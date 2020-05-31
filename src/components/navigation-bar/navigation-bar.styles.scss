@@ -1,0 +1,80 @@
+@import "../../project-styles/mixins";
+
+.navigation {
+    width: 100%;
+    position: fixed;
+    z-index: 4;
+    @include BoxShadowHelper(4);
+
+    &__content {
+        max-width: 136.6rem;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    &--primary {
+        height: 6rem;
+        background-color: var(--color-white);
+    }
+
+    &__logo-box {
+        display: inline-block;
+        // padding: .55rem 0;
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+        height: 100%;
+        // line-height: 100%;
+    }
+
+    &__logo {
+        height: 4.4rem;
+    }
+
+    // &__nav {
+    //     float: right;
+    //     vertical-align: middle;
+    // }
+
+    &__list {
+        list-style: none;
+        float: right;
+        height: 100%;
+        line-height: 100%;
+    }
+
+    &__item {
+        float: left;
+        height: 100%;
+        line-height: 100%;
+
+        &:not(:last-child):hover {
+            background-color: var(--color-primary-student-4);
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        font-size: 2rem;
+        font-weight: 600;
+        // margin: 1rem 0;
+        // padding: 1rem 3.5rem;
+        padding: 2rem 3.5rem;
+        color: var(--color-primary-student);
+        text-align: center;
+        text-decoration: none;
+        height: 100%;
+        line-height: 100%;
+        // vertical-align: middle;
+
+        &:link,
+        &:visited {
+            text-decoration: none;
+        }
+    }
+
+    &__btn {
+        display: inline-block;
+        margin-top: 1.1rem;
+        margin-bottom: 1.1rem;
+    }
+}

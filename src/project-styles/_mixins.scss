@@ -1,0 +1,175 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absCenterVertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// @mixin transition($duration) {
+//   -webkit-transition: all $duration ease;
+//   -moz-transition: all $duration ease;
+//   -o-transition: all $duration ease;
+//   transition: all $duration ease;
+// }
+
+//BOX SHADOWS
+/**
+ * A mixin which helps you to add depth to elements according to the Google Material Design spec:
+ * http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality
+ *
+ * Please note that the values given in the specification cannot be used as is. To create the same visual experience
+ * the blur parameter has to be doubled.
+ *
+ * Author: Florian Kutschera (@gefangenimnetz), Conceptboard GmbH (@conceptboardapp)
+ *
+ * Example usage:
+ *
+ * .card {
+ *     width: 95px;
+ *     height: 95px;
+ *     background: #f4f4f4;
+ *     -webkit-transition: all 250ms;
+ *     -moz-transition: all 250ms;
+ *     transition: all 250ms;
+ *     .BoxShadowHelper(1);
+ *     &:hover {
+ *         .BoxShadowHelper(3);
+ *         -webkit-transform: translateY(-5px);
+ *         -moz-transform: translateY(-5px);
+ *         transform: translateY(-5px);
+ *     }
+ * }
+ *
+ */
+
+@mixin BoxShadowHelper($level) {
+
+  @if $level == 1 {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+  @if $level == 2 {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  @if $level == 3 {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+  @if $level == 4 {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  @if $level == 5 {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  }
+}
+
+////////////////////////////////////////////////
+// MEDIA QUERY MANAGER
+
+/*
+possible $breakpoint arguments:
+-phone-small: 0 - 360px     ==> Phone small ???
+-phone:       360 - 600px   ==> Phone
+-tab-port:    600 - 900px   ==> Tablet portrait
+-tab-land:    900 - 1200px  ==> Tablet landscape
+[1200 - 1800] normal style
+-big-desktop: 1800+         ==> Big destop screens
+
+1em = 16px
+*/
+
+//POSSIBLE OPTIONS:
+/*
+TOUCH SCREENS:
+DESKTOPS CAN BE TOUCH TOO... BUT THEY HAVE :HOVER ANYWAY... SO...
+ONLY(!) MOBILE DEVICES CAN BE TOUCH SCREENS WITHOUT :HOVER...
+SMALL SCREENS CAN BE ONLY ON MOBILE DEVICES => TOUCH-SCREENS
+
+LET ASSUME, MOBILE DEVICES ARE ALL THOSE THAT HAVE 900PX SCREEN AND LESS.
+THAN WE HAVE TO CHECK ONLY DEVICES WITH 900 - 1200PX SCREENS FOR HAVING :HOVER,
+OTHERVICE WE SUGGEST IT AS A MOBILE DEVICE WITH TOUCH SCREEN.
+*/
+
+// @mixin respond($breakpoint) {
+//   @if $breakpoint == _0-360 {
+//     //phone-small {
+//     @media only screen and (max-width: 22.5em) {
+//       @content;
+//     } //18.75em) { @content };
+//   }
+
+//   @if $breakpoint == _360-580 {
+//     //phone {
+//     @media only screen and (max-width: 36.25em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == _580-720 {
+//     //tab-port {
+//     @media only screen and (max-width: 45em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == _720-880 {
+//     //tab-port {
+//     @media only screen and (max-width: 55em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == _880-1040 {
+//     //tab-land {
+//     @media only screen and (max-width: 65em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == _1040-1200 {
+//     //small-desktop {
+//     @media only screen and (max-width: 75em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == big-desktop {
+//     //big-desktop
+//     @media only screen and (min-width: 112.5em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == touch-screen {
+//     //any size touch-screen
+//     @media only screen and (hover: none) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == touch_880-1040 {
+//     //touch-screen big size
+//     @media only screen and (max-width: 65em), only screen and (hover: none) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == touch_1040-1200 {
+//     //touch-screen big size
+//     @media only screen and (max-width: 75em), only screen and (hover: none) {
+//       @content;
+//     }
+//   }
+// }

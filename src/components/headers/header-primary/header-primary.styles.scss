@@ -1,0 +1,19 @@
+.header {
+    // height: 56.1rem;
+    text-align: center;
+    padding: 14rem 0 8rem;
+    // background-color: #e6e6e6;
+    // background-size: cover;
+
+    &__video {
+        padding: 4rem 0;
+    }
+
+    &__paragraph {
+        text-align: justify;
+    }
+
+    &__btn-box {
+        padding: 3rem;
+    }
+}

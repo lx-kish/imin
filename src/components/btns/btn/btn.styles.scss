@@ -1,0 +1,59 @@
+@import '../../../project-styles/mixins';
+@import '../../../project-styles/variables';
+@import '../../../project-styles/typography';
+
+.btn {
+
+    border-radius: $border-radius-main;
+    text-decoration: none;
+    line-height: 2rem;
+
+    font-weight: 600;
+    padding: 0.8rem 4.5rem;
+    display: inline-block;
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: $font-size-paragraph;
+
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    transition: all 250ms;
+
+    &:hover,
+    &:focus,
+    &:active {
+        outline: none;
+        text-decoration: none;
+    }
+
+    &:hover {
+        @include BoxShadowHelper(2);
+        -webkit-transform: translateY(-0.5rem);
+        -moz-transform: translateY(-0.5rem);
+        transform: translateY(-0.5rem);
+    }
+
+    &:active {
+        @include BoxShadowHelper(1);
+        transform: translateY(-0.1rem);
+    }
+
+    &--primary {
+        background-color: var(--color-primary-student);
+        color: var(--color-white);
+        border: 1px solid var(--color-primary-student);
+    }
+
+    &--secondary {
+        background-color: var(--color-white);
+        color: var(--color-primary-student);
+        border: 1px solid var(--color-primary-student);
+    }
+
+    &--tertiary {
+        background-color: var(--color-primary-educator);
+        color: var(--color-white);
+        border: 1px solid var(--color-primary-educator);
+    }
+}
