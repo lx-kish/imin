@@ -48,29 +48,29 @@
         line-height: 100%;
 
         &:not(:last-child):hover {
-            background-color: var(--color-primary-student-4);
+            background-color: var(--color-pink-4);
         }
     }
 
-    &__link {
-        display: inline-block;
-        font-size: 2rem;
-        font-weight: 600;
-        // margin: 1rem 0;
-        // padding: 1rem 3.5rem;
-        padding: 2rem 3.5rem;
-        color: var(--color-primary-student);
-        text-align: center;
-        text-decoration: none;
-        height: 100%;
-        line-height: 100%;
-        // vertical-align: middle;
+    // &__link {
+    //     display: inline-block;
+    //     font-size: 2rem;
+    //     font-weight: 600;
+    //     // margin: 1rem 0;
+    //     // padding: 1rem 3.5rem;
+    //     padding: 2rem 3.5rem;
+    //     color: var(--color-pink);
+    //     text-align: center;
+    //     text-decoration: none;
+    //     height: 100%;
+    //     line-height: 100%;
+    //     // vertical-align: middle;
 
-        &:link,
-        &:visited {
-            text-decoration: none;
-        }
-    }
+    //     &:link,
+    //     &:visited {
+    //         text-decoration: none;
+    //     }
+    // }
 
     &__btn {
         display: inline-block;

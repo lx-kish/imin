@@ -40,20 +40,20 @@
     }
 
     &--primary {
-        background-color: var(--color-primary-student);
+        background-color: var(--color-pink);
         color: var(--color-white);
-        border: 1px solid var(--color-primary-student);
+        border: 1px solid var(--color-pink);
     }
 
     &--secondary {
         background-color: var(--color-white);
-        color: var(--color-primary-student);
-        border: 1px solid var(--color-primary-student);
+        color: var(--color-pink);
+        border: 1px solid var(--color-pink);
     }
 
     &--tertiary {
-        background-color: var(--color-primary-educator);
+        background-color: var(--color-violet);
         color: var(--color-white);
-        border: 1px solid var(--color-primary-educator);
+        border: 1px solid var(--color-violet);
     }
 }

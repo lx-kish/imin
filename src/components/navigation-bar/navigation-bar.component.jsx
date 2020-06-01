@@ -1,9 +1,55 @@
 import React from 'react';
 
+import NavigationLink from '../navigation-link/navigation-link.component';
 import ButtonTertiary from '../btns/btn-tertiary/btn-tertiary.component';
-import logo from '../../img/logo_pink.png';
+import logo from '../../graphics/logo_pink.png';
 
 import './navigation-bar.styles.scss';
+
+const links = [
+    {
+        name: 'Home',
+        link: '/',
+        className: 'navigation-link color-pink paragraph--uppercase'
+    },
+    {
+        name: 'About',
+        link: '/about',
+        className: 'navigation-link color-pink paragraph--uppercase'
+    },
+    {
+        name: 'Support',
+        link: '/support',
+        className: 'navigation-link color-pink paragraph--uppercase'
+    },
+    {
+        name: 'Contact',
+        link: '/contact',
+        className: 'navigation-link color-pink paragraph--uppercase'
+    }
+];
+
+const element = (link, i) => (
+
+    <li
+        key={i}
+        className='navigation__item'
+    >
+        <NavigationLink
+            link={link.link}
+            className={link.className}
+            name={link.name}
+        />
+    </li>
+);
+
+const showLinks = () => (
+
+    links.map((link, i) => {
+
+        return element(link, i);
+    })
+);
 
 const NavigationBar = () => (
     <nav className='navigation navigation--primary'>
@@ -15,38 +61,8 @@ const NavigationBar = () => (
 
 
             <ul className='navigation__list'>
-                <li className='navigation__item'>
-                    <a
-                        href={'/'}
-                        className='navigation__link paragraph--uppercase'
-                    >
-                        Home
-                    </a>
-                </li>
-                <li className='navigation__item'>
-                    <a
-                        href={'/'}
-                        className='navigation__link paragraph--uppercase'
-                    >
-                        About
-                    </a>
-                </li>
-                <li className='navigation__item'>
-                    <a
-                        href={'/'}
-                        className='navigation__link paragraph--uppercase'
-                    >
-                        Support
-                    </a>
-                </li>
-                <li className='navigation__item'>
-                    <a
-                        href={'/'}
-                        className='navigation__link paragraph--uppercase'
-                    >
-                        Contact
-                    </a>
-                </li>
+                {showLinks()}
+
                 <li className='navigation__item'>
                     <ButtonTertiary
                         name={'sign in'}

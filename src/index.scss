@@ -1,5 +1,7 @@
+@import './project-styles/grid';
 @import './project-styles/mixins';
 @import './project-styles/typography';
+@import './project-styles/utilities';
 @import './project-styles/variables';
 
 *,
@@ -23,18 +25,18 @@ html {
   // COLORS
 
   // COLOR PRIMARY STUDENT
-  --color-primary-student: #{$color-primary-student};
-  --color-primary-student-1: #{$color-primary-student-1};
-  --color-primary-student-2: #{$color-primary-student-2};
-  --color-primary-student-3: #{$color-primary-student-3};
-  --color-primary-student-4: #{$color-primary-student-4};
+  --color-pink: #{$color-pink};
+  --color-pink-1: #{$color-pink-1};
+  --color-pink-2: #{$color-pink-2};
+  --color-pink-3: #{$color-pink-3};
+  --color-pink-4: #{$color-pink-4};
 
   // COLOR PRIMARY EDUCATOR
-  --color-primary-educator: #{$color-primary-educator};
-  --color-primary-educator-1: #{$color-primary-educator-1};
-  --color-primary-educator-2: #{$color-primary-educator-2};
-  --color-primary-educator-3: #{$color-primary-educator-3};
-  --color-primary-educator-4: #{$color-primary-educator-4};
+  --color-violet: #{$color-violet};
+  --color-violet-1: #{$color-violet-1};
+  --color-violet-2: #{$color-violet-2};
+  --color-violet-3: #{$color-violet-3};
+  --color-violet-4: #{$color-violet-4};
 
   //COLOR FONT
   --color-font-main: #{$color-font-main};
@@ -62,7 +64,7 @@ body {
 ////////////////////////////////////////////////
 //STYLING SELECTION
 ::selection {
-  background-color: var(--color-primary-student);
+  background-color: var(--color-pink);
   color: var(--color-white);
 }
 
@@ -76,65 +78,3 @@ nav,
 section {
   display: block;
 }
-
-// ////////////////////////////////////////////////
-// //TYPHOGRAPHY
-// body {
-//   font-family: 'Quicksand', sans-serif;
-//   font-weight: $font-weight-regular;
-//   font-size: $font-size-paragraph;
-//   line-height: calc($font-size-paragraph * 1.3);
-//   // line-height: 1.7;
-//   color: var(--color-font-main);
-// }
-
-// .heading-primary {
-//   font-weight: $font-weight-bold;
-//   font-size: $font-size-heading-primary;
-//   line-height: calc($font-size-heading-primary * 1.3);
-  
-//   &--uppercase {
-//       text-transform: uppercase;
-//       letter-spacing: .6rem;
-//   }
-// }
-
-// .heading-secondary {
-//   font-weight: $font-weight-bold;
-//   font-size: $font-size-heading-secondary;
-
-//   &--uppercase {
-//       text-transform: uppercase;
-//       letter-spacing: .5rem;
-//   }
-// }
-
-// .heading-tertiary {
-//   font-weight: $font-weight-bold;
-//   font-size: $font-size-heading-tertiary;
-
-//   &--uppercase {
-//       text-transform: uppercase;
-//       letter-spacing: .4rem;
-//   }
-// }
-
-// .heading-quaternary {
-//   font-weight: $font-weight-bold;
-//   font-size: $font-size-heading-quaternary;
-
-//   &--uppercase {
-//       text-transform: uppercase;
-//       letter-spacing: .3rem;
-//   }
-// }
-
-// .paragraph {
-//   font-weight: $font-weight-regular;
-//   font-size: $font-size-paragraph;
-
-//   &--uppercase {
-//       text-transform: uppercase;
-//       letter-spacing: .2rem;
-//   }
-// }

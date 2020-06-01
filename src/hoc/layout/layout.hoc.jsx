@@ -1,8 +1,8 @@
 import React from 'react';
-import NavigationBar from '../components/navigation-bar/navigation-bar.component';
-import Footer from '../components/footer/footer.component';
+import NavigationBar from '../../components/navigation-bar/navigation-bar.component';
+import Footer from '../../components/footer/footer.component';
 
-const Layout = (props) => {
+const Layout = props => {
     return (
         <React.Fragment>
             <NavigationBar />

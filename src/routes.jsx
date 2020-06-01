@@ -11,7 +11,7 @@ import Home from './pages/home/home.page';
 // import Register from './containers/Admin/register';
 // import Logout from './components/Admin/logout';
 
-import Layout from './hoc/layout.hoc';
+import Layout from './hoc/layout/layout.hoc';
 // import Auth from './hoc/auth';
 
 const Routes = () => {
