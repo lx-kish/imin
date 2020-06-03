@@ -5,11 +5,11 @@ import './double-panes-row.styles.scss';
 const DoublePanesRow = props => (
 
     <section className={props.sectionClassName}>
-        <div className={`row ${props.rowClassName}`}>
-            <div className={`col-1-of-2 ${props.leftColClassName}`}>
+        <div className={props.rowClassName}>
+            <div className={props.leftColClassName}>
                 {props.left}
             </div>
-            <div className={`col-1-of-2 ${props.rightColClassName}`}>
+            <div className={props.rightColClassName}>
                 {props.right}
             </div>
         </div>

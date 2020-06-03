@@ -1,0 +1,33 @@
+@import "../../../project-styles/mixins";
+@import "../../../project-styles/variables";
+
+////////////////////////////////////////////////
+// CUSTOM GRID FOR PARTS SECTION
+.row-parts {
+    .col-1-of-2--parts {
+        width: calc((100% - #{$gutter-horizontal-parts}) / 2);
+    }
+
+    @include clearfix;
+
+    [class^="col-"] {
+        float: left;
+
+        &:not(:last-child) {
+            margin-right: $gutter-horizontal-parts;
+        }
+    }
+}
+
+.contact-form {
+    height: 56.5rem;
+    background-color: var(--color-contact-form-bg);
+    color: var(--color-white);
+    text-align: center;
+
+    &__heading {
+        padding: 5rem 0 3.6rem;
+        color: var(--color-white);
+    }
+
+}

@@ -13,17 +13,21 @@ const content = {
 };
 
 const HeaderHomePage = () => (
-    <header className='header container'>
-        <h1 className='heading-primary'>
-            {content.header}
-        </h1>
-        <p className='header__paragraph paragraph'>
-            {content.paragraph}
-        </p>
-        <div className='header__btn-box'>
-            <ButtonPrimary name={'Register Now'}>
-                {content.button}
-            </ButtonPrimary>
+    <header className='header'>
+        <div className="header__container">
+            <h1 className='header__title heading-primary color-pink'>
+                {content.header}
+            </h1>
+            <div className="header__content-box">
+                <p className='header__paragraph'>
+                    {content.paragraph}
+                </p>
+                <div className='header__btn-box'>
+                    <ButtonPrimary name={'Register Now'}>
+                        {content.button}
+                    </ButtonPrimary>
+                </div>
+            </div>
         </div>
     </header>
 );

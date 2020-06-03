@@ -6,10 +6,10 @@ import NavigationLink from '../../navigation-link/navigation-link.component';
 
 const PartArticle = props => (
 
-    <div className='part-article'>
-        <h4 className='heading-quaternary'>For those that want to</h4>
+    <div className={props.componentClassName}>
+        <h4 className={props.headerCommonClassName}>For those that want to</h4>
         <h2 className={props.headerClassName}>{props.header}</h2>
-        <p className='paragraph'>{props.paragraph}</p>
+        <p className={props.paragraphClassName}>{props.paragraph}</p>
 
 
         <NavigationLink
