@@ -67,33 +67,37 @@ const content = {
 
 const element = (part, i) => (
 
-    <DoublePanesRow
+
+    < section
         key={i}
-        sectionClassName={part.sectionClassName}
-        rowClassName={part.rowClassName}
-        leftColClassName={part.colClassName}
-        rightColClassName={part.colClassName}
-        left={
-            <Image
-                src={part.imgSrc}
-                alt={part.imgAlt}
-                className=''
-            />
-        }
-        right={
-            <PartArticle
-                componentClassName={part.textComponentClassName}
-                header={part.header}
-                headerCommonClassName={part.headerCommonClassName}
-                headerClassName={part.headerClassName}
-                paragraph={part.paragraph}
-                paragraphClassName={part.paragraphClassName}
-                cta={part.cta}
-                ctaLink={part.ctaLink}
-                ctaClassName={part.ctaClassName}
-            />
-        }
-    />
+        className={part.sectionClassName}
+    >
+        <DoublePanesRow
+            rowClassName={part.rowClassName}
+            leftColClassName={part.colClassName}
+            rightColClassName={part.colClassName}
+            left={
+                <Image
+                    src={part.imgSrc}
+                    alt={part.imgAlt}
+                    className=''
+                />
+            }
+            right={
+                <PartArticle
+                    componentClassName={part.textComponentClassName}
+                    header={part.header}
+                    headerCommonClassName={part.headerCommonClassName}
+                    headerClassName={part.headerClassName}
+                    paragraph={part.paragraph}
+                    paragraphClassName={part.paragraphClassName}
+                    cta={part.cta}
+                    ctaLink={part.ctaLink}
+                    ctaClassName={part.ctaClassName}
+                />
+            }
+        />
+    </section >
 );
 
 const showParts = () => (
