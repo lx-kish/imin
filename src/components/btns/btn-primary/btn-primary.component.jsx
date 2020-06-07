@@ -2,10 +2,11 @@ import React from 'react';
 
 import Btn from '../btn/btn.component';
 
-const ButtonPrimary = (props) => (
+const ButtonPrimary = props => (
     <React.Fragment>
         <Btn
-            name={props.name}
+            type={props.type}
+            title={props.title}
             className={`${props.className} btn--primary`}
         />
     </React.Fragment>

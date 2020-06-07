@@ -38,7 +38,7 @@ const FormFields = (props) => {
         // console.log(props.formData);
 
         return (
-            <div className="form_element">
+            <div className={props.formData.elementClassName}>
                 {renderTemplate(props.formData)}
             </div>
         )
@@ -54,15 +54,23 @@ const FormFields = (props) => {
 
     }
 
-    const showLabel = (show, label) => {
+    const showLabel = (show, label, labelClassName, labelFor) => {
         return show ?
-            <label>{label}</label>
+            <label 
+                className={labelClassName}
+                htmlFor={labelFor}
+            >
+                {label}
+            </label>
             : null
+        // return show ?
+        //     <label className={labelClassName}>{label}</label>
+        //     : null
     }
 
     const changeHandler = (event, id, blur) => {
         const newState = props.formData;
-        console.log(event.target);
+        // console.log(event.target);
         newState.value = event.target.value;
         // newState[id].value = event.target.value;
 
@@ -74,14 +82,14 @@ const FormFields = (props) => {
 
         newState.touched = blur;
 
-        console.log('new state = ', newState);
+        // console.log('id = ', id);
+        // console.log('new state = ', newState);
 
         // if (blur) {
         //     let validData = validate(newState[id])
         //     newState[id].valid = validData[0];
         //     newState[id].validationMessage = validData[1];
         // }
-
         // newState[id].touched = blur;
 
         props.change(newState)
@@ -89,7 +97,7 @@ const FormFields = (props) => {
     }
 
     const validate = (element) => {
-        console.log(element)
+
         let error = [true, '']
 
         if (element.validation.minLen) {
@@ -110,14 +118,25 @@ const FormFields = (props) => {
 
     const showValidation = (data) => {
         let errorMessage = null;
+        // let validationMessage = 
+        //     (data.validation && !data.valid) ?
+        //     data.validationMessage :
+        //     `&nbsp`;
+
+        // errorMessage = (
+        //     <div className="label-error">
+        //         {validationMessage}
+        //     </div>
+        // )
 
         if (data.validation && !data.valid) {
             errorMessage = (
-                <div className="label_error">
+                <div className="label-error">
                     {data.validationMessage}
                 </div>
             )
         }
+
         return errorMessage;
     }
 
@@ -125,15 +144,12 @@ const FormFields = (props) => {
         let formTemplate = '';
         let values = data;
 
-        console.log(data.field);
-        // console.log(data, data.field);
-
         switch (values.element) {
             case ('input'):
                 formTemplate = (
                     <React.Fragment>
                         {showValidation(values)}
-                        {showLabel(values.label, values.labelText)}
+                        {showLabel(values.label, values.labelText, values.labelClassName, values.config.name)}
                         <input
                             {...values.config}
                             value={values.value}
@@ -144,14 +160,13 @@ const FormFields = (props) => {
                                 (event) => changeHandler(event, data.field, false)
                             }
                         />
-                        {/* {showValidation(values)} */}
                     </React.Fragment>
                 )
                 break;
             case ('textarea'):
                 formTemplate = (
                     <React.Fragment>
-                        {showLabel(values.label, values.labelText)}
+                        {showLabel(values.label, values.labelText, values.labelClassName, values.config.name)}
                         <textarea
                             {...values.config}
                             value={values.value}
@@ -165,20 +180,24 @@ const FormFields = (props) => {
             case ('select'):
                 formTemplate = (
                     <React.Fragment>
-                        {showLabel(values.label, values.labelText)}
-                        <select
-                            value={values.value}
-                            name={values.config.name}
-                            onChange={
-                                (event) => changeHandler(event, data.field)
-                            }
-                        >
-                            {values.config.options.map((item, i) => (
-                                <option key={i} value={item.val}>
-                                    {item.text}
-                                </option>
-                            ))}
-                        </select>
+                        {showLabel(values.label, values.labelText, values.labelClassName, values.config.name)}
+                        <div className={values.wraperClassName}>
+                            <select
+                                {...values.config}
+                                value={values.value}
+                                name={values.config.name}
+                                // className={values.config.className}
+                                onChange={
+                                    (event) => changeHandler(event, data.field)
+                                }
+                            >
+                                {values.options.map((item, i) => (
+                                    <option key={i} value={item.val}>
+                                        {item.text}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </React.Fragment>
                 )
                 break;

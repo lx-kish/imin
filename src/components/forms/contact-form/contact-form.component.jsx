@@ -4,108 +4,137 @@ import './contact-form.styles.scss';
 
 import DoublePanesRow from '../../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import FormFields from '../forms-fields/form-fields.component';
-import ButtonPrimary from '../../btns/btn-primary/btn-primary.component';
+import Btn from '../../btns/btn/btn.component';
 
 class ContactForm extends React.Component {
 
     state = {
-        name: {
-            field: 'name',
-            element: 'input',
-            value: '',
-            label: false,
-            labelText: '',
-            config: {
-                name: 'name_input',
-                type: 'text',
-                placeholder: 'First Name'
+        formData: {
+            name: {
+                field: 'name', //field name for service purposes
+                element: 'input', //type of element input|text area|select
+                elementClassName: 'contact-form__element', //form element (field+label) className
+                value: '', //value
+                label: false, //show label: true|false
+                labelText: '', //text label (if show)
+                labelClassName: '', //label styles
+                config: { //properties of element (attributes)
+                    name: 'name_input',
+                    className: 'contact-form__input',
+                    type: 'text',
+                    placeholder: 'First Name'
+                },
+                validation: { //field validation required: true|false
+                    required: false
+                },
+                valid: false, //field valid: true|false
+                touched: false, //for blur field touched flag: true|false
+                labelErrorClassName: 'contact-form__label-error',
+                validationMessage: '' //warning text if the field invalid
             },
-            validation: {
-                required: true
+            lastname: {
+                field: 'lastname',
+                element: 'input',
+                elementClassName: 'contact-form__element',
+                value: '',
+                label: false,
+                labelText: '',
+                labelClassName: '',
+                config: {
+                    name: 'lastname_input',
+                    className: 'contact-form__input',
+                    type: 'text',
+                    placeholder: 'Last Name'
+                },
+                validation: {
+                    required: false
+                },
+                valid: false,
+                touched: false,
+                labelErrorClassName: 'contact-form__label-error',
+                validationMessage: ''
             },
-            valid: false,
-            touched: false,
-            validationMessage: ''
-        },
-        lastname: {
-            field: 'lastname',
-            element: 'input',
-            value: '',
-            label: false,
-            labelText: '',
-            config: {
-                name: 'lastname_input',
-                type: 'text',
-                placeholder: 'Last Name'
+            phone: {
+                field: 'phone',
+                element: 'input',
+                elementClassName: 'contact-form__element',
+                value: '',
+                label: false,
+                labelText: '',
+                labelClassName: '',
+                config: {
+                    name: 'tel_input',
+                    className: 'contact-form__input',
+                    type: 'tel',
+                    placeholder: 'Contact Number'
+                },
+                validation: {
+                    required: false
+                },
+                valid: false,
+                touched: false,
+                labelErrorClassName: 'contact-form__label-error',
+                validationMessage: ''
             },
-            validation: {
-                required: true
+            email: {
+                field: 'email',
+                element: 'input',
+                elementClassName: 'contact-form__element',
+                value: '',
+                label: false,
+                labelText: '',
+                labelClassName: '',
+                config: {
+                    name: 'email_input',
+                    className: 'contact-form__input',
+                    type: 'email',
+                    placeholder: 'Email Address'
+                },
+                validation: {
+                    required: false
+                },
+                valid: false,
+                touched: false,
+                labelErrorClassName: 'contact-form__label-error',
+                validationMessage: ''
             },
-            valid: false,
-            touched: false,
-            validationMessage: ''
-        },
-        phone: {
-            field: 'phone',
-            element: 'input',
-            value: '',
-            label: false,
-            labelText: '',
-            config: {
-                name: 'tel_input',
-                type: 'tel',
-                placeholder: 'Contact Number'
-            },
-            validation: {
-                required: true
-            },
-            valid: false,
-            touched: false,
-            validationMessage: ''
-        },
-        email: {
-            field: 'email',
-            element: 'input',
-            value: '',
-            label: false,
-            labelText: '',
-            config: {
-                name: 'email_input',
-                type: 'email',
-                placeholder: 'Email Address'
-            },
-            validation: {
-                required: true
-            },
-            valid: false,
-            touched: false,
-            validationMessage: ''
-        },
-        participant: {
-            field: 'participant',
-            element: 'select',
-            value: '',
-            label: false,
-            labelText: '',
-            config: {
-                name: 'participant_input',
+            participant: {
+                field: 'participant',
+                element: 'select',
+                elementClassName: 'contact-form__element',
+                value: '',
+                label: true,
+                labelText: 'Which one are you?',
+                labelClassName: 'contact-form__select-label',
+                wraperClassName: 'contact-form__select-box',
+                config: {
+                    name: 'participant_input',
+                    className: 'contact-form__select'
+                },
                 options: [
                     { val: 'educator', text: 'I want to be an educator' },
                     { val: 'student', text: 'I want to be a student' },
                     { val: 'partner', text: 'I want to be a partner' }
-                ]
-            },
-            validation: {
-                required: false
-            },
-            valid: true
+                ],
+                validation: {
+                    required: false
+                },
+                valid: true
+            }
         }
     }
 
-    updateForm = (newState) => {
-        this.setState({
-            formData: newState
-        })
+    updateForm = (newState, key) => {
+        // this.setState({
+        //     formData: newState
+        // })
+
+        this.setState(prevState => ({
+            formData: {
+                ...prevState.formData,
+                [prevState.formData[key]]: newState
+            }
+        }));
     }
 
     submitForm = (event) => {
@@ -150,16 +179,16 @@ class ContactForm extends React.Component {
                         rightColClassName='col-1-of-2--contact-form'
                         left={
                             <FormFields
-                                formData={this.state.name}
-                                onblur={(newState) => this.updateForm(newState)}
-                                change={(newState) => this.updateForm(newState)}
+                                formData={this.state.formData['name']}
+                                onblur={(newState) => this.updateForm(newState, 'name')}
+                                change={(newState) => this.updateForm(newState, 'name')}
                             />
                         }
                         right={
                             <FormFields
-                                formData={this.state.lastname}
-                                onblur={(newState) => this.updateForm(newState)}
-                                change={(newState) => this.updateForm(newState)}
+                                formData={this.state.formData['lastname']}
+                                onblur={(newState) => this.updateForm(newState, 'lastname')}
+                                change={(newState) => this.updateForm(newState, 'lastname')}
                             />
                         }
                     />
@@ -170,16 +199,16 @@ class ContactForm extends React.Component {
                         rightColClassName='col-1-of-2--contact-form'
                         left={
                             <FormFields
-                                formData={this.state.phone}
-                                onblur={(newState) => this.updateForm(newState)}
-                                change={(newState) => this.updateForm(newState)}
+                                formData={this.state.formData['phone']}
+                                onblur={(newState) => this.updateForm(newState, 'phone')}
+                                change={(newState) => this.updateForm(newState, 'phone')}
                             />
                         }
                         right={
                             <FormFields
-                                formData={this.state.email}
-                                onblur={(newState) => this.updateForm(newState)}
-                                change={(newState) => this.updateForm(newState)}
+                                formData={this.state.formData['email']}
+                                onblur={(newState) => this.updateForm(newState, 'email')}
+                                change={(newState) => this.updateForm(newState, 'email')}
                             />
                         }
                     />
@@ -187,18 +216,20 @@ class ContactForm extends React.Component {
                     <DoublePanesRow
                         rowClassName='row-contact-form'
                         leftColClassName='col-1-of-2--contact-form'
-                        rightColClassName='col-1-of-2--contact-form'
+                        rightColClassName='col-1-of-2--contact-form contact-form--btn-box'
                         left={
+                            // <span className='contact-form__label'>{'Which one are you?'}</span>
                             <FormFields
-                                formData={this.state.participant}
-                                onblur={(newState) => this.updateForm(newState)}
-                                change={(newState) => this.updateForm(newState)}
+                                formData={this.state.formData['participant']}
+                                onblur={(newState) => this.updateForm(newState, 'participant')}
+                                change={(newState) => this.updateForm(newState, 'participant')}
                             />
                         }
                         right={
-                            <ButtonPrimary
-                                name='Submit'
+                            <Btn
                                 type='submit'
+                                title='Submit'
+                                className='btn--primary contact-form__btn--submit'
                             />
                         }
                     />

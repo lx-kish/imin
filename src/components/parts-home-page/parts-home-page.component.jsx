@@ -2,9 +2,9 @@ import React from 'react';
 
 import './parts-home-page.styles.scss';
 
-import educateImg from '../../graphics/imgs/home-educate-1x.png';
-import learnImg from '../../graphics/imgs/home-learn-1x.png';
-import supportImg from '../../graphics/imgs/home-support-1x.png';
+import educateImg from '../../graphics/pages-content/home-page/home-educate-1x.png';
+import learnImg from '../../graphics/pages-content/home-page/home-learn-1x.png';
+import supportImg from '../../graphics/pages-content/home-page/home-support-1x.png';
 
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import Image from '../panes/image/image.component';
@@ -27,7 +27,7 @@ const content = {
             paragraph: `It's easy to teach your skills to our nation's future leaders. Our platform connects local industry and organisations with young people and supports your organisation to deliver a world class education experience.`,
             paragraphClassName: 'parts__article-paragraph paragraph',
             cta: 'Become a community educator.',
-            ctaLink: '/',
+            ctaLink: '/educators',
             ctaClassName: 'navigation-link color-pink paragraph--uppercase'
         },
         {
@@ -43,7 +43,7 @@ const content = {
             paragraph: `It's easy to learn from industry experts. With I'm In, access education experiences to help you discover your future pathway. Combining the best of gamification with real world experiences you can engage in and track your learning jurney, like never before.`,
             paragraphClassName: 'parts__article-paragraph paragraph',
             cta: `Learn through I'm In.`,
-            ctaLink: '/',
+            ctaLink: '/students',
             ctaClassName: 'navigation-link color-violet paragraph--uppercase'
         },
         {
@@ -59,7 +59,7 @@ const content = {
             paragraph: `Our mission is to help young people get off to a flying start by making industry led education free and accessible. We help young people into education and employment. Partner with us, and together we will see young kiwis take flight.`,
             paragraphClassName: 'parts__article-paragraph paragraph',
             cta: 'Become a partner.',
-            ctaLink: '/',
+            ctaLink: '/partners',
             ctaClassName: 'navigation-link color-pink paragraph--uppercase'
         }
     ]

@@ -5,7 +5,8 @@ import Btn from '../btn/btn.component';
 const ButtonTertiary = (props) => (
     <React.Fragment>
         <Btn
-            name={props.name}
+            type={props.type}
+            title={props.title}
             className={`${props.className} btn--tertiary`}
         />
     </React.Fragment>

@@ -1,6 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './footer.styles.scss';
+
+import IconFacebook from '../../components/icons/icon-facebook.component';
+import IconLinkedIn from '../../components/icons/icon-linkedin.component';
+
 
 const Footer = () => (
     <footer className='footer'>
@@ -10,16 +15,24 @@ const Footer = () => (
                 2020.
             </p>
             <div className='footer__media'>
-                <a href={'/'} className='footer__link'>
-                    <svg className='footer__icon'>
+                <Link
+                    to={'/'}
+                    className='footer__link'
+                >
+                    <IconFacebook className='footer__icon' />
+                    {/* <svg className='footer__icon'>
                         <use xlinkHref='./img/sprite.svg#icon-facebook2' />
-                    </svg>
-                </a>
-                <a href={'/'} className='footer__link'>
-                    <svg className='footer__icon'>
+                    </svg> */}
+                </Link>
+                <Link
+                    to={'/'}
+                    className='footer__link'
+                >
+                    <IconLinkedIn className='footer__icon' />
+                    {/* <svg className='footer__icon'>
                         <use xlinkHref='./img/sprite.svg#icon-linkedin' />
-                    </svg>
-                </a>
+                    </svg> */}
+                </Link>
             </div>
         </div>
     </footer>

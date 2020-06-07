@@ -6,10 +6,10 @@ const Button = (props) => {
 
     return (
         <button
+            type={props.type || 'button'}
             className={`btn ${props.className}`}
-            type={props.type}
         >
-            {props.name}
+            {props.title}
         </button>)
 };
 

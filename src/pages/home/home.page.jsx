@@ -6,12 +6,21 @@ import HeaderHomePage from '../../components/headers/header-home-page/header-hom
 import PartsHomePage from '../../components/parts-home-page/parts-home-page.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
+// import IconUmbrella from '../../components/icons/icon-umbrella.component';
+// import IconFacebook from '../../components/icons/icon-facebook.component';
+// import IconLinkedIn from '../../components/icons/icon-linkedin.component';
+
 const HomePage = () => (
     <React.Fragment>
 
-        {/* <div style={{ height: '100px' }}>content</div> */}
         <HeaderHomePage />
         <PartsHomePage />
+
+        {/* <div style={{width: '100%', backgroundColor: '#000'}}>
+            <IconUmbrella className='footer__icon' />
+            <IconFacebook className='footer__icon' />
+            <IconLinkedIn className='footer__icon' />
+        </div> */}
         <ContactForm />
     </React.Fragment>
 );

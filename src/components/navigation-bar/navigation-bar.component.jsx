@@ -65,7 +65,7 @@ const NavigationBar = () => (
 
                 <li className='navigation__item'>
                     <ButtonTertiary
-                        name={'sign in'}
+                        title={'sign in'}
                         className={'navigation__btn paragraph--uppercase'}
                     />
                 </li>
