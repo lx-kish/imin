@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/imin/static/css/main.5d8e9396.chunk.css",
-    "main.js": "/imin/static/js/main.7a502f29.chunk.js",
-    "main.js.map": "/imin/static/js/main.7a502f29.chunk.js.map",
+    "main.css": "/imin/static/css/main.4c9bb25a.chunk.css",
+    "main.js": "/imin/static/js/main.87e886ce.chunk.js",
+    "main.js.map": "/imin/static/js/main.87e886ce.chunk.js.map",
     "runtime-main.js": "/imin/static/js/runtime-main.23955c3f.js",
     "runtime-main.js.map": "/imin/static/js/runtime-main.23955c3f.js.map",
-    "static/js/2.e1cd1803.chunk.js": "/imin/static/js/2.e1cd1803.chunk.js",
-    "static/js/2.e1cd1803.chunk.js.map": "/imin/static/js/2.e1cd1803.chunk.js.map",
+    "static/js/2.3290f99e.chunk.js": "/imin/static/js/2.3290f99e.chunk.js",
+    "static/js/2.3290f99e.chunk.js.map": "/imin/static/js/2.3290f99e.chunk.js.map",
     "index.html": "/imin/index.html",
-    "precache-manifest.1f1d11577623ebecaca07aaf900cfeab.js": "/imin/precache-manifest.1f1d11577623ebecaca07aaf900cfeab.js",
+    "precache-manifest.3481effb714a2bedabb1f8e729071fb9.js": "/imin/precache-manifest.3481effb714a2bedabb1f8e729071fb9.js",
     "service-worker.js": "/imin/service-worker.js",
-    "static/css/main.5d8e9396.chunk.css.map": "/imin/static/css/main.5d8e9396.chunk.css.map",
-    "static/js/2.e1cd1803.chunk.js.LICENSE.txt": "/imin/static/js/2.e1cd1803.chunk.js.LICENSE.txt",
-    "static/media/header-home-page.styles.scss": "/imin/static/media/Home-header-1920.f990f9f3.png",
+    "static/css/main.4c9bb25a.chunk.css.map": "/imin/static/css/main.4c9bb25a.chunk.css.map",
+    "static/js/2.3290f99e.chunk.js.LICENSE.txt": "/imin/static/js/2.3290f99e.chunk.js.LICENSE.txt",
+    "static/media/headers.styles.scss": "/imin/static/media/students-header-1920.a4f4f194.png",
     "static/media/home-educate-1x.png": "/imin/static/media/home-educate-1x.e2dd53d5.png",
     "static/media/home-learn-1x.png": "/imin/static/media/home-learn-1x.f41d6896.png",
     "static/media/home-support-1x.png": "/imin/static/media/home-support-1x.2fd6e65b.png",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.23955c3f.js",
-    "static/js/2.e1cd1803.chunk.js",
-    "static/css/main.5d8e9396.chunk.css",
-    "static/js/main.7a502f29.chunk.js"
+    "static/js/2.3290f99e.chunk.js",
+    "static/css/main.4c9bb25a.chunk.css",
+    "static/js/main.87e886ce.chunk.js"
   ]
 }
