@@ -5,7 +5,6 @@ import '../headers.styles.scss';
 import Btn from '../../btns/btn/btn.component';
 
 const HeaderSecondary = props => {
-    console.log(props);
 
     return (
         <header className={props.headerClassName}>

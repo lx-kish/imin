@@ -3,7 +3,6 @@ import React from 'react';
 import './educators.styles.scss';
 
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
-import PartsHomePage from '../../components/parts-home-page/parts-home-page.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
@@ -23,7 +22,7 @@ const content = {
     }
 };
 
-const AboutPage = () => (
+const EducatorsPage = () => (
     <React.Fragment>
         <HeaderSecondary {...content.header} />
         {'Content here'}
@@ -31,4 +30,4 @@ const AboutPage = () => (
     </React.Fragment>
 );
 
-export default AboutPage;
+export default EducatorsPage;

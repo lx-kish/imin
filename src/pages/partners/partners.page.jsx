@@ -3,7 +3,6 @@ import React from 'react';
 import './partners.styles.scss';
 
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
-import PartsHomePage from '../../components/parts-home-page/parts-home-page.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
@@ -23,12 +22,12 @@ const content = {
     }
 };
 
-const AboutPage = () => (
+const PartnersPage = () => (
     <React.Fragment>
         <HeaderSecondary {...content.header} />
-        {'Content here'}
+        {'Partners content here'}
         <ContactForm />
     </React.Fragment>
 );
 
-export default AboutPage;
+export default PartnersPage;

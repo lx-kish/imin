@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationBar from '../../components/navigation-bar/navigation-bar.component';
+import NavigationBar from '../../components/navigation/navigation-bar/navigation-bar.component';
 import Footer from '../../components/footer/footer.component';
 
 const Layout = props => {

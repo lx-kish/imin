@@ -3,7 +3,7 @@
 
 ////////////////////////////////////////////////
 // CUSTOM GRID FOR PARTS SECTION
-.row-parts {
+.row--parts {
     .col-1-of-2--parts {
         width: calc((100% - #{$gutter-horizontal-parts}) / 2);
     }

@@ -7,10 +7,10 @@ import Btn from '../../btns/btn/btn.component';
 const content = {
 
     header: {
-        headerClassName: 'header',
+        headerClassName: 'header header--home-page',
         containerClassName: 'header__container header__container--home-page',
         title: 'Industry and Community-led Education',
-        titleClassName: 'header__title heading-primary color-pink',
+        titleClassName: 'header__title--home-page heading-primary color-pink',
         contentClassName: 'header__content-box',
         paragraph: `At I'm In, our vision is to make community led education and development opportunities <b>free and accessible</b> for every young person in every corner of New Zealand. Our platform connects organisations, businesses and individuals who want to teach, with young people who want to learn.`,
         paragraphClassName: 'header__paragraph'

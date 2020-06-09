@@ -1,8 +1,8 @@
 import React from 'react';
 
 import NavigationLink from '../navigation-link/navigation-link.component';
-import ButtonTertiary from '../btns/btn-tertiary/btn-tertiary.component';
-import logo from '../../graphics/logo_pink.png';
+import ButtonTertiary from '../../btns/btn-tertiary/btn-tertiary.component';
+import logo from '../../../graphics/logo_pink.png';
 
 import './navigation-bar.styles.scss';
 

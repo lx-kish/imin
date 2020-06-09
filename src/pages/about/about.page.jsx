@@ -2,9 +2,15 @@ import React from 'react';
 
 import './about.styles.scss';
 
+import FirstImage from '../../graphics/pages-content/about-page/about-dna-1.png';
+import SecondImage from '../../graphics/pages-content/about-page/about-strategy-2.png';
+
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
 import SinglePaneRow from '../../components/panes/single-pane-row/single-pane-row.component';
-// import DoublePanesRow from '../../components/
+import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
+import Image from '../../components/panes/image/image.component';
+import TextParagraph from '../../components/panes/paragraphs/paragraph-text/paragraph-text.component';
+import LinkedBottomParagraph from '../../components/panes/paragraphs/paragraph-linked-bottom/paragraph-linked-bottom.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
@@ -12,7 +18,7 @@ const content = {
         headerClassName: 'header',
         containerClassName: 'header__container header__container--about-page',
         title: 'A vision from New Zealand.',
-        titleClassName: 'header__title heading-primary color-pink',
+        titleClassName: 'header__title--about-page heading-primary color-pink',
         button: {
             boxClassName: 'header__btn-box',
             config: {
@@ -24,65 +30,110 @@ const content = {
     },
     content: {
         firstSinglePaneRow: {
-            sectionClassName: '',
-            rowClassName: '',
-            titleClassName: '',
-            title: '',
-            paragraphClassName: '',
-            paragraph: ''
+            sectionClassName: 'about__section',
+            rowClassName: 'row--about about__container about__container--single-pane',
+            titleClassName: 'about__heading heading-secondary',
+            title: 'Free and accessible education for young New Zealanders.',
+            paragraphClassName: 'about__paragraph paragraph',
+            paragraph: 'Founded in 2020 by Thomas Maharaj, I’m In is a New Zealand based registered charitable trust with a vision to see communities work collectively together, in order to help every young person have access to free industry and community led education. As they realise their potential, I’m In helps young people discover a pathway into education and employment.'
         },
         firstDoublePanesSection: {
-            sectionClassName: '',
-            rowClassName: '',
-            leftColClassName: '',
-            rightColClassName: '',
+            textSectionType: 'paragraph',
+            sectionClassName: 'about--bg-grey',
+            title: 'In our DNA.',
+            titleClassName: 'about__heading heading-secondary',
+            rowClassName: 'row--about about__container about__container--double-pane',
+            leftColClassName: 'col-1-of-2--about',
+            rightColClassName: 'col-1-of-2--about',
             img: {
-                src: '',
-                alt: '',
-                className: ''
+                src: FirstImage,
+                alt: 'In our DNA.',
+                className: 'about__image-pane'
             },
             text: {
-                paragraph: '',
+                paragraph: 'In 2015, Thomas Maharaj underwent brain surgery, and from his hospital bed he started The Knowledge Bank, a small project that helped deliver books to children whose parents could not afford them. Since then, he went on to work at multiple charitable trusts around New Zealand helping to fund and build programmes of national significance and help young people find jobs. Having always worked at the crossroads of sales, education and recruitment. In 2019 Jenny and Isaac joined the team, bringing both talent, drive and passion. 2020 creates a world of opportunities. As we dive deep into the future of…',
                 paragraphClassName: ''
+            }
+        },
+        secondSinglePaneRow: {
+            sectionClassName: 'about__section',
+            rowClassName: 'row--about about__container about__container--single-pane',
+            titleClassName: 'about__heading heading-secondary',
+            title: 'What we do and how we do it.',
+            paragraphClassName: 'about__paragraph paragraph',
+            paragraph: 'I’m In provides education training and support to industry and community groups, businesses and centres helping them become educators. We’ve been hard at work developing a gamified education platform that enables young people to access industry and community led education and an access point to study and employment opportunities. It’s a showcase for our rangatahi about their options and helps create a clear pathway for their future.'
+        },
+        secondDoublePanesSection: {
+            textSectionType: 'paragraph-bottom-link',
+            sectionClassName: 'about--bg-grey',
+            title: 'Our strategy for impact.',
+            titleClassName: 'about__heading heading-secondary',
+            rowClassName: 'row--about about__container about__container--double-pane',
+            leftColClassName: 'col-1-of-2--about',
+            rightColClassName: 'col-1-of-2--about',
+            img: {
+                src: SecondImage,
+                alt: 'What we do and how we do it.',
+                className: 'about__image-pane'
+            },
+            text: {
+                componentClassName: '',
+                paragraph: 'Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum. Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac.',
+                paragraphClassName: '',
+                link: '/contact',
+                linkClassName: 'navigation-link color-pink paragraph--uppercase about__paragraph-link',
+                linkName: 'Contact us'
             }
         }
     }
 };
 
-const AboutPage = () => (
-    <React.Fragment>
-        <HeaderSecondary {...content.header} />
-        <SinglePaneRow {...content.content} />
-        {/* < section
-            className={content.content.firstDoublePanesSection.sectionClassName}
+const renderDoublePaneSection = (data) => {
+
+    return (
+        <section
+            className={data.sectionClassName}
         >
+            <h2 className={data.titleClassName}>{data.title}</h2>
             <DoublePanesRow
-                rowClassName={part.rowClassName}
-                leftColClassName={part.colClassName}
-                rightColClassName={part.colClassName}
+                rowClassName={data.rowClassName}
+                leftColClassName={data.leftColClassName}
+                rightColClassName={data.rightColClassName}
                 left={
                     <Image
-                        src={part.imgSrc}
-                        alt={part.imgAlt}
-                        className=''
+                        src={data.img.src}
+                        alt={data.img.alt}
+                        className={data.img.className}
                     />
                 }
                 right={
-                    <PartArticle
-                        componentClassName={part.textComponentClassName}
-                        header={part.header}
-                        headerCommonClassName={part.headerCommonClassName}
-                        headerClassName={part.headerClassName}
-                        paragraph={part.paragraph}
-                        paragraphClassName={part.paragraphClassName}
-                        cta={part.cta}
-                        ctaLink={part.ctaLink}
-                        ctaClassName={part.ctaClassName}
-                    />
+                    data.textSectionType === 'paragraph'
+                        ?
+                        <TextParagraph
+                            paragraph={data.text.paragraph}
+                            paragraphClassName={data.text.paragraphClassName}
+                        />
+                        :
+                        <LinkedBottomParagraph
+                            paragraph={data.text.paragraph}
+                            paragraphClassName={data.text.paragraphClassName}
+                            link={data.text.link}
+                            linkClassName={data.text.linkClassName}
+                            linkName={data.text.linkName}
+                        />
                 }
             />
-        </section > */}
-        {'Content here'}
+        </section >
+    )
+}
+
+const AboutPage = () => (
+    <React.Fragment>
+        <HeaderSecondary {...content.header} />
+        <SinglePaneRow {...content.content.firstSinglePaneRow} />
+        {renderDoublePaneSection(content.content.firstDoublePanesSection)}
+        <SinglePaneRow {...content.content.secondSinglePaneRow} />
+        {renderDoublePaneSection(content.content.secondDoublePanesSection)}
         <ContactForm />
     </React.Fragment>
 );

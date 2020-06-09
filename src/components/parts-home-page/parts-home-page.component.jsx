@@ -16,7 +16,7 @@ const content = {
     parts: [
         {
             sectionClassName: 'bg-grey',
-            rowClassName: 'parts__container row-parts container',
+            rowClassName: 'parts__container row--parts container',
             colClassName: 'col-1-of-2--parts',
             imgSrc: educateImg,
             imgAlt: 'For those who want to educate',
@@ -32,7 +32,7 @@ const content = {
         },
         {
             sectionClassName: '',
-            rowClassName: 'parts__container row-parts container',
+            rowClassName: 'parts__container row--parts container',
             colClassName: 'col-1-of-2--parts',
             imgSrc: learnImg,
             imgAlt: 'For those who want to learn',
@@ -48,7 +48,7 @@ const content = {
         },
         {
             sectionClassName: 'bg-grey',
-            rowClassName: 'parts__container row-parts container',
+            rowClassName: 'parts__container row--parts container',
             colClassName: 'col-1-of-2--parts',
             imgSrc: supportImg,
             imgAlt: 'For those who want to support',

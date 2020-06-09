@@ -1,8 +1,6 @@
 import React from 'react';
 
-import './part-article.styles.scss';
-
-import NavigationLink from '../../navigation-link/navigation-link.component';
+import NavigationLink from '../../navigation/navigation-link/navigation-link.component';
 
 const PartArticle = props => (
 

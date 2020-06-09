@@ -11,6 +11,5 @@ const IconUmbrella = props => {
         </svg>
     )
 };
-// fill={umbrellafill}
 
 export default IconUmbrella;
