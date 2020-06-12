@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/home/home.page';
-import About from './pages/about/about.page';
+import About from './pages/lvl2-pages/about.page';
 import Contact from './pages/contact/contact.page';
-import Educators from './pages/educators/educators.page';
-import Partners from './pages/partners/partners.page';
-import Students from './pages/students/students.page';
+import Educators from './pages/lvl2-pages/educators.page';
+import Partners from './pages/lvl2-pages/partners.page';
+import Students from './pages/lvl2-pages/students.page';
 // import BookView from './components/Books';
 // import Login from './containers/Admin/login';
 // import User from './components/Admin/';

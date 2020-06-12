@@ -47,10 +47,16 @@
         float: left;
         height: 100%;
         line-height: 100%;
-        padding: 0 3.5rem;
 
-        &:not(:last-child):hover {
-            background-color: var(--color-pink-4);
+        &:not(:last-child) {
+            padding: 0 3.5rem;
+
+            &:hover {
+                background-color: var(--color-pink-4);
+            }
+        }
+        &:last-child {
+            padding: 0 0 0 3.5rem;
         }
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './partners.styles.scss';
+import './lvl2-pages.styles.scss';
 
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
@@ -8,26 +8,26 @@ import ContactForm from '../../components/forms/contact-form/contact-form.compon
 const content = {
     header: {
         headerClassName: 'header',
-        containerClassName: 'header__container header__container--partners-page',
-        title: 'Openning up a world of possibilities.',
-        titleClassName: 'header__title heading-primary color-pink',
+        containerClassName: 'header__container header__container--students-page',
+        title: `Learn through I'm In.`,
+        titleClassName: 'header__title heading-primary color-violet',
         button: {
             boxClassName: 'header__btn-box',
             config: {
                 type: 'button',
                 title: 'Register Now',
-                className: 'btn--primary'
+                className: 'btn--tertiary'
             }
         }
     }
 };
 
-const PartnersPage = () => (
+const StudentsPage = () => (
     <React.Fragment>
         <HeaderSecondary {...content.header} />
-        {'Partners content here'}
+        {'Students content here'}
         <ContactForm />
     </React.Fragment>
 );
 
-export default PartnersPage;
+export default StudentsPage;

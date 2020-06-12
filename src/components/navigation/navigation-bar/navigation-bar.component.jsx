@@ -18,8 +18,8 @@ const links = [
         className: 'navigation-link color-pink paragraph--uppercase'
     },
     {
-        name: 'Support',
-        link: '/support',
+        name: 'Platform',
+        link: '/platform',
         className: 'navigation-link color-pink paragraph--uppercase'
     },
     {

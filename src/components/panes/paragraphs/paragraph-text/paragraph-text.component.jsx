@@ -1,10 +1,12 @@
 import React from 'react';
 
-const TextParagraph = props => (
+const TextParagraph = props => {
 
-    <p className={props.paragraphClassName}>
-        {props.paragraph}
-    </p>
-);
+    return (
+        <p className={props.paragraphClassName}>
+            {props.paragraph}
+        </p>
+    );
+}
 
 export default TextParagraph;

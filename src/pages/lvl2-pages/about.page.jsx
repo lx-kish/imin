@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './about.styles.scss';
+import './lvl2-pages.styles.scss';
 
 import FirstImage from '../../graphics/pages-content/about-page/about-dna-1.png';
 import SecondImage from '../../graphics/pages-content/about-page/about-strategy-2.png';
@@ -18,7 +18,7 @@ const content = {
         headerClassName: 'header',
         containerClassName: 'header__container header__container--about-page',
         title: 'A vision from New Zealand.',
-        titleClassName: 'header__title--about-page heading-primary color-pink',
+        titleClassName: 'header__title--second-lvl-page heading-primary color-pink',
         button: {
             boxClassName: 'header__btn-box',
             config: {
@@ -30,25 +30,25 @@ const content = {
     },
     content: {
         firstSinglePaneRow: {
-            sectionClassName: 'about__section',
-            rowClassName: 'row--about about__container about__container--single-pane',
-            titleClassName: 'about__heading heading-secondary',
+            sectionClassName: 'lvl2__section',
+            rowClassName: 'row-lvl2 lvl2__container lvl2__container--single-pane',
+            titleClassName: 'lvl2__heading heading-secondary',
             title: 'Free and accessible education for young New Zealanders.',
-            paragraphClassName: 'about__paragraph paragraph',
+            paragraphClassName: 'lvl2__paragraph paragraph',
             paragraph: 'Founded in 2020 by Thomas Maharaj, I’m In is a New Zealand based registered charitable trust with a vision to see communities work collectively together, in order to help every young person have access to free industry and community led education. As they realise their potential, I’m In helps young people discover a pathway into education and employment.'
         },
         firstDoublePanesSection: {
             textSectionType: 'paragraph',
-            sectionClassName: 'about--bg-grey',
+            sectionClassName: 'lvl2--bg-grey',
             title: 'In our DNA.',
-            titleClassName: 'about__heading heading-secondary',
-            rowClassName: 'row--about about__container about__container--double-pane',
-            leftColClassName: 'col-1-of-2--about',
-            rightColClassName: 'col-1-of-2--about',
+            titleClassName: 'lvl2__heading heading-secondary',
+            rowClassName: 'row-lvl2 lvl2__container lvl2__container--double-pane',
+            leftColClassName: 'col-1-of-2--lvl2',
+            rightColClassName: 'col-1-of-2--lvl2',
             img: {
                 src: FirstImage,
                 alt: 'In our DNA.',
-                className: 'about__image-pane'
+                className: 'lvl2__image-pane'
             },
             text: {
                 paragraph: 'In 2015, Thomas Maharaj underwent brain surgery, and from his hospital bed he started The Knowledge Bank, a small project that helped deliver books to children whose parents could not afford them. Since then, he went on to work at multiple charitable trusts around New Zealand helping to fund and build programmes of national significance and help young people find jobs. Having always worked at the crossroads of sales, education and recruitment. In 2019 Jenny and Isaac joined the team, bringing both talent, drive and passion. 2020 creates a world of opportunities. As we dive deep into the future of…',
@@ -56,32 +56,32 @@ const content = {
             }
         },
         secondSinglePaneRow: {
-            sectionClassName: 'about__section',
-            rowClassName: 'row--about about__container about__container--single-pane',
-            titleClassName: 'about__heading heading-secondary',
+            sectionClassName: 'lvl2__section',
+            rowClassName: 'row-lvl2 lvl2__container lvl2__container--single-pane',
+            titleClassName: 'lvl2__heading heading-secondary',
             title: 'What we do and how we do it.',
-            paragraphClassName: 'about__paragraph paragraph',
+            paragraphClassName: 'lvl2__paragraph paragraph',
             paragraph: 'I’m In provides education training and support to industry and community groups, businesses and centres helping them become educators. We’ve been hard at work developing a gamified education platform that enables young people to access industry and community led education and an access point to study and employment opportunities. It’s a showcase for our rangatahi about their options and helps create a clear pathway for their future.'
         },
         secondDoublePanesSection: {
             textSectionType: 'paragraph-bottom-link',
-            sectionClassName: 'about--bg-grey',
+            sectionClassName: 'lvl2--bg-grey',
             title: 'Our strategy for impact.',
-            titleClassName: 'about__heading heading-secondary',
-            rowClassName: 'row--about about__container about__container--double-pane',
-            leftColClassName: 'col-1-of-2--about',
-            rightColClassName: 'col-1-of-2--about',
+            titleClassName: 'lvl2__heading heading-secondary',
+            rowClassName: 'row-lvl2 lvl2__container lvl2__container--double-pane',
+            leftColClassName: 'col-1-of-2--lvl2',
+            rightColClassName: 'col-1-of-2--lvl2',
             img: {
                 src: SecondImage,
                 alt: 'What we do and how we do it.',
-                className: 'about__image-pane'
+                className: 'lvl2__image-pane'
             },
             text: {
                 componentClassName: '',
                 paragraph: 'Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum. Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac.',
                 paragraphClassName: '',
                 link: '/contact',
-                linkClassName: 'navigation-link color-pink paragraph--uppercase about__paragraph-link',
+                linkClassName: 'navigation-link color-pink paragraph--uppercase lvl2__paragraph-link',
                 linkName: 'Contact us'
             }
         }
