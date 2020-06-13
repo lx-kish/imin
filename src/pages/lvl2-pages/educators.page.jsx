@@ -23,6 +23,7 @@ const content = {
         containerClassName: 'header__container header__container--educators-page',
         title: 'Become a Community Educator.',
         titleClassName: 'header__title heading-primary color-pink',
+        renderButton: true,
         button: {
             boxClassName: 'header__btn-box',
             config: {
@@ -45,7 +46,7 @@ const content = {
             {
                 textSectionType: 'equal',
                 sectionClassName: 'lvl2__section--double-pane',
-                rowClassName: 'flex-box flex-box--steps lvl2__container lvl2__container--double-pane',
+                rowClassName: 'flex-box flex-box-row flex-box--steps lvl2__container lvl2__container--double-pane',
                 leftColClassName: 'flex-item__of-2--steps',
                 rightColClassName: 'flex-item__of-2--steps',
                 left: {
@@ -73,7 +74,7 @@ const content = {
                         className: 'lvl2__image-pane'
                     },
                     flexCont: {
-                        className: 'flex-box',
+                        className: 'flex-box flex-box-row',
                         title: {
                             header: 'Apply to host.',
                             headerClassName: 'flex-item__of-2--50_50 flex-item__of-2--50_50-left heading-primary color-pink'
@@ -88,7 +89,7 @@ const content = {
             {
                 textSectionType: 'equal',
                 sectionClassName: 'lvl2__section--double-pane',
-                rowClassName: 'flex-box flex-box--steps lvl2__container lvl2__container--double-pane',
+                rowClassName: 'flex-box flex-box-row flex-box--steps lvl2__container lvl2__container--double-pane',
                 leftColClassName: 'flex-item__of-2--steps',
                 rightColClassName: 'flex-item__of-2--steps',
                 left: {
@@ -98,7 +99,7 @@ const content = {
                         className: 'lvl2__image-pane'
                     },
                     flexCont: {
-                        className: 'flex-box',
+                        className: 'flex-box flex-box-row',
                         title: {
                             header: 'Educate.',
                             headerClassName: 'flex-item__of-2--50_50 flex-item__of-2--50_50-left heading-primary color-pink'
@@ -116,7 +117,7 @@ const content = {
                         className: 'lvl2__image-pane'
                     },
                     flexCont: {
-                        className: 'flex-box',
+                        className: 'flex-box flex-box-row',
                         title: {
                             header: 'See the impact.',
                             headerClassName: 'flex-item__of-2--50_50 flex-item__of-2--50_50-left heading-primary color-pink'
@@ -131,7 +132,7 @@ const content = {
             {
                 textSectionType: 'equal',
                 sectionClassName: 'lvl2__section--double-pane',
-                rowClassName: 'flex-box flex-box--steps lvl2__container lvl2__container--double-pane',
+                rowClassName: 'flex-box flex-box-row flex-box--steps lvl2__container lvl2__container--double-pane',
                 leftColClassName: 'flex-item__of-2--steps',
                 rightColClassName: 'flex-item__of-2--steps',
                 left: {
@@ -141,7 +142,7 @@ const content = {
                         className: 'lvl2__image-pane'
                     },
                     flexCont: {
-                        className: 'flex-box',
+                        className: 'flex-box flex-box-row',
                         title: {
                             header: 'Be an Impact Partner.',
                             headerClassName: 'flex-item__of-2--50_50 flex-item__of-2--50_50-left heading-primary color-pink'
@@ -159,7 +160,7 @@ const content = {
                         className: 'lvl2__image-pane'
                     },
                     flexCont: {
-                        className: 'flex-box',
+                        className: 'flex-box flex-box-row',
                         title: {
                             header: 'The Next Wave.',
                             headerClassName: 'flex-item__of-2--50_50 flex-item__of-2--50_50-left heading-primary color-pink'
@@ -176,7 +177,6 @@ const content = {
 };
 
 const renderDoublePaneSection = (data) => {
-    console.log(data)
 
     return (
         <section className={data.sectionClassName}>
@@ -203,15 +203,18 @@ const loopSteps = () => {
     })
 };
 
-const EducatorsPage = () => (
-    <React.Fragment>
-        <HeaderSecondary {...content.header} />
-        <SinglePaneRow {...content.content.singlePaneRow} />
-        <div className='lvl2'>
-            {loopSteps()}
-        </div>
-        <ContactForm />
-    </React.Fragment>
-);
+const EducatorsPage = () => {
+
+    return (
+        <React.Fragment>
+            <HeaderSecondary {...content.header} />
+            <SinglePaneRow {...content.content.singlePaneRow} />
+            <div className='lvl2__steps-content'>
+                {loopSteps()}
+            </div>
+            <ContactForm />
+        </React.Fragment>
+    )
+};
 
 export default EducatorsPage;

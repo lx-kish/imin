@@ -4,7 +4,16 @@ import '../headers.styles.scss';
 
 import Btn from '../../btns/btn/btn.component';
 
+
 const HeaderSecondary = props => {
+
+    const renderButton = (render, btn) => {
+        return render ?
+            <div className={btn.boxClassName}>
+                <Btn {...btn.config} />
+            </div>
+            : null
+    }
 
     return (
         <header className={props.headerClassName}>
@@ -12,9 +21,7 @@ const HeaderSecondary = props => {
                 <h1 className={props.titleClassName}>
                     {props.title}
                 </h1>
-                <div className={props.button.boxClassName}>
-                    <Btn {...props.button.config} />
-                </div>
+                {renderButton(props.renderButton, props.button)}
             </div>
         </header>
     );

@@ -19,6 +19,7 @@ const content = {
         containerClassName: 'header__container header__container--about-page',
         title: 'A vision from New Zealand.',
         titleClassName: 'header__title--second-lvl-page heading-primary color-pink',
+        renderButton: true,
         button: {
             boxClassName: 'header__btn-box',
             config: {
@@ -42,9 +43,9 @@ const content = {
             sectionClassName: 'lvl2--bg-grey',
             title: 'In our DNA.',
             titleClassName: 'lvl2__heading heading-secondary',
-            rowClassName: 'row-lvl2 lvl2__container lvl2__container--double-pane',
-            leftColClassName: 'col-1-of-2--lvl2',
-            rightColClassName: 'col-1-of-2--lvl2',
+            rowClassName: 'flex-box flex-box-row lvl2__container lvl2__container--double-pane',
+            leftColClassName: 'flex-item__of-2--about flex-item__of-2--about-left',
+            rightColClassName: 'flex-item__of-2--about flex-item__of-2--about-right',
             img: {
                 src: FirstImage,
                 alt: 'In our DNA.',
@@ -68,9 +69,9 @@ const content = {
             sectionClassName: 'lvl2--bg-grey',
             title: 'Our strategy for impact.',
             titleClassName: 'lvl2__heading heading-secondary',
-            rowClassName: 'row-lvl2 lvl2__container lvl2__container--double-pane',
-            leftColClassName: 'col-1-of-2--lvl2',
-            rightColClassName: 'col-1-of-2--lvl2',
+            rowClassName: 'flex-box flex-box-row lvl2__container lvl2__container--double-pane',
+            leftColClassName: 'flex-item__of-2--about flex-item__of-2--about-left',
+            rightColClassName: 'flex-item__of-2--about flex-item__of-2--about-right',
             img: {
                 src: SecondImage,
                 alt: 'What we do and how we do it.',
@@ -127,15 +128,18 @@ const renderDoublePaneSection = (data) => {
     )
 }
 
-const AboutPage = () => (
-    <React.Fragment>
-        <HeaderSecondary {...content.header} />
-        <SinglePaneRow {...content.content.firstSinglePaneRow} />
-        {renderDoublePaneSection(content.content.firstDoublePanesSection)}
-        <SinglePaneRow {...content.content.secondSinglePaneRow} />
-        {renderDoublePaneSection(content.content.secondDoublePanesSection)}
-        <ContactForm />
-    </React.Fragment>
-);
+const AboutPage = () => {
+
+    return (
+        <React.Fragment>
+            <HeaderSecondary {...content.header} />
+            <SinglePaneRow {...content.content.firstSinglePaneRow} />
+            {renderDoublePaneSection(content.content.firstDoublePanesSection)}
+            <SinglePaneRow {...content.content.secondSinglePaneRow} />
+            {renderDoublePaneSection(content.content.secondDoublePanesSection)}
+            <ContactForm />
+        </React.Fragment>
+    )
+};
 
 export default AboutPage;

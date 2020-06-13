@@ -10,19 +10,22 @@ import ContactForm from '../../components/forms/contact-form/contact-form.compon
 // import IconFacebook from '../../components/icons/icon-facebook.component';
 // import IconLinkedIn from '../../components/icons/icon-linkedin.component';
 
-const HomePage = () => (
-    <React.Fragment>
+const HomePage = () => {
 
-        <HeaderHomePage />
-        <PartsHomePage />
+    return (
+        <React.Fragment>
 
-        {/* <div style={{width: '100%', backgroundColor: '#000'}}>
+            <HeaderHomePage />
+            <PartsHomePage />
+
+            {/* <div style={{width: '100%', backgroundColor: '#000'}}>
             <IconUmbrella className='footer__icon' />
             <IconFacebook className='footer__icon' />
             <IconLinkedIn className='footer__icon' />
         </div> */}
-        <ContactForm />
-    </React.Fragment>
-);
+            <ContactForm />
+        </React.Fragment>
+    )
+};
 
 export default HomePage;

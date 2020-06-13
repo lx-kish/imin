@@ -7,26 +7,33 @@
 *about: 1390; left: 540 * 308; right: 740 * 308; gutter: 1390 - 740 - 540 = 110
 *steps: 1350; left: 600 * 300; right: 600 * 300; gutter: 150;
 */
-.row-lvl2 {
-    .col-1-of-2--lvl2 {
-        width: calc((100% - #{$gutter-horizontal-about}) / 2);
-    }
+// .row-lvl2 {
+//     .col-1-of-2--lvl2 {
+//         width: calc((100% - #{$gutter-horizontal-about}) / 2);
+//     }
 
-    @include clearfix;
+//     @include clearfix;
 
-    [class*="col-"] {
-        float: left;
+//     [class*="col-"] {
+//         float: left;
 
-        &:not(:last-child) {
-            margin-right: $gutter-horizontal-about;
-        }
-    }
-}
+//         &:not(:last-child) {
+//             margin-right: $gutter-horizontal-about;
+//         }
+//     }
+// }
 
 .flex {
     &-box {
         display: flex;
-        flex-direction: row;
+
+        &-row {
+            flex-direction: row;
+        }
+
+        &-col {
+            flex-direction: column;
+        }
 
         &--about {
             height: 31rem;
@@ -34,6 +41,11 @@
 
         &--steps {
             justify-content: space-between;
+        }
+
+        &--partners-contact {
+            justify-content: space-between;
+            align-items: center;
         }
     }
 
@@ -150,5 +162,18 @@
     &__image-pane {
         // height: 30.8rem;
         width: 100%;
+    }
+}
+
+.partners-contact {
+    font-size: 3rem;
+    margin-bottom: 25rem;
+
+    &__icon {
+        margin-right: 2rem;
+
+        &-box {
+            margin-top: 2rem;
+        }
     }
 }

@@ -19,16 +19,13 @@ const Footer = () => (
                     to={'/'}
                     className='footer__link'
                 >
-                    <IconFacebook className='footer__icon' />
-                    {/* <svg className='footer__icon'>
-                        <use xlinkHref='./img/sprite.svg#icon-facebook2' />
-                    </svg> */}
+                    <IconFacebook className='footer__icon color-white' />
                 </Link>
                 <Link
                     to={'/'}
                     className='footer__link'
                 >
-                    <IconLinkedIn className='footer__icon' />
+                    <IconLinkedIn className='footer__icon color-white' />
                     {/* <svg className='footer__icon'>
                         <use xlinkHref='./img/sprite.svg#icon-linkedin' />
                     </svg> */}
