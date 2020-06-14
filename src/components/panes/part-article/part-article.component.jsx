@@ -6,13 +6,13 @@ const PartArticle = props => {
 
     return (
         <div className={props.componentClassName}>
-            <h4 className={props.headerCommonClassName}>For those that want to</h4>
-            <h2 className={props.headerClassName}>{props.header}</h2>
-            <p className={props.paragraphClassName}>{props.paragraph}</p>
+            <h4 className={props.titles.headerCommonClassName}>For those that want to</h4>
+            <h2 className={props.titles.headerClassName}>{props.titles.header}</h2>
+            <p className={props.paragraph.paragraphClassName}>{props.paragraph.paragraph}</p>
             <NavigationLink
-                link={props.ctaLink}
-                className={props.ctaClassName}
-                name={props.cta}
+                link={props.cta.link}
+                className={props.cta.className}
+                name={props.cta.text}
             />
         </div>
     );

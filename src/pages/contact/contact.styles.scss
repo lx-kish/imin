@@ -1,0 +1,35 @@
+.contact {
+    &__row {
+        padding: 25rem 0;
+    }
+
+    &-details {
+        &__box {
+            padding: 4rem;
+        }
+
+        &__title {
+            padding: 8rem 0;
+        }
+
+        &__item {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            // align-items: center;
+            align-content: center;
+            margin: 2rem 0;
+        }
+
+        &__icon {
+            height: 2.4rem;
+            width: 2.4rem;
+            margin-right: 4rem;
+        }
+    }
+
+    &__map-box {
+        width: 69rem;
+        height: 63.5rem;
+    }
+}

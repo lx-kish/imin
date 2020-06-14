@@ -26,22 +26,25 @@ const content = {
 
 };
 
-const HeaderHomePage = () => (
-    <header className={content.header.headerClassName}>
-        <div className={content.header.containerClassName}>
-            <h1 className={content.header.titleClassName}>
-                {content.header.title}
-            </h1>
-            <div className={content.header.contentClassName}>
-                <p className={content.header.paragraphClassName}>
-                    {content.header.paragraph}
-                </p>
-                <div className={content.button.boxClassName}>
-                    <Btn {...content.button.config} />
+const HeaderHomePage = () => {
+
+    return (
+        <header className={content.header.headerClassName}>
+            <div className={content.header.containerClassName}>
+                <h1 className={content.header.titleClassName}>
+                    {content.header.title}
+                </h1>
+                <div className={content.header.contentClassName}>
+                    <p className={content.header.paragraphClassName}>
+                        {content.header.paragraph}
+                    </p>
+                    <div className={content.button.boxClassName}>
+                        <Btn {...content.button.config} />
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-);
+        </header>
+    )
+};
 
 export default HeaderHomePage;

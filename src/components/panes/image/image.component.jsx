@@ -8,7 +8,7 @@ const Image = props => {
         <img
             src={props.src}
             alt={props.alt}
-            className={`image ${props.className}`}
+            className={props.className}
         />
     );
 }
