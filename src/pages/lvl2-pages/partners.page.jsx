@@ -9,7 +9,8 @@ import IconPhone from '../../components/icons/icon-phone.component';
 import IconEnvelop from '../../components/icons/icon-envelope.component';
 
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
-import SinglePaneRow from '../../components/panes/single-pane-row/single-pane-row.component';
+import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
+import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import StepArticle from '../../components/panes/step-article/step-article.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
@@ -34,10 +35,12 @@ const content = {
         singlePaneRow: {
             sectionClassName: 'lvl2__section--single-pane',
             rowClassName: 'row-lvl2 lvl2__container lvl2__container--single-pane',
-            titleClassName: 'lvl2__heading heading-secondary',
-            title: 'Opening up a world of possibilities.',
-            paragraphClassName: 'lvl2__paragraph paragraph',
-            paragraph: 'Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum. Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum.'
+            pane: {
+                titleClassName: 'lvl2__heading heading-secondary',
+                title: 'Opening up a world of possibilities.',
+                paragraphClassName: 'lvl2__paragraph paragraph',
+                paragraph: 'Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum. Tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum.'
+            }
         },
         doublePanesSections: [
             {
@@ -95,18 +98,30 @@ const renderContactSection = () => {
                     <b>Speak to our team about partnering today.</b>
                 </p>
                 <div className='partners-contact__icon-box flex-box flex-box-row color-pink'>
-                    <IconEnvelop className='partners-contact__icon'/>
+                    <IconEnvelop className='partners-contact__icon' />
                     <span>
                         thomas@imin.org.nz
                     </span>
                 </div>
                 <div className='partners-contact__icon-box flex-box flex-box-row color-pink'>
-                    <IconPhone className='partners-contact__icon'/>
+                    <IconPhone className='partners-contact__icon' />
                     <span>
                         +6421 193 7699
                     </span>
                 </div>
             </div>
+        </section>
+    )
+};
+
+const renderSinglePaneSection = (data) => {
+
+    return (
+        <section className={data.sectionClassName}>
+            <SinglePaneRow
+                rowClassName={data.rowClassName}
+                pane={<ParagraphTitled {...data.pane} />}
+            />
         </section>
     )
 };
@@ -143,7 +158,7 @@ const PartnersPage = () => {
     return (
         <React.Fragment>
             <HeaderSecondary {...content.header} />
-            <SinglePaneRow {...content.content.singlePaneRow} />
+            {renderSinglePaneSection(content.content.singlePaneRow)}
             <div className='lvl2__steps-content'>
                 {loopSteps()}
             </div>

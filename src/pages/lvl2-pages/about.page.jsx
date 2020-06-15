@@ -6,7 +6,8 @@ import FirstImage from '../../graphics/pages-content/about-page/about-dna-1.png'
 import SecondImage from '../../graphics/pages-content/about-page/about-strategy-2.png';
 
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
-import SinglePaneRow from '../../components/panes/single-pane-row/single-pane-row.component';
+import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
+import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import Image from '../../components/panes/image/image.component';
 import TextParagraph from '../../components/panes/paragraphs/paragraph-text/paragraph-text.component';
@@ -33,10 +34,12 @@ const content = {
         firstSinglePaneRow: {
             sectionClassName: 'lvl2__section',
             rowClassName: 'row-lvl2 lvl2__container lvl2__container--single-pane',
-            titleClassName: 'lvl2__heading heading-secondary',
-            title: 'Free and accessible education for young New Zealanders.',
-            paragraphClassName: 'lvl2__paragraph paragraph',
-            paragraph: 'Founded in 2020 by Thomas Maharaj, I’m In is a New Zealand based registered charitable trust with a vision to see communities work collectively together, in order to help every young person have access to free industry and community led education. As they realise their potential, I’m In helps young people discover a pathway into education and employment.'
+            pane: {
+                titleClassName: 'lvl2__heading heading-secondary',
+                title: 'Free and accessible education for young New Zealanders.',
+                paragraphClassName: 'lvl2__paragraph paragraph',
+                paragraph: 'Founded in 2020 by Thomas Maharaj, I’m In is a New Zealand based registered charitable trust with a vision to see communities work collectively together, in order to help every young person have access to free industry and community led education. As they realise their potential, I’m In helps young people discover a pathway into education and employment.'
+            }
         },
         firstDoublePanesSection: {
             textSectionType: 'paragraph',
@@ -59,10 +62,12 @@ const content = {
         secondSinglePaneRow: {
             sectionClassName: 'lvl2__section',
             rowClassName: 'row-lvl2 lvl2__container lvl2__container--single-pane',
-            titleClassName: 'lvl2__heading heading-secondary',
-            title: 'What we do and how we do it.',
-            paragraphClassName: 'lvl2__paragraph paragraph',
-            paragraph: 'I’m In provides education training and support to industry and community groups, businesses and centres helping them become educators. We’ve been hard at work developing a gamified education platform that enables young people to access industry and community led education and an access point to study and employment opportunities. It’s a showcase for our rangatahi about their options and helps create a clear pathway for their future.'
+            pane: {
+                titleClassName: 'lvl2__heading heading-secondary',
+                title: 'What we do and how we do it.',
+                paragraphClassName: 'lvl2__paragraph paragraph',
+                paragraph: 'I’m In provides education training and support to industry and community groups, businesses and centres helping them become educators. We’ve been hard at work developing a gamified education platform that enables young people to access industry and community led education and an access point to study and employment opportunities. It’s a showcase for our rangatahi about their options and helps create a clear pathway for their future.'
+            }
         },
         secondDoublePanesSection: {
             textSectionType: 'paragraph-bottom-link',
@@ -87,6 +92,18 @@ const content = {
             }
         }
     }
+};
+
+const renderSinglePaneSection = (data) => {
+
+    return (
+        <section className={data.sectionClassName}>
+            <SinglePaneRow
+                rowClassName={data.rowClassName}
+                pane={<ParagraphTitled {...data.pane} />}
+            />
+        </section>
+    )
 };
 
 const renderDoublePaneSection = (data) => {
@@ -133,9 +150,9 @@ const AboutPage = () => {
     return (
         <React.Fragment>
             <HeaderSecondary {...content.header} />
-            <SinglePaneRow {...content.content.firstSinglePaneRow} />
+            {renderSinglePaneSection(content.content.firstSinglePaneRow)}
             {renderDoublePaneSection(content.content.firstDoublePanesSection)}
-            <SinglePaneRow {...content.content.secondSinglePaneRow} />
+            {renderSinglePaneSection(content.content.secondSinglePaneRow)}
             {renderDoublePaneSection(content.content.secondDoublePanesSection)}
             <ContactForm />
         </React.Fragment>

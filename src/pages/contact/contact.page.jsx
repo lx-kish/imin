@@ -5,6 +5,7 @@ import './contact.styles.scss';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import ContactDetails from '../../components/panes/contact-details/contact-details.component';
 import ContactMap from '../../components/panes/contact-map/contact-map.component';
+import EnquiryForm from '../../components/forms/enquiry-form/enquiry-form.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
@@ -54,6 +55,35 @@ const content = {
             componentClassName: 'contact__map-box'
 
         }
+    },
+    team: {
+        sectionClassName: '',
+        rowClassName: '',
+        colClassName: '',
+        members: [
+            {
+                image: {
+                    img: '',
+                    alt: ''
+                },
+                title: {
+                    name: '',
+                    className: ''
+                },
+                role: {
+                    name: '',
+                    className: ''
+                },
+                description: {
+                    text: '',
+                    className: ''
+                },
+                links: {
+                    className: '',
+                    
+                }
+            }
+        ]
     }
 };
 
@@ -79,6 +109,7 @@ const ContactPage = () => {
     return (
         <React.Fragment>
             {renderContactDetailsSection(content.contactDetails)}
+            <EnquiryForm />
             {'Contact me'}
             <ContactForm />
         </React.Fragment>

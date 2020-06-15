@@ -10,7 +10,8 @@ import ImageRateExperiences from '../../graphics/pages-content/students-page/4-r
 import ImageMakeDecisionAboutYourFuture from '../../graphics/pages-content/students-page/5-make-decisions-about-your-future.png';
 
 import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
-import SinglePaneRow from '../../components/panes/single-pane-row/single-pane-row.component';
+import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
+import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import StepArticle from '../../components/panes/step-article/step-article.component';
 
@@ -36,10 +37,12 @@ const content = {
         singlePaneRow: {
             sectionClassName: 'lvl2__section--single-pane',
             rowClassName: 'row-lvl2 lvl2__container lvl2__container--single-pane',
-            titleClassName: 'lvl2__heading heading-secondary',
-            title: 'Why learn through I’m In?',
-            paragraphClassName: 'lvl2__paragraph paragraph',
-            paragraph: 'Deciding on a career pathway or your further study options can be tough. With I’m In, we make these decisions easier by connecting you with local industry and community professionals education experiences. Learn new skills, be inspired and discover a world of possibilities. It’s free.'
+            pane: {
+                titleClassName: 'lvl2__heading heading-secondary',
+                title: 'Why learn through I’m In?',
+                paragraphClassName: 'lvl2__paragraph paragraph',
+                paragraph: 'Deciding on a career pathway or your further study options can be tough. With I’m In, we make these decisions easier by connecting you with local industry and community professionals education experiences. Learn new skills, be inspired and discover a world of possibilities. It’s free.'
+            }
         },
         doublePanesSections: [
             {
@@ -175,6 +178,18 @@ const content = {
     }
 };
 
+const renderSinglePaneSection = (data) => {
+
+    return (
+        <section className={data.sectionClassName}>
+            <SinglePaneRow
+                rowClassName={data.rowClassName}
+                pane={<ParagraphTitled {...data.pane} />}
+            />
+        </section>
+    )
+};
+
 const renderDoublePaneSection = (data) => {
 
     return (
@@ -207,7 +222,7 @@ const StudentsPage = () => {
     return (
         <React.Fragment>
             <HeaderSecondary {...content.header} />
-            <SinglePaneRow {...content.content.singlePaneRow} />
+            {renderSinglePaneSection(content.content.singlePaneRow)}
             <div className='lvl2__steps-content'>
                 {loopSteps()}
             </div>

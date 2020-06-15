@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormFields = (props) => {
+const FormFields = props => {
 
     // const renderFields = () => {
     //     const formArray = [];

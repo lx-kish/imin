@@ -1,0 +1,105 @@
+@import "../../../project-styles/mixins";
+@import "../../../project-styles/variables";
+
+////////////////////////////////////////////////
+// CUSTOM GRID FOR PARTS SECTION
+.row-enquiry-form {
+    // width: 60rem;
+    &:not(:last-child) {
+        padding-top: 4.2rem;
+    }
+
+    &:last-child {
+        padding-top: 4.2rem;
+    }
+
+    .col-1-of-2--enquiry-form {
+        width: calc((100% - #{$gutter-horizontal-contact-form}) / 2);
+    }
+
+    @include clearfix;
+
+    [class^="col-"] {
+        float: left;
+
+        &:not(:last-child) {
+            margin-right: $gutter-horizontal-contact-form;
+        }
+    }
+}
+
+.enquiry-form {
+    background-color: var(--color-input-border);
+    color: var(--color-white);
+    text-align: center;
+
+    &__form {
+        padding: 0 38.3rem 12rem;
+    }
+
+    &__heading {
+        padding: 12rem 0 3rem;
+        color: var(--color-font-main);
+    }
+
+    &__input {
+        height: 5rem;
+        width: 100%; //25.4rem;
+        font-size: $font-size-input;
+        font-family: inherit;
+
+        padding: 0.7rem 2rem;
+        background-color: var(--color-white);
+        border: 0.2rem solid var(--color-input-border);
+        border-radius: $border-radius-main;
+
+        &::-webkit-input-placeholder {
+            /* Edge */
+            color: var(--color-font-main);
+        }
+
+        &::-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: var(--color-font-main);
+        }
+
+        &::placeholder {
+            color: var(--color-font-main);
+        }
+    }
+
+    &__label {
+        font-size: 1.8rem;
+    }
+
+    &__message-label {
+        text-align: left;
+        color: var(--color-font-main);
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 1rem;
+    }
+
+    &__textarea {
+        width: 100%;
+        resize: none;
+        outline: none;
+        border: 0.2rem solid var(--color-input-border);
+        border-radius: $border-radius-main;
+
+        font-size: $font-size-input;
+        font-family: inherit;
+
+        padding: 0.7rem 2rem;
+    }
+
+    &--btn-box {
+        height: 8rem;
+    }
+
+    &__btn {
+        &--submit {
+            float: right;
+        }
+    }
+}
