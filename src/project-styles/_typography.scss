@@ -50,6 +50,16 @@ body {
     }
 }
 
+.heading-quinary {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-heading-quinary;
+
+    &--uppercase {
+        text-transform: uppercase;
+        letter-spacing: .2rem;
+    }
+}
+
 .paragraph {
     font-weight: $font-weight-regular;
     font-size: $font-size-paragraph;

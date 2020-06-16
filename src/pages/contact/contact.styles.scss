@@ -33,3 +33,58 @@
         height: 63.5rem;
     }
 }
+
+.team {
+    
+    &__row {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem 20.8rem 18rem;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--color-input-border);
+
+        &:not(:last-child) {
+            margin-right: 4rem;
+        }
+    }
+
+    &__heading {
+        text-align: center;
+        padding: 8rem 0 4rem;
+    }
+
+    &-member {
+        &__container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            text-align: center;
+            font-size: 1.6rem;
+            padding: 0 2rem;  
+        }
+
+        &__title {
+            padding: 4.5rem 0 1rem;
+        }
+
+        &__role {
+            padding: 1rem 0 3rem;
+        }
+
+        &__media {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            padding-bottom: 2.5rem;
+        }
+
+        &__icon {
+            height: 1.8rem;
+        }
+    }
+}

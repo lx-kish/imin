@@ -6,6 +6,25 @@ import './footer.styles.scss';
 import IconFacebook from '../../components/icons/icon-facebook.component';
 import IconLinkedIn from '../../components/icons/icon-linkedin.component';
 
+// const content = {
+//     doubleLinkPane: {
+//         className: 'footer__media',
+//         links: [
+//             {
+//                 to: '/',
+//                 className: 'footer__link',
+//                 icon: IconFacebook,
+//                 iconClassName: 'footer__icon color-white'
+//             },
+//             {
+//                 to: '/',
+//                 className: 'footer__link',
+//                 icon: IconLinkedIn,
+//                 iconClassName: 'footer__icon color-white'
+//             }
+//         ]
+//     }
+// };
 
 const Footer = () => (
     <footer className='footer'>
@@ -26,9 +45,6 @@ const Footer = () => (
                     className='footer__link'
                 >
                     <IconLinkedIn className='footer__icon color-white' />
-                    {/* <svg className='footer__icon'>
-                        <use xlinkHref='./img/sprite.svg#icon-linkedin' />
-                    </svg> */}
                 </Link>
             </div>
         </div>
