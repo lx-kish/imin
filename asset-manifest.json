@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/imin/static/css/main.0e78560b.chunk.css",
-    "main.js": "/imin/static/js/main.03883e7c.chunk.js",
-    "main.js.map": "/imin/static/js/main.03883e7c.chunk.js.map",
+    "main.css": "/imin/static/css/main.38a9d157.chunk.css",
+    "main.js": "/imin/static/js/main.01882400.chunk.js",
+    "main.js.map": "/imin/static/js/main.01882400.chunk.js.map",
     "runtime-main.js": "/imin/static/js/runtime-main.23955c3f.js",
     "runtime-main.js.map": "/imin/static/js/runtime-main.23955c3f.js.map",
-    "static/js/2.e7b7d729.chunk.js": "/imin/static/js/2.e7b7d729.chunk.js",
-    "static/js/2.e7b7d729.chunk.js.map": "/imin/static/js/2.e7b7d729.chunk.js.map",
+    "static/js/2.e18bfbd1.chunk.js": "/imin/static/js/2.e18bfbd1.chunk.js",
+    "static/js/2.e18bfbd1.chunk.js.map": "/imin/static/js/2.e18bfbd1.chunk.js.map",
     "index.html": "/imin/index.html",
-    "precache-manifest.3938bd436b28e216f772fdbe60aff4f1.js": "/imin/precache-manifest.3938bd436b28e216f772fdbe60aff4f1.js",
+    "precache-manifest.dbcfefbd3a5a7648f532f601e42e1352.js": "/imin/precache-manifest.dbcfefbd3a5a7648f532f601e42e1352.js",
     "service-worker.js": "/imin/service-worker.js",
-    "static/css/main.0e78560b.chunk.css.map": "/imin/static/css/main.0e78560b.chunk.css.map",
-    "static/js/2.e7b7d729.chunk.js.LICENSE.txt": "/imin/static/js/2.e7b7d729.chunk.js.LICENSE.txt",
+    "static/css/main.38a9d157.chunk.css.map": "/imin/static/css/main.38a9d157.chunk.css.map",
+    "static/js/2.e18bfbd1.chunk.js.LICENSE.txt": "/imin/static/js/2.e18bfbd1.chunk.js.LICENSE.txt",
     "static/media/1-become-a-partner.png": "/imin/static/media/1-become-a-partner.757ace58.png",
     "static/media/1-sign-up.png": "/imin/static/media/1-sign-up.48a58b38.png",
     "static/media/2-apply-to-host.png": "/imin/static/media/2-apply-to-host.c0ef5aa8.png",
@@ -30,12 +30,15 @@
     "static/media/home-educate-1x.png": "/imin/static/media/home-educate-1x.e2dd53d5.png",
     "static/media/home-learn-1x.png": "/imin/static/media/home-learn-1x.f41d6896.png",
     "static/media/home-support-1x.png": "/imin/static/media/home-support-1x.2fd6e65b.png",
-    "static/media/logo_pink.png": "/imin/static/media/logo_pink.d459e05e.png"
+    "static/media/isaac.png": "/imin/static/media/isaac.0cfedc1a.png",
+    "static/media/jenny.png": "/imin/static/media/jenny.95b01d65.png",
+    "static/media/logo_pink.png": "/imin/static/media/logo_pink.d459e05e.png",
+    "static/media/thomas.png": "/imin/static/media/thomas.d738ffcd.png"
   },
   "entrypoints": [
     "static/js/runtime-main.23955c3f.js",
-    "static/js/2.e7b7d729.chunk.js",
-    "static/css/main.0e78560b.chunk.css",
-    "static/js/main.03883e7c.chunk.js"
+    "static/js/2.e18bfbd1.chunk.js",
+    "static/css/main.38a9d157.chunk.css",
+    "static/js/main.01882400.chunk.js"
   ]
 }
