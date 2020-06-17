@@ -21,16 +21,16 @@ import ContactForm from '../../components/forms/contact-form/contact-form.compon
 const content = {
     contactDetails: {
         sectionClassName: 'bg-pink',
-        rowClassName: 'flex-box flex-box-row container contact__row',
+        rowClassName: 'container contact__row',
         colClassName: 'flex-item__of-2',
         details: {
-            componentClassName: 'flex-box flex-box-col',
+            componentClassName: 'contact-details__box',
             title: {
-                className: 'contact-details__title heading-primary color-white',
+                className: 'contact-details__title color-white',
                 text: 'We’d love to hear from you.'
             },
             detailsBox: {
-                className: 'bg-white contact-details__box',
+                className: 'bg-white contact-details__details',
                 title: {
                     className: 'heading-tertiary heading-tertiary--uppercase',
                     text: 'Concact us'
@@ -62,7 +62,7 @@ const content = {
             }
         },
         map: {
-            componentClassName: 'contact__map-box'
+            className: 'contact__map-box'
 
         }
     },

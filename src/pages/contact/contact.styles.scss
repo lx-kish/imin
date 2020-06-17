@@ -1,15 +1,31 @@
+@import "../../project-styles/variables";
+
 .contact {
     &__row {
-        padding: 25rem 0;
+        padding: 19rem 0 25rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     &-details {
         &__box {
+            display: flex;
+            flex-direction: column;
+            width: 40rem;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        &__details {
             padding: 4rem;
         }
 
         &__title {
-            padding: 8rem 0;
+            // padding: 0 0 8rem;
+            font-weight: $font-weight-bold;
+            font-size: 8rem;
+            line-height: calc(8rem * 1.2);
         }
 
         &__item {
@@ -23,19 +39,21 @@
 
         &__icon {
             height: 2.4rem;
-            width: 2.4rem;
+            // width: 2.4rem;
             margin-right: 4rem;
         }
     }
 
-    &__map-box {
-        width: 69rem;
-        height: 63.5rem;
+    &__map {
+        &-box {
+            width: 69rem;
+            height: 63.5rem;
+            // background-color: var(--color-white);
+        }
     }
 }
 
 .team {
-    
     &__row {
         display: flex;
         flex-direction: row;
@@ -65,7 +83,7 @@
 
             text-align: center;
             font-size: 1.6rem;
-            padding: 0 2rem;  
+            padding: 0 2rem;
         }
 
         &__title {
