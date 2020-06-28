@@ -1,0 +1,67 @@
+const bcrypt = require('bcrypt');
+const SALT_I = 10;
+const jwt = require('jsonwebtoken');
+
+module.exports = (schema) => {
+
+    schema.pre('save', function (next) {
+        var user = this;
+
+        if (user.isModified('password')) {
+            bcrypt.genSalt(SALT_I, function (err, salt) {
+                if (err) return next(err);
+
+                bcrypt.hash(user.password, salt, function (err, hash) {
+                    if (err) return next(err);
+
+                    user.password = hash;
+                    next();
+                });
+            });
+        } else {
+            next();
+        }
+    });
+
+    schema.methods.comparePassword = function (candidatePassword, cb) {
+        var user = this;
+        bcrypt.compare(candidatePassword, user.password, function (err, isMatch) {
+            if (err) return cb(err);
+            cb(null, isMatch);
+        });
+    };
+
+    schema.methods.generateToken = function (cb) {
+        var user = this;
+        var token = jwt.sign(user._id.toHexString(), 'supersecret');
+
+        user.token = token;
+        user.save(function (err, user) {
+            if (err) return cb(err);
+            console.log(user)
+            cb(null, user);
+        })
+    };
+
+    schema.methods.deleteToken = function (token, cb) {
+        var user = this;
+
+        user.update({ $unset: { token: 1 } }, (err, user) => {
+            if (err) return cb(err);
+            cb(null, user);
+        });
+    };
+
+    schema.statics.findByToken = function (token, cb) {
+        var user = this;
+        jwt.verify(token, 'supersecret', (err, decode) => {
+            if (err) return cb(err);
+            user.findOne({ '_id': decode, 'token': token }, (err, user) => {
+                if (err) return cb(err);
+                cb(null, user);
+            });
+        });
+    };
+
+    return schema;
+};
