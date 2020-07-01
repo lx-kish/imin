@@ -1,28 +1,36 @@
-const { User } = require('../../db/models/userModel');
+// const User = require('../../db/models/userModel');
+const logger = require('../../loaders/logger')();
+const services = require('../../loaders/services');
+const model = require('../../db/models/userModel');
+const config = require('../../config');
 
-// let authenticate = (req, res, next) => {
-//   let token = req.cookies.auth;
-
-//   User.findByToken(token, (err, user) => {
-//     if (err) return res.status(400).json({
-//       message: `Error ${err} occured while verifying token.`
-//     });
-//     if (!user) return res.status(401).send('Wrong email or password');
-
-//     req.user = user;
-//     req.token = token;
-//     next();
-//   });
-// };
+const dbName = config.database_name;
+const connection = services.get('connections')[dbName];
+const userModel = model(connection);
 
 module.exports = (req, res, next) => {
-  let token = req.cookies.auth;
+  console.log(req.cookies)
+  let token = req.cookies.access_token;
+  // console.log(req.headers.cookie);
+  // console.log(req.cookie);
 
-  User.findByToken(token, (err, user) => {
-    if (err) return res.status(400).json({
-      message: `Error ${err} occured while verifying token.`
-    });
-    if (!user) return res.status(401).send('Wrong email or password');
+
+
+  logger.debug('Searching user with session tokeny: %o', token);
+
+  userModel.findByToken(token, (err, user) => {
+
+    if (err) {
+      let message = `User has not found due to ${err}`;
+      logger.error(message);
+      return res.status(400).json({ message: message });
+    }
+    
+    if (!user) {
+      let message = `User has not found due to wrong email or password provided`;
+      logger.error(message);
+      return res.status(401).send(message);
+    }
 
     req.user = user;
     req.token = token;

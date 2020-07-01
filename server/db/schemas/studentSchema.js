@@ -24,7 +24,7 @@ module.exports = {
 		unique: false,
 		required: true
 	},
-	tokenSignIn: {
+	access_token: {
 		type: String,
 		unique: true
 	}

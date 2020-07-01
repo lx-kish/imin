@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const routes = require('../api/index');
 const config = require('../config');
+const logger = require('./logger')();
 
 module.exports = (app) => {
   /**
@@ -20,6 +21,18 @@ module.exports = (app) => {
   // It shows the real origin IP in the heroku or Cloudwatch logs
   app.enable('trust proxy');
 
+  //https redirect
+  app.use(function (req, res, next) {
+
+    res.setHeader('Strict-Transport-Security', 'max-age=8640000; includeSubDomains');
+    if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === "http") {
+      return res.redirect(301, 'https://' + req.host + req.url);
+    } else {
+      logger.info("HTTPS call detected");
+      return next();
+    }
+  });
+
   // The magic package that prevents frontend developers going nuts
   // Alternate description:
   // Enable Cross Origin Resource Sharing to all origins by default
@@ -34,7 +47,7 @@ module.exports = (app) => {
   app.use(bodyParser.json());
 
   app.use(cookieParser());
-  
+
   // Load API routes
   app.use(config.api.prefix, routes());
 

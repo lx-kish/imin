@@ -2,6 +2,7 @@ import React from 'react';
 
 import DoublePanesRow from '../../../hoc/rows/double-panes-row';
 import SignUpLogo from '../../../components/sign-up-logo/sign-up-logo.component';
+import SignUpForm from '../../../components/forms/sign-up-form/sign-up-form.component';
 
 const content = {
     background: {
@@ -37,7 +38,7 @@ const SignUpStudents = props => {
                 leftColClassName={content.doublePanes.left.className}
                 rightColClassName={content.doublePanes.right.className}
                 left={<SignUpLogo {...content.doublePanes.left} />}
-                right={<PartArticle {...content.text} />}
+                right={<SignUpForm {...content.doublePanes.right} />}
             />
         </div>
     )

@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const logger = require('../../loaders/logger')();
 const isAuth = require('../middleware/isAuth');
-const Logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');
 const model = require('../../db/models/userModel');
 const config = require('../../config');
@@ -28,10 +27,10 @@ module.exports = (app) => {
 
                 user.save((err, user) => {
                     if (err) {
-                        Logger.error(`${err} occured while saving`);
+                        logger.error(`${err} occured while saving`);
                         res.status(400).send(err);
                     } else {
-                        Logger.info(`User ${user._id} has been successfully saved into the db ${dbName}`);
+                        logger.info(`User ${user._id} has been successfully saved into the db ${dbName}`);
                         res.status(200).json({ post: true, userId: user._id });
                     }
                 });
@@ -43,7 +42,7 @@ module.exports = (app) => {
 
                 // return next();
             } catch (e) {
-                Logger.error('🔥 Error attaching user to req: %o', e);
+                logger.error('🔥 Error attaching user to req: %o', e);
                 return next(e);
             }
         }
@@ -60,22 +59,35 @@ module.exports = (app) => {
                 const { email, password } = req.body;
 
                 userModel.findOne({ email: email }, (err, user) => {
-                    
-                    if (!user) return res.json({ 
-                        message: `Email ${email} hasn't registered in the database` 
-                    });
+                    if (err) {
+                        let message = `${err} occured while logging in.`;
+                        logger.error(message);
+                        return res.status(400).json({ message: message });
+                    };
+
+                    if (!user) {
+                        let message = `Email ${email} hasn't registered in the database`;
+                        logger.error(message);
+                        return res.status(400).json({ message: message });
+                    };
 
                     user.comparePassword(password, (err, isMatch) => {
                         if (err) throw err;
-                        if (!isMatch) return res.status(400).json({
-                            message: 'Wrong password provided!'
-                        });
+                        if (!isMatch) {
+
+                            let message = `Wrong password provided!`;
+                            logger.error(message);
+                            return res.status(400).json({ message: message });
+                        }
 
                         user.generateToken((err, user) => {
-                            if (err) return res.status(400).json({
-                                message: `Error ${err} occured while logging in.`
-                            });
-                            res.cookie('auth', user.token).send('ok');
+                            if (err) {
+                                let message = `${err} occured while logging in.`;
+                                logger.error(message);
+                                return res.status(400).json({ message: message });
+                            }
+                            logger.info(`User ${user._id} has been successfully logged in`);
+                            res.cookie('access_token', user.access_token).send('ok');
                         });
                     });
                 });
@@ -99,8 +111,19 @@ module.exports = (app) => {
         // const logger = Container.get('logger');
         logger.debug('Calling Sign-Out endpoint with body: %o', req.body)
         try {
-            //@TODO AuthService.Logout(req.user) do some clever stuff
-            return res.status(200).end();
+            // //@TODO AuthService.Logout(req.user) do some clever stuff
+            // return res.status(200).end();
+            req.user.deleteToken(req.token, (err, user) => {
+                if (err) {
+                    let message = `${err} occured while logging out.`;
+                    logger.error(message);
+                    return res.status(400).json({ message: message });
+                }
+
+                logger.info(`User ${user._id} has been successfully logged out`);
+                res.status(200).cookie('access_token', '').send('ok');
+                // res.cookie('auth', user.access_token).send('ok');
+            });
         } catch (e) {
             logger.error('🔥 error %o', e);
             return next(e);

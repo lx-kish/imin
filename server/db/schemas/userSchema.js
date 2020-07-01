@@ -8,7 +8,7 @@ module.exports = {
 		type: String,
 		required: true
     },
-	tokenSignIn: {
+	access_token: {
 		type: String
 	}
 };

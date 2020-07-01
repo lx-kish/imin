@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const SALT_I = 10;
 const jwt = require('jsonwebtoken');
+const config = require('../../config');
+
 
 module.exports = (schema) => {
 
@@ -33,20 +35,28 @@ module.exports = (schema) => {
 
     schema.methods.generateToken = function (cb) {
         var user = this;
-        var token = jwt.sign(user._id.toHexString(), 'supersecret');
+        var token = jwt.sign(user._id.toHexString(), config.jwt_secret);
 
-        user.token = token;
+        user.access_token = token;
+        user.markModified(token);
+
         user.save(function (err, user) {
             if (err) return cb(err);
-            console.log(user)
+
             cb(null, user);
-        })
+        });
+        // user.update(function (err, user) {
+        //     if (err) return cb(err);
+        //     console.log(user)
+        //     cb(null, user);
+        // })
     };
 
     schema.methods.deleteToken = function (token, cb) {
         var user = this;
 
-        user.update({ $unset: { token: 1 } }, (err, user) => {
+        user.updateOne({ $unset: { access_token: 1 } }, (err, user) => {
+            // user.update({ $unset: { token: 1 } }, (err, user) => {
             if (err) return cb(err);
             cb(null, user);
         });
@@ -54,9 +64,12 @@ module.exports = (schema) => {
 
     schema.statics.findByToken = function (token, cb) {
         var user = this;
-        jwt.verify(token, 'supersecret', (err, decode) => {
+
+        jwt.verify(token, config.jwt_secret, (err, decode) => {
+
             if (err) return cb(err);
-            user.findOne({ '_id': decode, 'token': token }, (err, user) => {
+
+            user.findOne({ '_id': decode, 'access_token': token }, (err, user) => {
                 if (err) return cb(err);
                 cb(null, user);
             });

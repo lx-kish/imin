@@ -28,6 +28,11 @@ module.exports = {
   // database_URI: JSON.parse(process.env.MONGODB_URI).URI,
 
   /**
+   * Secret key for JWT
+   */
+  jwt_secret: process.env.JWT_SECRET,
+
+  /**
    * Used by winston logger
    */
   logs: {
