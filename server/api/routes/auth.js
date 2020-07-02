@@ -114,6 +114,7 @@ module.exports = (app) => {
             // //@TODO AuthService.Logout(req.user) do some clever stuff
             // return res.status(200).end();
             req.user.deleteToken(req.token, (err, user) => {
+
                 if (err) {
                     let message = `${err} occured while logging out.`;
                     logger.error(message);

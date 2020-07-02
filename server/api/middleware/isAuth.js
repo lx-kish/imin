@@ -9,12 +9,8 @@ const connection = services.get('connections')[dbName];
 const userModel = model(connection);
 
 module.exports = (req, res, next) => {
-  console.log(req.cookies)
+
   let token = req.cookies.access_token;
-  // console.log(req.headers.cookie);
-  // console.log(req.cookie);
-
-
 
   logger.debug('Searching user with session tokeny: %o', token);
 
