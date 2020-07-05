@@ -12,9 +12,12 @@ of the collection the model is for
 @param schema - mongoose.Schema() object
 
 */
-module.exports = (connection, modelName, schema) => {
+module.exports = (connection, modelName, schema, options = null) => {
+
     try {
-        return connection.model(modelName, schema);
+        return options ? 
+        connection.model(modelName, schema, options) 
+        : connection.model(modelName, schema);
     } catch (e) {
         return e;
     }

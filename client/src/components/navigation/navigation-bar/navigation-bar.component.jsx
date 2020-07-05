@@ -51,27 +51,36 @@ const showLinks = () => (
     })
 );
 
-const NavigationBar = () => (
-    <nav className='navigation navigation--primary'>
-        <div className='navigation__content'>
+const NavigationBar = props => {
 
-            <div className='navigation__logo-box'>
-                <img src={logo} alt='Logo' className='navigation__logo' />
+    return (
+        <nav className='navigation navigation--primary'>
+            <div className='navigation__content'>
+
+                <div className='navigation__logo-box'>
+                    <img src={logo} alt='Logo' className='navigation__logo' />
+                </div>
+
+
+                <ul className='navigation__list'>
+                    {showLinks()}
+
+                    <li className='navigation__item'>
+                        {props.isAuth ?
+                            'Auth'
+                            :
+                            <ButtonTertiary
+                                title={'sign in'}
+                                onClick={() => props.showModal()}
+                                className={'navigation__btn paragraph--uppercase'}
+                            />
+                        }
+
+                    </li>
+                </ul>
             </div>
-
-
-            <ul className='navigation__list'>
-                {showLinks()}
-
-                <li className='navigation__item'>
-                    <ButtonTertiary
-                        title={'sign in'}
-                        className={'navigation__btn paragraph--uppercase'}
-                    />
-                </li>
-            </ul>
-        </div>
-    </nav>
-)
+        </nav>
+    )
+}
 
 export default NavigationBar;

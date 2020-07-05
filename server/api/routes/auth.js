@@ -1,13 +1,18 @@
 const { Router } = require('express');
 const logger = require('../../loaders/logger')();
-const isAuth = require('../middleware/isAuth');
 const services = require('../../loaders/services');
-const model = require('../../db/models/userModel');
 const config = require('../../config');
+const neoModel = require('../../db/models/neoModel');
 
 const dbName = config.database_name;
 const connection = services.get('connections')[dbName];
-const userModel = model(connection);
+const model = neoModel(connection);
+const users =  model.users;
+const admins = model.admins;
+const students = model.students;
+const educators = model.educators;
+
+const isAuth = require('../middleware/isAuth');
 
 const route = Router();
 
@@ -20,12 +25,50 @@ module.exports = (app) => {
             logger.debug('Calling Sign-Up endpoint with body: %o', req.body)
             try {
 
-                const user = new userModel({
-                    email: req.body.email,
-                    password: req.body.password
-                });
+                const role = req.body.role;
+                let userModel, user;
+
+                switch (role) {
+                    case 'admin':
+                        userModel = admins;
+
+                        user = new userModel({
+                            email: req.body.email,
+                            password: req.body.password,
+                            phone: req.body.phone,
+                            name: req.body.name,
+                            surname: req.body.surname
+                        });
+                        break;
+                    case 'student':
+                        userModel = students;
+
+                        user = new userModel({
+                            email: req.body.email,
+                            password: req.body.password,
+                            phone: req.body.phone,
+                            name: req.body.name,
+                            surname: req.body.surname
+                        });
+                        break;
+                    case 'educator':
+                        userModel = educators;
+
+                        user = new userModel({
+                            email: req.body.email,
+                            password: req.body.password,
+                            phone: req.body.phone,
+                            name: req.body.name,
+                            surname: req.body.surname,
+                            company: req.body.company
+                        });
+                        break;
+                    default:
+                        throw new Error(`Nonidentified role: ${role}.`);
+                }
 
                 user.save((err, user) => {
+
                     if (err) {
                         logger.error(`${err} occured while saving`);
                         res.status(400).send(err);
@@ -35,12 +78,6 @@ module.exports = (app) => {
                     }
                 });
 
-                // user.save((err, doc) => {
-                //     if (err) res.status(400).send(err);
-                //     res.status(200).send(doc);
-                // })
-
-                // return next();
             } catch (e) {
                 logger.error('🔥 Error attaching user to req: %o', e);
                 return next(e);
@@ -57,6 +94,8 @@ module.exports = (app) => {
             logger.debug('Calling Sign-In endpoint with body: %o', req.body)
             try {
                 const { email, password } = req.body;
+
+                const userModel = users;
 
                 userModel.findOne({ email: email }, (err, user) => {
                     if (err) {

@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
-const SALT_I = 10;
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
-
+const SALT_I = 10;
 
 module.exports = (schema) => {
 
@@ -17,6 +16,7 @@ module.exports = (schema) => {
                     if (err) return next(err);
 
                     user.password = hash;
+
                     next();
                 });
             });
@@ -24,6 +24,12 @@ module.exports = (schema) => {
             next();
         }
     });
+
+    // schema.post('save', function (next) {
+    //     var user = this;
+    //     console.log(user);
+    //     next();
+    // });
 
     schema.methods.comparePassword = function (candidatePassword, cb) {
         var user = this;

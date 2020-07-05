@@ -16,9 +16,11 @@ const schemaObject = {
 */
 const mongoose = require('mongoose');
 
-module.exports = (schemaObject) => {
+module.exports = (schemaObject, options = null) => {
     try {
-        return new mongoose.Schema(schemaObject);
+        return options ? 
+        new mongoose.Schema(schemaObject, options)
+        : new mongoose.Schema(schemaObject);
     } catch (e) {
         return e;
     }

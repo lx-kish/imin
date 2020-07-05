@@ -1,37 +1,29 @@
 module.exports = {
-	email: {
+	phone: {
 		type: String,
-		unique: true,
 		required: true
-    },
-    password: {
+	},
+	name: {
 		type: String,
-		unique: true,
 		required: true
-    },
-    contactNumber: {
-        type: String,
-        unique: false,
-        required: true
-    },
-    firstName: {
+	},
+	surname: {
 		type: String,
-		unique: false,
 		required: true
-    },
-    lastName: {
+	},
+	industries: [String],
+	events: [String],
+	company: {
 		type: String,
-		unique: false,
 		required: true
-    },
-    companyName: {
-        type: String,
-        unique: false,
-        required: true
-    },
-    companyWebsite: {
-        type: String,
-        unique: false,
-        required: true
-    }
+	},
+	website: [String],
+	registered: {
+		type: Boolean,
+		default: false
+	},
+	approved: {
+		type: Boolean,
+		default: false
+	}
 };

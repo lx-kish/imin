@@ -1,16 +1,14 @@
 module.exports = {
     phone: {
 		type: String,
-		required: true
+		required: false
 	},
 	name: {
 		type: String,
-		required: true
+		required: false
 	},
 	surname: {
 		type: String,
-		required: true
-	},
-	industries: [String],
-	events: [String]
+		required: false
+	}
 };
