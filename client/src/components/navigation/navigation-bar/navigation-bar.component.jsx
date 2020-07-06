@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { showHideSignIn } from '../../../redux/modal/modal.actions';
 
 import NavigationLink from '../navigation-link/navigation-link.component';
-import ButtonTertiary from '../../btns/btn-tertiary/btn-tertiary.component';
+import Btn from '../../btns/btn/btn.component';
 import logo from '../../../graphics/logo_pink.png';
 
 import './navigation-bar.styles.scss';
@@ -53,6 +56,8 @@ const showLinks = () => (
 
 const NavigationBar = props => {
 
+    console.log(props)
+
     return (
         <nav className='navigation navigation--primary'>
             <div className='navigation__content'>
@@ -69,13 +74,12 @@ const NavigationBar = props => {
                         {props.isAuth ?
                             'Auth'
                             :
-                            <ButtonTertiary
+                            <Btn
                                 title={'sign in'}
-                                onClick={() => props.showModal()}
-                                className={'navigation__btn paragraph--uppercase'}
+                                onClick={() => props.showHideSignIn(props.showSignIn)}
+                                className={'btn--tertiary navigation__btn paragraph--uppercase'}
                             />
                         }
-
                     </li>
                 </ul>
             </div>
@@ -83,4 +87,27 @@ const NavigationBar = props => {
     )
 }
 
-export default NavigationBar;
+// const mapStateToProps = state => {
+//     return {
+//         showSignIn: state.showSignIn
+//     };
+// };
+
+// const mapDispatchToProps = {
+//     showHideSignIn
+// };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showHideSignIn: (showSignIn) => dispatch(showHideSignIn(showSignIn))
+    }
+};
+
+// const mapDispatchToProps = dispatch => ({
+//     showSignUp:  state.modal.showSignUp toggleTodo: todoId => dispatch(toggleTodo(todoId))
+// })
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(NavigationBar);

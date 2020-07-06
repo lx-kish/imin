@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DoublePanesRow from '../../../hoc/rows/double-panes-row';
+import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import SignUpLogo from '../../components/sign-up-logo/sign-up-logo.component';
 import SignUpForm from '../../components/forms/sign-up-form/sign-up-form.component';
 
@@ -55,19 +55,21 @@ const content = {
     }
 }
 
-const SignUpStudents = props => {
+const SignUp = props => {
+
+    const data = props.role === 'educator' ? { ...content.educator } : { ...content.student} 
 
     return (
-        <div className={content.background.className}>
+        <div className={data.background.className}>
             <DoublePanesRow
-                rowClassName={content.doublePanes.rowClassName}
-                leftColClassName={content.doublePanes.left.className}
-                rightColClassName={content.doublePanes.right.className}
-                left={<SignUpLogo {...content.doublePanes.left} />}
-                right={<SignUpForm {...content.doublePanes.right} />}
+                rowClassName={data.doublePanes.rowClassName}
+                leftColClassName={data.doublePanes.left.className}
+                rightColClassName={data.doublePanes.right.className}
+                left={<SignUpLogo {...data.doublePanes.left} />}
+                right={<SignUpForm {...data.doublePanes.right} />}
             />
         </div>
     )
 };
 
-export default SignUpStudents;
+export default SignUp;
