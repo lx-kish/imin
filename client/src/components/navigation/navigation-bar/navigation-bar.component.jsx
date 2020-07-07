@@ -70,7 +70,10 @@ const NavigationBar = props => {
                         {props.isAuth ?
                             'Auth'
                             :
-                            <Link to={'/signin'}>
+                            <Link to={{
+                                pathname: '/signin',
+                                state: { role: 'student' }
+                            }}>
                                 <Btn
                                     title={'sign in'}
                                     className={'btn--tertiary navigation__btn paragraph--uppercase'}
@@ -83,5 +86,5 @@ const NavigationBar = props => {
         </nav>
     )
 }
-
+//{ pathname: '/route', state: { foo: 'bar'} }
 export default NavigationBar;

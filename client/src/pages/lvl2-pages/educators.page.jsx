@@ -27,6 +27,7 @@ const content = {
         button: {
             boxClassName: 'header__btn-box',
             linkTo: '/signup',
+            role: 'educator',
             config: {
                 type: 'button',
                 title: 'Register Now',

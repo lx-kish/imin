@@ -18,7 +18,11 @@ const HeaderHomePage = props => {
                         {props.contentBox.paragraph}
                     </p>
                     <div className={props.contentBox.button.boxClassName}>
-                        <Link to={props.contentBox.button.linkTo}>
+                        <Link to={{ 
+                            pathname: props.contentBox.button.linkTo,
+                            state: { role: props.contentBox.button.role} 
+                            // props.contentBox.button.linkTo
+                        }}>
                             <Btn {...props.contentBox.button.config} />
                         </Link>
                     </div>

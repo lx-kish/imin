@@ -57,6 +57,8 @@ const content = {
 
 const SignUp = props => {
 
+    // console.log(props);
+    console.log(props.location.state.role || 'empty props');
     const data = props.role === 'educator' ? { ...content.educator } : { ...content.student} 
 
     return (

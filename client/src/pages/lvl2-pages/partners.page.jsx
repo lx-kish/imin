@@ -21,16 +21,17 @@ const content = {
         containerClassName: 'header__container header__container--partners-page',
         title: 'Openning up a world of possibilities.',
         titleClassName: 'header__title heading-primary color-white',
-        renderButton: false,
-        button: {
-            boxClassName: 'header__btn-box',
-            linkTo: '/signup',
-            config: {
-                type: 'button',
-                title: 'Register Now',
-                className: 'btn--primary'
-            }
-        }
+        renderButton: false
+        // button: {
+        //     boxClassName: 'header__btn-box',
+        //     linkTo: '/signup',
+        //     role: 'educator',
+        //     config: {
+        //         type: 'button',
+        //         title: 'Register Now',
+        //         className: 'btn--primary'
+        //     }
+        // }
     },
     content: {
         singlePaneRow: {
