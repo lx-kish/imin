@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import '../headers.styles.scss';
 
@@ -10,7 +11,10 @@ const HeaderSecondary = props => {
     const renderButton = (render, btn) => {
         return render ?
             <div className={btn.boxClassName}>
-                <Btn {...btn.config} />
+                <Link to={btn.linkTo}>
+                    <Btn {...btn.config} />
+                </Link>
+                {/* <Btn {...btn.config} /> */}
             </div>
             : null
     }

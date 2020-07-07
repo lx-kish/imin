@@ -26,6 +26,7 @@ const content = {
             paragraphClassName: 'header__paragraph',
             button: {
                 boxClassName: 'header__btn-box',
+                linkTo: '/signup',
                 config: {
                     type: 'button',
                     title: 'Register Now',
@@ -157,7 +158,7 @@ const HomePage = () => {
 
     return (
         <React.Fragment>
-            <HeaderHomePage />
+            <HeaderHomePage {...content.header}/>
             {/* <PartsHomePage /> */}
             {loopParts()}
             <ContactForm />

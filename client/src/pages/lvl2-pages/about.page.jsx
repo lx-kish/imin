@@ -23,6 +23,7 @@ const content = {
         renderButton: true,
         button: {
             boxClassName: 'header__btn-box',
+            linkTo: '/signup',
             config: {
                 type: 'button',
                 title: 'Register Now',
