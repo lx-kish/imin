@@ -7,14 +7,8 @@ import Contact from './pages/contact/contact.page';
 import Educators from './pages/lvl2-pages/educators.page';
 import Partners from './pages/lvl2-pages/partners.page';
 import Students from './pages/lvl2-pages/students.page';
-// import BookView from './components/Books';
-// import Login from './containers/Admin/login';
-// import User from './components/Admin/';
-// import AddReview from './containers/Admin/add';
-// import UserPosts from './components/Admin/userPosts';
-// import EditReview from './containers/Admin/edit';
-// import Register from './containers/Admin/register';
-// import Logout from './components/Admin/logout';
+import SignUp from './pages/sign-up/sign-up.component';
+import SignIn from './pages/sign-in/sign-in.component';
 
 import Layout from './hoc/layout/layout.hoc';
 // import Auth from './hoc/auth';
@@ -29,6 +23,8 @@ const Routes = () => {
                 <Route path='/educators' exact component={Educators} />
                 <Route path='/students' exact component={Students} />
                 <Route path='/partners' exact component={Partners} />
+                <Route path='/signup' exact component={SignUp} />
+                <Route path='/signin' exact component={SignIn} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>
                 <Route path='/user' exact component={Auth(User, true)}/>
                 <Route path='/user/logout' exact component={Auth(Logout, true)}/>

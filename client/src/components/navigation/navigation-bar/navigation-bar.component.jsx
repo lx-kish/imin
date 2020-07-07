@@ -1,9 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { showHideSignIn } from '../../../redux/modal/modal.actions';
-
-import NavigationLink from '../navigation-link/navigation-link.component';
 import Btn from '../../btns/btn/btn.component';
 import logo from '../../../graphics/logo_pink.png';
 
@@ -38,11 +35,12 @@ const element = (link, i) => (
         key={i}
         className='navigation__item'
     >
-        <NavigationLink
-            link={link.link}
+        <Link
+            to={link.link}
             className={link.className}
-            name={link.name}
-        />
+        >
+            {link.name}
+        </Link>
     </li>
 );
 
@@ -55,8 +53,6 @@ const showLinks = () => (
 );
 
 const NavigationBar = props => {
-
-    console.log(props)
 
     return (
         <nav className='navigation navigation--primary'>
@@ -74,11 +70,12 @@ const NavigationBar = props => {
                         {props.isAuth ?
                             'Auth'
                             :
-                            <Btn
-                                title={'sign in'}
-                                onClick={() => props.showHideSignIn(props.showSignIn)}
-                                className={'btn--tertiary navigation__btn paragraph--uppercase'}
-                            />
+                            <Link to={'/signin'}>
+                                <Btn
+                                    title={'sign in'}
+                                    className={'btn--tertiary navigation__btn paragraph--uppercase'}
+                                />
+                            </Link>
                         }
                     </li>
                 </ul>
@@ -87,27 +84,4 @@ const NavigationBar = props => {
     )
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         showSignIn: state.showSignIn
-//     };
-// };
-
-// const mapDispatchToProps = {
-//     showHideSignIn
-// };
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        showHideSignIn: (showSignIn) => dispatch(showHideSignIn(showSignIn))
-    }
-};
-
-// const mapDispatchToProps = dispatch => ({
-//     showSignUp:  state.modal.showSignUp toggleTodo: todoId => dispatch(toggleTodo(todoId))
-// })
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(NavigationBar);
+export default NavigationBar;

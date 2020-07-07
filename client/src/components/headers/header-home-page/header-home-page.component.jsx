@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { showHideSignUp } from '../../../redux/modal/modal.actions';
 
 import '../headers.styles.scss';
 
@@ -26,7 +29,7 @@ const content = {
 
 };
 
-const HeaderHomePage = () => {
+const HeaderHomePage = props => {
 
     return (
         <header className={content.header.headerClassName}>
@@ -39,7 +42,13 @@ const HeaderHomePage = () => {
                         {content.header.paragraph}
                     </p>
                     <div className={content.button.boxClassName}>
-                        <Btn {...content.button.config} />
+                        <Btn
+                            {...content.button.config}
+                            onClick={() => {
+                                console.log('==============>', props)
+                                props.showHideSignUp(!props.showSignUp)
+                            }}
+                        />
                     </div>
                 </div>
             </div>
@@ -47,4 +56,24 @@ const HeaderHomePage = () => {
     )
 };
 
-export default HeaderHomePage;
+const mapStateToProps = state => {
+
+    return {
+        showSignUp: state.modal.showSignUp,
+    };
+};
+
+const mapDispatchToProps = {
+    showHideSignUp
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         showHideSignUp: (showSignUp) => dispatch(showHideSignUp(showSignUp))
+//     }
+// };
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HeaderHomePage);

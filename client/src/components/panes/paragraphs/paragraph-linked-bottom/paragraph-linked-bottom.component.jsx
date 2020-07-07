@@ -1,6 +1,5 @@
 import React from 'react';
-
-import NavigationLink from '../../../navigation/navigation-link/navigation-link.component';
+import { Link } from 'react-router-dom';
 
 const LinkedBottomParagraph = props => {
 
@@ -9,11 +8,12 @@ const LinkedBottomParagraph = props => {
             <p className={props.paragraphClassName}>
                 {props.paragraph}
             </p>
-            <NavigationLink
-                link={props.link}
+            <Link
+                to={props.link}
                 className={props.linkClassName}
-                name={props.linkName}
-            />
+            >
+                {props.linkName}
+            </Link>
         </div>
     );
 }
