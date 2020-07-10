@@ -112,12 +112,10 @@ const SignUpForm = props => {
                                             onBlur={handleBlur}
                                             value={values.name}
                                         />
-                                        {errors.name && touched.name ?
-                                            <p className='form-input--error-message'>
-                                                {errors.name}
-                                            </p>
-                                            : null
-                                        }
+                                        {<p className='form-input--error-message'>
+                                            {errors.name && touched.name ?
+                                                errors.name : ''}
+                                        </p>}
                                     </>
                                 }
                                 right={
@@ -131,12 +129,10 @@ const SignUpForm = props => {
                                             onBlur={handleBlur}
                                             value={values.surname}
                                         />
-                                        {errors.surname && touched.surname ?
-                                            <p className='form-input--error-message'>
-                                                {errors.surname}
-                                            </p>
-                                            : null
-                                        }
+                                        {<p className='form-input--error-message'>
+                                            {errors.surname && touched.surname ?
+                                                errors.surname : ''}
+                                        </p>}
                                     </>
                                 }
                             />
@@ -326,7 +322,17 @@ const SignUpForm = props => {
                                     />
                                 }
                             />
-
+                            <SinglePaneRow
+                                rowClassName='row-sign-up-form'
+                                pane={
+                                    <Link to={{
+                                        pathname: '/signup',
+                                        state: { role: props.role === 'educator' ? 'student' : 'educator' }
+                                    }}>
+                                        {`Sign up as ${props.role === 'educator' ? 'a student' : 'an educator'}?`}
+                                    </Link>
+                                }
+                            />
                         </form>
                     )}
             </Formik>

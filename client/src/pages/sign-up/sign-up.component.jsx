@@ -65,7 +65,10 @@ const SignUp = props => {
 
     // console.log(props);
     // console.log('empty -> student' || props.location.state.role);
-    const role = props.location.state.role || 'student';  
+    // console.log((typeof props.location.state === "undefined"))
+    const role = props.location.state ? 
+        props.location.state.role || 'student'
+        : 'student';  
     const data = { ...content[role] };
     // const data = props.role === 'educator' ? { ...content.educator } : { ...content.student};
     // console.log(data.doublePanes.left.className);
