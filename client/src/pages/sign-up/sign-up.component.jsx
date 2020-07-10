@@ -2,24 +2,29 @@ import React from 'react';
 
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import SignUpLogo from '../../components/sign-up-logo/sign-up-logo.component';
-import SignUpForm from '../../components/forms/sign-up-form/sign-up-form.component';
+import SignUpForm from '../../components/forms/sign-up-form/sign-up-form-formik.component';
+import ImgStudent from '../../graphics/pages-content/sign-up/IMIN-purple.png';
+import ImgEducator from '../../graphics/pages-content/sign-up/IMIN-pink.png';
+
+// import SignUpForm from '../../components/forms/sign-up-form/sign-up-form-rhf.component';
 
 const content = {
     student: {
         background: {
-            className: 'popup__background'
+            className: 'sign-up__background'
         },
         doublePanes: {
-            rowClassName: 'popup__container',
+            rowClassName: 'sign-up__container',
             left: {
-                className: 'popup__sign-up--student',
+                className: 'sign-up__logo--student',
                 img: {
-                    src: '',
-                    alt: '',
+                    src: ImgStudent,
+                    alt: 'student logo',
                     className: ''
                 }
             },
             right: {
+                role: 'student',
                 className: '',
                 form: {
                     properties: {
@@ -31,19 +36,20 @@ const content = {
     },
     educator: {
         background: {
-            className: 'popup__background'
+            className: 'sign-up__background'
         },
         doublePanes: {
-            rowClassName: 'popup__container',
+            rowClassName: 'sign-up__container',
             left: {
-                className: 'popup__sign-up--student',
+                className: 'sign-up__logo--educator',
                 img: {
-                    src: '',
-                    alt: '',
+                    src: ImgEducator,
+                    alt: 'educator logo',
                     className: ''
                 }
             },
             right: {
+                role: 'educator',
                 className: '',
                 form: {
                     properties: {
@@ -58,8 +64,12 @@ const content = {
 const SignUp = props => {
 
     // console.log(props);
-    console.log(props.location.state.role || 'empty props');
-    const data = props.role === 'educator' ? { ...content.educator } : { ...content.student} 
+    // console.log('empty -> student' || props.location.state.role);
+    const role = props.location.state.role || 'student';  
+    const data = { ...content[role] };
+    // const data = props.role === 'educator' ? { ...content.educator } : { ...content.student};
+    // console.log(data.doublePanes.left.className);
+
 
     return (
         <div className={data.background.className}>

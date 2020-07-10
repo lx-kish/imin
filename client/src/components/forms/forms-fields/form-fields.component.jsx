@@ -2,40 +2,7 @@ import React from 'react';
 
 const FormFields = props => {
 
-    // const renderFields = () => {
-    //     const formArray = [];
-
-    //     for (let elementName in props.formData) {
-    //         formArray.push({
-    //             id: elementName,
-    //             settings: props.formData[elementName]
-    //         })
-    //     }
-
-    //     return formArray.map((item, i) => {
-    //         return (
-    //             <div key={i} className="form_element">
-    //                 {renderTemplates(item)}
-    //             </div>
-    //         )
-    //     })
-
-    // }
-
     const renderField = () => {
-
-        // console.log(props.formData);
-        // const formArray = [];
-
-        // for (let elementName in props.formData) {
-        //     console.log(Object.keys(props.formData)[0]);
-        //     formArray.push({
-        //         id: elementName,
-        //         settings: props.formData[elementName]
-        //     })
-        // }
-
-        // console.log(props.formData);
 
         return (
             <div className={props.formData.elementClassName}>
@@ -43,29 +10,17 @@ const FormFields = props => {
             </div>
         )
 
-
-        // return formArray.map((item, i) => {
-        //     return (
-        //         <div key={i} className="form_element">
-        //             {renderTemplates(item)}
-        //         </div>
-        //     )
-        // })
-
     }
 
     const showLabel = (show, label, labelClassName, labelFor) => {
         return show ?
-            <label 
+            <label
                 className={labelClassName}
                 htmlFor={labelFor}
             >
                 {label}
             </label>
             : null
-        // return show ?
-        //     <label className={labelClassName}>{label}</label>
-        //     : null
     }
 
     const changeHandler = (event, id, blur) => {
@@ -118,16 +73,6 @@ const FormFields = props => {
 
     const showValidation = (data) => {
         let errorMessage = null;
-        // let validationMessage = 
-        //     (data.validation && !data.valid) ?
-        //     data.validationMessage :
-        //     `&nbsp`;
-
-        // errorMessage = (
-        //     <div className="label-error">
-        //         {validationMessage}
-        //     </div>
-        // )
 
         if (data.validation && !data.valid) {
             errorMessage = (
@@ -147,7 +92,7 @@ const FormFields = props => {
         switch (values.element) {
             case ('input'):
                 formTemplate = (
-                    <React.Fragment>
+                    <>
                         {showValidation(values)}
                         {showLabel(values.label, values.labelText, values.labelClassName, values.config.name)}
                         <input
@@ -160,12 +105,12 @@ const FormFields = props => {
                                 (event) => changeHandler(event, data.field, false)
                             }
                         />
-                    </React.Fragment>
+                    </>
                 )
                 break;
             case ('textarea'):
                 formTemplate = (
-                    <React.Fragment>
+                    <>
                         {showLabel(values.label, values.labelText, values.labelClassName, values.config.name)}
                         <textarea
                             {...values.config}
@@ -174,12 +119,12 @@ const FormFields = props => {
                                 (event) => changeHandler(event, data.field)
                             }
                         />
-                    </React.Fragment>
+                    </>
                 )
                 break;
             case ('select'):
                 formTemplate = (
-                    <React.Fragment>
+                    <>
                         {showLabel(values.label, values.labelText, values.labelClassName, values.config.name)}
                         <div className={values.wraperClassName}>
                             <select
@@ -198,7 +143,7 @@ const FormFields = props => {
                                 ))}
                             </select>
                         </div>
-                    </React.Fragment>
+                    </>
                 )
                 break;
             default:
@@ -208,9 +153,9 @@ const FormFields = props => {
     }
 
     return (
-        <React.Fragment>
+        <>
             {renderField()}
-        </React.Fragment>
+        </>
     )
 }
 

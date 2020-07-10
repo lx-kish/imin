@@ -26,11 +26,21 @@ module.exports = (app) => {
 
     res.setHeader('Strict-Transport-Security', 'max-age=8640000; includeSubDomains');
     if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] === "http") {
-      return res.redirect(301, 'https://' + req.host + req.url);
+      return res.redirect(301, 'https://' + req.hostname + req.url);
     } else {
       logger.info("HTTPS call detected");
       return next();
     }
+  });
+
+  /**allow CORS 
+  * (https://stackoverflow.com/questions/18642828/origin-origin-is-not-allowed-by-access-control-allow-origin)
+  */
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
   });
 
   // The magic package that prevents frontend developers going nuts

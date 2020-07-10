@@ -9,6 +9,7 @@ import Partners from './pages/lvl2-pages/partners.page';
 import Students from './pages/lvl2-pages/students.page';
 import SignUp from './pages/sign-up/sign-up.component';
 import SignIn from './pages/sign-in/sign-in.component';
+import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
 import Layout from './hoc/layout/layout.hoc';
 // import Auth from './hoc/auth';
@@ -25,6 +26,7 @@ const Routes = () => {
                 <Route path='/partners' exact component={Partners} />
                 <Route path='/signup' exact component={SignUp} />
                 <Route path='/signin' exact component={SignIn} />
+                <Route path='/terms' exact component={TermsAndConditions} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>
                 <Route path='/user' exact component={Auth(User, true)}/>
                 <Route path='/user/logout' exact component={Auth(Logout, true)}/>
