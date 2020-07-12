@@ -33,7 +33,7 @@ module.exports = (app) => {
     }
   });
 
-  /**allow CORS 
+  /**allow CORS (for development purposes only, disable in production)
   * (https://stackoverflow.com/questions/18642828/origin-origin-is-not-allowed-by-access-control-allow-origin)
   */
   app.use(function (req, res, next) {

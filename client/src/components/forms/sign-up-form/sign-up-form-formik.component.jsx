@@ -329,7 +329,9 @@ const SignUpForm = props => {
                                         pathname: '/signup',
                                         state: { role: props.role === 'educator' ? 'student' : 'educator' }
                                     }}>
-                                        {`Sign up as ${props.role === 'educator' ? 'a student' : 'an educator'}?`}
+                                        <p className='sign-up-form__toggle'>
+                                            {`Sign up as ${props.role === 'educator' ? 'a student' : 'an educator'}?`}
+                                        </p>
                                     </Link>
                                 }
                             />

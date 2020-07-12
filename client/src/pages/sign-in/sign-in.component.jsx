@@ -3,7 +3,10 @@ import React from 'react';
 const SignIn = props => {
 
     // console.log(props);
-    console.log(props.location.state.role || 'empty props');
+    const role = props.location.state ?
+        props.location.state.role || 'student'
+        : 'student';
+    console.log(role);
 
     return (
         <div>

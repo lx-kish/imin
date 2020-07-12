@@ -4,37 +4,48 @@ export const userSignUp = user => {
 
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': "*"
+        }
+    };
+    return (dispatch) => {
+
+        dispatch({ type: 'USER_SIGN_UP' });
+        axios.post(`http://localhost:3100/api/auth/signup`, user, config)
+        // request
+            .then((res) => {
+                console.log('res ----> ',res);
+                // dispatch({ type: 'USER_SIGN_UP_SUCCESS', payload: res });
+                dispatch(userSignIn(res.data.user));
+            })
+            .catch(( error ) => {
+                console.log('error ----> ', error);
+                dispatch({ type: 'USER_SIGN_UP_FAILURE', payload: error });
+            })
+    }
+
+}
+
+export const userSignIn = user => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': "*"
         }
     };
 
-    const request = axios.post(`http://localhost:3100/api/auth/signup`, user, config);
-    // const request = axios.post(`/api/auth/signup`, user, config);
-
-    // console.log(user);
-    console.log('------------>', request);
-
     return (dispatch) => {
-        console.log('------------>', 'here');
-        try {
-            request.then(({ data }) => {
-                // let users = data.success ? [...userList, data.user] : userList;
-                let response = {
-                    success: data.post,
-                    user: data.userId
-                }
 
-                dispatch({
-                    type: 'USER_REGISTER',
-                    payload: response
-                })
-
-                console.log(data);
+        dispatch({ type: 'USER_SIGN_IN' });
+        axios.post(`http://localhost:3100/api/auth/signin`, user, config)
+        // request
+            .then((res) => {
+                console.log('res ----> ',res);
+                dispatch({ type: 'USER_SIGN_IN_SUCCESS', payload: res });
             })
-        }
-        catch (e) {
-            console.log(e);
-        }
-
+            .catch(( error ) => {
+                console.log('error ----> ', error);
+                dispatch({ type: 'USER_SIGN_IN_FAILURE', payload: error });
+            })
     }
 }
