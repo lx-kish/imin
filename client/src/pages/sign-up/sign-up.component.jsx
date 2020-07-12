@@ -24,7 +24,7 @@ const SignUp = props => {
     // if (auth.token) {
     //     return <Redirect push to="/" />
     // }
-    console.log(props);
+    console.log('Sign up =====> ', 'user status = ', props.user);
 
     const signUpForm = () => {
         return (
@@ -97,6 +97,9 @@ const SignUp = props => {
                     onSubmit={(values, { setSubmitting }) => {
 
                         props.dispatch(userSignUp(values))
+                        // .then((res) => console.log(res))
+                        // console.log(' after ', props);
+                        setSubmitting(false);
                         // userSignUp(values)
                         // console.log(props.data);
 
@@ -388,7 +391,7 @@ const SignUp = props => {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    user: state.user
 })
 
 // const mapDispatchToProps = dispatch => {

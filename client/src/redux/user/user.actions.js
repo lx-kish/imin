@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+import {
+    USER_SIGN_UP,
+    USER_SIGN_UP_SUCCESS,
+    USER_SIGN_UP_FAILURE,
+    USER_SIGN_IN,
+    USER_SIGN_IN_SUCCESS,
+    USER_SIGN_IN_FAILURE,
+    USER_CREATED_STATUS_CHANGE,
+} from '../types';
+
 export const userSignUp = user => {
 
     const config = {
@@ -10,23 +20,23 @@ export const userSignUp = user => {
     };
     return (dispatch) => {
 
-        dispatch({ type: 'USER_SIGN_UP' });
+        dispatch({ type: USER_SIGN_UP });
         axios.post(`http://localhost:3100/api/auth/signup`, user, config)
-        // request
+            // request
             .then((res) => {
-                console.log('res ----> ',res);
-                // dispatch({ type: 'USER_SIGN_UP_SUCCESS', payload: res });
-                dispatch(userSignIn(res.data.user));
+                // console.log('res ----> ',res);
+                dispatch({ type: USER_SIGN_UP_SUCCESS, payload: res });
+                // dispatch(userSignIn(res.data.user));
             })
-            .catch(( error ) => {
-                console.log('error ----> ', error);
-                dispatch({ type: 'USER_SIGN_UP_FAILURE', payload: error });
+            .catch((error) => {
+                // console.log('error ----> ', error);
+                dispatch({ type: USER_SIGN_UP_FAILURE, payload: error });
             })
     }
-
 }
 
 export const userSignIn = user => {
+
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -36,16 +46,25 @@ export const userSignIn = user => {
 
     return (dispatch) => {
 
-        dispatch({ type: 'USER_SIGN_IN' });
+        dispatch({ type: USER_SIGN_IN });
         axios.post(`http://localhost:3100/api/auth/signin`, user, config)
-        // request
+            // request
             .then((res) => {
-                console.log('res ----> ',res);
-                dispatch({ type: 'USER_SIGN_IN_SUCCESS', payload: res });
+                // console.log('res ----> ',res);
+                dispatch({ type: USER_SIGN_IN_SUCCESS, payload: res });
             })
-            .catch(( error ) => {
-                console.log('error ----> ', error);
-                dispatch({ type: 'USER_SIGN_IN_FAILURE', payload: error });
+            .catch((error) => {
+                // console.log('error ----> ', error);
+                dispatch({ type: USER_SIGN_IN_FAILURE, payload: error });
             })
+    }
+}
+
+export const userCreatedStatusChange = user => {
+
+    return (dispatch) => {
+
+        dispatch({ type: USER_CREATED_STATUS_CHANGE, payload: { created: false } });
+
     }
 }
