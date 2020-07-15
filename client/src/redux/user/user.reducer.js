@@ -43,7 +43,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 created: false,
                 loading: false,
                 loaded: true,
-                error: payload
+                error: payload,
+                message: payload.response.data.message
             }
 
         case USER_SIGN_IN:

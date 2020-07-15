@@ -94,14 +94,31 @@ const SignUp = props => {
 
                         return errors;
                     }}
-                    onSubmit={(values, { setSubmitting }) => {
+                    onSubmit={(values, { setSubmitting, resetForm }) => {
+
+                        setSubmitting(true);
 
                         props.dispatch(userSignUp(values))
-                        .then((res) => console.log('inside submit ===> ', res))
-                        // console.log(' after ', props);
+                        .then((res) => {
+                            // console.log('inside submit ===> ', props)
+                            // console.log('inside submit ===> ', res)
+                            if (res.type === 'USER_SIGN_UP_FAILURE') {
+                                let message = res.payload.response.data.message;
+                                // console.log('indexOf ======>', message, message.indexOf('E11000 duplicate key error collection:'));
+                                if (message.indexOf('E11000 duplicate key error collection:') > -1) {
+                                    let errorMessage = `User with email ${values.email} already exists.`;
+                                    console.log('inside submit ===> ',errorMessage);
+                                }
+                                // console.log('Error ====> ', res.payload.response.data.message)
+                            } else if (res.type === 'USER_SIGN_UP_SUCCESS') {
+                                resetForm();
+                                return <Redirect push to="/" />
+                            }
+                        })
+
+                        // 
+
                         setSubmitting(false);
-                        // userSignUp(values)
-                        // console.log(props.data);
 
                     }}
                 >

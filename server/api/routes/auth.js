@@ -71,7 +71,8 @@ module.exports = (app) => {
 
                     if (err) {
                         logger.error(`${err} occured while saving`);
-                        res.status(400).send(err);
+                        res.status(err.status || 400).json({ message: err.message });
+                        // res.status(400).send(err);
                     } else {
                         /**************************************************/
                         user.generateToken((err, user) => {
