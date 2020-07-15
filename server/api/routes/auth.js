@@ -83,7 +83,8 @@ module.exports = (app) => {
                             // logger.info(`User ${user._id} has been successfully logged in`);
 
                             logger.info(`User ${user._id} has been successfully saved into the db ${dbName} and logged in`);
-                            res.cookie('access_token', user.access_token).status(200).json({ post: true, userId: user._id, token: user.access_token });
+                            res.cookie('access_token', user.access_token );//, { domain: 'localhost' });
+                            res.status(200).json({ post: true, userId: user._id, token: user.access_token });
                             // res.cookie('access_token', user.access_token).send('ok');
                         });
                         /**************************************************/
@@ -130,7 +131,7 @@ module.exports = (app) => {
                             logger.error(message);
                             return res.status(400).json({ message: message });
                         }
-
+                        
                         user.generateToken((err, user) => {
                             if (err) {
                                 let message = `${err} occured while logging in.`;

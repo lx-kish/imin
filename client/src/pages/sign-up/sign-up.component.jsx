@@ -97,7 +97,7 @@ const SignUp = props => {
                     onSubmit={(values, { setSubmitting }) => {
 
                         props.dispatch(userSignUp(values))
-                        // .then((res) => console.log(res))
+                        .then((res) => console.log('inside submit ===> ', res))
                         // console.log(' after ', props);
                         setSubmitting(false);
                         // userSignUp(values)
