@@ -16,6 +16,29 @@ import ImgEducator from '../../graphics/pages-content/sign-up/IMIN-pink.png';
 
 const SignUp = props => {
 
+    /**
+    * Single state hook useState for all the state properties
+    */
+    const [fullState, setFullState] = React.useState({
+
+        submitSuccess: false,
+        submitError: false,
+        errorMessage: ''
+    });
+
+    /**
+    * Redirect on successfull submission
+    */
+    React.useEffect(() => {
+
+        if (fullState.submitSuccess) {
+            props.history.push('/profile');
+        }
+
+    }, [fullState.submitSuccess]);
+
+    // if (fullState.submitSuccess) return props.history.push('/profile');
+
     const role = props.location.state ?
         props.location.state.role || 'student'
         : 'student';
@@ -24,7 +47,7 @@ const SignUp = props => {
     // if (auth.token) {
     //     return <Redirect push to="/" />
     // }
-    console.log('Sign up =====> ', 'user status = ', props.user);
+    // console.log('Sign up =====> ', 'user status = ', props.user);
 
     const signUpForm = () => {
         return (
@@ -98,23 +121,39 @@ const SignUp = props => {
 
                         setSubmitting(true);
 
-                        props.dispatch(userSignUp(values))
-                        .then((res) => {
-                            // console.log('inside submit ===> ', props)
-                            // console.log('inside submit ===> ', res)
-                            if (res.type === 'USER_SIGN_UP_FAILURE') {
-                                let message = res.payload.response.data.message;
-                                // console.log('indexOf ======>', message, message.indexOf('E11000 duplicate key error collection:'));
-                                if (message.indexOf('E11000 duplicate key error collection:') > -1) {
-                                    let errorMessage = `User with email ${values.email} already exists.`;
-                                    console.log('inside submit ===> ',errorMessage);
+                        props.userSignUp(values)
+                        // props.dispatch(userSignUp(values))
+                            .then((res) => {
+                                // console.log('inside submit ===> ', props)
+                                // console.log('inside submit ===> ', res)
+                                if (res.type === 'USER_SIGN_UP_FAILURE') {
+                                    let responseMessage = res.payload.response.data.message;
+                                    let errorMessage;
+                                    console.log('sign up doc, res =====> ', res);
+                                    // console.log('indexOf ======>', message, message.indexOf('E11000 duplicate key error collection:'));
+                                    if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
+                                        errorMessage = `User with email ${values.email} already exists.`;
+                                        // console.log('inside submit ===> ', errorMessage);
+
+                                    }
+                                    setFullState({
+                                        ...fullState,
+                                        submitSuccess: false,
+                                        submitError: true,
+                                        errorMessage
+                                    })
+                                    // console.log('Error ====> ', res.payload.response.data.message)
+                                } else if (res.type === 'USER_SIGN_UP_SUCCESS') {
+                                    resetForm();
+                                    setFullState({
+                                        ...fullState,
+                                        submitSuccess: true,
+                                        submitError: false,
+                                        errorMessage: ''
+                                    });
+                                    props.history.push('/profile');
                                 }
-                                // console.log('Error ====> ', res.payload.response.data.message)
-                            } else if (res.type === 'USER_SIGN_UP_SUCCESS') {
-                                resetForm();
-                                return <Redirect push to="/" />
-                            }
-                        })
+                            })
 
                         // 
 
@@ -353,11 +392,16 @@ const SignUp = props => {
                                 <SinglePaneRow
                                     rowClassName='row-sign-up-form'
                                     pane={
-                                        <input
-                                            type='submit'
-                                            value='SIGN UP'
-                                            className={`btn ${role === 'educator' ? 'btn--primary ' : 'btn--tertiary '}sign-up-form__btn--submit`}
-                                        />
+                                        <>
+                                            <p className='form-input--error-message'>
+                                                {fullState.submitError ? fullState.errorMessage : ''}
+                                            </p>
+                                            <input
+                                                type='submit'
+                                                value='SIGN UP'
+                                                className={`btn ${role === 'educator' ? 'btn--primary ' : 'btn--tertiary '}sign-up-form__btn--submit`}
+                                            />
+                                        </>
                                     }
                                 />
                                 <SinglePaneRow
@@ -407,9 +451,9 @@ const SignUp = props => {
     )
 };
 
-const mapStateToProps = state => ({
-    user: state.user
-})
+// const mapStateToProps = state => ({
+//     user: state.user
+// })
 
 // const mapDispatchToProps = dispatch => {
 //     return {
@@ -420,11 +464,12 @@ const mapStateToProps = state => ({
 
 // const mapDispatchToProps = {userSignUp}
 
-// const mapDispatchToProps = dispatch => ({
-//     // userSignUp: data => userSignUp(data)(dispatch)
-//     userSignUp: data => dispatch(userSignUp(data))
-// })
+const mapDispatchToProps = dispatch => ({
+    // userSignUp: data => userSignUp(data)(dispatch)
+    userSignUp: data => dispatch(userSignUp(data))
+})
 
-export default connect(mapStateToProps)(SignUp);
+// export default connect(mapStateToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(SignUp);
 // export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 // export default SignUp;

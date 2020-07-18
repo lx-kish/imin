@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
 
   let token = req.cookies.access_token;
 
-  logger.debug('Searching user with session tokeny: %o', token);
+  logger.debug('Searching user with session token: %o', token);
 
   userModel.findByToken(token, (err, user) => {
 

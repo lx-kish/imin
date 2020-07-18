@@ -7,21 +7,30 @@ import {
     USER_SIGN_IN,
     USER_SIGN_IN_SUCCESS,
     USER_SIGN_IN_FAILURE,
+    USER_CHECK_AUTH,
+    USER_CHECK_AUTH_SUCCESS,
+    USER_CHECK_AUTH_FAILURE,
     USER_CREATED_STATUS_CHANGE,
 } from '../types';
 
+const config = {
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
+        'Authorization': 'token',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Request-Headers': 'Content-Type, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Authorization'
+    },
+    withCredentials: true
+};
+
 export const userSignUp = user => {
 
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Access-Control-Allow-Origin': "*"
-        }
-    };
+    // return {
     return (dispatch) => {
 
-        dispatch({ type: USER_SIGN_UP });
-        return axios.post(`http://localhost:3100/api/auth/signup`, user, config)
+        // dispatch({ type: USER_SIGN_UP });
+        return axios.post(`http://127.0.0.1:3100/api/user/signup`, user, config)
             // request
             .then((res) => {
                 // console.log('res ----> ',res);
@@ -37,27 +46,39 @@ export const userSignUp = user => {
 
 export const userSignIn = user => {
 
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Access-Control-Allow-Origin': "*"
-        }
-    };
-
     return (dispatch) => {
 
         dispatch({ type: USER_SIGN_IN });
-        return axios.post(`http://localhost:3100/api/auth/signin`, user, config)
+        return axios.post(`http://127.0.0.1:3100/api/user/signin`, user, config)
             // request
             .then((res) => {
                 // console.log('res ----> ',res);
-                dispatch({ type: USER_SIGN_IN_SUCCESS, payload: res });
+                return dispatch({ type: USER_SIGN_IN_SUCCESS, payload: res });
             })
             .catch((error) => {
                 // console.log('error ----> ', error);
-                dispatch({ type: USER_SIGN_IN_FAILURE, payload: error });
+                return dispatch({ type: USER_SIGN_IN_FAILURE, payload: error });
             })
     }
+}
+
+export const auth = () => {
+
+    return (dispatch) => {
+
+        dispatch({ type: USER_CHECK_AUTH });
+        return axios.get(`http://127.0.0.1:3100/api/user/auth`, config)
+            // request
+            .then((res) => {
+                console.log('res ----> ', res);
+                return dispatch({ type: USER_CHECK_AUTH_SUCCESS, payload: res });
+            })
+            .catch((error) => {
+                console.log('error ----> ', error);
+                return dispatch({ type: USER_CHECK_AUTH_FAILURE, payload: error });
+            })
+    }
+
 }
 
 export const userCreatedStatusChange = user => {

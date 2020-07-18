@@ -17,7 +17,23 @@ const isAuth = require('../middleware/isAuth');
 const route = Router();
 
 module.exports = (app) => {
-    app.use('/auth', route);
+    app.use('/user', route);
+
+    route.get('/auth', isAuth, (req, res, next) => {
+        // const logger = Container.get('logger');
+        // logger.debug('Calling Sign-Out endpoint with body: %o', req.body)
+        try {
+            // //@TODO AuthService.Logout(req.user) do some clever stuff
+            // return res.status(200).end();
+            logger.info(`User ${req.user._id} has been defined as logged in`);
+            res.cookie('access_token', req.user.access_token, { 'SameSite': 'None' });//, { domain: 'localhost' });
+            res.status(200).json({ auth: true, user: req.user });
+
+        } catch (e) {
+            logger.error('🔥 error %o', e);
+            return next(e);
+        }
+    });
 
     route.post(
         '/signup',
@@ -84,7 +100,7 @@ module.exports = (app) => {
                             // logger.info(`User ${user._id} has been successfully logged in`);
 
                             logger.info(`User ${user._id} has been successfully saved into the db ${dbName} and logged in`);
-                            res.cookie('access_token', user.access_token );//, { domain: 'localhost' });
+                            res.cookie('access_token', user.access_token, { 'SameSite': 'None' });//, { domain: 'localhost' });
                             res.status(200).json({ post: true, userId: user._id, token: user.access_token });
                             // res.cookie('access_token', user.access_token).send('ok');
                         });
@@ -132,7 +148,7 @@ module.exports = (app) => {
                             logger.error(message);
                             return res.status(400).json({ message: message });
                         }
-                        
+
                         user.generateToken((err, user) => {
                             if (err) {
                                 let message = `${err} occured while logging in.`;
@@ -140,7 +156,7 @@ module.exports = (app) => {
                                 return res.status(400).json({ message: message });
                             }
                             logger.info(`User ${user._id} has been successfully logged in`);
-                            res.cookie('access_token', user.access_token).send('ok');
+                            res.cookie('access_token', user.access_token, { 'SameSite': 'None' }).send('ok');
                         });
                     });
                 });
@@ -175,7 +191,7 @@ module.exports = (app) => {
                 }
 
                 logger.info(`User ${user._id} has been successfully logged out`);
-                res.status(200).cookie('access_token', '').send('ok');
+                res.status(200).cookie('access_token', '', { 'SameSite': 'None' }).send('ok');
                 // res.cookie('auth', user.access_token).send('ok');
             });
         } catch (e) {
