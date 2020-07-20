@@ -11,7 +11,6 @@
  * - Sign up, Sign in
  * If user is signed in, he cannot see this pages until he logged off
  * 
- * 
  * Private pages, contain private data, can be seen jus authorized user
  * -Profile, ..., ...
  * If user is not signed in, he cannot see this pages until he logged off
@@ -20,6 +19,10 @@
  * - auth - true/false, checks after every changing page, based on matching 
  * access_token on client local storage and user profile in the database on the server
  * 
+ * .........
+ * 
+ * After some consideration it's concluded that there no need state 
+ * at this stage of the project for authorization purposes
  * 
  */
 

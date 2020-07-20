@@ -1,95 +1,70 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+import { Redirect, Route } from 'react-router-dom';
 
-import { auth } from '../../redux/user/user.actions';
+import SignUp from '../../pages/sign-up/sign-up.component';
+// import SignIn from '../../pages/sign-in/sign-in.component';
+import Profile from '../../pages/profile/profile.component';
+
+import config from '../../axios.config';
 
 export default (WrappedComponent, authRequired) => {
     const AuthenticationCheck = props => {
 
-        // /**
-        // * Single state hook useState for all the state properties
-        // */
-        // const [fullState, setFullState] = React.useState({
+        /**
+         * Single state hook useState for all the state properties
+         */
+        const [fullState, setFullState] = React.useState({
 
-        //     loading: true
-        // });
+            auth: false
+        });
 
-        // /**
-        // * Redirect on successfull submission
-        // */
-        // React.useEffect(() => {
+        axios.get(`http://127.0.0.1:3100/api/user/auth`, config)
 
-        //     if (fullState.submitSuccess) {
-        //         setFullState({
-        //             ...fullState,
-        //             submitSuccess: false
-        //         });
-        //         props.history.push('/profile');
-        //     }
+            .then((res) => {
+                setFullState({
+                    ...fullState,
+                    auth: true
+                })
+            })
+            .catch((error) => {
+                console.log('error ----> ', error);
+                // setFullState({
+                //     ...fullState,
+                //     auth: true
+                // })
+            })
+        // .finally(() => {
+        //     getRender();
+        // })
 
-        // }, [fullState.submitSuccess]);
-
-        // 
-
-        // if (fullState.loading) {
-        //     props.dispatch(auth())
-        //         .then((res) => {
-        //             // console.log('inside submit ===> ', props)
-        //             // console.log('inside submit ===> ', res)
-        //             if (res.type === 'USER_CHECK_AUTH_FAILURE') {
-        //                 setFullState({
-        //                     ...fullState,
-        //                     loading: false
-        //                 })
-        //             } else if (res.type === 'USER_CHECK_AUTH_SUCCESS') {
-
-        //                 setFullState({
-        //                     ...fullState,
-        //                     loading: true
-        //                 })
-        //             }
-        //         })
-        //         return (
-        //             <div className='auth__loader'> Loading...</div>
-        //         )
-        // }
-
-        // if (fullState.loading) {
-        //     return (
-        //         <ComposedClass {...props} user={props.user} />
-        //     )
-        // } else {
-        //     props.history.push('/signup');
-        // }
-        if (props.auth === authRequired) {
-            console.log('HOC auth ===> ', props.auth);
+        // const getRender = () => {
+        if (fullState.auth === authRequired) {
+            console.log('HOC auth if equal ===> ', fullState.auth);
             console.log('auth required ===> ', authRequired)
-            return <WrappedComponent {...this.props} />
+            return <WrappedComponent {...props} />
         } else {
-            props.dispatch(auth());
-
-            console.log('HOC auth ===> ', props.auth);
+            console.log('HOC auth if not equal ===> ', fullState.auth);
             console.log('auth required ===> ', authRequired)
-            if (authRequired) {
-                return <Redirect to="/profile" />
+            if (authRequired === null) {
+                if (fullState.auth) {
+                    return <Route path='/profile' exact component={Profile}  />
+                } else {
+                    return <Route path='/signup' exact component={SignUp}  />
+                }
+            } else if (authRequired) {
+                console.log('*** signup returned ***')
+                // props.history.push('/signup');
+                return <Redirect to={{ pathname: '/signup' }} push />
             } else {
-                return <Redirect to="/signup" />
+                console.log('*** profile returned ***')
+                // props.history.push('/profile');
+                return <Redirect to={{ pathname: '/profile' }} push />
             }
         }
 
-
-
-
+        // }
     }
 
-    const mapStateToProps = state => {
-        console.log('mapStateToProps ====> ', state);
-        console.log('mapStateToProps state.user.auth ====> ', state.user.auth)
-        return {
-            auth: state.user.auth
-        }
-    }
-
-    return connect(mapStateToProps)(AuthenticationCheck);
+    return AuthenticationCheck;
 }

@@ -14,6 +14,7 @@ module.exports = (connection) => {
 
         //CREATING SCHEMA-OBJECTS
         const userBase = schemaFactory(userSchema, userDiscriminator);
+
         //ADDING MIDDLEWARE
         const schemaWithMiddleware = schemaMiddleware(userBase);
 
@@ -22,6 +23,7 @@ module.exports = (connection) => {
         const educatorBase = schemaFactory(educatorSchema);
         const studentBase = schemaFactory(studentSchema);
 
+        //CREATING MODELS FOR FURTHER USE
         const userBaseModel = modelFactory(connection, 'users', schemaWithMiddleware);
 
         const adminModel = userBaseModel.discriminator('admins', adminBase);

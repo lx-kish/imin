@@ -1,13 +1,12 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
-import { connect } from 'react-redux';
 
 import './sign-up.styles.scss';
 
-import { userSignUp } from '../../redux/user/user.actions';
-
+import config from '../../axios.config';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
 
@@ -37,17 +36,9 @@ const SignUp = props => {
 
     }, [fullState.submitSuccess]);
 
-    // if (fullState.submitSuccess) return props.history.push('/profile');
-
     const role = props.location.state ?
         props.location.state.role || 'student'
         : 'student';
-
-    // const { auth } = props;
-    // if (auth.token) {
-    //     return <Redirect push to="/" />
-    // }
-    // console.log('Sign up =====> ', 'user status = ', props.user);
 
     const signUpForm = () => {
         return (
@@ -121,41 +112,38 @@ const SignUp = props => {
 
                         setSubmitting(true);
 
-                        props.userSignUp(values)
-                        // props.dispatch(userSignUp(values))
+                        axios.post(`http://127.0.0.1:3100/api/user/signup`, values, config)
+
                             .then((res) => {
-                                // console.log('inside submit ===> ', props)
-                                // console.log('inside submit ===> ', res)
-                                if (res.type === 'USER_SIGN_UP_FAILURE') {
-                                    let responseMessage = res.payload.response.data.message;
-                                    let errorMessage;
-                                    console.log('sign up doc, res =====> ', res);
-                                    // console.log('indexOf ======>', message, message.indexOf('E11000 duplicate key error collection:'));
-                                    if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
-                                        errorMessage = `User with email ${values.email} already exists.`;
-                                        // console.log('inside submit ===> ', errorMessage);
 
-                                    }
-                                    setFullState({
-                                        ...fullState,
-                                        submitSuccess: false,
-                                        submitError: true,
-                                        errorMessage
-                                    })
-                                    // console.log('Error ====> ', res.payload.response.data.message)
-                                } else if (res.type === 'USER_SIGN_UP_SUCCESS') {
-                                    resetForm();
-                                    setFullState({
-                                        ...fullState,
-                                        submitSuccess: true,
-                                        submitError: false,
-                                        errorMessage: ''
-                                    });
-                                    props.history.push('/profile');
+                                let responseMessage = res.payload.response.data.message;
+                                let errorMessage;
+                                console.log('sign up doc, res =====> ', res);
+                                if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
+                                    errorMessage = `User with email ${values.email} already exists.`;
+
                                 }
-                            })
+                                setFullState({
+                                    ...fullState,
+                                    submitSuccess: false,
+                                    submitError: true,
+                                    errorMessage
+                                })
 
-                        // 
+                            })
+                            .catch((error) => {
+
+                                console.log(error);
+
+                                resetForm();
+                                setFullState({
+                                    ...fullState,
+                                    submitSuccess: true,
+                                    submitError: false,
+                                    errorMessage: ''
+                                });
+
+                            })
 
                         setSubmitting(false);
 
@@ -451,25 +439,4 @@ const SignUp = props => {
     )
 };
 
-// const mapStateToProps = state => ({
-//     user: state.user
-// })
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         userSignUp: data => dispatch(userSignUp(data)),
-//         dispatch
-//     }
-// }
-
-// const mapDispatchToProps = {userSignUp}
-
-const mapDispatchToProps = dispatch => ({
-    // userSignUp: data => userSignUp(data)(dispatch)
-    userSignUp: data => dispatch(userSignUp(data))
-})
-
-// export default connect(mapStateToProps)(SignUp);
-export default connect(null, mapDispatchToProps)(SignUp);
-// export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
-// export default SignUp;
+export default SignUp;

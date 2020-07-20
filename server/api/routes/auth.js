@@ -2,11 +2,11 @@ const { Router } = require('express');
 const logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');
 const config = require('../../config');
-const neoModel = require('../../db/models/neoModel');
+const userModel = require('../../db/models/userModel');
 
 const dbName = config.database_name;
 const connection = services.get('connections')[dbName];
-const model = neoModel(connection);
+const model = userModel(connection);
 const users = model.users;
 const admins = model.admins;
 const students = model.students;
@@ -97,10 +97,9 @@ module.exports = (app) => {
                                 logger.error(message);
                                 return res.status(400).json({ message: message });
                             }
-                            // logger.info(`User ${user._id} has been successfully logged in`);
-
                             logger.info(`User ${user._id} has been successfully saved into the db ${dbName} and logged in`);
-                            res.cookie('access_token', user.access_token, { 'SameSite': 'None' });//, { domain: 'localhost' });
+
+                            res.cookie('access_token', user.access_token, { SameSite: 'None' });//, { domain: 'localhost' });
                             res.status(200).json({ post: true, userId: user._id, token: user.access_token });
                             // res.cookie('access_token', user.access_token).send('ok');
                         });
