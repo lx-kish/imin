@@ -13,6 +13,7 @@ import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.compon
 import ImgStudent from '../../graphics/pages-content/sign-up/IMIN-purple.png';
 import ImgEducator from '../../graphics/pages-content/sign-up/IMIN-pink.png';
 
+
 const SignUp = props => {
 
     /**
@@ -31,7 +32,7 @@ const SignUp = props => {
     React.useEffect(() => {
 
         if (fullState.submitSuccess) {
-            props.history.push('/profile');
+            // props.history.push('/profile');
         }
 
     }, [fullState.submitSuccess]);
@@ -112,35 +113,36 @@ const SignUp = props => {
 
                         setSubmitting(true);
 
-                        axios.post(`http://127.0.0.1:3100/api/user/signup`, values, config)
+                        axios.post(`/api/user/signup`, values, config)
 
                             .then((res) => {
 
-                                let responseMessage = res.payload.response.data.message;
-                                let errorMessage;
                                 console.log('sign up doc, res =====> ', res);
-                                if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
-                                    errorMessage = `User with email ${values.email} already exists.`;
+                                // let responseMessage = res.payload.response.data.message;
+                                // let errorMessage;
+                                
+                                // if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
+                                //     errorMessage = `User with email ${values.email} already exists.`;
 
-                                }
-                                setFullState({
-                                    ...fullState,
-                                    submitSuccess: false,
-                                    submitError: true,
-                                    errorMessage
-                                })
-
-                            })
-                            .catch((error) => {
-
-                                console.log(error);
-
-                                resetForm();
+                                // }
                                 setFullState({
                                     ...fullState,
                                     submitSuccess: true,
                                     submitError: false,
                                     errorMessage: ''
+                                })
+
+                            })
+                            .catch((error) => {
+
+                                console.log('sign up doc, error =====> ', error.response);
+
+                                // resetForm();
+                                setFullState({
+                                    ...fullState,
+                                    submitSuccess: false,
+                                    submitError: true,
+                                    errorMessage: error.message
                                 });
 
                             })

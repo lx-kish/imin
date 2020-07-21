@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config');
 const SALT_I = 10;
 
+
 module.exports = (schema) => {
 
     schema.pre('save', function (next) {

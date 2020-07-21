@@ -99,7 +99,18 @@ module.exports = (app) => {
                             }
                             logger.info(`User ${user._id} has been successfully saved into the db ${dbName} and logged in`);
 
-                            res.cookie('access_token', user.access_token, { SameSite: 'None' });//, { domain: 'localhost' });
+
+                            // Set the new style cookie
+                            res.cookie('access_token', user.access_token, {
+                                // domain: 'http://localhost:3000/signup',
+                                sameSite: 'none',
+                                httpOnly: true,
+                                secure: true
+                            });
+                            // And set the same value in the legacy cookie
+                            // res.cookie('3pcookie-legacy', 'value', { secure: true });
+
+                            // res.cookie('access_token', user.access_token, { SameSite: 'None' });//, { domain: 'localhost' });
                             res.status(200).json({ post: true, userId: user._id, token: user.access_token });
                             // res.cookie('access_token', user.access_token).send('ok');
                         });

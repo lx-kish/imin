@@ -12,6 +12,11 @@
 # production
 /build
 
+# https certificates
+.cert
+.cer
+.key
+
 # misc
 .DS_Store
 .env

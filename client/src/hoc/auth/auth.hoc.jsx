@@ -19,7 +19,7 @@ export default (WrappedComponent, authRequired) => {
             auth: false
         });
 
-        axios.get(`http://127.0.0.1:3100/api/user/auth`, config)
+        axios.get(`/api/user/auth`, config)
 
             .then((res) => {
                 setFullState({
