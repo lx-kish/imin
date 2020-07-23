@@ -27,7 +27,7 @@ const Routes = () => {
                 <Route path='/students' exact component={Students} />
                 <Route path='/partners' exact component={Partners} />
                 <Route path='/signup' exact component={SignUp} />
-                <Route path='/signin' exact component={Auth(SignIn, null)} />
+                <Route path='/signin' exact component={SignIn} />
                 <Route path='/profile' exact component={Profile} />
                 <Route path='/terms' exact component={TermsAndConditions} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>

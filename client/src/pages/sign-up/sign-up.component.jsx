@@ -13,7 +13,26 @@ import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.compon
 import ImgStudent from '../../graphics/pages-content/sign-up/IMIN-purple.png';
 import ImgEducator from '../../graphics/pages-content/sign-up/IMIN-pink.png';
 
-
+/**
+ * Component Sign-up let user to create an account in the system. 
+ * System can accept 3 different types of users: 
+ * - administrators,
+ * - educators,
+ * - students
+ * 
+ * Contains user form (separate for each type of users) to collect data 
+ * about user and send it to the server. After sending server is saving data
+ * into the DB, and signing in user at the same time (@TODO expand to sending
+ * confirmation via registered email with unique link, and authorize user by 
+ * clicking that unique link). 
+ * 
+ * On success gets response from the server with 
+ * cookie containing session JWT for 'signed in' state. 
+ * On error returns error object contains error code. Error code then displays
+ * in the form over the submit button.
+ * 
+ * @param {*} props 
+ */
 const SignUp = props => {
 
     /**
@@ -412,7 +431,10 @@ const SignUp = props => {
                                     pane={
                                         <p className='sign-up-form__redirect-sign-in'>
                                             Already have an account? <Link
-                                                to={'/signin'}
+                                                to={{
+                                                    pathname: '/signin',
+                                                    state: { role: role === 'educator' ? 'educator' : 'student' }
+                                                }}
                                                 className='sign-up-form__redirect-sign-in--link'
                                             >Sign in.</Link>
                                         </p>
