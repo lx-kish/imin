@@ -264,7 +264,7 @@ const SignIn = props => {
                                     rowClassName='row-sign-in-form'
                                     pane={
                                         <>
-                                            <p className='form-input--error-message'>
+                                            <p className='form-input__error-message'>
                                                 {fullState.submitError ? fullState.errorMessage : ''}
                                             </p>
                                             <input

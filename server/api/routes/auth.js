@@ -166,7 +166,13 @@ module.exports = (app) => {
                                 return res.status(400).json({ message: message });
                             }
                             logger.info(`User ${user._id} has been successfully logged in`);
-                            res.cookie('access_token', user.access_token, { 'SameSite': 'None' }).send('ok');
+                            res.status(200).cookie('access_token', user.access_token, {
+                                // domain: 'http://localhost:3000/signup',
+                                sameSite: 'none',
+                                httpOnly: true,
+                                secure: true
+                            }).send('ok');
+                            // res.cookie('access_token', user.access_token, { 'SameSite': 'None' }).send('ok');
                         });
                     });
                 });
@@ -201,7 +207,13 @@ module.exports = (app) => {
                 }
 
                 logger.info(`User ${user._id} has been successfully logged out`);
-                res.status(200).cookie('access_token', '', { 'SameSite': 'None' }).send('ok');
+                res.status(200).cookie('access_token', '', {
+                    // domain: 'http://localhost:3000/signup',
+                    sameSite: 'none',
+                    httpOnly: true,
+                    secure: true
+                }).send('ok');
+                // res.status(200).cookie('access_token', '', { 'SameSite': 'None' }).send('ok');
                 // res.cookie('auth', user.access_token).send('ok');
             });
         } catch (e) {

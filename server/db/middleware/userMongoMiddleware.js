@@ -52,6 +52,7 @@ module.exports = (schema) => {
 
             cb(null, user);
         });
+        
         // user.update(function (err, user) {
         //     if (err) return cb(err);
         //     console.log(user)

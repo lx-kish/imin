@@ -9,6 +9,7 @@ import Partners from './pages/lvl2-pages/partners.page';
 import Students from './pages/lvl2-pages/students.page';
 import SignUp from './pages/sign-up/sign-up.component';
 import SignIn from './pages/sign-in/sign-in.component';
+import LogOut from './pages/log-out/log-out.component';
 import Profile from './pages/profile/profile.component';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
@@ -28,6 +29,7 @@ const Routes = () => {
                 <Route path='/partners' exact component={Partners} />
                 <Route path='/signup' exact component={SignUp} />
                 <Route path='/signin' exact component={SignIn} />
+                <Route path='/logout' exact component={LogOut} />
                 <Route path='/profile' exact component={Profile} />
                 <Route path='/terms' exact component={TermsAndConditions} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import './btn.styles.scss';
 
-const Button = (props) => {
+const Button = props => {
 
     return (
         <button
