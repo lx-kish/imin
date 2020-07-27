@@ -4,7 +4,7 @@ import './contact-form.styles.scss';
 
 import DoublePanesRow from '../../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import FormFields from '../forms-fields/form-fields.component';
-import Btn from '../../btns/btn/btn.component';
+import Btn from '../../btn/btn.component';
 
 class ContactForm extends React.Component {
 

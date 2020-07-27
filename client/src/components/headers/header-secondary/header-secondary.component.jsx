@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import '../headers.styles.scss';
 
-import Btn from '../../btns/btn/btn.component';
+import Btn from '../../btn/btn.component';
 
 const HeaderSecondary = props => {
 

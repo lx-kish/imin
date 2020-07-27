@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Btn from '../../btns/btn/btn.component';
+import Btn from '../../btn/btn.component';
 import logo from '../../../graphics/logo_pink.png';
 
 import './navigation-bar.styles.scss';

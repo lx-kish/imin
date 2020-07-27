@@ -4,7 +4,7 @@ import axios from 'axios';
 import './log-out.styles.scss';
 
 import config from '../../axios.config';
-import Btn from '../../components/btns/btn/btn.component';
+import Btn from '../../components/btn/btn.component';
 
 const content = {
     logof: {
@@ -30,12 +30,12 @@ const LogOut = props => {
      */
     const [fullState, setFullState] = React.useState({
 
-        logoffError: false,
+        logoutError: false,
         errorMessage: ''
     });
 
     const logout = () => {
-        // console.log('log-off');
+        // console.log('log-out');
 
         axios.post(`/api/user/logout`, '', config)
 
@@ -53,7 +53,7 @@ const LogOut = props => {
                 // resetForm();
                 setFullState({
                     ...fullState,
-                    logoffError: true,
+                    logoutError: true,
                     errorMessage: error.message
                 });
 
@@ -67,12 +67,12 @@ const LogOut = props => {
     }
 
     return (
-        <div className='log-off'>
-            <h2 className='log-off__header'>Do you want to log off?</h2>
-            <p className='og-off__error-message'>
-                {fullState.logoffError ? fullState.errorMessage : ''}
+        <div className='log-out'>
+            <h2 className='log-out__header'>Do you want to log out?</h2>
+            <p className='log-out__error-message'>
+                {fullState.logoutError ? fullState.errorMessage : ''}
             </p>
-            <div className='log-off__button-box'>
+            <div className='log-out__button-box'>
                 <Btn
                     {...content.logof.config}
                     onClick={() => { logout() }}
