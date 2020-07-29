@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect, Route } from 'react-router-dom';
 
-import SignUp from '../../pages/sign-up/sign-up.component';
+import SignUp from '../../pages/sign-up/sign-up.page';
 // import SignIn from '../../pages/sign-in/sign-in.component';
-import Profile from '../../pages/profile/profile.component';
+import Profile from '../../pages/profile/profile.page';
 
 import config from '../../axios.config';
 

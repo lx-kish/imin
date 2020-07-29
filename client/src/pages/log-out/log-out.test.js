@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import LogOut from './log-out.component';
+import LogOut from './log-out.page';
 
 const setUp = (props = {}) => {
     return shallow(<LogOut {...props} />);

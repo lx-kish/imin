@@ -17,87 +17,92 @@ describe('Navigation bar component test set', () => {
     it('Should render <NavigationBar /> component without errors', () => {
         expect(
             component
-            .find('nav')
-            .length
+                .find('nav')
+                .length
         ).toBe(1);
     });
 
     it('Should render class="navigation__logo-box" inside <NavigationBar /> component', () => {
         expect(
             component
-            .find('.navigation__logo-box')
-            .length
+                .find('.navigation__logo-box')
+                .length
         ).toBe(1);
     });
 
     it('Should render <img /> inside <NavigationBar /> component', () => {
         expect(
             component
-            .find('img')
-            .length
+                .find('img')
+                .length
         ).toBe(1);
     });
 
     it('Should render <ul /> list inside <NavigationBar /> component', () => {
         expect(
             component
-            .find('ul')
-            .length
+                .find('ul')
+                .length
         ).toBe(1);
     });
 
     it('Should render four <li /> items inside <NavigationBar /> component', () => {
         expect(
             component
-            .find('li')
-            .length
+                .find('li')
+                .length
         ).toBe(5);
     });
-    
+
     it('Should contain <Link /> to "/" (Home page)', () => {
         expect(
             component
-            .find('Link')
-            .at(0)
-            .prop('to')
+                .find('Link')
+                .at(0)
+                .prop('to')
         ).toEqual('/');
     });
-    
+
     it('Should contain <Link /> to "/about" (About page)', () => {
         expect(
             component
-            .find('Link')
-            .at(1)
-            .prop('to')
+                .find('Link')
+                .at(1)
+                .prop('to')
         ).toEqual('/about');
     });
-        
+
     it('Should contain <Link /> to "/platform" (Platform page)', () => {
         expect(
             component
-            .find('Link')
-            .at(2)
-            .prop('to')
+                .find('Link')
+                .at(2)
+                .prop('to')
         ).toEqual('/platform');
     });
-        
+
     it('Should contain <Link /> to "/contact" (Contact page)', () => {
         expect(
             component
-            .find('Link')
-            .at(3)
-            .prop('to')
+                .find('Link')
+                .at(3)
+                .prop('to')
         ).toEqual('/contact');
     });
 
-    // it('Should contain <Link /> to "/signin" (Sign in page)', () => {
-    //     expect(
-    //         component
-    //         .find('Link')
-    //         .at(4)
-    //         .prop('to')
-    //     ).toEqual('/signin');
-    // });
+    it('Should contain <Link /> to "/signin" (Sign in page)', () => {
+        const props = {
+            pathname: '/signin',
+            state: { role: 'student' }
+        }
+
+        expect(
+            component
+                .find('Link')
+                .at(4)
+                .prop('to')
+        ).toEqual(props);
+    });
 
     // it('Should render <ul /> list inside <NavigationBar /> component', () => {
 

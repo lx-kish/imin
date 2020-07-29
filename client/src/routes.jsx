@@ -7,10 +7,10 @@ import Contact from './pages/contact/contact.page';
 import Educators from './pages/lvl2-pages/educators.page';
 import Partners from './pages/lvl2-pages/partners.page';
 import Students from './pages/lvl2-pages/students.page';
-import SignUp from './pages/sign-up/sign-up.component';
-import SignIn from './pages/sign-in/sign-in.component';
-import LogOut from './pages/log-out/log-out.component';
-import Profile from './pages/profile/profile.component';
+import SignUp from './pages/sign-up/sign-up.page';
+import SignIn from './pages/sign-in/sign-in.page';
+import LogOut from './pages/log-out/log-out.page';
+import Profile from './pages/profile/profile.page';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
 import Layout from './hoc/layout/layout.hoc';
