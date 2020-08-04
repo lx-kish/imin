@@ -8,7 +8,7 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest server",
     "start": "node server/server.js",
     "dev:server": "nodemon server/server.js",
     "client": "npm run start --prefix client",
@@ -29,6 +29,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "jest": "^26.2.2",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }

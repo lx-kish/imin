@@ -4,8 +4,11 @@ const path = require('path');
 // Set the NODE_ENV to 'development' by default
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const envFound = dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+// Connect .env.* files ('.env.development, .env.test, ...')
+const envFound = dotenv.config({ path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`) });
+// const envFound = dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 // const envFound = dotenv.config();
+// console.log('path: ===> ', path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`))
 
 if (!envFound) {
   // This error should crash whole process
@@ -15,15 +18,20 @@ if (!envFound) {
 
 module.exports = {
   /**
-   * Your favorite port
+   * Port which application listens
    */
-  port: parseInt(process.env.PORT, 10),
+  port: parseInt(process.env.APP_PORT, 10),
 
   /**
-   * That long string from mlab
+   * Database connection settings
    */
-  database_name: process.env.MONGODB_NAME,
-  database_URI: process.env.MONGODB_URI,
+  db: {
+    host: process.env.MONGODB_HOST,
+    port: process.env.MONGODB_PORT,
+    name: process.env.MONGODB_NAME
+  },
+  // database_name: process.env.MONGODB_NAME,
+  // database_URI: process.env.MONGODB_URI,
   // database_name: JSON.parse(process.env.MONGODB_URI).name || '',
   // database_URI: JSON.parse(process.env.MONGODB_URI).URI,
 

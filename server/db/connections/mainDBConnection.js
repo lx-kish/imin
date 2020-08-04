@@ -1,8 +1,11 @@
-const config = require('../../config');
 const dbConnectionFactory = require('../connectionFactory');
 const Logger = require('../../loaders/logger')();
+const config = require('../../config');
 
-const dbUrl = config.database_URI;
+const { db: { host, port, name } } = config;
+const dbUrl = `mongodb://${host}:${port}/${name}`;
+
+// const dbUrl = config.database_URI;
 
 // Establishing connection to DB
 const connection = dbConnectionFactory(dbUrl);
