@@ -6,13 +6,14 @@ const routes = require('../api/index');
 const config = require('../config');
 const logger = require('./logger')();
 
-module.exports = (app) => {
+module.exports = async (app) => {
   /**
    * Health Check endpoints
    * @TODO Explain why they are here
    */
   app.get('/status', (req, res) => {
-    res.status(200).end();
+    res.status(200).send({message: 'Ok'});
+    // res.status(200).end();
   });
   app.head('/status', (req, res) => {
     res.status(200).end();
@@ -67,7 +68,7 @@ module.exports = (app) => {
   app.use(cookieParser());
 
   // Load API routes
-  app.use(config.api.prefix, routes());
+  app.use(config.api.prefix, await routes());
 
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {

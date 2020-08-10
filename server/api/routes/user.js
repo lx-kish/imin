@@ -5,7 +5,7 @@ const userMiddleware = require('../middleware/users');
 
 const route = Router();
 
-module.exports = (app) => {
+module.exports = function (app) {
     app.use('/user', route);
 
     route.get(

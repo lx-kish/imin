@@ -6,11 +6,13 @@ const config = require('./config');
 
 const gracefulExit = require('./db/connections/gracefulExit');
 
-// console.log(rocess.env.PORT);
+// const app = require('.loaders');
+
+let app;
 
 async function startServer() {
 
-    const app = express();
+    app = express();
 
     await require('./loaders')(app);
 
@@ -35,4 +37,5 @@ async function startServer() {
 
 startServer();
 
-// module.exports = startServer.app;
+// module.exports = startServer.server;
+module.exports = app;

@@ -3,8 +3,11 @@ const services = require('../../loaders/services');;
 const config = require('../../config');
 const userModel = require('../../db/models/userModel');
 
-const dbName = config.database_name;
-const connection = services.get('connections')[dbName];
+const { db: { name } } = config;
+// console.log(services);
+// const dbName = config.database_name;
+// const connection = services.get('connections')[dbName];
+const connection = services.get('connections')[name];
 const model = userModel(connection);
 const users = model.users;
 const admins = model.admins;

@@ -4,13 +4,12 @@ const config = require('../../config');
 
 const { db: { host, port, name } } = config;
 const dbUrl = `mongodb://${host}:${port}/${name}`;
-
 // const dbUrl = config.database_URI;
 
-// Establishing connection to DB
+// Establish connection to DB
 const connection = dbConnectionFactory(dbUrl);
 
-// Initializing DB connection service messages:
+// DB connection initialization service messages:
 // When the connection established
 connection.on("open", () => {
     Logger.info(`Connection to database ${dbUrl} established`);
