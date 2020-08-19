@@ -12,11 +12,11 @@ module.exports = () => {
     logger.info(`Loading routes from: ${path}`);
 
     try {
-        fs.readdirSync(path).forEach( async (file) => {
+        fs.readdirSync(path).forEach((file) => {
             const route = `${path}\\${file.substr(0, file.indexOf('.'))}`;
             logger.info(`Adding route: ${route}`);
             // console.log(`require(${route}) ====> `, require(route)(app));
-            await require(route)(app);
+            require(route)(app);
         });
     } catch (e) {
         logger.error('🔥 error: %o', e);

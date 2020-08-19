@@ -5,9 +5,9 @@ const { db: { name } } = config;
 // const name = config.database_name;
 const connectionLink = {};
 
-module.exports = async () => {
+module.exports = () => {
 
-  const connection = await require('../db/connections/mainDBConnection');
+  const connection = require('../db/connections/mainDBConnection');
   connectionLink[name] = connection;
   services.set('connections', connectionLink);
 }

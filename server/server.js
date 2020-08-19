@@ -10,11 +10,11 @@ const gracefulExit = require('./db/connections/gracefulExit');
 
 let app;
 
-async function startServer() {
+function startServer() {
 
     app = express();
 
-    await require('./loaders')(app);
+    require('./loaders')(app);
 
     app.listen(config.port, err => {
         if (err) {

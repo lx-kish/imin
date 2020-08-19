@@ -68,7 +68,7 @@ module.exports = async (app) => {
   app.use(cookieParser());
 
   // Load API routes
-  app.use(config.api.prefix, await routes());
+  app.use(config.api.prefix, routes());
 
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {

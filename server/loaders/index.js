@@ -4,13 +4,13 @@ const mongooseLoader = require('./mongoose');
 const Logger = require('./logger')();
 
 
-module.exports = async (app) => {
+module.exports = (app) => {
 
-  if(await mongooseLoader()) {
+  if(mongooseLoader()) {
     Logger.info('✌️ DB loaded and connected!');
   }
 
-  if(await expressLoader(app)) {
+  if(expressLoader(app)) {
     Logger.info('✌️ Express loaded');
   }
 };
