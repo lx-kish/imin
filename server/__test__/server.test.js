@@ -3,7 +3,7 @@ const express = require('express')();
 const server = require('../server');
 
 
-describe('auth middleware', () => {
+describe('server routes test set', () => {
 
     it('status route to check if it works... ', () => {
         // await request(app)

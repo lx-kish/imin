@@ -24,11 +24,11 @@ module.exports = (connection) => {
         const studentBase = schemaFactory(studentSchema);
 
         //CREATING MODELS FOR FURTHER USE
-        const userBaseModel = modelFactory(connection, 'users', schemaWithMiddleware);
+        const userBaseModel = modelFactory(connection, 'user', schemaWithMiddleware);
 
-        const adminModel = userBaseModel.discriminator('admins', adminBase);
-        const educatorModel = userBaseModel.discriminator('educators', educatorBase);
-        const studentModel = userBaseModel.discriminator('students', studentBase);;
+        const adminModel = userBaseModel.discriminator('admin', adminBase);
+        const educatorModel = userBaseModel.discriminator('educator', educatorBase);
+        const studentModel = userBaseModel.discriminator('student', studentBase);;
 
         return { 
             users: userBaseModel,

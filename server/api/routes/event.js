@@ -5,15 +5,15 @@ const eventMiddleware = require('../middleware/events');
 
 const route = Router();
 
-module.exports = function (app) {
+module.exports = async (app) => {
     app.use('/event', route);
 
     route.post(
         '/create',
-        eventMiddleware.create,
+        await eventMiddleware.create,
         (req, res, next) => {
             try {
-                logger.info(`Event ${req.event} has been successfully created`);
+                logger.info(`Event No ${req.event._id}, ${req.event.name} has been successfully created`);
                 // res.cookie('access_token', req.user.access_token, { 'SameSite': 'None' });//, { domain: 'localhost' });
                 res.status(200).json({ event: req.event._id, name: req.event.name });
 

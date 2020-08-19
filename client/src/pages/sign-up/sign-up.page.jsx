@@ -122,7 +122,7 @@ const SignUp = props => {
                         if (values.password !== values.passwordConfirm) {
                             errors.passwordConfirm = 'Please repeat the password';
                         }
-                        if (!values.termsAndConditionsRead) {
+                        if (!values.termsAndConditionsRead && role === 'student') {
                             errors.termsAndConditionsRead = 'To continue you should accept Terms and Conditions'
                         }
 

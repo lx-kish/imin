@@ -2,6 +2,7 @@ const logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');;
 const config = require('../../config');
 const userModel = require('../../db/models/userModel');
+const { website } = require('../../db/schemas/educatorSchema');
 
 const { db: { name } } = config;
 // console.log(services);
@@ -47,6 +48,7 @@ module.exports = {
 
     try {
       const role = req.body.role;
+      console.log('role from signUp user routes middleware ====> ', role);
       let userModel, user;
 
       switch (role) {
@@ -81,7 +83,8 @@ module.exports = {
             phone: req.body.phone,
             name: req.body.name,
             surname: req.body.surname,
-            company: req.body.company
+            company: req.body.company,
+            website: req.body.website
           });
           break;
         default:
