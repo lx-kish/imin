@@ -3,14 +3,17 @@ const mongooseLoader = require('./mongoose');
 
 const Logger = require('./logger')();
 
+module.exports = () => {
 
-module.exports = (app) => {
+  // const app = expressLoader();
 
   if(mongooseLoader()) {
     Logger.info('✌️ DB loaded and connected!');
   }
 
-  if(expressLoader(app)) {
+  if(expressLoader()) {
     Logger.info('✌️ Express loaded');
   }
+
+  return expressLoader;
 };

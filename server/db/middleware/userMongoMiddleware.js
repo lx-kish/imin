@@ -9,6 +9,20 @@ module.exports = (schema) => {
     schema.pre('save', function (next) {
         var user = this;
 
+        // console.log(this.constructor.find({}, {_id: 1}));
+        // user.constructor.find( {}, {_id: 1}, (err, data) => {
+        //     if(err) return next(err);
+        //     console.log('from pre.save ====> ', data);
+        // })
+
+        // db.getCollection('test').find().forEach(function (doc) {
+        //     db.getCollection('test').remove({ _id : doc._id});
+        //     tempId = new NumberLong(doc._id);
+        //     doc._id = tempId;
+        //     db.getCollection('test').save(doc);
+        //     } 
+        // );
+
         if (user.isModified('password')) {
             bcrypt.genSalt(SALT_I, function (err, salt) {
                 if (err) return next(err);

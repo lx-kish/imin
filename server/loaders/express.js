@@ -1,12 +1,12 @@
-// const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const routes = require('../api/index');
 const config = require('../config');
 const logger = require('./logger')();
+const app = require('express')();
 
-module.exports = async (app) => {
+module.exports = () => {
   /**
    * Health Check endpoints
    * @TODO Explain why they are here
@@ -98,4 +98,6 @@ module.exports = async (app) => {
       },
     });
   });
+
+  return app;
 };

@@ -48,7 +48,7 @@ module.exports = {
 
     try {
       const role = req.body.role;
-      console.log('role from signUp user routes middleware ====> ', role);
+      // console.log('role from signUp user routes middleware ====> ', role);
       let userModel, user;
 
       switch (role) {

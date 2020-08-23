@@ -6,15 +6,9 @@ const config = require('./config');
 
 const gracefulExit = require('./db/connections/gracefulExit');
 
-// const app = require('.loaders');
-
-let app;
+const app = require('./loaders')()();
 
 function startServer() {
-
-    app = express();
-
-    require('./loaders')(app);
 
     app.listen(config.port, err => {
         if (err) {
