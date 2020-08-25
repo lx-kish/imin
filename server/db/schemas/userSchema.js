@@ -22,9 +22,11 @@ module.exports = {
 		required: [
             true,
             'Required field missing: PASSWORD'
-        ]
+		],
+		select: false
     },
 	access_token: {
 		type: String
-	}
+	},
+	select: false
 };

@@ -9,7 +9,7 @@ module.exports = (schema) => {
     schema.pre('save', function (next) {
         var user = this;
 
-        // console.log(this.constructor.find({}, {_id: 1}));
+        console.log(this.collection.find());
         // user.constructor.find( {}, {_id: 1}, (err, data) => {
         //     if(err) return next(err);
         //     console.log('from pre.save ====> ', data);
