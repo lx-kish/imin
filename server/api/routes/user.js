@@ -1,11 +1,32 @@
 const { Router } = require('express');
 const logger = require('../../loaders/logger')();
 
-const userMiddleware = require('../middleware/users');
+const userMiddleware = require('../controllers/users');
+
+const router = require('express').Router();
 
 const route = Router();
 
 module.exports = function (app) {
+
+    // app.use('/', router);
+
+    // router
+    //     .route('/users/auth')
+    //     .get(userMiddleware.isAuth);
+
+    // router
+    //     .route('/users/sign-up')
+    //     .post(userMiddleware.signUp);
+
+    // router
+    //     .route('/users/sign-in')
+    //     .post(userMiddleware.signIn);
+
+    // router
+    //     .route('/users/log-out')
+    //     .delete(userMiddleware.isAuth, userMiddleware.logOut);
+
     app.use('/user', route);
 
     route.get(

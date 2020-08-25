@@ -2,7 +2,7 @@ const logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');;
 const config = require('../../config');
 const userModel = require('../../db/models/userModel');
-const { website } = require('../../db/schemas/educatorSchema');
+// const { website } = require('../../db/schemas/educatorSchema');
 
 const { db: { name } } = config;
 // console.log(services);

@@ -1,4 +1,3 @@
-// const express = require('express');
 const config = require('./config');
 const logger = require('./loaders/logger')();
 const mongooseLoader = require('./loaders/mongoose');
@@ -9,9 +8,7 @@ if (mongooseLoader()) {
 
 const gracefulExit = require('./db/connections/gracefulExit');
 
-const app = require('./loaders/express')();
-
-// function startServer() {
+const app = require('./app')();
 
 app.listen(config.port, err => {
     if (err) {
@@ -30,9 +27,4 @@ app.listen(config.port, err => {
 // If the Node process ends, close all the Mongoose connections
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
-// }
-
-// startServer();
-
-// module.exports = startServer.server;
 module.exports = app;

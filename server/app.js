@@ -1,9 +1,10 @@
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const routes = require('../api/index');
-const config = require('../config');
-const logger = require('./logger')();
+const routes = require('./api/index');
+const config = require('./config');
+const logger = require('./loaders/logger')();
+
 const app = require('express')();
 
 module.exports = () => {
@@ -71,9 +72,10 @@ module.exports = () => {
   app.use(config.api.prefix, routes());
 
   /// catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err['status'] = 404;
+  app.all('*', (req, res, next) => {
+    const err = new Error(`Can't find ${req.originalUrl} on the server`);
+    err.status = 'fail';
+    err.statusCode = 404;
     next(err);
   });
 
@@ -85,18 +87,27 @@ module.exports = () => {
     if (err.name === 'UnauthorizedError') {
       return res
         .status(err.status)
-        .send({ message: err.message })
+        .json({ message: err.message })
         .end();
     }
     return next(err);
   });
+
   app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.json({
-      errors: {
-        message: err.message,
-      },
+    err.statusCode = err.statusCode || 500;
+    err.status = err.status || 'error';
+
+    res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message
     });
+
+    // res.status(err.status || 500);
+    // res.json({
+    //   errors: {
+    //     message: err.message,
+    //   },
+    // });
   });
 
   return app;

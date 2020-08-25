@@ -1,4 +1,4 @@
-const expressLoader = require('./express');
+const expressLoader = require('../app');
 const mongooseLoader = require('./mongoose');
 
 const Logger = require('./logger')();

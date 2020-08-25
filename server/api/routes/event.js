@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const logger = require('../../loaders/logger')();
 
-const eventMiddleware = require('../middleware/events');
+const eventMiddleware = require('../controllers/events');
 
 const route = Router();
 
