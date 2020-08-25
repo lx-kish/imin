@@ -1,9 +1,14 @@
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const routes = require('./api/index');
+
 const config = require('./config');
 const logger = require('./loaders/logger')();
+const routes = require('./api/index');
+
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./utils/errorController');
+
 
 const app = require('express')();
 
@@ -12,12 +17,10 @@ module.exports = () => {
    * Health Check endpoints
    * @TODO Explain why they are here
    */
-  app.get('/status', (req, res) => {
-    res.status(200).send({message: 'Ok'});
-    // res.status(200).end();
-  });
-  app.head('/status', (req, res) => {
-    res.status(200).end();
+  app.all('/status', (req, res) => {
+    res.status(200).json({
+      message: 'Ok'
+    });
   });
 
   // Useful if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
@@ -52,7 +55,7 @@ module.exports = () => {
   // Alternate description:
   // Enable Cross Origin Resource Sharing to all origins by default
   // app.use(cors());
-  app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+  app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
   // Handle CORS pre-flight reqests (https://stackoverflow.com/questions/54845053/express-react-with-cors-setting-http-only-secure-cookie-for-react-spa)
   // app.options('*', cors());
@@ -71,44 +74,34 @@ module.exports = () => {
   // Load API routes
   app.use(config.api.prefix, routes());
 
-  /// catch 404 and forward to error handler
+  // catch 404 and forward to error handler
   app.all('*', (req, res, next) => {
-    const err = new Error(`Can't find ${req.originalUrl} on the server`);
-    err.status = 'fail';
-    err.statusCode = 404;
-    next(err);
+    next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
   });
+
+  // /// catch 404 and forward to error handler
+  // app.all('*', (req, res, next) => {
+  //   const err = new Error(`Can't find ${req.originalUrl} on the server`);
+  //   err.status = 'fail';
+  //   err.statusCode = 404;
+  //   next(err);
+  // });
 
   /// error handlers
-  app.use((err, req, res, next) => {
-    /**
-     * Handle 401 thrown by express-jwt library
-     */
-    if (err.name === 'UnauthorizedError') {
-      return res
-        .status(err.status)
-        .json({ message: err.message })
-        .end();
-    }
-    return next(err);
-  });
+  // app.use((err, req, res, next) => {
+  //   /**
+  //    * Handle 401 thrown by express-jwt library
+  //    */
+  //   if (err.name === 'UnauthorizedError') {
+  //     return res
+  //       .status(err.status)
+  //       .json({ message: err.message })
+  //       .end();
+  //   }
+  //   return next(err);
+  // });
 
-  app.use((err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || 'error';
-
-    res.status(err.statusCode).json({
-        status: err.status,
-        message: err.message
-    });
-
-    // res.status(err.status || 500);
-    // res.json({
-    //   errors: {
-    //     message: err.message,
-    //   },
-    // });
-  });
+  app.use(globalErrorHandler);
 
   return app;
 };
