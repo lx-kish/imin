@@ -1,43 +1,29 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
+const AppError = require('../../utils/appError');
 const SALT_I = 10;
 
 
 module.exports = (schema) => {
 
-    schema.pre('save', function (next) {
-        var user = this;
+    schema.pre('save', async function (next) {
 
-        console.log(this.collection.find());
-        // user.constructor.find( {}, {_id: 1}, (err, data) => {
-        //     if(err) return next(err);
-        //     console.log('from pre.save ====> ', data);
-        // })
+        const user = this;
 
-        // db.getCollection('test').find().forEach(function (doc) {
-        //     db.getCollection('test').remove({ _id : doc._id});
-        //     tempId = new NumberLong(doc._id);
-        //     doc._id = tempId;
-        //     db.getCollection('test').save(doc);
-        //     } 
-        // );
+        if (!user.isModified('password')) return next();
 
-        if (user.isModified('password')) {
-            bcrypt.genSalt(SALT_I, function (err, salt) {
-                if (err) return next(err);
+        const salt = await bcrypt.genSalt(SALT_I);
 
-                bcrypt.hash(user.password, salt, function (err, hash) {
-                    if (err) return next(err);
+        if (!salt) return next(new AppError(`Error occured while password incripting`, 400));
 
-                    user.password = hash;
+        const hash = await bcrypt.hash(user.password, salt);
 
-                    next();
-                });
-            });
-        } else {
-            next();
-        }
+        if (!hash) return next(new AppError(`Error occured while password incripting`, 400));
+
+        user.password = hash;
+
+        next();
     });
 
     // schema.post('save', function (next) {
@@ -54,31 +40,23 @@ module.exports = (schema) => {
         });
     };
 
-    schema.methods.generateToken = function (cb) {
-        var user = this;
-        var token = jwt.sign(user._id.toHexString(), config.jwt_secret);
+    schema.methods.generateToken = async function (next) {
+        let user = this;
+        const token = jwt.sign(user._id.toHexString(), config.jwt_secret);
+
+        if (!token) return next(new AppError(`Error occured while generating token`, 400));
 
         user.access_token = token;
         user.markModified(token);
 
-        user.save(function (err, user) {
-            if (err) return cb(err);
-
-            cb(null, user);
-        });
-        
-        // user.update(function (err, user) {
-        //     if (err) return cb(err);
-        //     console.log(user)
-        //     cb(null, user);
-        // })
+        return await user.save();
     };
 
     schema.methods.deleteToken = function (token, cb) {
         var user = this;
 
-        user.constructor.findOneAndUpdate({ _id: user._id },{ $unset: { access_token: 1 } }, {new: true}, (err, user) => {
-        // user.updateOne({ $unset: { access_token: 1 } }, (err, user) => {
+        user.constructor.findOneAndUpdate({ _id: user._id }, { $unset: { access_token: 1 } }, { new: true }, (err, user) => {
+            // user.updateOne({ $unset: { access_token: 1 } }, (err, user) => {
             // user.update({ $unset: { token: 1 } }, (err, user) => {
 
             if (err) return cb(err);
@@ -86,7 +64,7 @@ module.exports = (schema) => {
         });
     };
 
-    schema.statics.findByToken = function (token, cb) {
+    schema.statics.findByToken = async function (token) {
         var user = this;
 
         jwt.verify(token, config.jwt_secret, (err, decode) => {

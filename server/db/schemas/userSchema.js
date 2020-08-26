@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 module.exports = {
-	user_id: {
-		type: Number,
-		unique: true,
-		required: [
-            true,
-            'Required field missing: USER_ID'
-        ],
-		default: 1
-	},
+	// user_id: {
+	// 	type: Number,
+	// 	unique: true,
+	// 	required: [
+    //         true,
+    //         'Required field missing: USER_ID'
+    //     ],
+	// 	default: 1
+	// },
 	email: {
 		type: String,
 		unique: true,

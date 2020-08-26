@@ -79,28 +79,7 @@ module.exports = () => {
     next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
   });
 
-  // /// catch 404 and forward to error handler
-  // app.all('*', (req, res, next) => {
-  //   const err = new Error(`Can't find ${req.originalUrl} on the server`);
-  //   err.status = 'fail';
-  //   err.statusCode = 404;
-  //   next(err);
-  // });
-
-  /// error handlers
-  // app.use((err, req, res, next) => {
-  //   /**
-  //    * Handle 401 thrown by express-jwt library
-  //    */
-  //   if (err.name === 'UnauthorizedError') {
-  //     return res
-  //       .status(err.status)
-  //       .json({ message: err.message })
-  //       .end();
-  //   }
-  //   return next(err);
-  // });
-
+  // process all the errors in a single source
   app.use(globalErrorHandler);
 
   return app;
