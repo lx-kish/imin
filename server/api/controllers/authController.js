@@ -69,7 +69,7 @@ module.exports = {
   /**
    * The route is called after isAuth route, so will contain req.user in it
    */
-  isRestricted: (req, res, next) => {
+  isPermited: (req, res, next) => {
     
     if (req.user.role !== 'admin') {
       return next(new AppError('You do not have a permission to perform this action', 403));
@@ -120,7 +120,7 @@ module.exports = {
         };
         break;
       default:
-        throw new AppError(`Nonidentified role: ${role}.`, 400);
+        return new AppError(`Unidentified role: ${role}.`, 400);
     }
 
     let newUser = await userModel.create(user);
