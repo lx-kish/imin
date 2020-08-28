@@ -4,7 +4,6 @@ const config = require('../../config');
 const AppError = require('../../utils/appError');
 const SALT_I = 10;
 
-
 module.exports = (schema) => {
 
     schema.pre('save', async function (next) {
@@ -32,17 +31,14 @@ module.exports = (schema) => {
     //     next();
     // });
 
-    schema.methods.comparePassword = function (candidatePassword, cb) {
-        var user = this;
-        bcrypt.compare(candidatePassword, user.password, function (err, isMatch) {
-            if (err) return cb(err);
-            cb(null, isMatch);
-        });
+    schema.methods.comparePassword = async function (candidatePassword, userPassword) {
+        return await bcrypt.compare(candidatePassword, userPassword);
     };
 
     schema.methods.generateToken = async function (next) {
         let user = this;
-        const token = jwt.sign(user._id.toHexString(), config.jwt_secret);
+
+        const token = jwt.sign(user._id, config.jwtSecret);
 
         if (!token) return next(new AppError(`Error occured while generating token`, 400));
 
@@ -63,20 +59,35 @@ module.exports = (schema) => {
             cb(null, user);
         });
     };
+    
+    schema.methods.changedPasswordAfter = function(JWTTimestamp) {
+        if(this.passwordChangedAt) {
+            const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    
+            return JWTTimestamp < changedTimestamp;
+        }
+    
+        return false;
+    };
 
     schema.statics.findByToken = async function (token) {
         var user = this;
 
-        jwt.verify(token, config.jwt_secret, (err, decode) => {
+        const decoded = await promisify(jwt.verify)(token, config.jwtSecret);
 
-            if (err) return cb(err);
+        console.log(decoded);
 
-            user.findOne({ '_id': decode, 'access_token': token }, (err, user) => {
-                if (err) return cb(err);
-                cb(null, user);
-            });
-        });
+        // jwt.verify(token, config.jwtSecret, (err, decode) => {
+
+        //     if (err) return cb(err);
+
+        //     user.findOne({ '_id': decode, 'access_token': token }, (err, user) => {
+        //         if (err) return cb(err);
+        //         cb(null, user);
+        //     });
+        // });
     };
+
 
     return schema;
 };

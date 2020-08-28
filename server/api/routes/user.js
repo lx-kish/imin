@@ -9,7 +9,7 @@ module.exports = function (app) {
 
     router.get('/auth', authController.isAuth);
 
-    router.post('/signup', authController.signUp);//,
+    router.post('/signup', authController.signUp);
 
     router.post(
         '/signin',

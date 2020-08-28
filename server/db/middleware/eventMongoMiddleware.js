@@ -9,7 +9,7 @@ module.exports = (schema) => {
     schema.statics.findEvent = function (id, cb) {
         var event = this;
 
-        jwt.verify(token, config.jwt_secret, (err, decode) => {
+        jwt.verify(token, config.jwtSecret, (err, decode) => {
 
             if (err) return cb(err);
 
