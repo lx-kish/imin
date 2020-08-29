@@ -1,6 +1,7 @@
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 
+const config = require('../../config');
 const logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');;
 const userModel = require('../../db/models/userModel');
@@ -61,7 +62,9 @@ module.exports = {
 
     logger.info(`User ${currentUser._id} has been identified as logged in`);
 
-    // Grant access to protected route
+    /**
+     * Grant access to protected route
+     */
     req.user = currentUser;
     next();
   }),
@@ -69,8 +72,8 @@ module.exports = {
   /**
    * The route is called after isAuth route, so will contain req.user in it
    */
-  isPermited: (req, res, next) => {
-    
+  isPermitted: (req, res, next) => {
+
     if (req.user.role !== 'admin') {
       return next(new AppError('You do not have a permission to perform this action', 403));
     }
@@ -183,6 +186,13 @@ module.exports = {
 
     // if (!isMatch) return next(new AppError(`Wrong password provided!`, 400));
     const token = signToken(user._id);
+
+    res.cookie('access_token', token, {
+      // domain: 'http://localhost:3000/signup',
+      sameSite: 'none',
+      httpOnly: true,
+      secure: true
+    });
 
     res.status(200).json({
       status: 'success',
