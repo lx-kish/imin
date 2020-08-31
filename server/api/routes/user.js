@@ -11,27 +11,7 @@ module.exports = function (app) {
 
     router.post('/signup', authController.signUp);
 
-    router.post(
-        '/signin',
-        authController.signIn,
-        (req, res, next) => {
-
-            try {
-
-                logger.info(`User ${req.user._id} has been successfully logged in`);
-                res.status(200).cookie('access_token', req.user.access_token, {
-                    // domain: 'http://localhost:3000/signup',
-                    sameSite: 'none',
-                    httpOnly: true,
-                    secure: true
-                }).send('ok');
-
-            } catch (e) {
-                logger.error('🔥 error: %o', e);
-                return next(e);
-            }
-        }
-    );
+    router.post('/signin', authController.signIn);
 
     /**
      * @TODO Let's leave this as a place holder for now

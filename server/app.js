@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 
 const config = require('./config');
 const logger = require('./loaders/logger')();
@@ -31,6 +33,12 @@ module.exports = () => {
   app.use(bodyParser.json());
 
   app.use(cookieParser());
+
+  // Data sanitization against NoSQL query injection
+  app.use(mongoSanitize());
+
+  // Data sanitization against XSS
+  app.use(xss());
 
   // Limits requests from the same API
   // allow 100 requests from one IP per hour
