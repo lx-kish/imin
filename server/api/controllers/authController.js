@@ -25,6 +25,31 @@ const signToken = id => {
     config.jwtSecret,
     { expiresIn: config.jwtExpiresIn }
   );
+};
+
+const generateAndSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  const cookieOptions = {
+      expires: new Date(
+          Date.now() + config.jwtCookieExpiresIn * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  // removes password from the output
+  user.password = undefined;
+
+  res.cookie('access_token', token, cookieOptions);
+
+  res.status(statusCode).json({
+      status: 'success',
+      token,
+      data: {
+          user
+      }
+  });
 }
 
 module.exports = {
@@ -130,31 +155,13 @@ module.exports = {
 
     if (!newUser) return next(new AppError(`Error occured while user saving`, 400));
 
-    const token = signToken(newUser._id);
-    // newUser = await newUser.generateToken();
-
-    // if (!newUser) return next(new AppError(`Error occured while generating token`, 400));
-
-    res.cookie('access_token', token, {
-      // domain: 'http://localhost:3000/signup',
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true
-    });
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        user: newUser
-      }
-    });
-    // logger.error('🔥 Error attaching user to req: %o', e);
+    generateAndSendToken(newUser, 201, res);
   }),
 
   signIn: catchAsync(async (req, res, next) => {
 
     logger.debug('Calling Sign-In endpoint with body: %o', req.body)
-    // try {
+
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -163,59 +170,13 @@ module.exports = {
 
     const userModel = users;
 
-    // const user = await userModel.findOne({ email: email });
     const user = await userModel.findOne({ email }).select('password');
 
     if (!user || !(await user.comparePassword(password, user.password))) {
       return next(new AppError('Incorrect email or password!', 401));
     }
-    // if (err) {
-    //   let message = `${err} occured while logging in.`;
-    //   logger.error(message);
-    //   return res.status(400).json({ message: message });
-    // };
 
-    // if (!user) {
-    //   return next(new AppError(`Email ${email} hasn't registered in the database`, 400));
-    //   // let message = `Email ${email} hasn't registered in the database`;
-    //   // logger.error(message);
-    //   // return res.status(400).json({ message: message });
-    // };
-
-    // const isMatch = await user.comparePassword(password, user.password);
-
-    // if (!isMatch) return next(new AppError(`Wrong password provided!`, 400));
-    const token = signToken(user._id);
-
-    res.cookie('access_token', token, {
-      // domain: 'http://localhost:3000/signup',
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true
-    });
-
-    res.status(200).json({
-      status: 'success',
-      token
-    });
-
-    // user.generateToken((err, user) => {
-    //   if (err) {
-    //     let message = `${err} occured while logging in.`;
-    //     logger.error(message);
-    //     return res.status(400).json({ message: message });
-    //   }
-
-    //   req.user = user;
-    //   req.token = user.access_token;
-    //   next();
-    // });
-    // });
-
-    // } catch (e) {
-    //   logger.error('🔥 error: %o', e);
-    //   return next(e);
-    // }
+    generateAndSendToken(user, 200, res);
   }),
 
   logOut: async (req, res, next) => {
