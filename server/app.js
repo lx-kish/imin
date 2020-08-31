@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
+const hpp = require('hpp');
 
 const config = require('./config');
 const logger = require('./loaders/logger')();
@@ -39,6 +40,11 @@ module.exports = () => {
 
   // Data sanitization against XSS
   app.use(xss());
+
+  // Prevents parameter pollution
+  app.use(hpp({
+    whitelist: ['']
+  }));
 
   // Limits requests from the same API
   // allow 100 requests from one IP per hour
