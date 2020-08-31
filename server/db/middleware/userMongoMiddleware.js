@@ -25,12 +25,6 @@ module.exports = (schema) => {
         next();
     });
 
-    // schema.post('save', function (next) {
-    //     var user = this;
-    //     console.log(user);
-    //     next();
-    // });
-
     schema.methods.comparePassword = async function (candidatePassword, userPassword) {
         return await bcrypt.compare(candidatePassword, userPassword);
     };
