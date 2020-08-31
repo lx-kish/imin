@@ -1,6 +1,7 @@
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const rateLimit = require('express-rate-limit');
 
 const config = require('./config');
 const logger = require('./loaders/logger')();
@@ -70,6 +71,16 @@ module.exports = () => {
   app.use(bodyParser.json());
 
   app.use(cookieParser());
+
+  // Adding rate limiting for broot force defence
+  // allow 100 requests from one IP per hour
+  const limiter = rateLimit({
+    max: 100,
+    windowMs: 60 * 60 * 1000,
+    message: 'Too many requests from this IP, please try again in an hour!'
+  });
+
+  app.use(config.api.prefix, limiter);
 
   // Load API routes
   app.use(config.api.prefix, routes());
