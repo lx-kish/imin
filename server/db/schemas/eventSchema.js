@@ -1,6 +1,7 @@
 module.exports = {
     hoster: {
-		type: [String],
+		type: mongoose.Schema.ObjectId,
+        ref: 'Educator',
 		required: [
             true,
             'Required field missing: EVENT HOSTER'
@@ -69,16 +70,23 @@ module.exports = {
             'Required field missing: ADDRESS'
         ]
 	},
-	registered: {
+	created: {
 		type: Boolean,
 		default: false
-	},
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
 	approved: {
 		type: Boolean,
 		default: false
     },
+    approvedAt: {
+        type: Date
+    },
     approver: {
-		type: String,
-		default: ''
+		type: mongoose.Schema.ObjectId,
+        ref: 'Admin'
 	}
 };

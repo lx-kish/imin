@@ -25,8 +25,27 @@ module.exports = {
 		],
 		select: false
 	},
+	passwordConfirm: {
+        type: String,
+        required: [
+            true,
+            'Required field missing: PASSWORD CONFIRM'
+        ],
+        validate: {
+            // This validator works on CREATE or SAVE only!
+            validator: function (el) {
+                return el === this.password;
+            },
+            message: 'Password confirmation should be the same as a password'
+        }
+    },
 	passwordChangedAt: {
 		type: Date,
 		select: false
-	}
+	},
+    active: {
+        type: Boolean,
+        default: true,
+        select: false
+    }
 };
