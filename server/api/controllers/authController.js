@@ -1,23 +1,38 @@
 const { promisify } = require('util');
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
 const config = require('../../config');
 const logger = require('../../loaders/logger')();
-const services = require('../../loaders/services');;
-const userModel = require('../../db/models/userModel');
+const services = require('../../loaders/services');
+// const userModel = require('../../db/models/userModel');
 const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
 
 const { db: { name } } = require('../../config');
-// console.log(services);
+// // console.log(services);
 // const dbName = config.database_name;
-// const connection = services.get('connections')[dbName];
+// // const connection = services.get('connections')[dbName];
 const connection = services.get('connections')[name];
-const model = userModel(connection);
-const users = model.users;
-const admins = model.admins;
-const students = model.students;
-const educators = model.educators;
+// const model = userModel(connection);
+// const users = model.users;
+// const admins = model.admins;
+// const students = model.students;
+// const educators = model.educators;
+
+/**
+ * Important! If you opened a separate connection using 
+ * mongoose.createConnection() but attempt to access 
+ * the model through mongoose.model('ModelName') 
+ * it will not work as expected since it is not hooked up 
+ * to an active db connection. 
+ * In this case access your model through the connection you created.
+ * https://github.com/Automattic/mongoose/blob/master/README.md
+ */
+const users = connection.model('user');
+const admins = connection.model('admin');
+const students = connection.model('student');
+const educators = connection.model('educator');
 
 const signToken = id => {
   return jwt.sign(
@@ -31,24 +46,25 @@ const generateAndSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
 
   const cookieOptions = {
-      expires: new Date(
-          Date.now() + config.jwtCookieExpiresIn * 24 * 60 * 60 * 1000
-      ),
-      httpOnly: true
+    expires: new Date(
+      Date.now() + config.jwtCookieExpiresIn * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true
   };
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
   // removes password from the output
   user.password = undefined;
+  user.passwordConfirm = undefined;
 
   res.cookie('access_token', token, cookieOptions);
 
   res.status(statusCode).json({
-      status: 'success',
-      token,
-      data: {
-          user
-      }
+    status: 'success',
+    token,
+    data: {
+      user
+    }
   });
 }
 
@@ -75,7 +91,7 @@ module.exports = {
     /**
      * Checking if user still exist
      */
-    const currentUser = await user.findById(decoded.id);
+    const currentUser = await users.findById(decoded.id);
     if (!currentUser) return next(new AppError('The user does no longer exist.', 401));
 
     /**
@@ -85,7 +101,7 @@ module.exports = {
       return next(new AppError('Changing password is detected, please relogin.', 401));
     }
 
-    logger.info(`User ${currentUser._id} has been identified as logged in`);
+    logger.debug(`User ${currentUser._id} has been identified as logged in`);
 
     /**
      * Grant access to protected route
@@ -97,61 +113,61 @@ module.exports = {
   /**
    * The route is called after isAuth route, so will contain req.user in it
    */
-  isPermitted: (req, res, next) => {
-
-    if (req.user.role !== 'admin') {
-      return next(new AppError('You do not have a permission to perform this action', 403));
+  isPermitted: (...roles) => {
+    return (req, res, next) => {
+      // roles ['admin', 'lead-guide'], role='user'
+      if (!roles.includes(req.user.role)) {
+        return next(new AppError('You do not have a permission to perform this action', 403));
+      }
+      next();
     }
-    next();
   },
+  // isPermitted: (req, res, next) => {
+
+  //   if (req.user.role !== 'admin') {
+  //     return next(new AppError('You do not have a permission to perform this action', 403));
+  //   }
+  //   next();
+  // },
 
   signUp: catchAsync(async (req, res, next) => {
     logger.debug('Calling Sign-Up endpoint with body: %o', req.body)
 
     const role = req.body.role;
-    let userModel, user;
+    let userModel;
+
+    const user = {
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      phone: req.body.phone,
+      name: req.body.name,
+      surname: req.body.surname
+    };
 
     switch (role) {
       case 'admin':
         userModel = admins;
-
-        user = {
-          email: req.body.email,
-          password: req.body.password,
-          phone: req.body.phone,
-          name: req.body.name,
-          surname: req.body.surname
-        };
         break;
       case 'student':
         userModel = students;
-
-        user = {
-          email: req.body.email,
-          password: req.body.password,
-          phone: req.body.phone,
-          name: req.body.name,
-          surname: req.body.surname
-        };
         break;
       case 'educator':
         userModel = educators;
 
-        user = {
-          email: req.body.email,
-          password: req.body.password,
-          phone: req.body.phone,
-          name: req.body.name,
-          surname: req.body.surname,
-          company: req.body.company,
-          website: req.body.website
-        };
+        user.company = req.body.company;
+        user.website = req.body.website;
         break;
       default:
         return new AppError(`Unidentified role: ${role}.`, 400);
     }
 
     let newUser = await userModel.create(user);
+
+    // console.log('userModel ===> ', userModel);
+    // console.log('role "role" ===> ', role);
+    // console.log('role "req.body.role" ===> ', req.body.role);
+    // console.log('role newUser.role ===> ', newUser.role);
 
     if (!newUser) return next(new AppError(`Error occured while user saving`, 400));
 
@@ -181,33 +197,14 @@ module.exports = {
 
   logOut: async (req, res, next) => {
     // const logger = Container.get('logger');
-    logger.debug('Calling Sign-Out endpoint with body: %o', req.body)
-    // try {
-    // //@TODO AuthService.Logout(req.user) do some clever stuff
-    // return res.status(200).end();
-    const user = await req.user.deleteToken(req.token);//, (err, user) => {
+    logger.debug('Calling Sign-Out endpoint');
 
-    // if (err) {
-    //   let message = `${err} occured while logging out.`;
-    //   logger.error(message);
-    //   return res.status(400).json({ message: message });
-    // }
-    if (!user) {
-      return next(new AppError(`User has not found due to wrong email or password provided`, 401));
-    }
+    res.cookie('access_token', '');
 
-    // next();
-    logger.info(`User ${req.user._id} has been successfully logged out`);
-    res.status(200).cookie('access_token', '', {
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true
-    }).send('ok');
-    //   });
-    // } catch(e) {
-    //   logger.error('🔥 error %o', e);
-    //   return next(e);
-    // }
+    res.status(204).json({
+      status: 'success',
+      data: null
+    });
   }
 
 };

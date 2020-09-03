@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 module.exports = {
     hoster: {
 		type: mongoose.Schema.ObjectId,

@@ -15,7 +15,7 @@ module.exports = (connection) => {
         // const schemaWithMiddleware = schemaMiddleware(eventBase);
 
         //CREATING MODELS FOR FURTHER USE
-        const eventModel = modelFactory(connection, 'events', eventSchema);
+        const eventModel = modelFactory(connection, 'Event', eventSchema);
 
         return eventModel;
     }

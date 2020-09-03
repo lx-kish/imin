@@ -21,6 +21,7 @@ module.exports = (schema) => {
         if (!hash) return next(new AppError(`Error occured while password incripting`, 400));
 
         user.password = hash;
+        user.passwordConfirm = undefined;
 
         next();
     });
@@ -53,14 +54,14 @@ module.exports = (schema) => {
             cb(null, user);
         });
     };
-    
-    schema.methods.changedPasswordAfter = function(JWTTimestamp) {
-        if(this.passwordChangedAt) {
+
+    schema.methods.changedPasswordAfter = function (JWTTimestamp) {
+        if (this.passwordChangedAt) {
             const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-    
+
             return JWTTimestamp < changedTimestamp;
         }
-    
+
         return false;
     };
 

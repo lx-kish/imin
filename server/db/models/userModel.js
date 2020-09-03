@@ -44,15 +44,16 @@ module.exports = (connection) => {
         /**
          * Initiate model for base "user" schema
          */
-        const userBaseModel = modelFactory(connection, 'User', schemaWithMiddleware);
+        const userBaseModel = modelFactory(connection, 'user', schemaWithMiddleware);
 
+        // console.log('userBaseModel from userModel loader ===> ', userBaseModel);
         /**
          * Initiate "admin", "educator" and "student" schemas using 
          * "role" discriminator
          */
-        const adminModel = userBaseModel.discriminator('Admin', adminBase);
-        const educatorModel = userBaseModel.discriminator('Educator', educatorBase);
-        const studentModel = userBaseModel.discriminator('Student', studentBase);;
+        const adminModel = userBaseModel.discriminator('admin', adminBase);
+        const educatorModel = userBaseModel.discriminator('educator', educatorBase);
+        const studentModel = userBaseModel.discriminator('student', studentBase);;
 
         /**
          * Return all models: base "users" model for authentication purposes,
