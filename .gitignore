@@ -33,3 +33,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /server_auth
+
+*debug.log
+*/debug.log

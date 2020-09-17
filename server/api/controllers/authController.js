@@ -49,10 +49,10 @@ const generateAndSendToken = (user, statusCode, res) => {
     expires: new Date(
       Date.now() + config.jwtCookieExpiresIn * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwareded-proto'] === 'https'
   };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
+  
   // removes password from the output
   user.password = undefined;
   user.passwordConfirm = undefined;
@@ -72,9 +72,7 @@ module.exports = {
 
   isAuth: catchAsync(async (req, res, next) => {
 
-    /**
-     * Getting a token and checking if it exists
-     */
+    /** Getting a token and checking if it exists */
     let token = req.cookies.access_token;
 
     if (!token) {
@@ -83,36 +81,26 @@ module.exports = {
 
     logger.debug('Searching user with session token: %o', token);
 
-    /**
-     * Verifying a token
-     */
+    /** Verifying a token */
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-    /**
-     * Checking if user still exist
-     */
+    /** Checking if user still exist */
     const currentUser = await users.findById(decoded.id);
     if (!currentUser) return next(new AppError('The user does no longer exist.', 401));
 
-    /**
-     * Checking if user changed password after jwt was issued
-     */
+    /** Checking if user changed password after jwt was issued */
     if (currentUser.changedPasswordAfter(decoded.iat)) {
       return next(new AppError('Changing password is detected, please relogin.', 401));
     }
 
     logger.debug(`User ${currentUser._id} has been identified as logged in`);
 
-    /**
-     * Grant access to protected route
-     */
+    /** Grant access to protected route */
     req.user = currentUser;
     next();
   }),
 
-  /**
-   * The route is called after isAuth route, so will contain req.user in it
-   */
+  /** The route is called after isAuth route, so will contain req.user in it */
   isPermitted: (...roles) => {
     return (req, res, next) => {
       // roles ['admin', 'lead-guide'], role='user'

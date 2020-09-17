@@ -132,7 +132,7 @@ const SignUp = props => {
 
                         setSubmitting(true);
 
-                        axios.post(`/api/user/signup`, values, config)
+                        axios.post(`/api/users/signup`, values, config)
 
                             .then((res) => {
 

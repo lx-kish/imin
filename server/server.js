@@ -2,6 +2,12 @@ const config = require('./config');
 const logger = require('./loaders/logger')();
 const mongooseLoader = require('./loaders/mongoose');
 
+process.on('uncaughtException', err => {
+    console.log(`UNCAUGHT EXCEPTION! APPLICATION IS SHUTTING DOWN`);
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+
 mongooseLoader()
 logger.info('✌️ DB loaded and connected!');
 
@@ -23,7 +29,32 @@ app.listen(config.port, err => {
         `);
 });
 
+process.on('unhandledRejection', err => {
+    console.log(`UNHANDLED REJECTION! APPLICATION IS SHUTTING DOWN`);
+    console.log(err);
+    // graceful exit:
+    server.close(() => {
+        process.exit(1);
+    });
+});
+
 // If the Node process ends, close all the Mongoose connections
-process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+process
+    .on('SIGINT',
+        gracefulExit,
+        () => {
+            console.log('SIGTERM RECEIVED. Shutting down gracefully');
+            server.close(() => {
+                console.log('Process terminated.');
+            });
+        })
+    .on('SIGTERM',
+        gracefulExit,
+        () => {
+            console.log('SIGTERM RECEIVED. Shutting down gracefully');
+            server.close(() => {
+                console.log('Process terminated.');
+            });
+        });
 
 module.exports = app;
