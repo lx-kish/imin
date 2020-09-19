@@ -80,7 +80,7 @@
 
 /*
 possible $breakpoint arguments:
--phone-small: 0 - 360px     ==> Phone small ???
+-phone-small: 0 - 360px     ==> Phone small (iPhon 5 = 320px)
 -phone:       360 - 600px   ==> Phone
 -tab-port:    600 - 900px   ==> Tablet portrait
 -tab-land:    900 - 1200px  ==> Tablet landscape
@@ -102,74 +102,123 @@ THAN WE HAVE TO CHECK ONLY DEVICES WITH 900 - 1200PX SCREENS FOR HAVING :HOVER,
 OTHERVICE WE SUGGEST IT AS A MOBILE DEVICE WITH TOUCH SCREEN.
 */
 
-// @mixin respond($breakpoint) {
-//   @if $breakpoint == _0-360 {
-//     //phone-small {
-//     @media only screen and (max-width: 22.5em) {
-//       @content;
-//     } //18.75em) { @content };
-//   }
+@mixin respond($breakpoint) {
+  @if $breakpoint == _0-360 {
+    //phone-small {
+    /** Desktop first */
+    // @media only screen and (max-width: 22.5em) { 
+    //   @content;
+    // } //18.75em) { @content };
+    /** Mobile first should be without media query - by default */
+    // @media only screen and (min-width: 22.5em) {
+    //   @content;
+    // } 
 
-//   @if $breakpoint == _360-580 {
-//     //phone {
-//     @media only screen and (max-width: 36.25em) {
-//       @content;
-//     }
-//   }
+  }
 
-//   @if $breakpoint == _580-720 {
-//     //tab-port {
-//     @media only screen and (max-width: 45em) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == _360-580 {
+    //phone {
+    /** Desktop first */
+    // @media only screen and (max-width: 36.25em) {
+    //   @content;
+    // }
+    /** Mobile first */
+    @media only screen and (min-width: 22.5em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == _720-880 {
-//     //tab-port {
-//     @media only screen and (max-width: 55em) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == _580-720 {
+    //tab-port {
+    /** Desktop first */
+    // @media only screen and (max-width: 45em) {
+    //   @content;
+    // }
+    /** Mobile first */
+    @media only screen and (min-width: 36.25em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == _880-1040 {
-//     //tab-land {
-//     @media only screen and (max-width: 65em) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == _720-880 {
+    //tab-port {
+    /** Desktop first */
+    // @media only screen and (max-width: 55em) {
+    //   @content;
+    // }
+    /** Mobile first */
+    @media only screen and (min-width: 45em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == _1040-1200 {
-//     //small-desktop {
-//     @media only screen and (max-width: 75em) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == _880-1040 {
+    //tab-land {
+    /** Desktop first */
+    // @media only screen and (max-width: 65em) {
+    //   @content;
+    // }
+    /** Mobile first */
+    @media only screen and (min-width: 55em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == big-desktop {
-//     //big-desktop
-//     @media only screen and (min-width: 112.5em) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == _1040-1200 {
+    //small-desktop {
+    /** Desktop first */
+    // @media only screen and (max-width: 75em) {
+    //   @content;
+    // }
+    /** Mobile first */
+    @media only screen and (min-width: 65em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == touch-screen {
-//     //any size touch-screen
-//     @media only screen and (hover: none) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == _1200-big-desktop {
+     /** Mobile first */
+    @media only screen and (min-width: 75em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == touch_880-1040 {
-//     //touch-screen big size
-//     @media only screen and (max-width: 65em), only screen and (hover: none) {
-//       @content;
-//     }
-//   }
+  @if $breakpoint == big-desktop {
+    //big-desktop
+    /** Desktop first, Mobile first */
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
 
-//   @if $breakpoint == touch_1040-1200 {
-//     //touch-screen big size
-//     @media only screen and (max-width: 75em), only screen and (hover: none) {
-//       @content;
-//     }
-//   }
-// }
+  @if $breakpoint == touch-screen {
+    //any size touch-screen
+    @media only screen and (hover: none) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == touch_880-1040 {
+    //touch-screen big size
+    /** Desktop first */
+    @media only screen and (max-width: 65em), only screen and (hover: none) {
+      @content;
+    }
+    /** Mobile first */
+    // @media only screen and (min-width: 36.25em) {
+    //   @content;
+    // }
+  }
+
+  @if $breakpoint == touch_1040-1200 {
+    //touch-screen big size
+    /** Desktop first */
+    @media only screen and (max-width: 75em), only screen and (hover: none) {
+      @content;
+    }
+    /** Mobile first */
+    // @media only screen and (max-width: 75em), only screen and (hover: none) {
+    //   @content;
+    // }
+  }
+}

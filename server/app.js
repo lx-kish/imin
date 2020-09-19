@@ -12,7 +12,7 @@ const logger = require('./loaders/logger')();
 const routes = require('./api/index');
 
 const AppError = require('./utils/appError');
-const globalErrorHandler = require('./utils/errorController');
+const globalErrorHandler = require('./api/controllers/errorController');
 
 
 const app = require('express')();

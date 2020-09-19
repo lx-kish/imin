@@ -1,109 +1,153 @@
 @import "../../../project-styles/mixins";
 
 .navigation {
-    position: fixed;
-    top: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+  @include BoxShadowHelper(4);
+
+  &__content {
+    height: 100%;
     width: 100%;
-    z-index: 4;
-    @include BoxShadowHelper(4);
+    // margin: 0 2rem;
+    // margin: 0 auto;
 
-    &__content {
-        max-width: 136.6rem;
-        height: 100%;
-        margin: 0 auto;
+    // max-width: 100%;
+
+    &--desktop {
+      display: none;
+
+      @include respond(_1040-1200) {
+        display: block;
+        // max-width: 136.6rem;
+      }
     }
 
-    &--primary {
-        height: 6rem;
-        background-color: var(--color-white);
+    &--mobile {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      //   padding: .3rem;
+      //   max-width: 136.6rem;
+
+      @include respond(_1040-1200) {
+        display: none;
+      }
+    }
+  }
+
+  &--primary {
+    height: 6rem;
+    background-color: var(--color-white);
+  }
+
+  &__icon-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    padding: 2rem;
+  }
+
+  &__logo-box {
+    display: inline-block;
+    // padding: .55rem 0;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    height: 100%;
+    // line-height: 100%;
+  }
+
+  &__logo {
+    height: 4.4rem;
+  }
+
+  // &__nav {
+  //     float: right;
+  //     vertical-align: middle;
+  // }
+
+  &__list {
+    list-style: none;
+    float: right;
+    height: 100%;
+    line-height: 100%;
+  }
+
+  &__item {
+    float: left;
+    height: 100%;
+    line-height: 100%;
+
+    &:not(:last-child) {
+      padding: 0 3.5rem;
+
+      &:hover {
+        background-color: var(--color-pink-4);
+      }
+    }
+    &:last-child {
+      padding: 0 0 0 3.5rem;
+    }
+  }
+
+  // &__link {
+  //     display: inline-block;
+  //     font-size: 2rem;
+  //     font-weight: 600;
+  //     // margin: 1rem 0;
+  //     // padding: 1rem 3.5rem;
+  //     padding: 2rem 3.5rem;
+  //     color: var(--color-pink);
+  //     text-align: center;
+  //     text-decoration: none;
+  //     height: 100%;
+  //     line-height: 100%;
+  //     // vertical-align: middle;
+
+  //     &:link,
+  //     &:visited {
+  //         text-decoration: none;
+  //     }
+  // }
+
+  &__btn-box {
+    padding: 2rem;
+  }
+
+  &__btn {
+    &--desktop {
+      display: inline-block;
+      margin-top: 1.1rem;
+      margin-bottom: 1.1rem;
     }
 
-    &__logo-box {
-        display: inline-block;
-        // padding: .55rem 0;
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
-        height: 100%;
-        // line-height: 100%;
+    &--mobile {
+      display: flex;
+      align-items: center;
     }
-
-    &__logo {
-        height: 4.4rem;
-    }
-
-    // &__nav {
-    //     float: right;
-    //     vertical-align: middle;
-    // }
-
-    &__list {
-        list-style: none;
-        float: right;
-        height: 100%;
-        line-height: 100%;
-    }
-
-    &__item {
-        float: left;
-        height: 100%;
-        line-height: 100%;
-
-        &:not(:last-child) {
-            padding: 0 3.5rem;
-
-            &:hover {
-                background-color: var(--color-pink-4);
-            }
-        }
-        &:last-child {
-            padding: 0 0 0 3.5rem;
-        }
-    }
-
-    // &__link {
-    //     display: inline-block;
-    //     font-size: 2rem;
-    //     font-weight: 600;
-    //     // margin: 1rem 0;
-    //     // padding: 1rem 3.5rem;
-    //     padding: 2rem 3.5rem;
-    //     color: var(--color-pink);
-    //     text-align: center;
-    //     text-decoration: none;
-    //     height: 100%;
-    //     line-height: 100%;
-    //     // vertical-align: middle;
-
-    //     &:link,
-    //     &:visited {
-    //         text-decoration: none;
-    //     }
-    // }
-
-    &__btn {
-        display: inline-block;
-        margin-top: 1.1rem;
-        margin-bottom: 1.1rem;
-    }
+  }
 }
 
 .navigation-link {
-    display: inline-block;
-    font-size: 2rem;
-    font-weight: 600;
-    // margin: 1rem 0;
-    // padding: 1rem 3.5rem;
-    padding: 2rem 0;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 600;
+  // margin: 1rem 0;
+  // padding: 1rem 3.5rem;
+  padding: 2rem 0;
 
-    text-align: center;
+  text-align: center;
+  text-decoration: none;
+  height: 100%;
+  line-height: 100%;
+  // vertical-align: middle;
+
+  &:link,
+  &:visited,
+  &:active {
     text-decoration: none;
-    height: 100%;
-    line-height: 100%;
-    // vertical-align: middle;
-
-    &:link,
-    &:visited,
-    &:active {
-        text-decoration: none;
-    }
+  }
 }
