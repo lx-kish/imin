@@ -1,48 +1,60 @@
+@import "../../project-styles/mixins";
+
 .footer {
-    width: 100%;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-    padding: .5rem;
-    background-color: var(--color-pink);
-    color: var(--color-white);
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 0.5rem;
+  background-color: var(--color-pink);
+  color: var(--color-white);
 
-    &__content {
-        height: 100%;
-        line-height: 100%;
-        text-align: center;
-        // display: flex;
-        // flex-direction: row;
-        // align-items: center;
-    }
-    
-    &__copyright {
-        display: inline-block;
-        // height: 100%;
-        line-height: 100%;
-        // vertical-align: middle;
-        margin-right: 3rem;
-        padding: 2rem 0;
+  &__content {
+    height: 100%;
+    line-height: 100%;
+    text-align: center;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+  }
 
+  &__copyright {
+    display: inline-block;
+    // height: 100%;
+    line-height: 100%;
+    // vertical-align: middle;
+    padding: 2rem 0;
+
+    @include respond(_1040-1200) {
+      margin-right: 3rem;
+    }
+  }
+
+  &__media {
+    display: inline-block;
+    // height: 100%;
+    // padding: .8rem 0;
+    transform: translateY(0.6rem);
+    padding-bottom: 1rem;
+  }
+
+  &__link {
+    display: inline-block;
+
+    height: 2.4rem;
+    width: 2.4rem;
+
+    @include respond(_1040-1200) {
+      margin-left: 2rem;
     }
 
-    &__media {
-        display: inline-block;
-        // height: 100%;
-        // padding: .8rem 0;
-        transform: translateY(.6rem);
-        padding-bottom: 1rem;
+    &:nth-child(2) {
+      margin-left: 2rem;
     }
+  }
 
-    &__link {
-        display: inline-block;
-        margin-left: 2rem;
-        height: 2.4rem;
-        width: 2.4rem;
-    }
-
-    &__icon {
-        height: 2.4rem;
-        width: 2.4rem; 
-    }
+  &__icon {
+    height: 2.4rem;
+    width: 2.4rem;
+  }
 }
