@@ -1,0 +1,39 @@
+.burger {
+  background-color: transparent;
+  z-index: 10;
+
+  &.is-active .line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-1.75rem);
+  }
+
+  &.is-active .line:nth-child(1) {
+    -webkit-transform: translateY(6px) rotate(45deg);
+    -ms-transform: translateY(6px) rotate(45deg);
+    -o-transform: translateY(6px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  &.is-active .line:nth-child(3) {
+    -webkit-transform: translateY(-6px) rotate(-45deg);
+    -ms-transform: translateY(-6px) rotate(-45deg);
+    -o-transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}
+
+.line {
+  background-color: #000;
+  width: 2.5rem;
+  height: 0.2rem;
+  display: block;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &:nth-child(2) {
+    margin: 0.4rem auto;
+  }
+
+}

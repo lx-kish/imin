@@ -1,56 +1,121 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import useClickOutside from "../../../utils/useClickOutside";
+
 import Btn from "../../btn/btn.component";
 import logo from "../../../graphics/logo_pink.png";
-import MenuIcon from "../../icons/icon-menu.component";
+// import MenuIcon from "../../icons/icon-menu.component";
 import LogInIcon from "../../icons/icon-log-in.component";
+import BurgerIcon from "../burger icon/icon-burger.component";
+import SlideBar from "../slide bar/slide-bar.component";
 
 import "./navigation-bar.styles.scss";
 
-const links = [
-  {
-    name: "Home",
-    link: "/",
-    className: "navigation-link color-pink paragraph--uppercase",
-  },
-  {
-    name: "About",
-    link: "/about",
-    className: "navigation-link color-pink paragraph--uppercase",
-  },
-  {
-    name: "Platform",
-    link: "/platform",
-    className: "navigation-link color-pink paragraph--uppercase",
-  },
-  {
-    name: "Contact",
-    link: "/contact",
-    className: "navigation-link color-pink paragraph--uppercase",
-  },
-];
+const NavigationBar = (props) => {
+  /** Render navigation bar.
+   * Desktop navigation has menu items located in the navigation bar directly.
+   * Mobile navigation has menu items hide with slide (dissapeared) panel
+   * and showes it by click on 'burger' icon at the left.
+   *
+   * Stage I:
+   * 1) Render both options.
+   * 2) Set className with modifier --mobile / --desktop for the appropriate nav bars.
+   * 3) Set 'display: none;' css property for appropriate navbar base on the screen resolution, checking with mixins.
+   *
+   * Stage II:
+   * 1) Change menu items list depends on logged in/out user.
+   * 2) Show appropriate menu items for logged in user based on it's role.
+   *
+   * As a part of mobile navigation, burger menu icon should be implemented.
+   * @TODO
+   * 1) Implement the icon itself - @DONE
+   * 2) Implement slide menu - @DONE
+   * 3) Implement the state of the menu - @DONE
+   * 4) Hide slide bar by tapping outside the slide bar - @DONE
+   * 5) Hide slide bar by tapping on burger icon - @DONE
+   * 6) Hide slide bar by clicking menu item - @DONE
+   */
 
-const element = (link, i) => (
-  <li key={i} className="navigation__item">
-    <Link to={link.link} className={link.className}>
-      {link.name}
-    </Link>
-  </li>
-);
+  const links = [
+    {
+      name: "Home",
+      link: "/",
+      className: "navigation-link color-pink paragraph--uppercase",
+    },
+    {
+      name: "About",
+      link: "/about",
+      className: "navigation-link color-pink paragraph--uppercase",
+    },
+    {
+      name: "Platform",
+      link: "/platform",
+      className: "navigation-link color-pink paragraph--uppercase",
+    },
+    {
+      name: "Contact",
+      link: "/contact",
+      className: "navigation-link color-pink paragraph--uppercase",
+    },
+  ];
 
-const showLinks = () =>
-  links.map((link, i) => {
-    return element(link, i);
+  /** Single state hook useState for all the state properties */
+  const [fullState, setFullState] = React.useState({
+    open: false,
   });
 
-const NavigationBar = (props) => {
+  const menuRef = React.useRef();
+
+  const setState = () => {
+    // console.log("from setState before setting ===> ", fullState.open);
+    // console.log("setting state...");
+    setFullState({
+      ...fullState,
+      open: !fullState.open,
+    });
+    // console.log("from setState after setting ===> ", fullState.open);
+  };
+
+  const hideSliderMenu = () => {
+    // console.log("Clicked outside the menu", fullState);
+
+    setFullState({
+      ...fullState,
+      open: false
+    });
+  };
+
+  useClickOutside(menuRef, hideSliderMenu);
+
+  const element = (link, i) => (
+    <li key={i} className="navigation__item">
+      <Link to={link.link} className={link.className}>
+        {link.name}
+      </Link>
+    </li>
+  );
+
+  const showLinks = () =>
+    links.map((link, i) => {
+      return element(link, i);
+    });
+
   return (
     <nav className="navigation navigation--primary">
       <div className="navigation__content navigation__content--mobile">
-        <div className="navigation__icon-box">
-          <MenuIcon className="navigation__icon" />
+        <div className="navigation__menu-box" ref={menuRef}>
+          <BurgerIcon
+            open={fullState.open}
+            setOpen={setState}
+          />
+          <SlideBar
+            open={fullState.open}
+            links={links}
+            hideSliderMenu={hideSliderMenu}
+          />
         </div>
+
         <div className="navigation__logo-box">
           <img src={logo} alt="Logo" className="navigation__logo" />
         </div>
@@ -66,7 +131,7 @@ const NavigationBar = (props) => {
             className="navigation__btn-box"
           >
             <Btn
-              title={< LogInIcon className='color-white' />}
+              title={<LogInIcon className="color-white" />}
               className={"btn--tertiary navigation__btn btn--login"}
             />
           </Link>

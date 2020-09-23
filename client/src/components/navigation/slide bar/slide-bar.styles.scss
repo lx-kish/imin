@@ -1,0 +1,23 @@
+.slide-bar {
+  position: absolute;
+  left: -80vw;
+  top: 0;
+  top: 6rem;
+  height: 100vh;
+  width: 80vw;
+  // padding-top: 6rem;
+
+  background-color: var(--color-white);
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &.is-active {
+    left: 0;
+  }
+
+  &__item {
+    padding: 2rem 10rem 0;
+  }
+}
