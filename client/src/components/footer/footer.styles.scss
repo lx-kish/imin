@@ -5,9 +5,13 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 0.5rem;
+  padding: 4rem 2.5rem;
   background-color: var(--color-pink);
   color: var(--color-white);
+
+  @include respond(_1040-1200) {
+    padding: 0.5rem;
+  }
 
   &__content {
     height: 100%;

@@ -1,8 +1,8 @@
-@import './project-styles/grid';
-@import './project-styles/mixins';
-@import './project-styles/typography';
-@import './project-styles/utilities';
-@import './project-styles/variables';
+@import "./project-styles/grid";
+@import "./project-styles/mixins";
+@import "./project-styles/typography";
+@import "./project-styles/utilities";
+@import "./project-styles/variables";
 
 *,
 *::before,
@@ -13,11 +13,21 @@
 }
 
 html {
+  //for correct calculations rem units in Safari
+  -webkit-text-size-adjust: none;
+
   //defines how many px is 1rem
   font-size: 62.5%; //1rem = 10px (10px/16px = 62.5%)
 
-  //for correct calculations rem units in Safari
-  -webkit-text-size-adjust: none;
+  @include respond(big-desktop) {
+    font-size: 75%; //1rem = 12px, 12/16
+  }
+  @include respond(_1200-big-desktop) {
+    font-size: 56.25%; //1rem = 9px, 9/16 = 50%
+  }
+  @include respond(_1040-1200) {
+    font-size: 50%; //1rem = 8px, 8/16 = 50%
+  }
 }
 
 :root {
@@ -40,10 +50,9 @@ html {
 
   //COLOR FONT
   --color-font-main: #{$color-font-main};
-  
+
   //COLOR CONTACT-FORM BACKGROUND
   --color-contact-form-bg: #{$color-contact-form-bg};
-
 
   //INPUT-FIELDS
   --color-input-bg: #{$color-input-bg};
@@ -58,7 +67,6 @@ html {
 
   //WHITE
   --color-white: #{$color-white};
-  
 }
 
 body {

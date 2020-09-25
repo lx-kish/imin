@@ -1,9 +1,48 @@
-.form-input--error {
-    border-color: red;
-    
-    &-message {
-        color: red;
-        font-size: 1rem;
-        line-height: 1;
+@import "../../project-styles/mixins";
+
+.sign-up {
+  &__background {
+    padding: 8rem 4rem 3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &--educator {
+      background-color: var(--color-pink);
     }
+    &--student {
+      background-color: var(--color-violet);
+    }
+  }
+
+  &__logo {
+    max-width: 40vw;
+  }
+
+  &__heading {
+    &--dt {
+      display: none;
+
+      @include respond(_1040-1200) {
+        display: block;
+      }
+    }
+
+    &--mb {
+      @include respond(_1040-1200) {
+        display: none;
+      }
+    }
+  }
+}
+
+.form-input--error {
+  border-color: red;
+
+  &-message {
+    color: red;
+    font-size: 1rem;
+    line-height: 1;
+  }
 }

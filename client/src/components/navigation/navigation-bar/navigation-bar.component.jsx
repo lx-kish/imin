@@ -20,7 +20,7 @@ const NavigationBar = (props) => {
    *
    * Stage I:
    * 1) Render both options.
-   * 2) Set className with modifier --mobile / --desktop for the appropriate nav bars.
+   * 2) Set className with modifier --mb / --dt for the appropriate nav bars.
    * 3) Set 'display: none;' css property for appropriate navbar base on the screen resolution, checking with mixins.
    *
    * Stage II:
@@ -103,7 +103,7 @@ const NavigationBar = (props) => {
 
   return (
     <nav className="navigation navigation--primary">
-      <div className="navigation__content navigation__content--mobile">
+      <div className="navigation__content navigation__content--mb">
         <div className="navigation__menu-box" ref={menuRef}>
           <BurgerIcon
             open={fullState.open}
@@ -138,7 +138,7 @@ const NavigationBar = (props) => {
         )}
       </div>
 
-      <div className="navigation__content navigation__content--desktop">
+      <div className="navigation__content navigation__content--dt">
         <div className="navigation__logo-box">
           <img src={logo} alt="Logo" className="navigation__logo" />
         </div>
@@ -159,7 +159,7 @@ const NavigationBar = (props) => {
                 <Btn
                   title={"sign in"}
                   className={
-                    "btn--tertiary navigation__btn--desktop paragraph--uppercase"
+                    "btn--tertiary navigation__btn--dt paragraph--uppercase"
                   }
                 />
               </Link>
