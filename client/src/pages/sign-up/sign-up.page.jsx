@@ -485,7 +485,7 @@ const SignUp = (props) => {
           alt={`${role} logo`}
           className={`sign-up__logo`}
         />
-        <h2 className="sign-up__heading sign-up__heading--mb heading-secondary heading-secondary--uppercase color-white">
+        <h2 className="sign-up__heading sign-up__heading--mb color-white">
           {`${role === "educator" ? "Educator" : "Student"} Sign Up`}
         </h2>
       </div>

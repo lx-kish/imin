@@ -16,18 +16,22 @@ html {
   //for correct calculations rem units in Safari
   -webkit-text-size-adjust: none;
 
-  //defines how many px is 1rem
-  font-size: 62.5%; //1rem = 10px (10px/16px = 62.5%)
+  //defines how many px is 1 rem
+  // font-size: 50%; // 1rem = 8px, 8/16 = 50%
+  // font-size: 62.5%; //1rem = 10px (10px/16px = 62.5%)
 
-  @include respond(big-desktop) {
-    font-size: 75%; //1rem = 12px, 12/16
-  }
-  @include respond(_1200-big-desktop) {
-    font-size: 56.25%; //1rem = 9px, 9/16 = 50%
-  }
-  @include respond(_1040-1200) {
-    font-size: 50%; //1rem = 8px, 8/16 = 50%
-  }
+  // @include fluid-type(font-size, $minScreen, $maxScreen, $minFont, $maxFont);
+  @include fluid-type(font-size, 32rem, 194rem, .5rem, 1.6rem);
+
+  // @include respond(big-desktop) {
+  //   font-size: 75%; //1rem = 12px, 12/16
+  // }
+  // @include respond(_1200-big-desktop) {
+  //   font-size: 62.5%; //1rem = 10px (10px/16px = 62.5%)
+  // }
+  // @include respond(_1040-1200) {
+  //   font-size: 56.25%; //1rem = 9px, 9/16 = 50%
+  // }
 }
 
 :root {

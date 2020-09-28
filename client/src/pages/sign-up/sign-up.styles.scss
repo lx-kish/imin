@@ -2,11 +2,12 @@
 
 .sign-up {
   &__background {
-    padding: 8rem 4rem 3rem;
+    padding: 8rem 2rem 2rem;
+    // padding: 8rem 4rem 3rem;
 
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-end;
+    justify-content: space-between;
 
     &--educator {
       background-color: var(--color-pink);
@@ -18,6 +19,7 @@
 
   &__logo {
     max-width: 40vw;
+    padding: 5vw;
   }
 
   &__heading {
@@ -30,6 +32,18 @@
     }
 
     &--mb {
+      padding: 5vw;
+    //   padding: 2.5rem;
+      //   padding: 4rem;
+      line-height: 1;
+
+      font-weight: 700;
+      font-size: 3rem;
+      //   font-size: 4.2rem;
+
+      text-transform: uppercase;
+      letter-spacing: 0.5rem;
+
       @include respond(_1040-1200) {
         display: none;
       }
