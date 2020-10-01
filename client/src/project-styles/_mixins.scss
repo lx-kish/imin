@@ -90,6 +90,21 @@ possible $breakpoint arguments:
 1em = 16px
 */
 
+/*
+new possible $breakpoint arguments (2020 1001)
+calculating from less than 360 1rem = 5px up to 1200 where 1rem = 10px
+between 1200 = 10px and less than 360 = 5px should be 10 - 5 = 5 $breakpoints
+(1200 - 360) / 4 = 840 / 4 = 210 (each $breakpoint bigger than previous for 210px)
+
+-phone-small: 0 - 360px           ==> Phone small       ==> 1rem = 5px
+-phone:       360 + 210 = 570px   ==> Phone             ==> 1rem = 6px
+-tab-port:    570 + 210 = 780px   ==> Tablet portrait   ==> 1rem = 7px
+-tab-land:    780 + 210 = 990px   ==> Tablet landscape  ==> 1rem = 8px
+-tab-land:    990 + 210 = 1200px  ==> Small laptops     ==> 1rem = 9px
+[1200 - 1800] normal style                              ==> 1rem = 10px
+-big-desktop: 1800+         ==> Big destop screens      ==> 1rem = 12px
+*/
+
 //POSSIBLE OPTIONS:
 /*
 TOUCH SCREENS:
@@ -115,29 +130,29 @@ OTHERVICE WE SUGGEST IT AS A MOBILE DEVICE WITH TOUCH SCREEN.
   //   // } 
   // }
 
-  @if $breakpoint == _0-580 {
-    //phone {
-    /** Desktop first */
-    // @media only screen and (max-width: 36.25em) {
-    //   @content;
-    // }
-    /** Mobile first */
-    @media only screen and (min-width: 22.5em) {
-      @content;
-    }
-  }
+  // @if $breakpoint == _0-580 {
+  //   //phone {
+  //   /** Desktop first */
+  //   // @media only screen and (max-width: 36.25em) {
+  //   //   @content;
+  //   // }
+  //   /** Mobile first */
+  //   @media only screen and (min-width: 22.5em) {
+  //     @content;
+  //   }
+  // }
 
-  @if $breakpoint == _360-580 {
-    //phone {
-    /** Desktop first */
-    // @media only screen and (max-width: 36.25em) {
-    //   @content;
-    // }
-    /** Mobile first */
-    @media only screen and (min-width: 22.5em) {
-      @content;
-    }
-  }
+  // @if $breakpoint == _360-580 {
+  //   //phone {
+  //   /** Desktop first */
+  //   // @media only screen and (max-width: 36.25em) {
+  //   //   @content;
+  //   // }
+  //   /** Mobile first */
+  //   @media only screen and (min-width: 22.5em) {
+  //     @content;
+  //   }
+  // }
 
   @if $breakpoint == _580-720 {
     //tab-port {
@@ -248,29 +263,81 @@ with a banch of cross links and examples.
 
 Given mixin is published on 
 https://codepen.io/MadeByMike/pen/bEEGvv?editors=1100
+
+Parametres:
+
+$properties - list of properties
+$min-vw - 
+$max-vw - 
+$min-value - 
+$max-value -
+
+*/
+// ----
+// libsass (v3.3.6)
+// ----
+
+// =========================================================================
+//
+//  PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+//  ---------------------------------------------------
+//  Indrek Paas @indrekpaas
+//
+//  Inspired by Mike Riethmuller's Precise control over responsive typography
+//  http://madebymike.com.au/writing/precise-control-responsive-typography/
+//
+//  `strip-unit()` function by Hugo Giraudel
+//  
+//  11.08.2016 Remove redundant `&` self-reference
+//  31.03.2016 Remove redundant parenthesis from output
+//  02.10.2015 Add support for multiple properties
+//  24.04.2015 Initial release
+//
+// =========================================================================
+
+/*
+Usage:
+
+===> Single property <===
+html {
+  @include fluid-type(font-size, 320px, 1366px, 14px, 18px);
+}
+
+===> Multiple properties with same values <===
+h1 {
+  @include fluid-type(padding-bottom padding-top, 20em, 70em, 2em, 4em);
+}
 */
 
-@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
-	& {
-		@each $property in $properties {
-			#{$property}: $min-value;
-		}
+/*
+strip-unit function by Hugo Giraudel removes unit from $value for all types of units.
+Look detaild description on:
+https://css-tricks.com/snippets/sass/strip-unit-function/
 
-		@media screen and (min-width: $min-vw) {
-			@each $property in $properties {
-				#{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-			}
-		}
-
-		@media screen and (min-width: $max-vw) {
-			@each $property in $properties {
-				#{$property}: $max-value;
-			}
-		}
-	}
-}
-
+Parametres:
+$value - a value containing units
+*/
 @function strip-unit($value) {
-	@return $value / ($value * 0 + 1);
+  @return $value / ($value * 0 + 1);
 }
 
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+  @each $property in $properties {
+    #{$property}: $min-value;
+  }
+
+  @media screen and (min-width: $min-vw) {
+    @each $property in $properties {
+      #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+    }
+  }
+
+  @media screen and (min-width: $max-vw) {
+    @each $property in $properties {
+      #{$property}: $max-value;
+    }
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////

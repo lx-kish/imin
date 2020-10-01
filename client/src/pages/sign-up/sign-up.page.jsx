@@ -58,7 +58,10 @@ const SignUp = (props) => {
 
   const signUpForm = () => {
     return (
-      <div className="sign-up-form">
+      <div className="sign-up__form">
+        <h2 className="sign-up__heading sign-up__heading--dt heading-secondary heading-secondary--uppercase">
+          {`${role === "educator" ? "Educator" : "Student"} Sign Up`}
+        </h2>
         <Formik
           initialValues={{
             name: "",
@@ -477,7 +480,7 @@ const SignUp = (props) => {
   };
 
   return (
-    <div className={""}>
+    <div className={"sign-up"}>
       <div className={`sign-up__background sign-up__background--${role}`}>
         {/* <div className={`sign-up__logo sign-up__logo--${role}`}></div> */}
         <img
@@ -488,10 +491,15 @@ const SignUp = (props) => {
         <h2 className="sign-up__heading sign-up__heading--mb color-white">
           {`${role === "educator" ? "Educator" : "Student"} Sign Up`}
         </h2>
+        {/* <div className="sign-up__heading--mb">
+          <h2 className="sign-up__heading color-white">
+            {`${role === "educator" ? "Educator" : "Student"}`}
+          </h2>
+          <h2 className="sign-up__heading color-white">
+            {`Sign Up`}
+          </h2>
+        </div> */}
       </div>
-      <h2 className="sign-up__heading sign-up__heading--dt heading-secondary heading-secondary--uppercase">
-        {`${role === "educator" ? "Educator" : "Student"} Sign Up`}
-      </h2>
       {signUpForm()}
     </div>
   );

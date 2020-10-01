@@ -15,7 +15,10 @@
       display: none;
 
       @include respond(_1040-1200) {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
       }
     }
 
@@ -25,6 +28,7 @@
       align-items: center;
       justify-content: space-between;
 
+
       @include respond(_1040-1200) {
         display: none;
       }
@@ -32,7 +36,8 @@
   }
 
   &--primary {
-    height: 6rem;
+    height: 12rem;
+    // height: 6rem;
     background-color: var(--color-white);
   }
 
@@ -41,31 +46,44 @@
     flex-direction: row;
     align-items: center;
     height: 100%;
-    padding: 2rem;
+    padding: 4rem;
+    // padding: 2rem;
   }
 
   &__logo-box {
-    display: inline-block;
+    // display: inline-block;
     // padding: .55rem 0;
+    display: flex;
+    align-items: center;
+    // flex-direction: column;
+    // justify-content: center;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     height: 100%;
     // line-height: 100%;
+    // @include respond(_1040-1200) {
+    //   display: none;
+    // }
   }
 
   &__logo {
-    height: 4.4rem;
+    height: 8.8rem;
+    // height: 4.4rem;
   }
 
   &__list {
+    display: flex;
+    // flex-direction: row;
+    align-items: center;
     list-style: none;
-    float: right;
-    height: 100%;
-    line-height: 100%;
+    // float: right;
+    // height: 100%;
+    // line-height: 100%;
   }
 
   &__item {
-    float: left;
+    align-self: center;
+    // float: left;
     height: 100%;
     line-height: 100%;
 
@@ -83,7 +101,8 @@
   }
 
   &__btn-box {
-    padding: 2rem;
+    padding: 4rem;
+    // padding: 2rem;
   }
 
   &__btn {
@@ -102,9 +121,11 @@
 
 .navigation-link {
   display: inline-block;
-  font-size: 2rem;
+  font-size: 6rem;
+  // font-size: 2rem;
   font-weight: 600;
-  padding: 2rem 0;
+  padding: 4rem 0;
+  // padding: 2rem 0;
 
   text-align: center;
   text-decoration: none;
