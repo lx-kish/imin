@@ -28,7 +28,6 @@
       align-items: center;
       justify-content: space-between;
 
-
       @include respond(_1040-1200) {
         display: none;
       }
@@ -113,8 +112,13 @@
     }
 
     &--mb {
-      display: flex;
-      align-items: center;
+      height: 5.5rem;
+      width: 5.5rem;
+
+      @include respond(_1040-1200) {
+        height: default;
+        width: default;
+      }
     }
   }
 }

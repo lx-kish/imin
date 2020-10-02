@@ -23,14 +23,19 @@
   }
 
   &__copyright {
+    // display: inline-block;
+    // // height: 100%;
+    // line-height: 100%;
+    // // vertical-align: middle;
+    // padding: 2rem 0;
     display: inline-block;
-    // height: 100%;
     line-height: 100%;
-    // vertical-align: middle;
-    padding: 2rem 0;
+    padding: 3rem 0;
+    font-size: 3rem;
 
     @include respond(_1040-1200) {
       margin-right: 3rem;
+      font-size: inherit;
     }
   }
 
@@ -45,20 +50,25 @@
   &__link {
     display: inline-block;
 
-    height: 2.4rem;
-    width: 2.4rem;
+    height: 4.4rem;
+    width: 4.4rem;
+    // height: 2.4rem;
+    // width: 2.4rem;
 
     @include respond(_1040-1200) {
       margin-left: 2rem;
     }
 
     &:nth-child(2) {
-      margin-left: 2rem;
+      margin-left: 3rem;
+      // margin-left: 2rem;
     }
   }
 
   &__icon {
-    height: 2.4rem;
-    width: 2.4rem;
+    height: 4.4rem;
+    width: 4.4rem;
+    // height: 2.4rem;
+    // width: 2.4rem;
   }
 }

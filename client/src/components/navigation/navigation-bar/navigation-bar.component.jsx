@@ -13,6 +13,7 @@ import SlideBar from "../slide bar/slide-bar.component";
 import "./navigation-bar.styles.scss";
 
 const NavigationBar = (props) => {
+
   /** Render navigation bar.
    * Desktop navigation has menu items located in the navigation bar directly.
    * Mobile navigation has menu items hide with slide (dissapeared) panel
@@ -35,6 +36,18 @@ const NavigationBar = (props) => {
    * 4) Hide slide bar by tapping outside the slide bar - @DONE
    * 5) Hide slide bar by tapping on burger icon - @DONE
    * 6) Hide slide bar by clicking menu item - @DONE
+   * 
+   * Slide menu with burger icon implementation has been inspired by:
+   * https://css-tricks.com/hamburger-menu-with-a-side-of-react-hooks-and-styled-components/
+   * 
+   * Burger menu icon implementation has been inspired by:
+   * https://codepen.io/maximakymenko/pen/aboWJpX/
+   * https://codepen.io/RRoberts/pen/ZBYaJr
+   * 
+   * Detect click outside React component:
+   * https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+   * https://www.youtube.com/watch?v=J-g9ZJha8FE&feature=youtu.be&t=692s
+   * 
    */
 
   const links = [
@@ -132,7 +145,7 @@ const NavigationBar = (props) => {
           >
             <Btn
               title={<LogInIcon className="color-white" />}
-              className={"btn--tertiary navigation__btn btn--login"}
+              className={"btn--tertiary navigation__btn navigation__btn--mb btn--login"}
             />
           </Link>
         )}

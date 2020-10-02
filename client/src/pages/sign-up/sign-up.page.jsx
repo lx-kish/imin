@@ -58,7 +58,7 @@ const SignUp = (props) => {
 
   const signUpForm = () => {
     return (
-      <div className="sign-up__form">
+      <div className="sign-up__form-box">
         <h2 className="sign-up__heading sign-up__heading--dt heading-secondary heading-secondary--uppercase">
           {`${role === "educator" ? "Educator" : "Student"} Sign Up`}
         </h2>
@@ -171,307 +171,264 @@ const SignUp = (props) => {
             handleSubmit,
             isSubmitting,
           }) => (
-            <form
-              className="sign-up-form__form container"
-              onSubmit={handleSubmit}
-            >
-              <DoublePanesRow
-                rowClassName="row-sign-up-form"
-                leftColClassName="col-1-of-2--sign-up-form"
-                rightColClassName="col-1-of-2--sign-up-form"
-                left={
-                  <>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="First Name"
-                      className={`${
-                        errors.name && touched.name ? "form-input--error" : ""
-                      }`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.name}
-                    />
-                    {
-                      <p className="form-input--error-message">
-                        {errors.name && touched.name ? errors.name : ""}
-                      </p>
-                    }
-                  </>
-                }
-                right={
-                  <>
-                    <input
-                      type="text"
-                      name="surname"
-                      placeholder="Last Name"
-                      className={`${
-                        errors.surname && touched.surname
-                          ? "form-input--error"
-                          : ""
-                      }`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.surname}
-                    />
-                    {
-                      <p className="form-input--error-message">
-                        {errors.surname && touched.surname
-                          ? errors.surname
-                          : ""}
-                      </p>
-                    }
-                  </>
-                }
-              />
-
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email Address"
-                      className={`${
-                        errors.email && touched.email ? "form-input--error" : ""
-                      }`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                    {errors.email && touched.email ? (
-                      <p className="form-input--error-message">
-                        {errors.email}
-                      </p>
-                    ) : null}
-                  </>
-                }
-              />
-
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <>
-                    <input
-                      type="tel"
-                      name="phone"
-                      placeholder="Contact No."
-                      className={`${
-                        errors.phone && touched.phone ? "form-input--error" : ""
-                      }`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.phone}
-                    />
-                    {errors.phone && touched.phone ? (
-                      <p classphone="form-input--error-message">
-                        {errors.phone}
-                      </p>
-                    ) : null}
-                  </>
-                }
-              />
-
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <>
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className={`${
-                        errors.password && touched.password
-                          ? "form-input--error"
-                          : ""
-                      }`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                    />
-                    {errors.password && touched.password ? (
-                      <p className="form-input--error-message">
-                        {errors.password}
-                      </p>
-                    ) : null}
-                  </>
-                }
-              />
-
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <>
-                    <input
-                      type="password"
-                      name="passwordConfirm"
-                      placeholder="Confirm Password"
-                      className={`${
-                        errors.passwordConfirm && touched.passwordConfirm
-                          ? "form-input--error"
-                          : ""
-                      }`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.passwordConfirm}
-                    />
-                    {errors.passwordConfirm && touched.passwordConfirm ? (
-                      <p className="form-input--error-message">
-                        {errors.passwordConfirm}
-                      </p>
-                    ) : null}
-                  </>
-                }
-              />
-
-              {role === "educator" ? (
-                <>
-                  <SinglePaneRow
-                    rowClassName="row-sign-up-form"
-                    pane={
-                      <>
-                        <input
-                          type="text"
-                          name="company"
-                          placeholder="Company"
-                          className={`${
-                            errors.company && touched.company
-                              ? "form-input--error"
-                              : ""
-                          }`}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.company}
-                        />
-                        {errors.company && touched.company ? (
-                          <p className="form-input--error-message">
-                            {errors.company}
-                          </p>
-                        ) : null}
-                      </>
-                    }
-                  />
-
-                  <SinglePaneRow
-                    rowClassName="row-sign-up-form"
-                    pane={
-                      <>
-                        <input
-                          type="text"
-                          name="website"
-                          placeholder="Website"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.website}
-                        />
-                      </>
-                    }
-                  />
-
-                  <SinglePaneRow
-                    rowClassName="row-sign-up-form"
-                    pane={
-                      <textarea
-                        name="description"
-                        rows="5"
-                        cols="35"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.description}
-                      />
-                    }
-                  />
-                </>
-              ) : (
-                <SinglePaneRow
-                  rowClassName="row-sign-up-form"
-                  pane={
-                    <>
-                      <input
-                        type="checkbox"
-                        id="termsAndConditionsRead"
-                        name="termsAndConditionsRead"
-                        className={`${
-                          errors.termsAndConditionsRead &&
-                          touched.termsAndConditionsRead
-                            ? "form-input--error "
-                            : ""
-                        } sign-up-form__checkbox`}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        checked={values.termsAndConditionsRead}
-                      />
-                      <label htmlFor="termsAndConditionsRead">
-                        I have agreed to the{" "}
-                        <Link to={"/terms"}>Terms and Conditions</Link>
-                      </label>
-                      {errors.termsAndConditionsRead &&
-                      touched.termsAndConditionsRead ? (
-                        <p className="form-input--error-message">
-                          {errors.termsAndConditionsRead}
-                        </p>
-                      ) : null}
-                    </>
-                  }
+            <form className="sign-up__form container" onSubmit={handleSubmit}>
+              <>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="First Name"
+                  className={`sign-up__input ${
+                    errors.name && touched.name ? "sign-up__input--error" : null
+                  }`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
                 />
-              )}
-
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <>
-                    <p className="form-input--error-message">
-                      {fullState.submitError ? fullState.errorMessage : ""}
-                    </p>
-                    <input
-                      type="submit"
-                      value="SIGN UP"
-                      className={`btn ${
-                        role === "educator" ? "btn--primary " : "btn--tertiary "
-                      }sign-up-form__btn--submit`}
-                    />
-                  </>
-                }
-              />
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <Link
-                    to={{
-                      pathname: "/signup",
-                      state: {
-                        role: role === "educator" ? "student" : "educator",
-                      },
-                    }}
-                  >
-                    <p className="sign-up-form__toggle">
-                      {`Sign up as ${
-                        role === "educator" ? "a student" : "an educator"
-                      }?`}
-                    </p>
-                  </Link>
-                }
-              />
-              <SinglePaneRow
-                rowClassName="row-sign-up-form"
-                pane={
-                  <p className="sign-up-form__redirect-sign-in">
-                    Already have an account?{" "}
-                    <Link
-                      to={{
-                        pathname: "/signin",
-                        state: {
-                          role: role === "educator" ? "educator" : "student",
-                        },
-                      }}
-                      className="sign-up-form__redirect-sign-in--link"
-                    >
-                      Sign in.
-                    </Link>
+                {
+                  <p className="sign-up__input--error-message">
+                    {errors.name && touched.name ? errors.name : ""}
                   </p>
                 }
-              />
+              </>
+              <>
+                <input
+                  type="text"
+                  name="surname"
+                  placeholder="Last Name"
+                  className={`sign-up__input ${
+                    errors.surname && touched.surname
+                      ? "sign-up__input--error"
+                      : null
+                  }`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.surname}
+                />
+                {
+                  <p className="sign-up__input--error-message">
+                    {errors.surname && touched.surname ? errors.surname : ""}
+                  </p>
+                }
+              </>
+              <>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  className={`sign-up__input ${
+                    errors.email && touched.email
+                      ? "sign-up__input--error"
+                      : null
+                  }`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                {errors.email && touched.email ? (
+                  <p className="sign-up__input--error-message">
+                    {errors.email}
+                  </p>
+                ) : null}
+              </>
+              <>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Contact No."
+                  className={`sign-up__input ${
+                    errors.phone && touched.phone
+                      ? "sign-up__input--error"
+                      : null
+                  }`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phone}
+                />
+                {errors.phone && touched.phone ? (
+                  <p className="sign-up__input--error-message">
+                    {errors.phone}
+                  </p>
+                ) : null}
+              </>
+              <>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className={`sign-up__input ${
+                    errors.password && touched.password
+                      ? "sign-up__input--error"
+                      : null
+                  }`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                {errors.password && touched.password ? (
+                  <p className="sign-up__input--error-message">
+                    {errors.password}
+                  </p>
+                ) : null}
+              </>
+              <>
+                <input
+                  type="password"
+                  name="passwordConfirm"
+                  placeholder="Confirm Password"
+                  className={`sign-up__input ${
+                    errors.passwordConfirm && touched.passwordConfirm
+                      ? "sign-up__input--error"
+                      : null
+                  }`}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.passwordConfirm}
+                />
+                {errors.passwordConfirm && touched.passwordConfirm ? (
+                  <p className="sign-up__input--error-message">
+                    {errors.passwordConfirm}
+                  </p>
+                ) : null}
+              </>
+              {role === "educator" ? (
+                <>
+                  <>
+                    <input
+                      type="text"
+                      name="company"
+                      placeholder="Company"
+                      className={`sign-up__input ${
+                        errors.company && touched.company
+                          ? "sign-up__input--error"
+                          : null
+                      }`}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.company}
+                    />
+                    {errors.company && touched.company ? (
+                      <p className="sign-up__input--error-message">
+                        {errors.company}
+                      </p>
+                    ) : null}
+                  </>
+                  <>
+                    <input
+                      type="text"
+                      name="website"
+                      placeholder="Website"
+                      className={`sign-up__input ${
+                        errors.company && touched.company
+                          ? "sign-up__input--error"
+                          : null
+                      }`}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.website}
+                    />
+                  </>
+                  <>
+                    <label
+                      htmlFor="description"
+                      className="sign-up__description-label"
+                    >
+                      What makes you passionate about working with I’m In?
+                    </label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows="5"
+                      cols="35"
+                      className={`sign-up__input ${
+                        errors.company && touched.company
+                          ? "sign-up__input--error"
+                          : null
+                      }`}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.description}
+                    />
+                  </>
+                </>
+              ) : (
+                <>
+                  <div className="sign-up__checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="termsAndConditionsRead"
+                      name="termsAndConditionsRead"
+                      className={`sign-up__checkbox`}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      checked={values.termsAndConditionsRead}
+                    />
+                    <label
+                      htmlFor="termsAndConditionsRead"
+                      className="sign-up__checkbox-label"
+                    >
+                      I have agreed to the{" "}
+                      <Link
+                        to={"/terms"}
+                        className={`sign-up__link 
+                            sign-up__link--${role}`}
+                      >
+                        Terms and Conditions
+                      </Link>
+                    </label>
+                  </div>
+                  {errors.termsAndConditionsRead &&
+                  touched.termsAndConditionsRead ? (
+                    <p className="sign-up__input--error-message sign-up__checkbox-error">
+                      {errors.termsAndConditionsRead}
+                    </p>
+                  ) : null}
+                </>
+              )}
+              <>
+                <p className="sign-up__input--error-message">
+                  {fullState.submitError ? fullState.errorMessage : ""}
+                </p>
+                <input
+                  type="submit"
+                  value="SIGN UP"
+                  className={`btn ${
+                    role === "educator" ? "btn--primary " : "btn--tertiary "
+                  }sign-up__btn--submit`}
+                />
+              </>
+              <hr class={`sign-up__hr sign-up__hr--${role}`} />
+              <p className="sign-up__redirect-sign-in">
+                Already have an account?{" "}
+                <Link
+                  to={{
+                    pathname: "/signin",
+                    state: {
+                      role: role === "educator" ? "educator" : "student",
+                    },
+                  }}
+                  className={`sign-up__link 
+                            sign-up__link--${role}`}
+                  // className="sign-up__redirect-sign-in--link"
+                >
+                  Sign in.
+                </Link>
+              </p>
+              <Link
+                to={{
+                  pathname: "/signup",
+                  state: {
+                    role: role === "educator" ? "student" : "educator",
+                  },
+                }}
+                className={`sign-up__link 
+                            sign-up__link--${role}`}
+              >
+                <p className="sign-up__toggle">
+                  {`Sign up as ${
+                    role === "educator" ? "a student" : "an educator"
+                  }?`}
+                </p>
+              </Link>
             </form>
           )}
         </Formik>

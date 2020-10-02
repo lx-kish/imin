@@ -1,4 +1,5 @@
 @import "../../project-styles/mixins";
+@import "../../project-styles/variables";
 
 .sign-up {
   display: flex;
@@ -54,23 +55,159 @@
   }
 
   &__form {
-    @include respond(_1040-1200) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.5rem;
+
+    &-box {
+      //   @include respond(_1040-1200) {
       //   padding-top: 6rem;
       //   justify-content: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      //   }
     }
   }
-}
 
-.form-input--error {
-  border-color: red;
+  &__input {
+    height: 6.6rem;
+    width: 85vw; //25.4rem;
+    font-size: 3.2rem;
+    font-family: inherit;
 
-  &-message {
-    color: red;
-    font-size: 1rem;
-    line-height: 1;
+    padding: 0.7rem 2rem;
+    background-color: var(--color-input-bg) !important;
+    border: 0.2rem solid var(--color-input-border);
+    border-radius: $border-radius-main;
+
+    margin: 4vw 0;
+
+    @include respond(_1040-1200) {
+      width: 30vw;
+    }
+
+    &:first-child {
+      margin-top: 8vw;
+    }
+    &:last-child {
+      margin-bottom: 8vw;
+    }
+
+    &::-webkit-input-placeholder {
+      /* Edge */
+      color: var(--color-font-main);
+    }
+
+    &::-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: var(--color-font-main);
+    }
+
+    &::placeholder {
+      color: var(--color-font-main);
+    }
+
+    &--error {
+      border: 0.2rem solid red; //var(--color-red);
+
+      &-message {
+        color: red;
+        font-size: 2.5rem;
+        line-height: 1;
+        max-width: 85vw;
+      }
+    }
+  }
+
+  &__description {
+    &-label {
+      max-width: 85vw;
+    }
+  }
+
+  &__checkbox {
+    height: 3.3rem;
+    width: 3.3rem; //25.4rem;
+    display: inline-block;
+    margin: 4vw 0;
+
+    &-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      max-width: 85vw;
+    }
+
+    &-label {
+      display: inline-block;
+      font-size: 2.5rem;
+      //   font-size: 2rem;
+      letter-spacing: 0rem;
+      margin-left: 5vw;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    font-size: 2.5rem;
+    //   font-size: 2rem;
+    letter-spacing: 0rem;
+
+    &,
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+
+    &--student {
+      color: var(--color-violet);
+    }
+
+    &--educator {
+      color: var(--color-pink);
+    }
+  }
+
+  &__btn--submit {
+    height: 6.6rem;
+    width: 85vw;
+    margin: 4vw 0;
+    font-size: 3.5rem;
+
+    @include respond(_1040-1200) {
+      width: 30vw;
+    }
+  }
+
+  &__hr {
+    width: 85vw;
+    margin: 4vw 0 0;
+    border: 1px solid;
+
+    &--student {
+      border-color: var(--color-violet-1);
+      // color: var(--color-violet);
+    }
+
+    &--educator {
+      border-color: var(--color-pink-1);
+      // color: var(--color-pink);
+    }
+  }
+
+  &__redirect-sign-in {
+    margin: 3rem 0;
+  }
+
+  &__toggle {
+    margin: 2rem 0 6rem;
   }
 }
