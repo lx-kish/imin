@@ -118,7 +118,7 @@ const SignUp = (props) => {
             if (values.password !== values.passwordConfirm) {
               errors.passwordConfirm = "Please repeat the password";
             }
-            if (!values.termsAndConditionsRead && role === "student") {
+            if (!values.termsAndConditionsRead) {
               errors.termsAndConditionsRead =
                 "To continue you should accept Terms and Conditions";
             }
@@ -161,6 +161,7 @@ const SignUp = (props) => {
 
             setSubmitting(false);
           }}
+          // resetForm = {(values, {resetForm}) => {values: ''}}
         >
           {({
             values,
@@ -169,6 +170,7 @@ const SignUp = (props) => {
             handleChange,
             handleBlur,
             handleSubmit,
+            handleReset,
             isSubmitting,
           }) => (
             <form className="sign-up__form container" onSubmit={handleSubmit}>
@@ -177,8 +179,8 @@ const SignUp = (props) => {
                   type="text"
                   name="name"
                   placeholder="First Name"
-                  className={`sign-up__input ${
-                    errors.name && touched.name ? "sign-up__input--error" : null
+                  className={`sign-up__input${
+                    errors.name && touched.name ? " sign-up__input--error" : ""
                   }`}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -195,10 +197,10 @@ const SignUp = (props) => {
                   type="text"
                   name="surname"
                   placeholder="Last Name"
-                  className={`sign-up__input ${
+                  className={`sign-up__input${
                     errors.surname && touched.surname
-                      ? "sign-up__input--error"
-                      : null
+                      ? " sign-up__input--error"
+                      : ""
                   }`}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -215,10 +217,10 @@ const SignUp = (props) => {
                   type="email"
                   name="email"
                   placeholder="Email Address"
-                  className={`sign-up__input ${
+                  className={`sign-up__input${
                     errors.email && touched.email
-                      ? "sign-up__input--error"
-                      : null
+                      ? " sign-up__input--error"
+                      : ""
                   }`}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -235,10 +237,10 @@ const SignUp = (props) => {
                   type="tel"
                   name="phone"
                   placeholder="Contact No."
-                  className={`sign-up__input ${
+                  className={`sign-up__input${
                     errors.phone && touched.phone
-                      ? "sign-up__input--error"
-                      : null
+                      ? " sign-up__input--error"
+                      : ""
                   }`}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -255,10 +257,10 @@ const SignUp = (props) => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  className={`sign-up__input ${
+                  className={`sign-up__input${
                     errors.password && touched.password
-                      ? "sign-up__input--error"
-                      : null
+                      ? " sign-up__input--error"
+                      : ""
                   }`}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -275,10 +277,10 @@ const SignUp = (props) => {
                   type="password"
                   name="passwordConfirm"
                   placeholder="Confirm Password"
-                  className={`sign-up__input ${
+                  className={`sign-up__input${
                     errors.passwordConfirm && touched.passwordConfirm
-                      ? "sign-up__input--error"
-                      : null
+                      ? " sign-up__input--error"
+                      : ""
                   }`}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -297,10 +299,10 @@ const SignUp = (props) => {
                       type="text"
                       name="company"
                       placeholder="Company"
-                      className={`sign-up__input ${
+                      className={`sign-up__input${
                         errors.company && touched.company
-                          ? "sign-up__input--error"
-                          : null
+                          ? " sign-up__input--error"
+                          : ""
                       }`}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -317,10 +319,10 @@ const SignUp = (props) => {
                       type="text"
                       name="website"
                       placeholder="Website"
-                      className={`sign-up__input ${
+                      className={`sign-up__input${
                         errors.company && touched.company
-                          ? "sign-up__input--error"
-                          : null
+                          ? " sign-up__input--error"
+                          : ""
                       }`}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -339,10 +341,10 @@ const SignUp = (props) => {
                       name="description"
                       rows="5"
                       cols="35"
-                      className={`sign-up__input ${
+                      className={`sign-up__description${
                         errors.company && touched.company
-                          ? "sign-up__input--error"
-                          : null
+                          ? " sign-up__input--error"
+                          : ""
                       }`}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -350,40 +352,39 @@ const SignUp = (props) => {
                     />
                   </>
                 </>
-              ) : (
-                <>
-                  <div className="sign-up__checkbox-group">
-                    <input
-                      type="checkbox"
-                      id="termsAndConditionsRead"
-                      name="termsAndConditionsRead"
-                      className={`sign-up__checkbox`}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      checked={values.termsAndConditionsRead}
-                    />
-                    <label
-                      htmlFor="termsAndConditionsRead"
-                      className="sign-up__checkbox-label"
-                    >
-                      I have agreed to the{" "}
-                      <Link
-                        to={"/terms"}
-                        className={`sign-up__link 
+              ) : null}
+              <>
+                <div className="sign-up__checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="termsAndConditionsRead"
+                    name="termsAndConditionsRead"
+                    className={`sign-up__checkbox`}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    checked={values.termsAndConditionsRead}
+                  />
+                  <label
+                    htmlFor="termsAndConditionsRead"
+                    className="sign-up__checkbox-label"
+                  >
+                    I have agreed to the{" "}
+                    <Link
+                      to={"/terms"}
+                      className={`sign-up__link 
                             sign-up__link--${role}`}
-                      >
-                        Terms and Conditions
-                      </Link>
-                    </label>
-                  </div>
-                  {errors.termsAndConditionsRead &&
-                  touched.termsAndConditionsRead ? (
-                    <p className="sign-up__input--error-message sign-up__checkbox-error">
-                      {errors.termsAndConditionsRead}
-                    </p>
-                  ) : null}
-                </>
-              )}
+                    >
+                      Terms and Conditions
+                    </Link>
+                  </label>
+                </div>
+                {errors.termsAndConditionsRead &&
+                touched.termsAndConditionsRead ? (
+                  <p className="sign-up__input--error-message sign-up__checkbox-error">
+                    {errors.termsAndConditionsRead}
+                  </p>
+                ) : null}
+              </>
               <>
                 <p className="sign-up__input--error-message">
                   {fullState.submitError ? fullState.errorMessage : ""}
@@ -419,9 +420,10 @@ const SignUp = (props) => {
                   state: {
                     role: role === "educator" ? "student" : "educator",
                   },
+                  // values: {}
                 }}
-                className={`sign-up__link 
-                            sign-up__link--${role}`}
+                className={`sign-up__link sign-up__link--${role}`}
+                // onClick={handleReset}
               >
                 <p className="sign-up__toggle">
                   {`Sign up as ${

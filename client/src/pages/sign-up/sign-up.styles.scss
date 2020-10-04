@@ -125,8 +125,37 @@
   }
 
   &__description {
+    width: 85vw;
+    height: 20vw;
+    resize: none;
+    margin-bottom: 4vw;
+
+    font-size: 3.2rem;
+    font-family: inherit;
+
+    padding: 0.7rem 2rem;
+    background-color: var(--color-input-bg) !important;
+    border: 0.2rem solid var(--color-input-border);
+    border-radius: $border-radius-main;
+
+    &::-webkit-input-placeholder {
+      /* Edge */
+      color: var(--color-font-main);
+    }
+
+    &::-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: var(--color-font-main);
+    }
+
+    &::placeholder {
+      color: var(--color-font-main);
+    }
+
     &-label {
+      margin-top: 4vw;
       max-width: 85vw;
+      text-align: left;
     }
   }
 
@@ -135,6 +164,9 @@
     width: 3.3rem; //25.4rem;
     display: inline-block;
     margin: 4vw 0;
+
+    background-color: var(--color-input-bg) !important;
+    border: 0.2rem solid var(--color-input-border);
 
     &-group {
       display: flex;
@@ -147,15 +179,15 @@
     &-label {
       display: inline-block;
       font-size: 2.5rem;
-      //   font-size: 2rem;
-      letter-spacing: 0rem;
-      margin-left: 5vw;
+      letter-spacing: -0.1rem;
+      margin-left: 3vw;
     }
   }
 
   &__link {
     display: inline-block;
     font-size: 2.5rem;
+    font-weight: 700;
     //   font-size: 2rem;
     letter-spacing: 0rem;
 
