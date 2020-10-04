@@ -170,7 +170,7 @@ const SignUp = (props) => {
             handleChange,
             handleBlur,
             handleSubmit,
-            handleReset,
+            resetForm,
             isSubmitting,
           }) => (
             <form className="sign-up__form container" onSubmit={handleSubmit}>
@@ -397,7 +397,7 @@ const SignUp = (props) => {
                   }sign-up__btn--submit`}
                 />
               </>
-              <hr class={`sign-up__hr sign-up__hr--${role}`} />
+              <hr className={`sign-up__hr sign-up__hr--${role}`} />
               <p className="sign-up__redirect-sign-in">
                 Already have an account?{" "}
                 <Link
@@ -420,10 +420,9 @@ const SignUp = (props) => {
                   state: {
                     role: role === "educator" ? "student" : "educator",
                   },
-                  // values: {}
                 }}
                 className={`sign-up__link sign-up__link--${role}`}
-                // onClick={handleReset}
+                onClick={resetForm}
               >
                 <p className="sign-up__toggle">
                   {`Sign up as ${

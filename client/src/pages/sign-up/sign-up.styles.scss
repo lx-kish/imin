@@ -60,6 +60,8 @@
     align-items: center;
     justify-content: center;
 
+    margin: 8vw 0;
+
     font-size: 2.5rem;
 
     &-box {
@@ -91,12 +93,12 @@
       width: 30vw;
     }
 
-    &:first-child {
-      margin-top: 8vw;
-    }
-    &:last-child {
-      margin-bottom: 8vw;
-    }
+    // &:first-child {
+    //   margin-top: 8vw;
+    // }
+    // &:last-child {
+    //   margin-bottom: 8vw;
+    // }
 
     &::-webkit-input-placeholder {
       /* Edge */
@@ -240,6 +242,6 @@
   }
 
   &__toggle {
-    margin: 2rem 0 6rem;
+    margin: 2rem 0 2rem;
   }
 }
