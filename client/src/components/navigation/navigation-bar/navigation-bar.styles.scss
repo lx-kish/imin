@@ -18,7 +18,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 2rem;
+        padding: 0 3rem;
       }
     }
 
@@ -38,6 +38,10 @@
     height: 12rem;
     // height: 6rem;
     background-color: var(--color-white);
+
+    @include respond(_1040-1200) {
+      height: 7rem;
+    }
   }
 
   &__menu-box {
@@ -68,6 +72,10 @@
   &__logo {
     height: 8.8rem;
     // height: 4.4rem;
+
+    @include respond(_1040-1200) {
+      height: 4.4rem;
+    }
   }
 
   &__list {
@@ -125,16 +133,21 @@
 
 .navigation-link {
   display: inline-block;
-  font-size: 6rem;
+  font-size: 5rem;
+  // font-size: 6rem;
   // font-size: 2rem;
   font-weight: 600;
-  padding: 4rem 0;
-  // padding: 2rem 0;
+  // padding: 4rem 0;
+  padding: 2rem 0;
 
   text-align: center;
   text-decoration: none;
   height: 100%;
   line-height: 100%;
+
+  @include respond(_1040-1200) {
+    font-size: 3rem;
+  }
 
   &:link,
   &:visited,

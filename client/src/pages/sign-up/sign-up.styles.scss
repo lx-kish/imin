@@ -140,6 +140,10 @@
     border: 0.2rem solid var(--color-input-border);
     border-radius: $border-radius-main;
 
+    @include respond(_1040-1200) {
+      width: 30vw;
+    }
+
     &::-webkit-input-placeholder {
       /* Edge */
       color: var(--color-font-main);
@@ -158,6 +162,10 @@
       margin-top: 4vw;
       max-width: 85vw;
       text-align: left;
+
+      @include respond(_1040-1200) {
+        max-width: 30vw;
+      }
     }
   }
 
@@ -225,6 +233,10 @@
     width: 85vw;
     margin: 4vw 0 0;
     border: 1px solid;
+
+    @include respond(_1040-1200) {
+      max-width: 30vw;
+    }
 
     &--student {
       border-color: var(--color-violet-1);

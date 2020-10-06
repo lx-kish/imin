@@ -173,7 +173,7 @@ const SignUp = (props) => {
             resetForm,
             isSubmitting,
           }) => (
-            <form className="sign-up__form container" onSubmit={handleSubmit}>
+            <form className="sign-up__form " onSubmit={handleSubmit}>
               <>
                 <input
                   type="text"
@@ -359,7 +359,7 @@ const SignUp = (props) => {
                     type="checkbox"
                     id="termsAndConditionsRead"
                     name="termsAndConditionsRead"
-                    className={`sign-up__checkbox`}
+                    className="sign-up__checkbox"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     checked={values.termsAndConditionsRead}
@@ -404,7 +404,8 @@ const SignUp = (props) => {
                   to={{
                     pathname: "/signin",
                     state: {
-                      role: role === "educator" ? "educator" : "student",
+                      role,
+                      // role: role === "educator" ? "educator" : "student",
                     },
                   }}
                   className={`sign-up__link 
@@ -418,6 +419,7 @@ const SignUp = (props) => {
                 to={{
                   pathname: "/signup",
                   state: {
+                    // role,
                     role: role === "educator" ? "student" : "educator",
                   },
                 }}
@@ -438,7 +440,7 @@ const SignUp = (props) => {
   };
 
   return (
-    <div className={"sign-up"}>
+    <main className={"sign-up"}>
       <div className={`sign-up__background sign-up__background--${role}`}>
         {/* <div className={`sign-up__logo sign-up__logo--${role}`}></div> */}
         <img
@@ -447,7 +449,8 @@ const SignUp = (props) => {
           className={`sign-up__logo`}
         />
         <h2 className="sign-up__heading sign-up__heading--mb color-white">
-          {`${role === "educator" ? "Educator" : "Student"} Sign Up`}
+          {`${role} Sign Up`}
+          {/* {`${role === "educator" ? "Educator" : "Student"} Sign Up`} */}
         </h2>
         {/* <div className="sign-up__heading--mb">
           <h2 className="sign-up__heading color-white">
@@ -459,7 +462,7 @@ const SignUp = (props) => {
         </div> */}
       </div>
       {signUpForm()}
-    </div>
+    </main>
   );
 };
 

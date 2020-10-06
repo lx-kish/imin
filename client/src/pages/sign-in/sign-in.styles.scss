@@ -1,0 +1,196 @@
+@import "../../project-styles/mixins";
+@import "../../project-styles/variables";
+
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // margin: 12rem 0 4rem;
+
+  &__logo {
+    margin: 14rem 0 2rem;
+  }
+
+  &__heading {
+    margin: 2rem 0;
+    letter-spacing: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 2rem 0;
+
+    font-size: 2.5rem;
+  }
+
+  &__role {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 2rem 0;
+
+    &-label {
+      font-size: 3.5rem;
+      padding: 1rem;
+    }
+
+    &-radio {
+      display: none;
+
+      &:checked + .sign-in__role-label {
+        border-radius: 0.5rem;
+
+        &--student {
+          border-bottom: 1rem solid var(--color-violet);
+        }
+
+        &--educator {
+          border-bottom: 1rem solid var(--color-pink);
+        }
+      }
+    }
+  }
+
+  &__input {
+    height: 6.6rem;
+    width: 85vw; //25.4rem;
+    font-size: 3.2rem;
+    font-family: inherit;
+
+    padding: 0.7rem 2rem;
+    background-color: var(--color-input-bg) !important;
+    border: 0.2rem solid var(--color-input-border);
+    border-radius: $border-radius-main;
+
+    margin: 4vw 0;
+
+    @include respond(_1040-1200) {
+      width: 30vw;
+    }
+
+    // &:first-child {
+    //   margin-top: 8vw;
+    // }
+    // &:last-child {
+    //   margin-bottom: 8vw;
+    // }
+
+    &::-webkit-input-placeholder {
+      /* Edge */
+      color: var(--color-font-main);
+    }
+
+    &::-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: var(--color-font-main);
+    }
+
+    &::placeholder {
+      color: var(--color-font-main);
+    }
+
+    &--error {
+      border: 0.2rem solid red; //var(--color-red);
+
+      &-message {
+        color: red;
+        font-size: 2.5rem;
+        line-height: 1;
+        max-width: 85vw;
+      }
+    }
+  }
+
+  &__checkbox {
+    height: 3.3rem;
+    width: 3.3rem; //25.4rem;
+    display: inline-block;
+    margin: 4vw 0;
+
+    background-color: var(--color-input-bg) !important;
+    border: 0.2rem solid var(--color-input-border);
+
+    &-group {
+      display: flex;
+      align-items: center;
+
+      max-width: 85vw;
+    }
+
+    &-label {
+      // display: inline-block;
+      // font-size: 2.5rem;
+      // letter-spacing: -0.1rem;
+      margin-left: 3vw;
+    }
+  }
+
+  &__btn--submit {
+    height: 6.6rem;
+    width: 85vw;
+    margin: 4vw 0;
+    font-size: 3.5rem;
+
+    @include respond(_1040-1200) {
+      width: 30vw;
+    }
+  }
+
+  &__forgot {
+    margin: 4vw 0;
+  }
+
+  &__hr {
+    width: 85vw;
+    margin: 4vw 0 0;
+    border: 1px solid;
+
+    @include respond(_1040-1200) {
+      max-width: 30vw;
+    }
+
+    &--student {
+      border-color: var(--color-violet-1);
+      // color: var(--color-violet);
+    }
+
+    &--educator {
+      border-color: var(--color-pink-1);
+      // color: var(--color-pink);
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    //   font-size: 2rem;
+    letter-spacing: 0rem;
+
+    &,
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+
+    &--student {
+      color: var(--color-violet);
+    }
+
+    &--educator {
+      color: var(--color-pink);
+    }
+  }
+
+  &__redirect-sign-up {
+    align-self: center;
+    margin: 3rem 0;
+  }
+}
