@@ -1,33 +1,25 @@
 @import "../../project-styles/mixins";
 
 .footer {
-  width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  width: 100vw;
   padding: 4rem 2.5rem;
   background-color: var(--color-pink);
   color: var(--color-white);
 
+  line-height: 100%;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   @include respond(_1040-1200) {
+    flex-direction: row;
     padding: 0.5rem;
   }
 
-  &__content {
-    height: 100%;
-    line-height: 100%;
-    text-align: center;
-    // display: flex;
-    // flex-direction: row;
-    // align-items: center;
-  }
-
   &__copyright {
-    // display: inline-block;
-    // // height: 100%;
-    // line-height: 100%;
-    // // vertical-align: middle;
-    // padding: 2rem 0;
     display: inline-block;
     line-height: 100%;
     padding: 3rem 0;
@@ -41,8 +33,6 @@
 
   &__media {
     display: inline-block;
-    // height: 100%;
-    // padding: .8rem 0;
     transform: translateY(0.6rem);
     padding-bottom: 1rem;
   }
@@ -52,23 +42,26 @@
 
     height: 4.4rem;
     width: 4.4rem;
-    // height: 2.4rem;
-    // width: 2.4rem;
 
     @include respond(_1040-1200) {
       margin-left: 2rem;
+
+      height: 3rem;
+      width: 3rem;
     }
 
     &:nth-child(2) {
       margin-left: 3rem;
-      // margin-left: 2rem;
     }
   }
 
   &__icon {
     height: 4.4rem;
     width: 4.4rem;
-    // height: 2.4rem;
-    // width: 2.4rem;
+
+    @include respond(_1040-1200) {
+      height: 3rem;
+      width: 3rem;
+    }
   }
 }
