@@ -1,20 +1,35 @@
 @import "../../project-styles/mixins";
 @import "../../project-styles/variables";
 
+/* 
+All the main part 
+Contains 2 parts: logo and the form
+*/
 .sign-up {
   display: flex;
   flex-direction: column;
-
+  padding: 12rem 0rem 0rem;
+  
   @include respond(_1040-1200) {
     flex-direction: row;
     align-items: center;
+    padding: 7rem 0rem 0rem;
   }
 
+  /* Contains logo part */
   &__background {
-    padding: 16rem 0rem 0rem;
+    // padding: 16rem 0rem 0rem;
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
+
+    @include respond(_1040-1200) {
+      // width: 50vw;
+      flex: 1; /* additionally, equal width */
+      // height: 100vh;
+      // overflow: auto;
+      align-self: stretch;
+    }
 
     &--educator {
       background-color: var(--color-pink);
@@ -26,7 +41,12 @@
 
   &__logo {
     max-width: 42vw;
-    padding: 0vw 0vw 5vw 10vw;
+    padding: 5vw 0vw 5vw 10vw;
+    
+    @include respond(_1040-1200) {
+      padding: 0;
+      align-self: center;
+    }
   }
 
   &__heading {
@@ -35,6 +55,7 @@
 
       @include respond(_1040-1200) {
         display: block;
+        padding-bottom: 4rem;
       }
     }
 
@@ -57,22 +78,32 @@
   &__form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-
+    
     margin: 8vw 0;
-
+    
     font-size: 2.5rem;
+    
+    @include respond(_1040-1200) {
+      margin: 0;
+      align-items: center;
+      // width: 50vw;
+    }
 
     &-box {
-      //   @include respond(_1040-1200) {
-      //   padding-top: 6rem;
-      //   justify-content: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      //   }
+
+      @include respond(_1040-1200) {
+        // padding-top: 9rem;
+        align-self: stretch;
+        justify-content: center;
+        flex: 1; /* additionally, equal width */
+
+        padding: 6rem 0;
+      }
     }
   }
 
@@ -90,7 +121,8 @@
     margin: 4vw 0;
 
     @include respond(_1040-1200) {
-      width: 30vw;
+      width: 35vw;
+      margin: 1vw 0;
     }
 
     // &:first-child {
@@ -141,7 +173,9 @@
     border-radius: $border-radius-main;
 
     @include respond(_1040-1200) {
-      width: 30vw;
+      width: 35vw;
+      height: 10vw;
+      margin-bottom: 1vw;
     }
 
     &::-webkit-input-placeholder {
@@ -160,11 +194,14 @@
 
     &-label {
       margin-top: 4vw;
+      margin-bottom: 2vw;
       max-width: 85vw;
       text-align: left;
 
       @include respond(_1040-1200) {
-        max-width: 30vw;
+        max-width: 35vw;
+        margin-top: 1vw;
+        margin-bottom: .5vw;
       }
     }
   }
@@ -178,12 +215,20 @@
     background-color: var(--color-input-bg) !important;
     border: 0.2rem solid var(--color-input-border);
 
+    @include respond(_1040-1200) {
+      margin: 1vw 0;
+    }
+
     &-group {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      // justify-content: space-between;
 
       max-width: 85vw;
+
+      @include respond(_1040-1200) {
+        max-width: 35vw;
+      }
     }
 
     &-label {
@@ -225,7 +270,8 @@
     font-size: 3.5rem;
 
     @include respond(_1040-1200) {
-      width: 30vw;
+      width: 35vw;
+      margin: 1vw 0;
     }
   }
 
@@ -235,7 +281,8 @@
     border: 1px solid;
 
     @include respond(_1040-1200) {
-      max-width: 30vw;
+      max-width: 35vw;
+      margin: 1vw 0 0;
     }
 
     &--student {
@@ -251,9 +298,17 @@
 
   &__redirect-sign-in {
     margin: 3rem 0;
+
+    @include respond(_1040-1200) {
+      margin: 1rem 0;
+    }
   }
 
   &__toggle {
     margin: 2rem 0 2rem;
+
+    @include respond(_1040-1200) {
+      margin: 1rem 0 1rem;
+    }
   }
 }
