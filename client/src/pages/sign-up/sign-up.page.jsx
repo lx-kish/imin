@@ -26,8 +26,13 @@ import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
  * confirmation via registered email with unique link, and authorize user by
  * clicking that unique link).
  *
- * On success gets response from the server with
- * cookie containing session JWT for 'signed in' state.
+ * On success gets response from the server, containing:
+ * a) cookie with a session JWT for 'signed in' state;
+ * b) json with keys 'status' set to 'success', 'token' set to jwt value,
+ * and 'data', containing object with new user data, including unique user ID
+ * in the database.
+ * After getting success response document redirects user to the profile page.
+ * 
  * On error returns error object contains error code. Error code then displays
  * in the form over the submit button.
  *
@@ -126,11 +131,14 @@ const SignUp = (props) => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting, resetForm }) => {
+            //set setSubmitting Formik flag to true to prevent double sending form
             setSubmitting(true);
 
+            // send request containing new user data from the form to the server
             axios
               .post(`/api/users/signup`, values, config)
 
+              //getting respond from the server
               .then((res) => {
                 console.log("sign up doc, res =====> ", res);
                 // let responseMessage = res.payload.response.data.message;
@@ -146,7 +154,13 @@ const SignUp = (props) => {
                   submitError: false,
                   errorMessage: "",
                 });
+
+                //reset form fields
+
+                //redirect to the profile page with the newly registered user
               })
+
+              //error handler for unknown errors
               .catch((error) => {
                 console.log("sign up doc, error =====> ", error.response);
 
@@ -159,6 +173,7 @@ const SignUp = (props) => {
                 });
               });
 
+            //setting formik setSubmitting flag to false
             setSubmitting(false);
           }}
           // resetForm = {(values, {resetForm}) => {values: ''}}
