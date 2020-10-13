@@ -79,7 +79,7 @@ const SignIn = (props) => {
             setSubmitting(true);
 
             axios
-              .post(`/api/user/signin`, values, config)
+              .post(`/api/users/signin`, values, config)
 
               .then((res) => {
                 console.log("sign in doc, res =====> ", res);

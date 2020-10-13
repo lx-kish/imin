@@ -42,7 +42,7 @@ const signToken = id => {
   );
 };
 
-const generateAndSendToken = (user, statusCode, res) => {
+const generateAndSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
 
   const cookieOptions = {
@@ -159,7 +159,7 @@ module.exports = {
 
     if (!newUser) return next(new AppError(`Error occured while user saving`, 400));
 
-    generateAndSendToken(newUser, 201, res);
+    generateAndSendToken(newUser, 201, req, res);
   }),
 
   signIn: catchAsync(async (req, res, next) => {
@@ -180,7 +180,7 @@ module.exports = {
       return next(new AppError('Incorrect email or password!', 401));
     }
 
-    generateAndSendToken(user, 200, res);
+    generateAndSendToken(user, 200, req, res);
   }),
 
   logOut: async (req, res, next) => {
