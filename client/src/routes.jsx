@@ -13,7 +13,8 @@ import LogOut from './pages/log-out/log-out.page';
 import Profile from './pages/profile/profile.page';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
-import Layout from './hoc/layout/layout.hoc';
+import Layout from './components/layout/layout.hoc';
+import PrivateRoute from './hoc/private-route/private-route.hoc';
 import Auth from './hoc/auth/auth.hoc';
 // import Auth from './hoc/auth';
 
@@ -29,8 +30,8 @@ const Routes = () => {
                 <Route path='/partners' exact component={Partners} />
                 <Route path='/signup' exact component={SignUp} />
                 <Route path='/signin' exact component={SignIn} />
-                <Route path='/logout' exact component={LogOut} />
-                <Route path='/profile' exact component={Profile} />
+                <PrivateRoute path='/logout' exact component={LogOut} />
+                <PrivateRoute path='/users/:id' exact component={Profile} />
                 <Route path='/terms' exact component={TermsAndConditions} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>
                 <Route path='/user' exact component={Auth(User, true)}/>
