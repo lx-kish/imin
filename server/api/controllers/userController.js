@@ -5,6 +5,7 @@ const logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');
 const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 const { db: { name } } = require('../../config');
 
@@ -19,43 +20,52 @@ const connection = services.get('connections')[name];
  * In this case access your model through the connection you created.
  * https://github.com/Automattic/mongoose/blob/master/README.md
  */
-const usersModel = connection.model('user');
+const users = connection.model('user');
 const admins = connection.model('admin');
 const students = connection.model('student');
 const educators = connection.model('educator');
 
 module.exports = {
 
-    getAllUsers: catchAsync(async (req, res, next) => {
-        const users = await usersModel.find();
+    getMe: (req, res, next) => {
+        req.params.id = req.user.id;
+        next();
+    },
 
-        res.status(200).json({
-            status: 'success',
-            results: users.length,
-            data: {
-                users
-            }
-        });
-    }),
+    getAllUsers: factory.getAll(users),
 
-    getUser: catchAsync(async (req, res, next) => {
+    getUser: factory.getOne(users),
 
-        const user = await usersModel.findById(req.params.id);
-        // const user = await user.findOne({ _id: req.params.id });
 
-        if (!user) {
-            return next(new AppError(`No user found with id ${req.params.id}`, 404));
-        }
+    // getAllUsers: catchAsync(async (req, res, next) => {
+    //     // const users = await users.find();
 
-        res.status(200).json({
-            status: 'success',
-            data: {
-                user
-            }
-        })
-    }),
+    //     res.status(200).json({
+    //         status: 'success',
+    //         results: users.length,
+    //         data: {
+    //             users
+    //         }
+    //     });
+    // }),
 
-    updateUser: () => {},
-    deleteUser: () => {}
+    // getUser: catchAsync(async (req, res, next) => {
 
+    //     const user = await users.findById(req.params.id);
+    //     // const user = await user.findOne({ _id: req.params.id });
+
+    //     if (!user) {
+    //         return next(new AppError(`No user found with id ${req.params.id}`, 404));
+    //     }
+
+    //     res.status(200).json({
+    //         status: 'success',
+    //         data: {
+    //             user
+    //         }
+    //     })
+    // }),
+
+    updateUser: () => { },
+    deleteUser: () => { }
 }

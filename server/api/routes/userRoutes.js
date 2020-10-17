@@ -8,7 +8,13 @@ module.exports = function (app) {
 
     app.use('/users', router);
 
-    router.get('/auth', authController.isAuth);
+    router
+        .route('/auth')
+        .get(
+            authController.isAuth,
+            userController.getMe,
+            userController.getUser
+        );
 
     router.post('/signup', authController.signUp);
 

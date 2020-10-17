@@ -35,7 +35,7 @@ const SignIn = (props) => {
    */
   React.useEffect(() => {
     if (fullState.submitSuccess) {
-      // props.history.push('/profile');
+    //   props.history.push('/profile');
     }
   }, [fullState.submitSuccess]);
 
@@ -96,6 +96,9 @@ const SignIn = (props) => {
                   submitError: false,
                   errorMessage: "",
                 });
+
+                props.history.push(`/profile`);
+                // props.history.push(`/users/${res.}`);
               })
               .catch((error) => {
                 console.log("sign in doc, error =====> ", error.response);

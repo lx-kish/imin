@@ -31,7 +31,7 @@ const Routes = () => {
                 <Route path='/signup' exact component={SignUp} />
                 <Route path='/signin' exact component={SignIn} />
                 <PrivateRoute path='/logout' exact component={LogOut} />
-                <PrivateRoute path='/users/:id' exact component={Profile} />
+                <PrivateRoute path='/profile' exact component={Profile} />
                 <Route path='/terms' exact component={TermsAndConditions} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>
                 <Route path='/user' exact component={Auth(User, true)}/>

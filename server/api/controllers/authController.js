@@ -8,6 +8,7 @@ const services = require('../../loaders/services');
 // const userModel = require('../../db/models/userModel');
 const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
+// const factory = require('./handlerFactory');
 
 const { db: { name } } = require('../../config');
 // // console.log(services);
@@ -97,6 +98,7 @@ module.exports = {
 
     /** Grant access to protected route */
     req.user = currentUser;
+    res.locals.user = currentUser;
     next();
   }),
 
