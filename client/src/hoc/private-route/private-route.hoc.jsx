@@ -1,14 +1,9 @@
-import React from "react";
-import axios from "axios";
-import {
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
+import { Route, Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 
-import config from "../../axios.config";
+import isAuth from '../../utils/isAuth';
+import config from '../../axios.config';
 
 /**
  * PrivateRoute component is a High Order Component for rendering
@@ -20,9 +15,9 @@ import config from "../../axios.config";
  * @rest - other props to the component
  */
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  // const PrivateRoute = props => {
+	// const PrivateRoute = props => {
 
-  /**
+	/**
    * 1) check user variable.
    *
    * 2) user is an object means it's logged in, open a PrivateRoute
@@ -34,73 +29,50 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
    *
    */
 
-  // const { component, user } = props;
-  /**
-   * Single state hook useState for all the state properties
-   */
-  const [fullState, setFullState] = React.useState({
-    isAuth: false,
-    isLoaded: false
-  });
+	const [ user, setUser ] = React.useState(false);
+	const [ loaded, setLoaded ] = React.useState(false);
 
-  const unmounted = React.useRef(false);
+	React.useEffect(() => {
 
-  /**
-   * Redirect on successfull submission
-   */
-  React.useEffect(() => {
-    console.log("private route HOC, before axios request ===> ", fullState.isAuth);
-    axios
-      // const result = await axios
-      .get(`/api/users/auth`, config)
+		let isCancelled = false;
 
-      .then((isAuth) => {
-        if (!unmounted.current) {
-        // setLoading(false);
-          console.log("private route HOC, res =====> ", isAuth);
-          setFullState({
-            ...fullState,
-            isAuth,
-            isLoaded: true
-          });
-        }
-      })
-      .catch((error) => {
-        console.log("private route HOC, error =====> ", error.response);
-      });
+		const fetchData = async () => {
+			await axios
+			// const result = await axios
+				.get(`/api/users/auth`, config)
+				.then((res) => {
+					if (!isCancelled) {
+						console.log('PrivateRoute, res =====> ', res);
+						setUser(res.data.data);
+						setLoaded(true);
+					}
+				})
+				.catch((error) => {
+					console.log('PrivateRoute, error =====> ', error.response);
+					setLoaded(true);
+				});
+		};
 
-      return () => { unmounted.current = true };
-  }, []);
+		fetchData();
+		return () => {
+			isCancelled = true;
+		};
+	}, []);
 
-  // const isAuth = async () => {
-  //   if (user._id) return true;
+	if (!loaded) {
+		return <div>loading...</div>;
+	}
 
-  //   const result = await axios
-  //   .post(`/api/users/auth`, config)
-
-  //   .then((res) => {
-  //     console.log("private route HOC, res =====> ", res);
-  //   })
-  //   .catch((error) => {
-  //     console.log("private route HOC, error =====> ", error.response);
-  //   });
-
-  //   return result;
-
-  // }
-
-  // console.log(user);
-  // if (!fullState.isLoaded) {
-
-    return (
-      <Route {...rest} render={props => (
-        // console.log(fullState);
-        fullState.isAuth
-        ? <Component { ...props } />
-        : <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
-      )} />
-    );
-  // }
+	return (
+		<Route
+			{...rest}
+			render={(props) =>
+				user ? (
+					<Component {...user} {...props} />
+				) : (
+					<Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
+				)}
+		/>
+	);
 };
-
 export default PrivateRoute;

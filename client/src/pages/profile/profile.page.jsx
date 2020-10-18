@@ -8,11 +8,18 @@ import { userCreatedStatusChange } from '../../redux/user/user.actions';
 const Profile = props => {
 
     //if redirected from sign up, change new user status
-    if (props.user.created) props.dispatch(userCreatedStatusChange(props.user));
+    // if (props.user.created) props.dispatch(userCreatedStatusChange(props.user));
+
+    console.log('props from Profile ===> ', props);
 
     return (
         <div>
-            Profile
+            {/* Profile<br/>
+            Profile<br/>
+            Profile<br/>
+            Profile<br/>
+            Profile<br/> */}
+            {JSON.stringify(props.data)}
         </div>
     )
 }
