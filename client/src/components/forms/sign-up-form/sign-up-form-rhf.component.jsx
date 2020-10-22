@@ -226,7 +226,7 @@ const SignUpForm = props => {
                         <input
                             type='submit'
                             value='SIGN UP'
-                            className={`btn ${props.role === 'educator' ? 'btn--primary ' : 'btn--tertiary '}sign-up-form__btn--submit`}
+                            className={`btn btn--dt ${props.role === 'educator' ? 'btn--primary ' : 'btn--tertiary '}sign-up-form__btn--submit`}
                         />
                     }
                 />

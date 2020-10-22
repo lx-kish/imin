@@ -31,7 +31,7 @@ const content = {
             config: {
                 type: 'button',
                 title: 'Register Now',
-                className: 'btn--tertiary'
+                className: 'btn btn--dt btn--tertiary'
             }
         }
     },

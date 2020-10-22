@@ -28,7 +28,7 @@ const content = {
             config: {
                 type: 'button',
                 title: 'Register Now',
-                className: 'btn--primary'
+                className: 'btn btn--dt btn--primary'
             }
         }
     },

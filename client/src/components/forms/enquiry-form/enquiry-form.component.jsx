@@ -221,7 +221,7 @@ class EnquiryForm extends React.Component {
                         pane={<Btn
                             type='submit'
                             title='Enquire now'
-                            className='btn--primary enquiry-form__btn--submit'
+                            className='btn btn--dt btn--primary enquiry-form__btn--submit'
                         />}
                     />
                 </form>

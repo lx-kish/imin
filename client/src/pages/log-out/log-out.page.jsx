@@ -11,14 +11,14 @@ const content = {
         config: {
             type: 'button',
             title: 'Log out',
-            className: 'btn--secondary'
+            className: 'btn btn--secondary'
         }
     },
     cancel: {
         config: {
             type: 'button',
             title: 'Cancel',
-            className: 'btn--primary'
+            className: 'btn btn--primary'
         }
     }
 };

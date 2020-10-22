@@ -229,7 +229,7 @@ class ContactForm extends React.Component {
                             <Btn
                                 type='submit'
                                 title='Submit'
-                                className='btn--primary contact-form__btn--submit'
+                                className='btn btn--dt btn--primary contact-form__btn--submit'
                             />
                         }
                     />

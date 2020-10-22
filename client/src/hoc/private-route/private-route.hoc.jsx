@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Route, Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 
-import isAuth from '../../utils/isAuth';
+// import isAuth from '../../utils/isAuth';
 import config from '../../axios.config';
 
 /**
@@ -26,6 +26,17 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
    * api/users/isAuth(protected)
    *
    * 4) based on response, redirect to a PrivateRoute or to the /login
+	 * 
+	 * new PPP (19.10.2020)
+	 * 
+	 * 1) Render 'Loading...' element on the page
+	 * 
+	 * 2) Fetch auth route from the server (`/api/users/auth`)
+	 * 
+	 * 3) If response contains user data (res.data.data),
+	 * redirect to a private route
+	 * 
+	 * 4) Otherwise, redirect to login page
    *
    */
 
@@ -56,11 +67,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 		fetchData();
 		return () => {
 			isCancelled = true;
-		};
+    };
+    /**
+     * Input dependencies:
+     * undefined => every render,
+     * [a, b] => when a or b change,
+     * [] => only once
+     * https://medium.com/@sdolidze/the-iceberg-of-react-hooks-af0b588f43fb
+     */
 	}, []);
 
 	if (!loaded) {
-		return <div>loading...</div>;
+		return <div className="private-route__loading">loading...</div>;
 	}
 
 	return (

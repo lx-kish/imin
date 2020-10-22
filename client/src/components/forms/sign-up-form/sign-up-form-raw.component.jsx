@@ -415,7 +415,7 @@ const SignUpForm = props => {
                     pane={<Btn
                         type='submit'
                         title='Submit'
-                        className={`${props.role === 'educator' ? 'btn--primary ' : 'btn--tertiary '}sign-up-form__btn--submit`}
+                        className={`btn btn--dt ${props.role === 'educator' ? 'btn--primary ' : 'btn--tertiary '}sign-up-form__btn--submit`}
                     />}
                 />
 

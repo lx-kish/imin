@@ -145,7 +145,7 @@ const NavigationBar = (props) => {
           >
             <Btn
               title={<LogInIcon className="color-white" />}
-              className={"btn--tertiary navigation__btn navigation__btn--mb btn--login"}
+              className={"btn btn--tertiary navigation__btn navigation__btn--mb btn--login"}
             />
           </Link>
         )}
@@ -172,7 +172,7 @@ const NavigationBar = (props) => {
                 <Btn
                   title={"sign in"}
                   className={
-                    "btn--tertiary navigation__btn--dt paragraph--uppercase"
+                    "btn btn--dt btn--tertiary navigation__btn--dt paragraph--uppercase"
                   }
                 />
               </Link>
