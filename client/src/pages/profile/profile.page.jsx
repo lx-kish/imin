@@ -54,7 +54,7 @@ const Profile = (props) => {
      * 
      * @TODO decide, how to deal with desktop application menu.
      * For mobile UI user menu inside the slider where it is pretty easy
-     * to change the structure. In the desktop UI menu i in the navigation
+     * to change the structure. In the desktop UI menu lays in the navigation
      * bar, there is no space for additional items.
      * Proposed solution: separate application menu for desktop, located inside
      * main section in <aside/> tag, and 'display: block' only in desktop mode
@@ -120,9 +120,9 @@ const Profile = (props) => {
      * In the whireframe there are two modes: edit mode and view mode. 
      * Switching between modes is happening by clicking "Edit"/"Cancel" button.
      * 
-     * @TODO - decide, how to implement view. 
+     * @DONE - decide, how to implement view - option a).
      * There are 3 possible options: 
-     * a) Separate div's and p's block containing user data and showing/hiding
+     * a) Separate div block containing user data and showing/hiding
      * by changing classes (attributes) with clicking the button;
      * b) Set of separate div's, following by input fields of the form,
      * and showing/hiding by changing classes (attributes) with clicking 
@@ -131,9 +131,27 @@ const Profile = (props) => {
      * and as a regular input field in the edit mode.
      */
 
+    const renderViewField = (val) => {
+        return val ? val : '--';
+    }
+
 	const profileMainData = () => {
 		return (
 			<section className="profile__main-data">
+				<div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}>
+					<div className={`profile__inscription profile__name heading-secondary`}>
+						{props.data.name || props.data.surname ? `${props.data.name} ${props.data.surname}` : '--'}
+					</div>
+					<div className={`profile__profession`}>{renderViewField(props.data.profession)}</div>
+					<div className={`profile__industry`}>{renderViewField(props.data.industry)}</div>
+					<div className={`profile__skillset`}>{renderViewField(props.data.skills)}</div>
+					<div className={`profile__company`}>{renderViewField(props.data.company)}</div>
+					<div className={`profile__city`}>{renderViewField(props.data.city)}</div>
+					<div className={`profile__email`}>{renderViewField(props.data.email)}</div>
+					<div className={`profile__phone`}>{renderViewField(props.data.phone)}</div>
+					<div className={`profile__address`}>{renderViewField(props.data.address)}</div>
+				</div>
+
 				<Formik
 					initialValues={{ ...props.data }}
 					validate={(values) => {
@@ -198,19 +216,11 @@ const Profile = (props) => {
 					{({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
 						<form className="profile__form" onSubmit={handleSubmit}>
 							<div className="profile__box profile__box--name">
-								<div
-									className={`${fullState.edit
-										? 'display-none '
-										: ''}profile__inscription profile__name heading-secondary`}
-								>
-									{props.data.name || props.data.surname ? `${props.data.name} ${props.data.surname}` : '--'}
-								</div>
-
 								<input
 									type="text"
 									name="name"
 									placeholder="First Name"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.name && touched.name
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.name && touched.name
 										? ' profile__input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -223,7 +233,7 @@ const Profile = (props) => {
 									type="text"
 									name="surname"
 									placeholder="Last Name"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.surname && touched.surname
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.surname && touched.surname
 										? ' profile__input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -238,14 +248,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--profession">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__profession`}>
-									{props.data.profession ? props.data.profession : '--'}
-								</div>
 								<input
 									type="text"
 									name="profession"
 									placeholder="Profession"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -256,14 +263,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--industry">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__industry`}>
-									{props.data.industry ? props.data.industry : '--'}
-								</div>
 								<input
 									type="text"
 									name="industry"
 									placeholder="Industry"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -274,14 +278,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--skillset">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__skillset`}>
-									{props.data.skills ? props.data.skills : '--'}
-								</div>
 								<input
 									type="text"
 									name="skillset"
 									placeholder="Skillset"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -292,14 +293,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box company">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__company`}>
-									{props.data.company ? props.data.company : '--'}
-								</div>
 								<input
 									type="text"
 									name="company"
 									placeholder="Company"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -310,14 +308,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box--city">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__city`}>
-									{props.data.city ? props.data.city : '--'}
-								</div>
 								<input
 									type="text"
 									name="city"
 									placeholder="Location"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -328,14 +323,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--email">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__email`}>
-									{props.data.email ? props.data.email : '--'}
-								</div>
 								<input
 									type="email"
 									name="email"
 									placeholder="Email Address"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -346,14 +338,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--phone">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__phone`}>
-									{props.data.phone ? props.data.phone : '--'}
-								</div>
 								<input
 									type="text"
 									name="phone"
 									placeholder="Contact No"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -364,14 +353,11 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--address">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__address`}>
-									{props.data.address ? props.data.address : '--'}
-								</div>
 								<input
 									type="text"
 									name="address"
 									placeholder="Workshop address"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
 										? ' form-input--error'
 										: ''}`}
 									onChange={handleChange}
@@ -389,14 +375,14 @@ const Profile = (props) => {
 									title={`${fullState.edit ? 'Cancel' : 'Edit'}`}
 									className="btn btn--primary paragraph--uppercase"
 								/> */}
-								<button onClick={setEdit} className="btn btn--primary paragraph--uppercase">
+								<button type="button" onClick={setEdit} className="btn btn--primary paragraph--uppercase">
 									{`${fullState.edit ? 'Cancel' : 'Edit'}`}
 								</button>
 							</div>
 
 							<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--button`}>
 								{/* <Btn onClick={null} title="Save changes" className="btn btn--primary paragraph--uppercase" /> */}
-								<button onClick={null} className="btn btn--primary paragraph--uppercase">
+								<button type="button" onClick={null} className="btn btn--primary paragraph--uppercase">
 									Save changes
 								</button>
 							</div>
