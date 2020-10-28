@@ -40,48 +40,102 @@ const Profile = (props) => {
 	/**
      * Profile structure:
      * 
-     * header: MY PROFILE
+     * There are three kind of profile structures, one for each role: 
+     * - educator
+     * - student
+     * - admin.
+     * 
+     * @TODO decide, how to deal with form: a) separate form for each role,
+     * or b) conditional rendering at the same form.
+     * Pros for a) - simplicity, no sophisticated logic inside formik;
+     * Cons for a) - a lot of repeated code.
+     * Pros and cons for b) are opposite + need to clarify how to pass
+     * different sets of parametres into single formik function.
+     * 
+     * @TODO decide, how to deal with desktop application menu.
+     * For mobile UI user menu inside the slider where it is pretty easy
+     * to change the structure. In the desktop UI menu i in the navigation
+     * bar, there is no space for additional items.
+     * Proposed solution: separate application menu for desktop, located inside
+     * main section in <aside/> tag, and 'display: block' only in desktop mode
+     * (big screen resolutions).
+     * 
+     *     *********   COMMON FOR ALL PROFILES   ********* 
+     * 
+     * header: MY PROFILE (common for all the profiles)
      * 
      * PHOTO (circle), photo icon in a small circle on border of the photo
      * - without photo icon should be as big as photo size,
      * - with photo icon should move to the boottom of the photo and became smaller
+     * (common for all the profiles)
      * 
-     * Title
-     * Name + Lastname
-     * 
+     * Title (common for all the profiles)
      * Name Lastname (bold)
-     * 
-     * Profession
-     * 
-     * Industry
-     * 
-     * Skills
      * 
      * First name (from the left)
      * 
      * Last name (from the right)
      * 
-     * email
+     *     *********   PROFILE STRUCTURE FOR EDUCATOR   *********   
+     * 
+     * Profession
+     * 
+     * Industries [list or array (how???)]
+     * 
+     * Skillset [list or array (how???)]
+     * 
+     * Company
+     * 
+     * Website (optional)
+     * 
+     * Account status (active) (old, deprecated)
+     * 
+     * Location (city)
+     * 
+     * Workshop address
+     * 
+     *     *********   PROFILE STRUCTURE FOR STUDENT   *********   
+     * 
+     * Industries [list or array (how???)] - event filter by default
+     * 
+     * Skillset [list or array (how???)] - event filter by default
+     * 
+     * Location [list or array (how???)] - event filter by default
+     * 
+     *     *********   PROFILE STRUCTURE FOR ADMINISTRATORS   *********  
+     *  
+     *     *********   COMMON FOR ALL PROFILES   ********* 
+     * 
+     * Email - influent on login - @TODO - design structure (array, or changing email)
      * 
      * Contact No
      * 
-     * Account status (active) (?)
-     * 
-     * Buttons:
+     * Buttons: (common for all the profiles)
      * Preview
      * Edit
+     * 
+     * 
+     *     *********   SWITCHING BETWEEN EDIT AND VIEW MODES   ********* 
+     * 
+     * In the whireframe there are two modes: edit mode and view mode. 
+     * Switching between modes is happening by clicking "Edit"/"Cancel" button.
+     * 
+     * @TODO - decide, how to implement view. 
+     * There are 3 possible options: 
+     * a) Separate div's and p's block containing user data and showing/hiding
+     * by changing classes (attributes) with clicking the button;
+     * b) Set of separate div's, following by input fields of the form,
+     * and showing/hiding by changing classes (attributes) with clicking 
+     * the button;
+     * c) Styling input fields invisible and immutable in the view mode,
+     * and as a regular input field in the edit mode.
      */
 
 	const profileMainData = () => {
 		return (
 			<section className="profile__main-data">
 				<Formik
-					initialValues={{
-						// role,
-						email: '',
-						password: '',
-						remember: false
-					}}
+					initialValues={{ ...props.data }}
 					validate={(values) => {
 						const errors = {};
 
@@ -106,7 +160,7 @@ const Profile = (props) => {
 						setSubmitting(true);
 
 						axios
-							.post(`/api/users/signin`, values, config)
+							.post(`/api/users/${props.data._id}`, values, config)
 							.then((res) => {
 								console.log('sign in doc, res =====> ', res);
 								// let responseMessage = res.payload.response.data.message;
@@ -144,7 +198,11 @@ const Profile = (props) => {
 					{({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
 						<form className="profile__form" onSubmit={handleSubmit}>
 							<div className="profile__box profile__box--name">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__inscription profile__name heading-secondary`}>
+								<div
+									className={`${fullState.edit
+										? 'display-none '
+										: ''}profile__inscription profile__name heading-secondary`}
+								>
 									{props.data.name || props.data.surname ? `${props.data.name} ${props.data.surname}` : '--'}
 								</div>
 
@@ -152,7 +210,9 @@ const Profile = (props) => {
 									type="text"
 									name="name"
 									placeholder="First Name"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.name && touched.name ? ' profile__input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.name && touched.name
+										? ' profile__input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
 									value={values.name}
@@ -163,7 +223,9 @@ const Profile = (props) => {
 									type="text"
 									name="surname"
 									placeholder="Last Name"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.surname && touched.surname ? ' profile__input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.surname && touched.surname
+										? ' profile__input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
 									value={values.surname}
@@ -176,82 +238,106 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--profession">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__profession`}>{props.data.profession ? props.data.profession : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__profession`}>
+									{props.data.profession ? props.data.profession : '--'}
+								</div>
 								<input
 									type="text"
 									name="profession"
 									placeholder="Profession"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.profession}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
 
 							<div className="profile__box profile__box--industry">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__industry`}>{props.data.industry ? props.data.industry : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__industry`}>
+									{props.data.industry ? props.data.industry : '--'}
+								</div>
 								<input
 									type="text"
 									name="industry"
 									placeholder="Industry"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.industry}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
 
-							<div className="profile__box profile__box--slills">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__slills`}>{props.data.skills ? props.data.skills : '--'}</div>
+							<div className="profile__box profile__box--skillset">
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__skillset`}>
+									{props.data.skills ? props.data.skills : '--'}
+								</div>
 								<input
 									type="text"
-									name="slills"
-									placeholder="Slills"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									name="skillset"
+									placeholder="Skillset"
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.skillset}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
 
 							<div className="profile__box company">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__company`}>{props.data.company ? props.data.company : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__company`}>
+									{props.data.company ? props.data.company : '--'}
+								</div>
 								<input
 									type="text"
 									name="company"
 									placeholder="Company"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.company}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
 
 							<div className="profile__box--city">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__city`}>{props.data.city ? props.data.city : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__city`}>
+									{props.data.city ? props.data.city : '--'}
+								</div>
 								<input
 									type="text"
 									name="city"
 									placeholder="Location"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.city}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
 
 							<div className="profile__box profile__box--email">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__email`}>{props.data.email ? props.data.email : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__email`}>
+									{props.data.email ? props.data.email : '--'}
+								</div>
 								<input
 									type="email"
 									name="email"
 									placeholder="Email Address"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
 									value={values.email}
@@ -260,29 +346,37 @@ const Profile = (props) => {
 							</div>
 
 							<div className="profile__box profile__box--phone">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__phone`}>{props.data.phone ? props.data.phone : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__phone`}>
+									{props.data.phone ? props.data.phone : '--'}
+								</div>
 								<input
 									type="text"
 									name="phone"
 									placeholder="Contact No"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.phone}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
 
 							<div className="profile__box profile__box--address">
-								<div className={`${fullState.edit ? 'display-none ' : ''}profile__address`}>{props.data.address ? props.data.address : '--'}</div>
+								<div className={`${fullState.edit ? 'display-none ' : ''}profile__address`}>
+									{props.data.address ? props.data.address : '--'}
+								</div>
 								<input
 									type="text"
 									name="address"
 									placeholder="Workshop address"
-									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+									className={`${!fullState.edit ? 'display-none ' : ''}profile__input${errors.email && touched.email
+										? ' form-input--error'
+										: ''}`}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.email}
+									value={values.address}
 								/>
 								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
 							</div>
@@ -290,11 +384,21 @@ const Profile = (props) => {
 							<p className="profile__error-message">{fullState.submitError ? fullState.errorMessage : ''}</p>
 
 							<div className="profile__box profile__box--button">
-								<Btn onClick={setEdit} title={`${fullState.edit ? 'Cancel' : 'Edit'}`} className="btn btn--primary paragraph--uppercase" />
+								{/* <Btn
+									onClick={setEdit}
+									title={`${fullState.edit ? 'Cancel' : 'Edit'}`}
+									className="btn btn--primary paragraph--uppercase"
+								/> */}
+								<button onClick={setEdit} className="btn btn--primary paragraph--uppercase">
+									{`${fullState.edit ? 'Cancel' : 'Edit'}`}
+								</button>
 							</div>
-							
-                            <div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--button`}>
-								<Btn onClick={null} title="Update profile" className="btn btn--primary paragraph--uppercase" />
+
+							<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--button`}>
+								{/* <Btn onClick={null} title="Save changes" className="btn btn--primary paragraph--uppercase" /> */}
+								<button onClick={null} className="btn btn--primary paragraph--uppercase">
+									Save changes
+								</button>
 							</div>
 						</form>
 					)}
@@ -309,12 +413,14 @@ const Profile = (props) => {
 			<section className="profile__box profile__box--photo">
 				<div className="profile__photo">
 					<img src="img/profile_photo.png" className="profile__photo-img" />
-					{/* <button className="btn btn--primary btn--round profile__photo-button">Ф</button> */}
 				</div>
-				<Btn
+				<button className="btn--primary btn--round profile__photo-button">
+					{<IconCamera className="profile__photo-icon btn__icon color-white" />}
+				</button>
+				{/* <Btn
 					title={<IconCamera className="profile__photo-icon btn__icon color-white" />}
 					className="btn--primary btn--round profile__photo-button"
-				/>
+				/> */}
 			</section>
 			{profileMainData()}
 		</main>
