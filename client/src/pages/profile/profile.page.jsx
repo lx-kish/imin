@@ -120,38 +120,36 @@ const Profile = (props) => {
      * In the whireframe there are two modes: edit mode and view mode. 
      * Switching between modes is happening by clicking "Edit"/"Cancel" button.
      * 
-     * @DONE - decide, how to implement view - option a).
-     * There are 3 possible options: 
+     * @DONE - decide, how to implement view - (d) conditional rendering 
+     * inside Formik.
+     * There are 4 possible options: 
      * a) Separate div block containing user data and showing/hiding
      * by changing classes (attributes) with clicking the button;
+     * This decision is bad as it force to have one whole view element
+     * and repeat all the labels both in form and in view element.
+     * 
      * b) Set of separate div's, following by input fields of the form,
      * and showing/hiding by changing classes (attributes) with clicking 
      * the button;
+     * This decision is bad cos suggests managing multiple siloed signs
+     * using repeating code (fullState.edit checking).
+     * 
      * c) Styling input fields invisible and immutable in the view mode,
      * and as a regular input field in the edit mode.
+     * This decision is bad cos a value length might exceed a field length.
+     * 
+     * d) Rerender form each time state (fullState.edit) changes. View is a
+     * part of form (inside Formik), conditional rendering wether form or view.
+     * 
      */
 
-    const renderViewField = (val) => {
-        return val ? val : '--';
-    }
+	const renderViewField = (val) => {
+		return val ? val : '--';
+	};
 
 	const profileMainData = () => {
 		return (
 			<section className="profile__main-data">
-				<div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}>
-					<div className={`profile__inscription profile__name heading-secondary`}>
-						{props.data.name || props.data.surname ? `${props.data.name} ${props.data.surname}` : '--'}
-					</div>
-					<div className={`profile__profession`}>{renderViewField(props.data.profession)}</div>
-					<div className={`profile__industry`}>{renderViewField(props.data.industry)}</div>
-					<div className={`profile__skillset`}>{renderViewField(props.data.skills)}</div>
-					<div className={`profile__company`}>{renderViewField(props.data.company)}</div>
-					<div className={`profile__city`}>{renderViewField(props.data.city)}</div>
-					<div className={`profile__email`}>{renderViewField(props.data.email)}</div>
-					<div className={`profile__phone`}>{renderViewField(props.data.phone)}</div>
-					<div className={`profile__address`}>{renderViewField(props.data.address)}</div>
-				</div>
-
 				<Formik
 					initialValues={{ ...props.data }}
 					validate={(values) => {
@@ -162,15 +160,6 @@ const Profile = (props) => {
 						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
 							errors.email = 'Please provide valid email address';
 						}
-
-						// if (!values.password) {
-						//   errors.password =
-						//     "Please provide a password at least 8 characters";
-						// } else if (values.password.length < 1) {
-						//   //for debugging, change in production
-						//   // if (values.password.length < 8) {
-						//   errors.password = "Your password should be at least 8 characters";
-						// }
 
 						return errors;
 					}}
@@ -215,173 +204,164 @@ const Profile = (props) => {
 				>
 					{({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
 						<form className="profile__form" onSubmit={handleSubmit}>
-							<div className="profile__box profile__box--name">
-								<input
-									type="text"
-									name="name"
-									placeholder="First Name"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.name && touched.name
-										? ' profile__input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.name}
-								/>
-								{<p className="profile__input--error-message">{errors.name && touched.name ? errors.name : ''}</p>}
+							{fullState.edit ? (
+								<>
+									<div className="profile__box profile__box--name">
+										<input
+											type="text"
+											name="name"
+											placeholder="First Name"
+											className={`profile__input${errors.name && touched.name ? ' profile__input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.name}
+										/>
+										{<p className="profile__input--error-message">{errors.name && touched.name ? errors.name : ''}</p>}
 
-								<input
-									type="text"
-									name="surname"
-									placeholder="Last Name"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.surname && touched.surname
-										? ' profile__input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.surname}
-								/>
-								{
-									<p className="profile__input--error-message">
-										{errors.surname && touched.surname ? errors.surname : ''}
-									</p>
-								}
-							</div>
+										<input
+											type="text"
+											name="surname"
+											placeholder="Last Name"
+											className={`profile__input${errors.surname && touched.surname ? ' profile__input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.surname}
+										/>
+										{
+											<p className="profile__input--error-message">
+												{errors.surname && touched.surname ? errors.surname : ''}
+											</p>
+										}
+									</div>
 
-							<div className="profile__box profile__box--profession">
-								<input
-									type="text"
-									name="profession"
-									placeholder="Profession"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.profession}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box profile__box--profession">
+										<input
+											type="text"
+											name="profession"
+											placeholder="Profession"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.profession}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box profile__box--industry">
-								<input
-									type="text"
-									name="industry"
-									placeholder="Industry"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.industry}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box profile__box--industry">
+										<input
+											type="text"
+											name="industry"
+											placeholder="Industry"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.industry}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box profile__box--skillset">
-								<input
-									type="text"
-									name="skillset"
-									placeholder="Skillset"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.skillset}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box profile__box--skillset">
+										<input
+											type="text"
+											name="skillset"
+											placeholder="Skillset"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.skillset}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box company">
-								<input
-									type="text"
-									name="company"
-									placeholder="Company"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.company}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box company">
+										<input
+											type="text"
+											name="company"
+											placeholder="Company"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.company}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box--city">
-								<input
-									type="text"
-									name="city"
-									placeholder="Location"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.city}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box--city">
+										<input
+											type="text"
+											name="city"
+											placeholder="Location"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.city}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box profile__box--email">
-								<input
-									type="email"
-									name="email"
-									placeholder="Email Address"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.email}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box profile__box--email">
+										<input
+											type="email"
+											name="email"
+											placeholder="Email Address"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.email}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box profile__box--phone">
-								<input
-									type="text"
-									name="phone"
-									placeholder="Contact No"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.phone}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box profile__box--phone">
+										<input
+											type="text"
+											name="phone"
+											placeholder="Contact No"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.phone}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<div className="profile__box profile__box--address">
-								<input
-									type="text"
-									name="address"
-									placeholder="Workshop address"
-									className={`${fullState.edit ? '' : 'display-none '}profile__input${errors.email && touched.email
-										? ' form-input--error'
-										: ''}`}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.address}
-								/>
-								{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-							</div>
+									<div className="profile__box profile__box--address">
+										<input
+											type="text"
+											name="address"
+											placeholder="Workshop address"
+											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.address}
+										/>
+										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+									</div>
 
-							<p className="profile__error-message">{fullState.submitError ? fullState.errorMessage : ''}</p>
-
+									<p className="profile__error-message">{fullState.submitError ? fullState.errorMessage : ''}</p>
+								</>
+							) : (
+								<div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}>
+									<div className="profile__inscription profile__name heading-secondary">
+										{props.data.name || props.data.surname ? `${props.data.name} ${props.data.surname}` : '--'}
+									</div>
+									<div className="profile__profession">{renderViewField(props.data.profession)}</div>
+									<div className="profile__industry">{renderViewField(props.data.industry)}</div>
+									<div className="profile__skillset">{renderViewField(props.data.skills)}</div>
+									<div className="profile__company">{renderViewField(props.data.company)}</div>
+									<div className="profile__city">{renderViewField(props.data.city)}</div>
+									<div className="profile__email">{renderViewField(props.data.email)}</div>
+									<div className="profile__phone">{renderViewField(props.data.phone)}</div>
+									<div className="profile__address">{renderViewField(props.data.address)}</div>
+								</div>
+							)}
 							<div className="profile__box profile__box--button">
-								{/* <Btn
-									onClick={setEdit}
-									title={`${fullState.edit ? 'Cancel' : 'Edit'}`}
-									className="btn btn--primary paragraph--uppercase"
-								/> */}
 								<button type="button" onClick={setEdit} className="btn btn--primary paragraph--uppercase">
 									{`${fullState.edit ? 'Cancel' : 'Edit'}`}
 								</button>
 							</div>
 
 							<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--button`}>
-								{/* <Btn onClick={null} title="Save changes" className="btn btn--primary paragraph--uppercase" /> */}
 								<button type="button" onClick={null} className="btn btn--primary paragraph--uppercase">
 									Save changes
 								</button>
@@ -403,10 +383,6 @@ const Profile = (props) => {
 				<button className="btn--primary btn--round profile__photo-button">
 					{<IconCamera className="profile__photo-icon btn__icon color-white" />}
 				</button>
-				{/* <Btn
-					title={<IconCamera className="profile__photo-icon btn__icon color-white" />}
-					className="btn--primary btn--round profile__photo-button"
-				/> */}
 			</section>
 			{profileMainData()}
 		</main>
