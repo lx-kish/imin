@@ -6,12 +6,11 @@ import { Formik } from 'formik';
 
 import config from '../../axios.config';
 
-import Btn from '../../components/btn/btn.component';
 import IconCamera from '../../components/icons/icon-camera.component';
 
 import './profile.styles.scss';
 
-import { userCreatedStatusChange } from '../../redux/user/user.actions';
+// import { userCreatedStatusChange } from '../../redux/user/user.actions';
 
 const Profile = (props) => {
 	//if redirected from sign up, change new user status
@@ -23,6 +22,7 @@ const Profile = (props) => {
    * Single state hook useState for all the state properties
    */
 	const [ fullState, setFullState ] = React.useState({
+		user: { ...props.data },
 		edit: false,
 		submitSuccess: false,
 		submitError: false,
@@ -47,7 +47,7 @@ const Profile = (props) => {
      * 
      * @TODO decide, how to deal with form: a) separate form for each role,
      * or b) conditional rendering at the same form.
-     * Pros for a) - simplicity, no sophisticated logic inside formik;
+     * Pros for a) - simplicity, no sophisticated logic inside Formik;
      * Cons for a) - a lot of repeated code.
      * Pros and cons for b) are opposite + need to clarify how to pass
      * different sets of parametres into single formik function.
@@ -59,6 +59,9 @@ const Profile = (props) => {
      * Proposed solution: separate application menu for desktop, located inside
      * main section in <aside/> tag, and 'display: block' only in desktop mode
      * (big screen resolutions).
+     * 
+     * @TODO build form dynamicaly by adding input fields from the object
+     * received in props.
      * 
      *     *********   COMMON FOR ALL PROFILES   ********* 
      * 
@@ -143,15 +146,153 @@ const Profile = (props) => {
      * 
      */
 
+	const formStructure = (role) => {
+		//return specific form structure for each role
+		if (role === 'educator') {
+			return [
+				{
+					name: 'profession',
+					type: 'text',
+					placeholder: 'Profession',
+					class: 'profile__input'
+				},
+				{
+					name: 'industry',
+					type: 'text',
+					placeholder: 'Industry',
+					class: 'profile__input'
+				},
+				{
+					name: 'skillset',
+					type: 'text',
+					placeholder: 'Skillset',
+					class: 'profile__input'
+				},
+				{
+					name: 'company',
+					type: 'text',
+					placeholder: 'Company',
+					class: 'profile__input'
+				},
+				{
+					name: 'website',
+					type: 'text',
+					placeholder: 'Website',
+					class: 'profile__input'
+				},
+				{
+					name: 'city',
+					type: 'text',
+					placeholder: 'Location',
+					class: 'profile__input'
+				},
+				{
+					name: 'email',
+					type: 'text',
+					placeholder: 'Email address',
+					class: 'profile__input'
+				},
+				{
+					name: 'phone',
+					type: 'text',
+					placeholder: 'Contact No',
+					class: 'profile__input'
+				},
+				{
+					name: 'address',
+					type: 'text',
+					placeholder: 'Workshop address',
+					class: 'profile__input'
+				}
+			];
+		}
+		if (role === 'student') {
+			return [
+				{
+					name: 'industry',
+					type: 'text',
+					placeholder: 'Industry',
+					class: 'profile__input'
+				},
+				{
+					name: 'skillset',
+					type: 'text',
+					placeholder: 'Skillset',
+					class: 'profile__input'
+				},
+				{
+					name: 'city',
+					type: 'text',
+					placeholder: 'Location',
+					class: 'profile__input'
+				},
+				{
+					name: 'email',
+					type: 'text',
+					placeholder: 'Email address',
+					class: 'profile__input'
+				},
+				{
+					name: 'phone',
+					type: 'text',
+					placeholder: 'Contact No',
+					class: 'profile__input'
+				}
+			];
+		}
+		if (role === 'admin') {
+			return [];
+		}
+		//if role is unfamiliar, then return it for diagnostic
+		return role;
+	};
+
 	const renderViewField = (val) => {
 		return val ? val : '--';
 	};
 
 	const profileMainData = () => {
+		const viewFields = () => {
+			return formStructure(fullState.role).map((field, i) => {
+				return (
+					<div key={i} className={`profile__${field.name}`}>{renderViewField(fullState.user.profession)}</div>
+					// <div className="profile__industry">{renderViewField(fullState.user.industry)}</div>
+					// <div className="profile__skillset">{renderViewField(fullState.user.skills)}</div>
+					// <div className="profile__company">{renderViewField(fullState.user.company)}</div>
+					// <div className="profile__city">{renderViewField(fullState.user.city)}</div>
+					// <div className="profile__email">{renderViewField(fullState.user.email)}</div>
+					// <div className="profile__phone">{renderViewField(fullState.user.phone)}</div>
+					// <div className="profile__address">{renderViewField(fullState.user.address)}</div>
+				);
+			});
+		};
+
+		const formFields = (form) => {
+			return formStructure(fullState.role).map((field, i) => {
+				// console.log('form from profile ===> ', form);
+				return (
+					<div key={i} className={`profile__box profile__box--${field.name}`}>
+						<input
+							type={field.type}
+							name={field.name}
+							placeholder={field.placeholder}
+							className={field.class}
+							onChange={form.handleChange}
+							onBlur={form.handleBlur}
+							value={form.values[field.name]}
+						/>
+						{form.errors[field.name] && form.touched[field.name] ? (
+							<p className="profile__error-message">{form.errors[field.name]}</p>
+						) : null}
+					</div>
+				);
+			});
+		};
+
 		return (
 			<section className="profile__main-data">
 				<Formik
-					initialValues={{ ...props.data }}
+					initialValues={{ ...fullState.user }}
 					validate={(values) => {
 						const errors = {};
 
@@ -167,7 +308,7 @@ const Profile = (props) => {
 						setSubmitting(true);
 
 						axios
-							.post(`/api/users/${props.data._id}`, values, config)
+							.post(`/api/users/${fullState.user._id}`, values, config)
 							.then((res) => {
 								console.log('sign in doc, res =====> ', res);
 								// let responseMessage = res.payload.response.data.message;
@@ -202,49 +343,66 @@ const Profile = (props) => {
 						setSubmitting(false);
 					}}
 				>
-					{({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
-						<form className="profile__form" onSubmit={handleSubmit}>
+					{(form) => (
+						// {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
+						<form className="profile__form" onSubmit={form.handleSubmit}>
+							{/* conditional rendering: if "EDIT" button activated, 
+               form is rendering, if not then view */}
+
 							{fullState.edit ? (
-								<>
+								<React.Fragment>
+									{/* name renders for all roles */}
 									<div className="profile__box profile__box--name">
 										<input
 											type="text"
 											name="name"
 											placeholder="First Name"
-											className={`profile__input${errors.name && touched.name ? ' profile__input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.name}
+											className={`profile__input${form.errors.name && form.touched.name
+												? ' profile__input--error'
+												: ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.name}
 										/>
-										{<p className="profile__input--error-message">{errors.name && touched.name ? errors.name : ''}</p>}
+										{
+											<p className="profile__input--error-message">
+												{form.errors.name && form.touched.name ? form.errors.name : ''}
+											</p>
+										}
 
 										<input
 											type="text"
 											name="surname"
 											placeholder="Last Name"
-											className={`profile__input${errors.surname && touched.surname ? ' profile__input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.surname}
+											className={`profile__input${form.errors.surname && form.touched.surname
+												? ' profile__input--error'
+												: ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.surname}
 										/>
 										{
 											<p className="profile__input--error-message">
-												{errors.surname && touched.surname ? errors.surname : ''}
+												{form.errors.surname && form.touched.surname ? form.errors.surname : ''}
 											</p>
 										}
 									</div>
 
-									<div className="profile__box profile__box--profession">
+									{formFields(form)}
+
+									{/* <div className="profile__box profile__box--profession">
 										<input
 											type="text"
 											name="profession"
 											placeholder="Profession"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.profession}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.profession}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box profile__box--industry">
@@ -252,12 +410,14 @@ const Profile = (props) => {
 											type="text"
 											name="industry"
 											placeholder="Industry"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.industry}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.industry}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box profile__box--skillset">
@@ -265,12 +425,14 @@ const Profile = (props) => {
 											type="text"
 											name="skillset"
 											placeholder="Skillset"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.skillset}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.skillset}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box company">
@@ -278,12 +440,14 @@ const Profile = (props) => {
 											type="text"
 											name="company"
 											placeholder="Company"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.company}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.company}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box--city">
@@ -291,12 +455,14 @@ const Profile = (props) => {
 											type="text"
 											name="city"
 											placeholder="Location"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.city}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.city}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box profile__box--email">
@@ -304,12 +470,14 @@ const Profile = (props) => {
 											type="email"
 											name="email"
 											placeholder="Email Address"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.email}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.email}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box profile__box--phone">
@@ -317,12 +485,14 @@ const Profile = (props) => {
 											type="text"
 											name="phone"
 											placeholder="Contact No"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.phone}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.phone}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
 									</div>
 
 									<div className="profile__box profile__box--address">
@@ -330,31 +500,42 @@ const Profile = (props) => {
 											type="text"
 											name="address"
 											placeholder="Workshop address"
-											className={`profile__input${errors.email && touched.email ? ' form-input--error' : ''}`}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.address}
+											className={`profile__input${form.errors.email && form.touched.email ? ' form-input--error' : ''}`}
+											onChange={form.handleChange}
+											onBlur={form.handleBlur}
+											value={form.values.address}
 										/>
-										{errors.email && touched.email ? <p className="profile__error-message">{errors.email}</p> : null}
-									</div>
+										{form.errors.email && form.touched.email ? (
+											<p className="profile__error-message">{form.errors.email}</p>
+										) : null}
+									</div> */}
 
 									<p className="profile__error-message">{fullState.submitError ? fullState.errorMessage : ''}</p>
-								</>
+								</React.Fragment>
 							) : (
 								<div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}>
 									<div className="profile__inscription profile__name heading-secondary">
-										{props.data.name || props.data.surname ? `${props.data.name} ${props.data.surname}` : '--'}
+										{fullState.user.name || fullState.user.surname ? (
+											`${fullState.user.name} ${fullState.user.surname}`
+										) : (
+											'--'
+										)}
 									</div>
-									<div className="profile__profession">{renderViewField(props.data.profession)}</div>
-									<div className="profile__industry">{renderViewField(props.data.industry)}</div>
-									<div className="profile__skillset">{renderViewField(props.data.skills)}</div>
-									<div className="profile__company">{renderViewField(props.data.company)}</div>
-									<div className="profile__city">{renderViewField(props.data.city)}</div>
-									<div className="profile__email">{renderViewField(props.data.email)}</div>
-									<div className="profile__phone">{renderViewField(props.data.phone)}</div>
-									<div className="profile__address">{renderViewField(props.data.address)}</div>
+
+									{viewFields()}
+									{/* <div className="profile__profession">{renderViewField(fullState.user.profession)}</div>
+									<div className="profile__industry">{renderViewField(fullState.user.industry)}</div>
+									<div className="profile__skillset">{renderViewField(fullState.user.skills)}</div>
+									<div className="profile__company">{renderViewField(fullState.user.company)}</div>
+									<div className="profile__city">{renderViewField(fullState.user.city)}</div>
+									<div className="profile__email">{renderViewField(fullState.user.email)}</div>
+									<div className="profile__phone">{renderViewField(fullState.user.phone)}</div>
+									<div className="profile__address">{renderViewField(fullState.user.address)}</div> */}
 								</div>
 							)}
+
+							{/* buttons are rendered on any condition */}
+
 							<div className="profile__box profile__box--button">
 								<button type="button" onClick={setEdit} className="btn btn--primary paragraph--uppercase">
 									{`${fullState.edit ? 'Cancel' : 'Edit'}`}
