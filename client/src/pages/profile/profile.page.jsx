@@ -284,7 +284,9 @@ const Profile = (props) => {
 					: <span className={`profile__label profile__label--${field.name}`}>{field.label}</span>
 					}
 
-					{renderViewField(fullState.user[field.name])}
+					<div className={`profile__field-content profile__${field.name}`}>
+						{renderViewField(fullState.user[field.name])}
+					</div>
 				</div>
 			);
 		});
@@ -298,14 +300,14 @@ const Profile = (props) => {
 					{/* if no label property in the field object, then label equal to placeholder
 					if there is a label property, then label is distinct of placeholder
 					if there is a label property and it's empty, there is no label at all */}
-					
+
 					{ !field?.label 
 					? <label htmlFor={field.name} className={`profile__label profile__label--${field.name}`}>{field.placeholder}</label>
 					: field.label === '' 
 					? null
 					: <label htmlFor={field.name} className={`profile__label profile__label--${field.name}`}>{field.label}</label>
 					}
-					
+
 					<input
 						id={field.name}
 						type={field.type}
@@ -407,7 +409,8 @@ const Profile = (props) => {
 											{form.errors.name && form.touched.name ? form.errors.name : ''}
 										</p>
 									}
-
+								</div>
+								<div className="profile__box profile__box--surname">
 									<label htmlFor="surname" className="profile__label profile__label--surname">
 										Last Name
 									</label>
@@ -436,8 +439,8 @@ const Profile = (props) => {
 							</React.Fragment>
 						) : (
 							<div className="profile__view">
-							{/* <div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}> */}
-								<div className="profile__inscription profile__name heading-secondary">
+								{/* <div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}> */}
+								<div className="profile__box profile__name heading-secondary">
 									{fullState.user.name || fullState.user.surname ? (
 										`${fullState.user.name} ${fullState.user.surname}`
 									) : (
@@ -452,13 +455,13 @@ const Profile = (props) => {
 						{/* ===> buttons are rendered on any condition <=== */}
 
 						<div className="profile__box profile__box--button">
-							<button type="button" onClick={setEdit} className="btn btn--primary paragraph--uppercase">
+							<button type="button" onClick={setEdit} className="btn btn--primary profile__btn paragraph--uppercase">
 								{`${fullState.edit ? 'Cancel' : 'Edit'}`}
 							</button>
 						</div>
 
 						<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--button`}>
-							<button type="button" onClick={null} className="btn btn--primary paragraph--uppercase">
+							<button type="button" onClick={null} className="btn btn--primary profile__btn paragraph--uppercase">
 								Save changes
 							</button>
 						</div>
