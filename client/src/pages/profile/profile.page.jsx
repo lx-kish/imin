@@ -454,13 +454,13 @@ const Profile = (props) => {
 
 						{/* ===> buttons are rendered on any condition <=== */}
 
-						<div className="profile__box profile__box--button">
+						<div className="profile__box profile__box--btn">
 							<button type="button" onClick={setEdit} className="btn btn--primary profile__btn paragraph--uppercase">
 								{`${fullState.edit ? 'Cancel' : 'Edit'}`}
 							</button>
 						</div>
 
-						<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--button`}>
+						<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--btn`}>
 							<button type="button" onClick={null} className="btn btn--primary profile__btn paragraph--uppercase">
 								Save changes
 							</button>

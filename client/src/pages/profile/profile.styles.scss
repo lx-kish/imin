@@ -24,6 +24,10 @@
     align-items: center;
 
     margin-bottom: 1vw;
+
+    &--btn {
+      margin: 4vw 0;
+    }
   }
 
   &__photo {
@@ -154,5 +158,11 @@
         max-width: 85vw;
       }
     }
+  }
+
+  &__btn {
+    height: 6.6rem;
+    width: 65vw; //25.4rem;
+    font-size: 3.2rem;
   }
 }
