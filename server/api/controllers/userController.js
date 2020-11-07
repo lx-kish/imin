@@ -66,6 +66,25 @@ module.exports = {
     //     })
     // }),
 
-    updateUser: () => { },
-    deleteUser: () => { }
+    updateUser: factory.updateOne(users),
+    // updateUser: (req, res, next) => { 
+
+    //     console.log(req.user);
+    //     factory.updateOne(users);
+    //     // factory.updateOne(connection.model(req.user.role));
+    // },
+    // updateUser: () => { },
+    deleteUser: () => { },
+
+    getRole: (req, res, next) => {
+        factory.getOne(connection.model(req.params.role))(req, res, next);
+    },
+
+    updateRole: (req, res, next) => {
+        factory.updateOne(connection.model(req.params.role))(req, res, next);
+    },
+
+    deleteRole: (req, res, next) => {
+        factory.deleteOne(connection.model(req.params.role))(req, res, next);
+    }
 }

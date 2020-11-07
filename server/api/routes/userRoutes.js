@@ -32,9 +32,15 @@ module.exports = function (app) {
 
     router
         .route('/:id')
-        .get(userController.getUser)
-        .patch(userController.updateUser)
-        .delete(userController.deleteUser);
+        .get(authController.isAuth, userController.getUser)
+        .patch(authController.isAuth, userController.updateUser)
+        .delete(authController.isAuth, userController.deleteUser);
+
+    router
+        .route('/:role/:id')
+        .get(authController.isAuth, userController.getRole)
+        .patch(authController.isAuth, userController.updateRole)
+        .delete(authController.isAuth, userController.deleteRole);
 
     return app;
 };

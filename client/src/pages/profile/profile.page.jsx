@@ -190,12 +190,12 @@ const Profile = (props) => {
 					placeholder: 'Location',
 					class: 'profile__input'
 				},
-				{
-					name: 'email',
-					type: 'text',
-					placeholder: 'Email address',
-					class: 'profile__input'
-				},
+				// {
+				// 	name: 'email',
+				// 	type: 'text',
+				// 	placeholder: 'Email address',
+				// 	class: 'profile__input'
+				// },
 				{
 					name: 'phone',
 					type: 'text',
@@ -230,12 +230,12 @@ const Profile = (props) => {
 					placeholder: 'Location',
 					class: 'profile__input'
 				},
-				{
-					name: 'email',
-					type: 'text',
-					placeholder: 'Email address',
-					class: 'profile__input'
-				},
+				// {
+				// 	name: 'email',
+				// 	type: 'text',
+				// 	placeholder: 'Email address',
+				// 	class: 'profile__input'
+				// },
 				{
 					name: 'phone',
 					type: 'text',
@@ -246,12 +246,12 @@ const Profile = (props) => {
 		}
 		if (role === 'admin') {
 			return [
-				{
-					name: 'email',
-					type: 'text',
-					placeholder: 'Email address',
-					class: 'profile__input'
-				},
+				// {
+				// 	name: 'email',
+				// 	type: 'text',
+				// 	placeholder: 'Email address',
+				// 	class: 'profile__input'
+				// },
 				{
 					name: 'phone',
 					type: 'text',
@@ -346,16 +346,10 @@ const Profile = (props) => {
 					setSubmitting(true);
 
 					axios
-						.post(`/api/users/${fullState.user._id}`, values, config)
+						.patch(`/api/users/${fullState.role}/${fullState.user._id}`, values, config)
 						.then((res) => {
 							console.log('sign in doc, res =====> ', res);
-							// let responseMessage = res.payload.response.data.message;
-							// let errorMessage;
-
-							// if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
-							//     errorMessage = `User with email ${values.email} already exists.`;
-
-							// }
+							
 							setFullState({
 								...fullState,
 								submitSuccess: true,
@@ -363,13 +357,11 @@ const Profile = (props) => {
 								errorMessage: ''
 							});
 
-							props.history.push(`/profile`);
-							// props.history.push(`/users/${res.}`);
+							// resetForm();
 						})
 						.catch((error) => {
 							console.log('sign in doc, error =====> ', error.response);
 
-							// resetForm();
 							setFullState({
 								...fullState,
 								submitSuccess: false,
@@ -378,7 +370,7 @@ const Profile = (props) => {
 							});
 						});
 
-					setSubmitting(false);
+					// setSubmitting(false);
 				}}
 			>
 				{(form) => (
@@ -461,7 +453,7 @@ const Profile = (props) => {
 						</div>
 
 						<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--btn`}>
-							<button type="button" onClick={null} className="btn btn--primary profile__btn paragraph--uppercase">
+							<button type="submit" onClick={null} className="btn btn--primary profile__btn paragraph--uppercase">
 								Save changes
 							</button>
 						</div>

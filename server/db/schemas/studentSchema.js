@@ -1,25 +1,28 @@
 module.exports = {
-    phone: {
+	phone: {
 		type: String,
 		required: [
-            true,
-            'Required field missing: PHONE NUMBER'
-        ]
+			true,
+			'Required field missing: PHONE NUMBER'
+		]
 	},
 	name: {
 		type: String,
 		required: [
-            true,
-            'Required field missing: FIRST NAME'
-        ]
+			true,
+			'Required field missing: FIRST NAME'
+		]
 	},
 	surname: {
 		type: String,
 		required: [
-            true,
-            'Required field missing: LAST NAME'
-        ]
+			true,
+			'Required field missing: LAST NAME'
+		]
 	},
 	industries: [String],
-	events: [String]
+	events: [String],
+	location: {
+		type: String
+	}
 };

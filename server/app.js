@@ -57,6 +57,7 @@ module.exports = () => {
   });
 
   app.use(config.api.prefix, limiter);
+  // console.log('config.api.prefix ===> ', config.api.prefix);
 
   /**
    * Health Check endpoints

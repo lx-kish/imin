@@ -158,6 +158,7 @@ const SignUp = (props) => {
                 //reset form fields
 
                 //redirect to the profile page with the newly registered user
+                props.history.push(`/profile`);
               })
 
               //error handler for unknown errors
