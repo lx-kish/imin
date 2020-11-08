@@ -16,7 +16,8 @@ const Profile = (props) => {
 	//if redirected from sign up, change new user status
 	// if (props.user.created) props.dispatch(userCreatedStatusChange(props.user));
 
-	console.log('props from Profile ===> ', props);
+	// console.log('props.data.role from Profile ===> ', props.data.role);
+	// console.log('props from Profile ===> ', props);
 
 	/**
    * Single state hook useState for all the state properties
@@ -27,7 +28,8 @@ const Profile = (props) => {
 		submitSuccess: false,
 		submitError: false,
 		errorMessage: '',
-		role: props.location.state ? props.location.state.role || 'student' : 'student'
+		role: props?.data?.role ? props.data.role : 'student'
+		// role: props.location.state ? props.location.state.role || 'student' : 'student'
 	});
 
 	const setEdit = () => {
@@ -185,7 +187,7 @@ const Profile = (props) => {
 					class: 'profile__input'
 				},
 				{
-					name: 'city',
+					name: 'location',
 					type: 'text',
 					placeholder: 'Location',
 					class: 'profile__input'
@@ -225,7 +227,7 @@ const Profile = (props) => {
 					class: 'profile__input'
 				},
 				{
-					name: 'city',
+					name: 'location',
 					type: 'text',
 					placeholder: 'Location',
 					class: 'profile__input'
@@ -269,6 +271,7 @@ const Profile = (props) => {
 	};
 
 	const viewFields = () => {
+		console.log('profile viewFields fullState.role ===> ', fullState.role);
 		return formStructure(fullState.role).map((field, i) => {
 			return (
 				// <div key={i} className={`profile__${field.name}`}>

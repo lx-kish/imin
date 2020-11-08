@@ -134,6 +134,9 @@ const SignUp = (props) => {
             //set setSubmitting Formik flag to true to prevent double sending form
             setSubmitting(true);
 
+            //set the role sending to the server from the form
+            values.role = role;
+
             // send request containing new user data from the form to the server
             axios
               .post(`/api/users/signup`, values, config)
@@ -159,6 +162,7 @@ const SignUp = (props) => {
 
                 //redirect to the profile page with the newly registered user
                 props.history.push(`/profile`);
+                // props.history.push(`/profile`, { role: res.data.data.role });
               })
 
               //error handler for unknown errors

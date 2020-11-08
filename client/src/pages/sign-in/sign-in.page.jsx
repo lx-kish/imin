@@ -98,7 +98,8 @@ const SignIn = (props) => {
                 });
 
                 props.history.push(`/profile`);
-                // props.history.push(`/users/${res.}`);
+                // props.history.push(`/profile`, { role: res.data.data.role });
+
               })
               .catch((error) => {
                 console.log("sign in doc, error =====> ", error.response);
