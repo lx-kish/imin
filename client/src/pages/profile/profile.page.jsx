@@ -163,15 +163,15 @@ const Profile = (props) => {
 					label: ''
 				},
 				{
-					name: 'industry',
+					name: 'industries',
 					type: 'text',
 					placeholder: 'Industry',
 					class: 'profile__input'
 				},
 				{
-					name: 'skillset',
+					name: 'skills',
 					type: 'text',
-					placeholder: 'Skillset',
+					placeholder: 'Skills',
 					class: 'profile__input'
 				},
 				{
@@ -351,19 +351,22 @@ const Profile = (props) => {
 					axios
 						.patch(`/api/users/${fullState.role}/${fullState.user._id}`, values, config)
 						.then((res) => {
-							console.log('sign in doc, res =====> ', res);
+							console.log('profile, res =====> ', res);
 							
 							setFullState({
 								...fullState,
+								user: res.data.data.data,
+								edit: false,
 								submitSuccess: true,
 								submitError: false,
 								errorMessage: ''
 							});
 
 							// resetForm();
+							values = {...fullState.user};
 						})
 						.catch((error) => {
-							console.log('sign in doc, error =====> ', error.response);
+							console.log('profile, error =====> ', error.response);
 
 							setFullState({
 								...fullState,

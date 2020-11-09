@@ -29,7 +29,7 @@ const NavigationBar = (props) => {
    * 2) Show appropriate menu items for logged in user based on it's role.
    *
    * As a part of mobile navigation, burger menu icon should be implemented.
-   * @TODO
+   * @DONE
    * 1) Implement the icon itself - @DONE
    * 2) Implement slide menu - @DONE
    * 3) Implement the state of the menu - @DONE

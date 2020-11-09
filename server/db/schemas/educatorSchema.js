@@ -20,8 +20,12 @@ module.exports = {
 			'Required field missing: LAST NAME'
 		]
 	},
+	profession: {
+		type: String
+	},
 	industries: [String],
 	events: [String],
+	skills: [String],
 	company: {
 		type: String,
 		required: [
@@ -37,5 +41,8 @@ module.exports = {
 	approved: {
 		type: Boolean,
 		default: false
+	},
+	location: {
+		type: String
 	}
 };

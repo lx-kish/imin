@@ -11,6 +11,7 @@ import SignUp from './pages/sign-up/sign-up.page';
 import SignIn from './pages/sign-in/sign-in.page';
 import LogOut from './pages/log-out/log-out.page';
 import Profile from './pages/profile/profile.page';
+import Account from './pages/account/account.page';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
 import Layout from './components/layout/layout.hoc';
@@ -32,6 +33,7 @@ const Routes = () => {
                 <Route path='/signin' exact component={SignIn} />
                 <PrivateRoute path='/logout' exact component={LogOut} />
                 <PrivateRoute path='/profile' exact component={Profile} />
+                <PrivateRoute path='/account' exact component={Account} />
                 <Route path='/terms' exact component={TermsAndConditions} />
                 {/* <Route path='/login' exact component={Auth(Login, false)}/>
                 <Route path='/user' exact component={Auth(User, true)}/>
