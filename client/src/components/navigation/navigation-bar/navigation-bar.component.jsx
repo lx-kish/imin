@@ -1,20 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import useClickOutside from "../../../utils/useClickOutside";
+import useClickOutside from '../../../utils/useClickOutside';
 
-import Btn from "../../btn/btn.component";
-import logo from "../../../graphics/logo_pink.png";
+import Btn from '../../btn/btn.component';
+import logo from '../../../graphics/logo_pink.png';
 // import MenuIcon from "../../icons/icon-menu.component";
-import LogInIcon from "../../icons/icon-log-in.component";
-import BurgerIcon from "../burger icon/icon-burger.component";
-import SlideBar from "../slide bar/slide-bar.component";
+import LogInIcon from '../../icons/icon-log-in.component';
+import BurgerIcon from '../burger icon/icon-burger.component';
+import SlideBar from '../slide bar/slide-bar.component';
 
-import "./navigation-bar.styles.scss";
+import './navigation-bar.styles.scss';
 
 const NavigationBar = (props) => {
-
-  /** Render navigation bar.
+	/** Render navigation bar.
    * Desktop navigation has menu items located in the navigation bar directly.
    * Mobile navigation has menu items hide with slide (dissapeared) panel
    * and showes it by click on 'burger' icon at the left.
@@ -50,138 +49,129 @@ const NavigationBar = (props) => {
    * 
    */
 
-  const links = [
-    {
-      name: "Home",
-      link: "/",
-      className: "navigation-link color-pink paragraph--uppercase",
-    },
-    {
-      name: "About",
-      link: "/about",
-      className: "navigation-link color-pink paragraph--uppercase",
-    },
-    {
-      name: "Platform",
-      link: "/platform",
-      className: "navigation-link color-pink paragraph--uppercase",
-    },
-    {
-      name: "Contact",
-      link: "/contact",
-      className: "navigation-link color-pink paragraph--uppercase",
-    },
-  ];
+	const links = [
+		{
+			name: 'Home',
+			link: '/',
+			className: 'navigation-link color-pink paragraph--uppercase'
+		},
+		{
+			name: 'About',
+			link: '/about',
+			className: 'navigation-link color-pink paragraph--uppercase'
+		},
+		{
+			name: 'Platform',
+			link: '/platform',
+			className: 'navigation-link color-pink paragraph--uppercase'
+		},
+		{
+			name: 'Contact',
+			link: '/contact',
+			className: 'navigation-link color-pink paragraph--uppercase'
+		}
+	];
 
-  /** Single state hook useState for all the state properties */
-  const [fullState, setFullState] = React.useState({
-    open: false,
-  });
+	/** Single state hook useState for all the state properties */
+	const [ fullState, setFullState ] = React.useState({
+		open: false
+	});
 
-  const menuRef = React.useRef();
+	const menuRef = React.useRef();
 
-  const setState = () => {
-    // console.log("from setState before setting ===> ", fullState.open);
-    // console.log("setting state...");
-    setFullState({
-      ...fullState,
-      open: !fullState.open,
-    });
-    // console.log("from setState after setting ===> ", fullState.open);
-  };
+	const setState = () => {
+		// console.log("from setState before setting ===> ", fullState.open);
+		// console.log("setting state...");
+		setFullState({
+			...fullState,
+			open: !fullState.open
+		});
+		// console.log("from setState after setting ===> ", fullState.open);
+	};
 
-  const hideSliderMenu = () => {
-    // console.log("Clicked outside the menu", fullState);
+	const hideSliderMenu = () => {
+		// console.log("Clicked outside the menu", fullState);
 
-    setFullState({
-      ...fullState,
-      open: false
-    });
-  };
+		setFullState({
+			...fullState,
+			open: false
+		});
+	};
 
-  useClickOutside(menuRef, hideSliderMenu);
+	useClickOutside(menuRef, hideSliderMenu);
 
-  const element = (link, i) => (
-    <li key={i} className="navigation__item">
-      <Link to={link.link} className={link.className}>
-        {link.name}
-      </Link>
-    </li>
-  );
+	const element = (link, i) => (
+		<li key={i} className="navigation__item">
+			<Link to={link.link} className={link.className}>
+				{link.name}
+			</Link>
+		</li>
+	);
 
-  const showLinks = () =>
-    links.map((link, i) => {
-      return element(link, i);
-    });
+	const showLinks = () =>
+		links.map((link, i) => {
+			return element(link, i);
+		});
 
-  return (
-    <nav className="navigation navigation--primary">
-      <div className="navigation__content navigation__content--mb">
-        <div className="navigation__menu-box" ref={menuRef}>
-          <BurgerIcon
-            open={fullState.open}
-            setOpen={setState}
-          />
-          <SlideBar
-            open={fullState.open}
-            links={links}
-            hideSliderMenu={hideSliderMenu}
-          />
-        </div>
+	return (
+		<nav className="navigation navigation--primary">
+			<div className="navigation__content navigation__content--mb">
+				<div className="navigation__menu-box" ref={menuRef}>
+					<BurgerIcon open={fullState.open} setOpen={setState} />
+					<SlideBar open={fullState.open} links={links} hideSliderMenu={hideSliderMenu} />
+				</div>
 
-        <div className="navigation__logo-box">
-          <img src={logo} alt="Logo" className="navigation__logo" />
-        </div>
+				<div className="navigation__logo-box">
+					<img src={logo} alt="Logo" className="navigation__logo" />
+				</div>
 
-        {props.isAuth ? (
-          "Auth"
-        ) : (
-          <Link
-            to={{
-              pathname: "/signin",
-              state: { role: "student" },
-            }}
-            className="navigation__btn-box"
-          >
-            <Btn
-              title={<LogInIcon className="color-white" />}
-              className={"btn btn--tertiary navigation__btn navigation__btn--mb btn--login"}
-            />
-          </Link>
-        )}
-      </div>
+				{props.isAuth ? (
+					'Auth'
+				) : (
+					<Link
+						to={{
+							pathname: '/signin',
+							state: { role: 'student' }
+						}}
+						className="navigation__btn-box"
+					>
+						<Btn
+							title={<LogInIcon className="color-white" />}
+							className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
+						/>
+					</Link>
+				)}
+			</div>
 
-      <div className="navigation__content navigation__content--dt">
-        <div className="navigation__logo-box">
-          <img src={logo} alt="Logo" className="navigation__logo" />
-        </div>
+			<div className="navigation__content navigation__content--dt">
+				<div className="navigation__logo-box">
+					<img src={logo} alt="Logo" className="navigation__logo" />
+				</div>
 
-        <ul className="navigation__list">
-          {showLinks()}
+				<div className="navigation__list-box">
+					<ul className="navigation__list">{showLinks()}</ul>
 
-          <li className="navigation__item">
-            {props.isAuth ? (
-              "Auth"
-            ) : (
-              <Link
-                to={{
-                  pathname: "/signin",
-                  state: { role: "student" },
-                }}
-              >
-                <Btn
-                  title={"sign in"}
-                  className={
-                    "btn btn--dt btn--tertiary navigation__btn--dt paragraph--uppercase"
-                  }
-                />
-              </Link>
-            )}
-          </li>
-        </ul>
-      </div>
-    </nav>
-  );
+					<div className="navigation__item">
+						{props.isAuth ? (
+							'Auth'
+						) : (
+							<Link
+								to={{
+									pathname: '/signin',
+									state: { role: 'student' }
+								}}
+							>
+								<Btn
+									title={'sign in'}
+									className={'btn btn--dt btn--tertiary navigation__btn--dt paragraph--uppercase'}
+								/>
+							</Link>
+						)}
+					</div>
+				</div>
+			</div>
+		</nav>
+	);
 };
 //{ pathname: '/route', state: { foo: 'bar'} }
 export default NavigationBar;

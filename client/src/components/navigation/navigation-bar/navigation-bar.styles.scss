@@ -78,6 +78,12 @@
     }
   }
 
+  &__list-box {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
   &__list {
     display: flex;
     // flex-direction: row;
