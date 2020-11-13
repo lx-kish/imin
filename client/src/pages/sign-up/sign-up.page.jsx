@@ -7,8 +7,6 @@ import { Formik } from "formik";
 import "./sign-up.styles.scss";
 
 import config from "../../axios.config";
-import DoublePanesRow from "../../hoc/rows/double-panes-row/double-panes-row.hoc";
-import SinglePaneRow from "../../hoc/rows/single-pane-row/single-pane-row.component";
 
 import ImgStudent from "../../graphics/pages-content/sign-up/IMIN-purple.png";
 import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
@@ -57,7 +55,7 @@ const SignUp = (props) => {
     }
   }, [fullState.submitSuccess]);
 
-  const role = props.location.state
+  const role = props.location?.state
     ? props.location.state.role || "student"
     : "student";
 

@@ -7,7 +7,7 @@ const Layout = props => {
 
     return (
         <>
-            <NavigationBar />
+            {/* <NavigationBar /> */}
             <>
                 {props.children}
             </>

@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { Route, Link, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 // import isAuth from '../../utils/isAuth';
 import config from '../../axios.config';
+import NavigationBar from '../../components/navigation/navigation-bar/navigation-bar.component';
+import Footer from '../../components/footer/footer.component';
 
 /**
  * PrivateRoute component is a High Order Component for rendering
@@ -86,7 +88,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 			{...rest}
 			render={(props) =>
 				user ? (
-					<Component {...user} {...props} />
+					<>
+						<NavigationBar {...user}/>
+						<Component {...user} {...props} />
+						<Footer />
+					</>
 				) : (
 					<Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
 				)}

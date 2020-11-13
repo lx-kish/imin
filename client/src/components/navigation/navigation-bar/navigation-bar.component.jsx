@@ -49,6 +49,8 @@ const NavigationBar = (props) => {
    * 
    */
 
+   console.log('navigation bar props.user ===> ', props.user);
+
 	const links = [
 		{
 			name: 'Home',

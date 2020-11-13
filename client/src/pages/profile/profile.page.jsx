@@ -17,7 +17,7 @@ const Profile = (props) => {
 	// if (props.user.created) props.dispatch(userCreatedStatusChange(props.user));
 
 	// console.log('props.data.role from Profile ===> ', props.data.role);
-	// console.log('props from Profile ===> ', props);
+	console.log('props from Profile ===> ', props);
 
 	/**
    * Single state hook useState for all the state properties
