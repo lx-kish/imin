@@ -142,13 +142,7 @@ const SignUp = (props) => {
               //getting respond from the server
               .then((res) => {
                 console.log("sign up doc, res =====> ", res);
-                // let responseMessage = res.payload.response.data.message;
-                // let errorMessage;
 
-                // if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
-                //     errorMessage = `User with email ${values.email} already exists.`;
-
-                // }
                 setFullState({
                   ...fullState,
                   submitSuccess: true,

@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import "./app-navigation.styles.scss";
+import appMenu from '../../../utils/appMenu';
+
+import './app-navigation.styles.scss';
 
 const AppNavigation = (props) => {
 	/**
    * Application navigation menu component
-   * 
-   * 
    * 
    * For mobile version it's located in a slider menu.
    * 
@@ -53,7 +53,8 @@ const AppNavigation = (props) => {
 	);
 
 	const showLinks = () =>
-		links.map((link, i) => {
+		appMenu.map((link, i) => {
+		// links.map((link, i) => {
 			return element(link, i);
 		});
 

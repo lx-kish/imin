@@ -14,19 +14,12 @@ import Profile from './pages/profile/profile.page';
 import Account from './pages/account/account.page';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
-import NavigationBar from './components/navigation/navigation-bar/navigation-bar.component';
-
-import Layout from './components/layout/layout.hoc';
 import PrivateRoute from './hoc/private-route/private-route.hoc';
 import PublicRoute from './hoc/public-route/public-route.hoc';
-import Auth from './hoc/auth/auth.hoc';
-// import Auth from './hoc/auth';
 
 const Routes = () => {
 	return (
-		// <Layout>
 		<Switch>
-			{/* <NavigationBar /> */}
 			<PublicRoute path="/" exact component={Home} />
 			<PublicRoute path="/about" exact component={About} />
 			<PublicRoute path="/contact" exact component={Contact} />
@@ -48,16 +41,7 @@ const Routes = () => {
 			<PrivateRoute path="/account" exact component={Account} />
 			<PublicRoute path="/terms" exact component={TermsAndConditions} />
 			{/* <Route path="/terms" exact component={TermsAndConditions} /> */}
-			{/* <Route path='/login' exact component={Auth(Login, false)}/>
-                <Route path='/user' exact component={Auth(User, true)}/>
-                <Route path='/user/logout' exact component={Auth(Logout, true)}/>
-                <Route path='/user/add' exact component={Auth(AddReview, true)}/>
-                <Route path='/user/register' exact component={Auth(Register, true)}/>
-                <Route path='/user/edit-post/:id' exact component={Auth(EditReview, true)}/>
-                <Route path='/books/:id' exact component={Auth(BookView, null)} />
-                <Route path='/user/user-reviews' exact component={Auth(UserPosts, true)}/> */}
 		</Switch>
-		// </Layout>
 	);
 };
 

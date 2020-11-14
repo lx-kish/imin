@@ -139,6 +139,7 @@
 
 .navigation-link {
   display: inline-block;
+  // font-size: 4rem;
   font-size: 5rem;
   // font-size: 6rem;
   // font-size: 2rem;
@@ -160,5 +161,10 @@
   &:visited,
   &:active {
     text-decoration: none;
+  }
+
+  &__delimeter {
+    margin: 4rem 10rem;
+    background-color: var(--color-font-main);
   }
 }

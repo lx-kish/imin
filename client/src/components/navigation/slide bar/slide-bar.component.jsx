@@ -12,9 +12,14 @@ const SlideBar = ({ open, links, hideSliderMenu }) => {
       </Link>
     </li>
   );
+  
+  const delimeter = (link, i) => (
+    <hr key={i} className={link.className} />
+  );
 
   const showLinks = (links) =>
     links.map((link, i) => {
+      if(link.name === 'delimeter') return delimeter(link, i);
       return element(link, i);
     });
 

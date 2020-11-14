@@ -14,11 +14,17 @@ import Footer from '../../components/footer/footer.component';
 const PublicRoute = ({ component: Component, ...rest }) => {
 
 	return (
-		<Route >
-			<NavigationBar user={{}}/>
-			<Component {...rest}/>
-			<Footer />
-		</Route>
+		<Route
+			{...rest}
+			render={(props) =>
+				(
+					<>
+						<NavigationBar data={{}}/>
+						<Component {...props} />
+						<Footer />
+					</>
+				)}
+		/>
 	);
 };
 export default PublicRoute;

@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import useClickOutside from '../../../utils/useClickOutside';
+import appMenu from '../../../utils/appMenu';
 
 import Btn from '../../btn/btn.component';
 import logo from '../../../graphics/logo_pink.png';
-// import MenuIcon from "../../icons/icon-menu.component";
 import LogInIcon from '../../icons/icon-log-in.component';
+import LogOutIcon from '../../icons/icon-log-out.component';
 import BurgerIcon from '../burger icon/icon-burger.component';
 import SlideBar from '../slide bar/slide-bar.component';
 
@@ -49,9 +50,9 @@ const NavigationBar = (props) => {
    * 
    */
 
-   console.log('navigation bar props.user ===> ', props.user);
-
-	const links = [
+	console.log('navigation bar props ===> ', props);
+	
+	const siteMenu = [
 		{
 			name: 'Home',
 			link: '/',
@@ -64,7 +65,7 @@ const NavigationBar = (props) => {
 		},
 		{
 			name: 'Platform',
-			link: '/platform',
+			link: '/profile',
 			className: 'navigation-link color-pink paragraph--uppercase'
 		},
 		{
@@ -73,6 +74,27 @@ const NavigationBar = (props) => {
 			className: 'navigation-link color-pink paragraph--uppercase'
 		}
 	];
+
+	// const signIn = [
+	// 	{
+	// 		name: 'Sign in',
+	// 		link: '/signin',
+	// 		className: 'navigation-link color-pink paragraph--uppercase'
+	// 	}
+	// ];
+  
+  const delimeter = [
+		{
+			name: 'delimeter',
+			link: '',
+			className: 'navigation-link__delimeter'
+		}
+	];
+
+  // console.log('navigation bar props.data?._id ===> ', props.data?._id);
+  // console.log('navigation bar menu list ===> ', props.data?._id ? siteMenu :  [ ...appMenu, ...delimeter, ...siteMenu]);
+	const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu] : siteMenu;
+
 
 	/** Single state hook useState for all the state properties */
 	const [ fullState, setFullState ] = React.useState({
@@ -111,7 +133,7 @@ const NavigationBar = (props) => {
 	);
 
 	const showLinks = () =>
-		links.map((link, i) => {
+		siteMenu.map((link, i) => {
 			return element(link, i);
 		});
 
@@ -120,15 +142,26 @@ const NavigationBar = (props) => {
 			<div className="navigation__content navigation__content--mb">
 				<div className="navigation__menu-box" ref={menuRef}>
 					<BurgerIcon open={fullState.open} setOpen={setState} />
-					<SlideBar open={fullState.open} links={links} hideSliderMenu={hideSliderMenu} />
+					<SlideBar open={fullState.open} links={slideMenu} hideSliderMenu={hideSliderMenu} />
 				</div>
 
 				<div className="navigation__logo-box">
 					<img src={logo} alt="Logo" className="navigation__logo" />
 				</div>
 
-				{props.isAuth ? (
-					'Auth'
+				{props.data?._id ? (
+          // 'isAuth'
+          <Link
+						to={{
+							pathname: '/logout'
+						}}
+						className="navigation__btn-box"
+					>
+						<Btn
+							title={<LogOutIcon className="color-white" />}
+							className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
+						/>
+					</Link>
 				) : (
 					<Link
 						to={{
@@ -175,5 +208,5 @@ const NavigationBar = (props) => {
 		</nav>
 	);
 };
-//{ pathname: '/route', state: { foo: 'bar'} }
+
 export default NavigationBar;

@@ -89,7 +89,7 @@ const SignIn = (props) => {
                   errorMessage: "",
                 });
 
-                console.log("after push into profile", props.history);
+                // console.log("after push into profile", props);
                 props.history.push(`/profile`);
                 // props.history.push(`/profile`, { role: res.data.data.role });
 
