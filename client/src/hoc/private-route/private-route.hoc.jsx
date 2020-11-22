@@ -16,9 +16,8 @@ import Footer from '../../components/footer/footer.component';
  * user id in the database;
  * @rest - other props to the component
  */
-const PrivateRoute = ({ component: Component, ...rest }) => {
-	// const PrivateRoute = props => {
-
+// const PrivateRoute = ({ component: Component, privateRoute, ...rest }) => {
+const PrivateRoute = (props) => {
 	/**
    * 1) check user variable.
    *
@@ -42,57 +41,91 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
    *
    */
 
-	const [ user, setUser ] = React.useState(false);
+	// console.log('props.privateRoute from private-route ===> ', privateRoute);
+
+	const { component: Component, privateRoute, path, ...rest } = props;
+
+	const [ user, setUser ] = React.useState({});
 	const [ loaded, setLoaded ] = React.useState(false);
+	// const [ counter, setCounter ] = React.useState(0);
 
-	React.useEffect(() => {
+	// setPrprts(props);
 
-		let isCancelled = false;
-
-		const fetchData = async () => {
-			await axios
+	const fetchData = async (isCancelled) => {
+		await axios
 			// const result = await axios
-				.get(`/api/users/auth`, config)
-				.then((res) => {
-					if (!isCancelled) {
-						console.log('PrivateRoute, res =====> ', res);
-						setUser(res.data.data);
-						setLoaded(true);
-					}
-				})
-				.catch((error) => {
-					console.log('PrivateRoute, error =====> ', error.response);
+			.get(`/api/users/auth`, config)
+			.then((res) => {
+				if (!isCancelled) {
+					// console.log('PrivateRoute, res =====> ', res);
+					console.log('PrivateRoute, res.data.data =====> ', res.data);
+					setUser(res.data);
 					setLoaded(true);
-				});
-		};
+				}
+			})
+			.catch((error) => {
+				console.log('PrivateRoute, error =====> ', error.response);
+				setUser({});
+				setLoaded(true);
+			});
+	};
 
-		fetchData();
-		return () => {
-			isCancelled = true;
-    };
-    /**
+	React.useEffect(
+		() => {
+			let isCancelled = false;
+
+			fetchData(isCancelled);
+			return () => {
+				isCancelled = true;
+			};
+			/**
      * Input dependencies:
      * undefined => every render,
      * [a, b] => when a or b change,
      * [] => only once
      * https://medium.com/@sdolidze/the-iceberg-of-react-hooks-af0b588f43fb
      */
-	}, []);
+		},
+		[]
+	);
 
 	if (!loaded) {
 		return <div className="private-route__loading">loading...</div>;
 	}
 
+	// console.log('user from private-route ===> ', user);
+
+	/**
+	 * Rendering options:
+	 * 
+	 * 1) Private route
+	 * 1.1) logged in
+	 * 1.2) not logged in
+	 * 2) Public route
+	 * 2.1) logged in
+	 * 2.2) not logged in
+	 */
+
+	// setCounter((counter) => counter + 1);
+
+	console.log('============================================>');
+	console.log('props from privateRoute hoc ===> ', props);
+	console.log('Component from privateRoute hoc ===> ', Component.name);
+	console.log('user from privateRoute hoc ===> ', user);
+	console.log('loaded from privateRoute hoc ===> ', loaded);
+	console.log('user?.data?._id from privateRoute hoc ===> ', user?.data?._id);
+	// console.log('counter from privateRoute hoc ===> ', counter);
+
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
-				user ? (
-					<>
-						<NavigationBar {...user}/>
+				user?.data?._id ? (
+					<React.Fragment>
+						<NavigationBar {...user} />
 						<Component {...user} {...props} />
 						<Footer />
-					</>
+					</React.Fragment>
 				) : (
 					<Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
 				)}

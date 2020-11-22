@@ -37,7 +37,7 @@ const LogOut = props => {
     const logout = () => {
         // console.log('log-out');
 
-        axios.post(`/api/user/logout`, '', config)
+        axios.post(`/api/users/logout`, '', config)
 
             .then((res) => {
 

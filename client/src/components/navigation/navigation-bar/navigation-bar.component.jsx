@@ -51,7 +51,7 @@ const NavigationBar = (props) => {
    */
 
 	console.log('navigation bar props ===> ', props);
-	
+
 	const siteMenu = [
 		{
 			name: 'Home',
@@ -82,8 +82,8 @@ const NavigationBar = (props) => {
 	// 		className: 'navigation-link color-pink paragraph--uppercase'
 	// 	}
 	// ];
-  
-  const delimeter = [
+
+	const delimeter = [
 		{
 			name: 'delimeter',
 			link: '',
@@ -91,10 +91,9 @@ const NavigationBar = (props) => {
 		}
 	];
 
-  // console.log('navigation bar props.data?._id ===> ', props.data?._id);
-  // console.log('navigation bar menu list ===> ', props.data?._id ? siteMenu :  [ ...appMenu, ...delimeter, ...siteMenu]);
+	// console.log('navigation bar props.data?._id ===> ', props.data?._id);
+	// console.log('navigation bar menu list ===> ', props.data?._id ? siteMenu :  [ ...appMenu, ...delimeter, ...siteMenu]);
 	const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu] : siteMenu;
-
 
 	/** Single state hook useState for all the state properties */
 	const [ fullState, setFullState ] = React.useState({
@@ -144,37 +143,35 @@ const NavigationBar = (props) => {
 					<BurgerIcon open={fullState.open} setOpen={setState} />
 					<SlideBar open={fullState.open} links={slideMenu} hideSliderMenu={hideSliderMenu} />
 				</div>
-
 				<div className="navigation__logo-box">
 					<img src={logo} alt="Logo" className="navigation__logo" />
 				</div>
-
 				{props.data?._id ? (
-          // 'isAuth'
-          <Link
-						to={{
-							pathname: '/logout'
-						}}
-						className="navigation__btn-box"
-					>
-						<Btn
-							title={<LogOutIcon className="color-white" />}
-							className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
-						/>
-					</Link>
+				// 'isAuth'
+				<Link
+					to={{
+						pathname: '/logout'
+					}}
+					className="navigation__btn-box"
+				>
+					<Btn
+						title={<LogOutIcon className="color-white" />}
+						className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
+					/>
+				</Link>
 				) : (
-					<Link
-						to={{
-							pathname: '/signin',
-							state: { role: 'student' }
-						}}
-						className="navigation__btn-box"
-					>
-						<Btn
-							title={<LogInIcon className="color-white" />}
-							className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
-						/>
-					</Link>
+				<Link
+					to={{
+						pathname: '/signin',
+						state: { role: 'student' }
+					}}
+					className="navigation__btn-box"
+				>
+					<Btn
+						title={<LogInIcon className="color-white" />}
+						className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
+					/>
+				</Link>
 				)}
 			</div>
 
@@ -188,7 +185,18 @@ const NavigationBar = (props) => {
 
 					<div className="navigation__item">
 						{props.isAuth ? (
-							'Auth'
+							// 'Auth'
+							<Link
+								to={{
+									pathname: '/logout'
+								}}
+								className="navigation__btn-box"
+							>
+								<Btn
+									title={<LogOutIcon className="color-white" />}
+									className={'btn btn--tertiary navigation__btn navigation__btn--mb btn--login'}
+								/>
+							</Link>
 						) : (
 							<Link
 								to={{

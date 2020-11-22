@@ -166,7 +166,7 @@ module.exports = {
 
   signIn: catchAsync(async (req, res, next) => {
 
-    logger.debug('Calling Sign-In endpoint with body: %o', req.body)
+    logger.debug('Calling Sign-In endpoint with body: %o', req.body);
 
     const { email, password } = req.body;
 
@@ -181,6 +181,8 @@ module.exports = {
     if (!user || !(await user.comparePassword(password, user.password))) {
       return next(new AppError('Incorrect email or password!', 401));
     }
+
+    logger.debug('Found user at Sign-In endpoint with properties:', user);
 
     generateAndSendToken(user, 200, req, res);
   }),

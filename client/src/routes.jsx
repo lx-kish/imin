@@ -20,14 +20,15 @@ import PublicRoute from './hoc/public-route/public-route.hoc';
 const Routes = () => {
 	return (
 		<Switch>
-			<PublicRoute path="/" exact component={Home} />
-			<PublicRoute path="/about" exact component={About} />
-			<PublicRoute path="/contact" exact component={Contact} />
-			<PublicRoute path="/educators" exact component={Educators} />
-			<PublicRoute path="/students" exact component={Students} />
-			<PublicRoute path="/partners" exact component={Partners} />
-			<PublicRoute path="/signup" exact component={SignUp} />
-			<PublicRoute path="/signin" exact component={SignIn} />
+			<PublicRoute path="/" exact component={Home} privateRoute={false} />
+			<PublicRoute path="/about" exact component={About} privateRoute={false} />
+			<PublicRoute path="/contact" exact component={Contact} privateRoute={false} />
+			<PublicRoute path="/educators" exact component={Educators} privateRoute={false} />
+			<PublicRoute path="/students" exact component={Students} privateRoute={false} />
+			<PublicRoute path="/partners" exact component={Partners} privateRoute={false} />
+			<PublicRoute path="/signup" exact component={SignUp} privateRoute={false} />
+			<PublicRoute path="/signin" exact component={SignIn} privateRoute={false} />
+			<PublicRoute path="/terms" exact component={TermsAndConditions} privateRoute={false} />
 			{/* <Route path="/" exact component={Home} />
 				<Route path="/about" exact component={About} />
 				<Route path="/contact" exact component={Contact} />
@@ -36,10 +37,9 @@ const Routes = () => {
 				<Route path="/partners" exact component={Partners} />
 				<Route path="/signup" exact component={SignUp} />
 				<Route path="/signin" exact component={SignIn} /> */}
-			<PrivateRoute path="/logout" exact component={LogOut} />
-			<PrivateRoute path="/profile" exact component={Profile} />
-			<PrivateRoute path="/account" exact component={Account} />
-			<PublicRoute path="/terms" exact component={TermsAndConditions} />
+			<PrivateRoute path="/logout" exact component={LogOut} privateRoute={true} />
+			<PrivateRoute path="/profile" exact component={Profile} privateRoute={true} />
+			<PrivateRoute path="/account" exact component={Account} privateRoute={true} />
 			{/* <Route path="/terms" exact component={TermsAndConditions} /> */}
 		</Switch>
 	);
