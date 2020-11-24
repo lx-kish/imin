@@ -9,7 +9,7 @@ import ImageSeeTheImpact from '../../graphics/pages-content/educators-page/4-see
 import ImageBeAnImpact from '../../graphics/pages-content/educators-page/5-be-an-impact-partner.png';
 import ImageTheNextWave from '../../graphics/pages-content/educators-page/6-the-next-wave.png';
 
-import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
+import IntroSecondary from '../../components/intros/intro-secondary/intro-secondary.component';
 import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
@@ -18,14 +18,14 @@ import StepArticle from '../../components/panes/step-article/step-article.compon
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
-    header: {
-        headerClassName: 'header',
-        containerClassName: 'header__container header__container--educators-page',
+    intro: {
+        introClassName: 'intro',
+        containerClassName: 'intro__container intro__container--educators-page',
         title: 'Become a Community Educator.',
-        titleClassName: 'header__title heading-primary color-pink',
+        titleClassName: 'intro__title heading-primary color-pink',
         renderButton: true,
         button: {
-            boxClassName: 'header__btn-box',
+            boxClassName: 'intro__btn-box',
             linkTo: '/signup',
             role: 'educator',
             config: {
@@ -223,7 +223,7 @@ const EducatorsPage = () => {
 
     return (
         <React.Fragment>
-            <HeaderSecondary {...content.header} />
+            <IntroSecondary {...content.intro} />
             {renderSinglePaneSection(content.content.singlePaneRow)}
             <div className='lvl2__steps-content'>
                 {loopSteps()}

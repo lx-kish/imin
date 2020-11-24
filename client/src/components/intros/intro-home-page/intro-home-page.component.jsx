@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import '../headers.styles.scss';
+import '../intros.styles.scss';
 
 import Btn from '../../btn/btn.component';
 
 const HeaderHomePage = props => {
 
     return (
-        <header className={props.headerClassName}>
+        <section className={props.sectionClassName}>
             <div className={props.containerClassName}>
                 <h1 className={props.titleClassName}>
                     {props.title}
@@ -28,7 +28,7 @@ const HeaderHomePage = props => {
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
     )
 };
 

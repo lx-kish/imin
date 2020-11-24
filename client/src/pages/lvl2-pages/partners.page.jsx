@@ -8,7 +8,7 @@ import ImageDonate from '../../graphics/pages-content/partners-page/2-donate.png
 import IconPhone from '../../components/icons/icon-phone.component';
 import IconEnvelop from '../../components/icons/icon-envelope.component';
 
-import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
+import IntroSecondary from '../../components/intros/intro-secondary/intro-secondary.component';
 import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
@@ -16,14 +16,14 @@ import StepArticle from '../../components/panes/step-article/step-article.compon
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
-    header: {
-        headerClassName: 'header',
-        containerClassName: 'header__container header__container--partners-page',
+    intro: {
+        introClassName: 'intro',
+        containerClassName: 'intro__container intro__container--partners-page',
         title: 'Openning up a world of possibilities.',
-        titleClassName: 'header__title heading-primary color-white',
+        titleClassName: 'intro__title heading-primary color-white',
         renderButton: false
         // button: {
-        //     boxClassName: 'header__btn-box',
+        //     boxClassName: 'intro__btn-box',
         //     linkTo: '/signup',
         //     role: 'educator',
         //     config: {
@@ -159,7 +159,7 @@ const PartnersPage = () => {
 
     return (
         <React.Fragment>
-            <HeaderSecondary {...content.header} />
+            <IntroSecondary {...content.intro} />
             {renderSinglePaneSection(content.content.singlePaneRow)}
             <div className='lvl2__steps-content'>
                 {loopSteps()}

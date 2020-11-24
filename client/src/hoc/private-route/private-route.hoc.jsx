@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 // import isAuth from '../../utils/isAuth';
 import config from '../../axios.config';
-import NavigationBar from '../../components/navigation/navigation-bar/navigation-bar.component';
+import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 
 /**
@@ -41,15 +41,10 @@ const PrivateRoute = (props) => {
    *
    */
 
-	// console.log('props.privateRoute from private-route ===> ', privateRoute);
-
 	const { component: Component, privateRoute, path, ...rest } = props;
 
 	const [ user, setUser ] = React.useState({});
 	const [ loaded, setLoaded ] = React.useState(false);
-	// const [ counter, setCounter ] = React.useState(0);
-
-	// setPrprts(props);
 
 	const fetchData = async (isCancelled) => {
 		await axios
@@ -93,39 +88,23 @@ const PrivateRoute = (props) => {
 		return <div className="private-route__loading">loading...</div>;
 	}
 
-	// console.log('user from private-route ===> ', user);
-
-	/**
-	 * Rendering options:
-	 * 
-	 * 1) Private route
-	 * 1.1) logged in
-	 * 1.2) not logged in
-	 * 2) Public route
-	 * 2.1) logged in
-	 * 2.2) not logged in
-	 */
-
-	// setCounter((counter) => counter + 1);
-
 	console.log('============================================>');
 	console.log('props from privateRoute hoc ===> ', props);
 	console.log('Component from privateRoute hoc ===> ', Component.name);
 	console.log('user from privateRoute hoc ===> ', user);
 	console.log('loaded from privateRoute hoc ===> ', loaded);
 	console.log('user?.data?._id from privateRoute hoc ===> ', user?.data?._id);
-	// console.log('counter from privateRoute hoc ===> ', counter);
 
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
 				user?.data?._id ? (
-					<React.Fragment>
-						<NavigationBar {...user} />
+					<div className="page">
+						<Header {...user} />
 						<Component {...user} {...props} />
 						<Footer />
-					</React.Fragment>
+					</div>
 				) : (
 					<Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
 				)}

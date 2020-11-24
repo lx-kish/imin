@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import NavigationBar from './navigation-bar.component';
+import Header from './header.component';
 
 const setUp = (props = {}) => {
-    return shallow(<NavigationBar {...props} />);
+    return shallow(<Header {...props} />);
 }
 
 describe('Navigation bar component test set', () => {

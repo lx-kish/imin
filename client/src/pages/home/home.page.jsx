@@ -6,7 +6,7 @@ import educateImg from '../../graphics/pages-content/home-page/home-educate-1x.p
 import learnImg from '../../graphics/pages-content/home-page/home-learn-1x.png';
 import supportImg from '../../graphics/pages-content/home-page/home-support-1x.png';
 
-import HeaderHomePage from '../../components/headers/header-home-page/header-home-page.component';
+import IntroHomePage from '../../components/intros/intro-home-page/intro-home-page.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import Image from '../../components/panes/image/image.component';
 import PartArticle from '../../components/panes/part-article/part-article.component';
@@ -15,17 +15,17 @@ import ContactForm from '../../components/forms/contact-form/contact-form.compon
 // import PartsHomePage from '../../components/parts-home-page/parts-home-page.component';
 
 const content = {
-    header: {
-        headerClassName: 'header header--home-page',
-        containerClassName: 'header__container header__container--home-page',
+    intro: {
+        sectionClassName: 'intro intro--home-page',
+        containerClassName: 'intro__container intro__container--home-page',
         title: 'Industry and Community-led Education',
-        titleClassName: 'header__title--home-page heading-primary color-pink',
+        titleClassName: 'intro__title--home-page heading-primary color-pink',
         contentBox: {
-            contentClassName: 'header__content-box',
+            contentClassName: 'intro__content-box',
             paragraph: `At I'm In, our vision is to make community led education and development opportunities <b>free and accessible</b> for every young person in every corner of New Zealand. Our platform connects organisations, businesses and individuals who want to teach, with young people who want to learn.`,
-            paragraphClassName: 'header__paragraph',
+            paragraphClassName: 'intro__paragraph',
             button: {
-                boxClassName: 'header__btn-box',
+                boxClassName: 'intro__btn-box',
                 linkTo: '/signup',
                 role: 'student',
                 config: {
@@ -38,9 +38,9 @@ const content = {
     },
     content: {
         sectionClassName: 'parts',
-        sectionHeader: {
-            sectionHeaderClassName: 'parts__heading parts__container heading-secondary',
-            sectionHeader: `How can you be part of I'm in?`
+        sectionIntro: {
+            sectionIntroClassName: 'parts__heading parts__container heading-secondary',
+            sectionIntro: `How can you be part of I'm in?`
         },
         partsSections: [
             {
@@ -159,7 +159,7 @@ const HomePage = () => {
 
     return (
         <React.Fragment>
-            <HeaderHomePage {...content.header}/>
+            <IntroHomePage {...content.intro}/>
             {/* <PartsHomePage /> */}
             {loopParts()}
             <ContactForm />

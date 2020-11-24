@@ -5,7 +5,7 @@ import './lvl2-pages.styles.scss';
 import FirstImage from '../../graphics/pages-content/about-page/about-dna-1.png';
 import SecondImage from '../../graphics/pages-content/about-page/about-strategy-2.png';
 
-import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
+import IntroSecondary from '../../components/intros/intro-secondary/intro-secondary.component';
 import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
@@ -15,14 +15,14 @@ import LinkedBottomParagraph from '../../components/panes/paragraphs/paragraph-l
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
-    header: {
-        headerClassName: 'header',
-        containerClassName: 'header__container header__container--about-page',
+    intro: {
+        introClassName: 'intro',
+        containerClassName: 'intro__container intro__container--about-page',
         title: 'A vision from New Zealand.',
-        titleClassName: 'header__title--second-lvl-page heading-primary color-pink',
+        titleClassName: 'intro__title--second-lvl-page heading-primary color-pink',
         renderButton: true,
         button: {
-            boxClassName: 'header__btn-box',
+            boxClassName: 'intro__btn-box',
             linkTo: '/signup',
             role: 'student',
             config: {
@@ -151,7 +151,7 @@ const AboutPage = () => {
 
     return (
         <React.Fragment>
-            <HeaderSecondary {...content.header} />
+            <IntroSecondary {...content.intro} />
             {renderSinglePaneSection(content.content.firstSinglePaneRow)}
             {renderDoublePaneSection(content.content.firstDoublePanesSection)}
             {renderSinglePaneSection(content.content.secondSinglePaneRow)}

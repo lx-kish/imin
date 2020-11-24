@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Route } from 'react-router-dom';
 
 import config from '../../axios.config';
-import NavigationBar from '../../components/navigation/navigation-bar/navigation-bar.component';
+import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 
 /**
@@ -18,9 +18,6 @@ const PublicRoute = (props) => {
 
 	const [ user, setUser ] = React.useState({});
 	const [ loaded, setLoaded ] = React.useState(false);
-	// const [ counter, setCounter ] = React.useState(0);
-
-	// setPrprts(props);
 
 	const fetchData = async (isCancelled) => {
 		await axios
@@ -68,11 +65,11 @@ const PublicRoute = (props) => {
 		<Route
 			{...rest}
 			render={(props) => (
-				<React.Fragment>
-					<NavigationBar data={{}} />
+				<div className="page">
+					<Header data={{}} />
 					<Component {...props} />
 					<Footer />
-				</React.Fragment>
+				</div>
 			)}
 		/>
 	);

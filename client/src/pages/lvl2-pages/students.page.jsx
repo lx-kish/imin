@@ -9,7 +9,7 @@ import ImageGainSkills from '../../graphics/pages-content/students-page/3-gain-s
 import ImageRateExperiences from '../../graphics/pages-content/students-page/4-rate-experiences.png';
 import ImageMakeDecisionAboutYourFuture from '../../graphics/pages-content/students-page/5-make-decisions-about-your-future.png';
 
-import HeaderSecondary from '../../components/headers/header-secondary/header-secondary.component';
+import IntroSecondary from '../../components/intros/intro-secondary/intro-secondary.component';
 import SinglePaneRow from '../../hoc/rows/single-pane-row/single-pane-row.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';
 import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
@@ -18,14 +18,14 @@ import StepArticle from '../../components/panes/step-article/step-article.compon
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
-    header: {
-        headerClassName: 'header',
-        containerClassName: 'header__container header__container--students-page',
+    intro: {
+        introClassName: 'intro',
+        containerClassName: 'intro__container intro__container--students-page',
         title: `Learn through I'm In.`,
-        titleClassName: 'header__title heading-primary color-violet',
+        titleClassName: 'intro__title heading-primary color-violet',
         renderButton: true,
         button: {
-            boxClassName: 'header__btn-box',
+            boxClassName: 'intro__btn-box',
             linkTo: '/signup',
             role: 'student',
             config: {
@@ -223,7 +223,7 @@ const StudentsPage = () => {
 
     return (
         <React.Fragment>
-            <HeaderSecondary {...content.header} />
+            <IntroSecondary {...content.intro} />
             {renderSinglePaneSection(content.content.singlePaneRow)}
             <div className='lvl2__steps-content'>
                 {loopSteps()}
