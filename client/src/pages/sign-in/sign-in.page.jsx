@@ -270,7 +270,7 @@ const SignIn = (props) => {
   };
 
   return (
-    <main className={"sign-in"}>
+    <main className="sign-in container">
       <img
         src={fullState.role === "student" ? ImgStudent : ImgEducator}
         alt={`${fullState.role} avatar`}

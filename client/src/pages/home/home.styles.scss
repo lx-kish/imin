@@ -29,15 +29,29 @@
     }
 }
 
-.parts {
-    background-color: var(--color-white);
-    // text-align: center;
+.home {
+    &__section {
 
-    &__container {
-        margin: 0 auto;
-        max-width: 111.4rem;
-        padding: 3.2rem 8rem;
+        @include respond(_1040-1200) {
+            display: flex;
+            
+            margin: 0 auto;
+            // max-width: 100%;
+            padding: 3.2rem 31rem;            
+        }
     }
+
+    
+}
+
+.parts {
+    // background-color: var(--color-white);
+
+    // &__container {
+    //     margin: 0 auto;
+    //     max-width: 111.4rem;
+    //     padding: 3.2rem 8rem;
+    // }
 
     &__heading {
         text-align: center;

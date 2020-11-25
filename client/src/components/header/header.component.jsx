@@ -98,7 +98,7 @@ const Header = (props) => {
 				</div>
 				{props.data?._id ? (
 					// 'isAuth'
-					<div className="header__btn-box header__btn-box--mb">
+					<div className="header__btn-box--mb">
 						<Link
 							to={{
 								pathname: '/logout'
@@ -109,7 +109,7 @@ const Header = (props) => {
 						</Link>
 					</div>
 				) : (
-					<div className="header__btn-box header__btn-box--mb">
+					<div className="header__btn-box--mb">
 						<Link
 							to={{
 								pathname: '/signin',
@@ -131,7 +131,7 @@ const Header = (props) => {
 				<div className="header__nav-box">
 					<NavigationBar />
 
-					<div className="header__nav-item header__btn-box">
+					<div className="header__btn-box--dt">
 						{props.data?._id ? (
 							// 'Auth'
 							<Link
