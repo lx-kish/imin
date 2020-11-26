@@ -41,9 +41,8 @@ const content = {
 		},
 		partsSections: [
 			{
-				sectionClassName: 'home__section bg-grey row--parts',
-				rowClassName: 'parts__container row--parts container',
-				colClassName: 'col-1-of-2--parts home__section-item',
+				sectionClassName: 'home__section bg-grey',
+				segmentClassName: 'home__segment',
 				img: {
 					src: educateImg,
 					alt: 'For those who want to educate',
@@ -63,14 +62,13 @@ const content = {
 					cta: {
 						text: 'Become a community educator.',
 						link: '/educators',
-						className: 'navigation-link color-pink paragraph--uppercase'
+						className: 'home__link color-pink paragraph--uppercase'
 					}
 				}
 			},
 			{
-				sectionClassName: 'home__section row--parts',
-				rowClassName: 'parts__container row--parts container',
-				colClassName: 'col-1-of-2--parts home__section-item',
+				sectionClassName: 'home__section home__section--middle',
+				segmentClassName: 'home__segment',
 				img: {
 					src: learnImg,
 					alt: 'For those who want to learn',
@@ -90,14 +88,13 @@ const content = {
 					cta: {
 						text: `Learn through I'm In.`,
 						link: '/students',
-						className: 'navigation-link color-violet paragraph--uppercase'
+						className: 'home__link color-violet paragraph--uppercase'
 					}
 				}
 			},
 			{
-				sectionClassName: 'home__section bg-grey row--parts',
-				rowClassName: 'parts__container row--parts container',
-				colClassName: 'col-1-of-2--parts home__section-item',
+				sectionClassName: 'home__section bg-grey',
+				segmentClassName: 'home__segment',
 				img: {
 					src: supportImg,
 					alt: 'For those who want to support',
@@ -117,7 +114,7 @@ const content = {
 					cta: {
 						text: 'Become a partner.',
 						link: '/partners',
-						className: 'navigation-link color-pink paragraph--uppercase'
+						className: 'home__link color-pink paragraph--uppercase'
 					}
 				}
 			}
@@ -128,17 +125,8 @@ const content = {
 const renderArticle = (data) => {
 	return (
 		<section className={data.sectionClassName}>
-			{/* <div className={data.rowClassName}> */}
-				<div className={data.colClassName}>{<Image {...data.img} />}</div>
-				<div className={data.colClassName}>{<PartArticle {...data.text} />}</div>
-			{/* </div> */}
-			{/* <DoublePanesRow
-				rowClassName={data.rowClassName}
-				leftColClassName={data.colClassName}
-				rightColClassName={data.colClassName}
-				left={<Image {...data.img} />}
-				right={<PartArticle {...data.text} />}
-			/> */}
+			<div className={data.segmentClassName}>{<Image {...data.img} />}</div>
+			<div className={data.segmentClassName}>{<PartArticle {...data.text} />}</div>
 		</section>
 	);
 };
@@ -155,7 +143,6 @@ const HomePage = () => {
 	return (
 		<React.Fragment>
 			<IntroHomePage {...content.intro} />
-			{/* <PartsHomePage /> */}
 			{loopParts()}
 			<ContactForm />
 		</React.Fragment>

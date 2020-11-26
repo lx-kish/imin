@@ -13,35 +13,71 @@
 
 ////////////////////////////////////////////////
 // CUSTOM GRID FOR PARTS SECTION
-.row--parts {
-    .col-1-of-2--parts {
-        width: calc((100% - #{$gutter-horizontal-parts}) / 2);
-    }
+// .row--parts {
+//     .col-1-of-2--parts {
+//         width: calc((100% - #{$gutter-horizontal-parts}) / 2);
+//     }
 
-    @include clearfix;
+//     @include clearfix;
 
-    [class^="col-"] {
-        float: left;
+//     [class^="col-"] {
+//         float: left;
 
-        &:not(:last-child) {
-            margin-right: $gutter-horizontal-parts;
-        }
-    }
-}
+//         &:not(:last-child) {
+//             margin-right: $gutter-horizontal-parts;
+//         }
+//     }
+// }
 
 .home {
     &__section {
+        display: flex;
+        margin: 0 auto;
 
         @include respond(_1040-1200) {
-            display: flex;
-            
-            margin: 0 auto;
             // max-width: 100%;
             padding: 3.2rem 31rem;            
         }
+        
+        &--middle {
+            @include respond(_1040-1200) {
+                margin: 10rem auto;
+            }
+        }
     }
 
+    &__segment {
+        width: calc((100% - #{$gutter-horizontal-parts}) / 2);
+        &:not(:last-child) {
+            margin-right: $gutter-horizontal-parts;
+        }
+    }  
     
+    &__link {
+
+        display: block;
+        font-size: 5rem;
+        font-weight: 600;
+        // margin: 2rem 0;
+          
+        transition: transform .2s linear;
+          
+        @include respond(_1040-1200) {
+            font-size: 2.2rem;
+            letter-spacing: 0.2rem;
+            margin: 6rem 0 0 0;
+        }
+         
+        &:link,
+        &:visited,
+        &:active {
+            text-decoration: none;
+        }
+            
+        &:hover {
+            transform: translateY(-1rem);
+        }
+    }   
 }
 
 .parts {
