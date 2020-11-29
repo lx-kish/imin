@@ -3,10 +3,14 @@
 body {
     font-family: 'Quicksand', sans-serif;
     font-weight: $font-weight-regular;
-    font-size: $font-size-paragraph;
-    line-height: calc(#{$font-size-paragraph} * 1.3);
+    font-size: $font-size-paragraph--mb;
+    line-height: calc(#{$font-size-paragraph--mb} * 1.3);
     // line-height: 1.7;
     color: var(--color-font-main);
+    @include respond(_1040-1200) {
+        font-size: $font-size-paragraph--dt;//2.3rem;
+        line-height: calc(#{$font-size-paragraph--dt} * 1.3);
+    }
 }
 
 .heading-primary {
@@ -16,7 +20,7 @@ body {
     
     &--uppercase {
         text-transform: uppercase;
-        letter-spacing: .6rem;
+        letter-spacing: $letter-spacing-primary; // .6rem;
     }
 }
 
@@ -26,7 +30,7 @@ body {
 
     &--uppercase {
         text-transform: uppercase;
-        letter-spacing: .5rem;
+        letter-spacing: $letter-spacing-secondary; // .5rem;
     }
 }
 
@@ -36,7 +40,7 @@ body {
 
     &--uppercase {
         text-transform: uppercase;
-        letter-spacing: .4rem;
+        letter-spacing: $letter-spacing-tertiary; // .4rem;
     }
 }
 
@@ -46,7 +50,7 @@ body {
 
     &--uppercase {
         text-transform: uppercase;
-        letter-spacing: .3rem;
+        letter-spacing: $letter-spacing-quaternary; // .3rem;
     }
 }
 
@@ -62,10 +66,13 @@ body {
 
 .paragraph {
     font-weight: $font-weight-regular;
-    font-size: $font-size-paragraph;
+    font-size: $font-size-paragraph--mb;//3rem;
+    @include respond(_1040-1200) {
+        font-size: $font-size-paragraph--dt;//2.3rem;
+    }
 
     &--uppercase {
         text-transform: uppercase;
-        letter-spacing: .2rem;
+        letter-spacing: $letter-spacing-paragraph; //.2rem
     }
 }

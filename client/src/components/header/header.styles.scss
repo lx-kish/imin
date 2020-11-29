@@ -1,4 +1,5 @@
 @import "../../project-styles/mixins";
+@import "../../project-styles/variables";
 
 .header {
   position: fixed;
@@ -154,10 +155,9 @@
   // align-self: center;
   font-size: 5rem;
   font-weight: 600;
-  margin: 2rem 0;
+  margin: 4rem 0;
 
-  transition: transform .2s linear;
-
+  
   // text-align: center;
   // text-decoration: none;
   // min-height: 100%;
@@ -165,15 +165,18 @@
   // line-height: 100%;
   // height: 100%;
   // vertical-align: middle;
-
-
-
+  
+  
+  
   @include respond(_1040-1200) {
-    font-size: 2.2rem;
+    // font-size: 2.2rem;
+    font-size: $font-size-paragraph--dt;//2.3rem;
     letter-spacing: 0.2rem;
     margin: 0 6rem 0 0;
+    
+    transition: transform .2s linear;
   }
-
+  
   &:link,
   &:visited,
   &:active {
@@ -181,7 +184,9 @@
   }
   
   &:hover {
-    transform: scale(1.15);
+    @include respond(_1040-1200) {
+      transform: scale(1.15);
+    }
     // background-color: var(--color-pink-4);
     // border-bottom: solid var(--color-pink);
   }

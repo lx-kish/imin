@@ -63,6 +63,11 @@
         text-align: justify;
         font-size: 2.3rem;
         background-color: var(--color-white);
+        
+        &--home-page {
+            font-size: 3rem;
+            max-width: 156rem;
+        }
     }
 
     &__btn-box {

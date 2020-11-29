@@ -50,7 +50,8 @@ $font-size-heading-secondary: 4.2rem;
 $font-size-heading-tertiary: 3.6rem;
 $font-size-heading-quaternary: 3rem;//2.4rem;
 $font-size-heading-quinary: 2.4rem;
-$font-size-paragraph: 2rem;
+$font-size-paragraph--mb: 3rem;//3rem;//2rem
+$font-size-paragraph--dt: 2.3rem;//3rem;//2rem
 $font-size-input: 1.8rem;
 
 //FONT WEIGHTS
@@ -63,6 +64,7 @@ $letter-spacing-secondary: .5rem;
 $letter-spacing-tertiary: .4rem;
 $letter-spacing-quaternary: .3rem;
 $letter-spacing-paragraph: .2rem;
+$letter-spacing-minimal: .1rem;
 
 //BORDER RADIUS
 $border-radius-main: 1rem;
