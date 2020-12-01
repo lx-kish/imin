@@ -5,48 +5,72 @@
 
     &__main {
         margin-top: 11.9rem;
-        
+
         @include respond(_1040-1200) {
             margin-top: 6.9rem;
         }
     }
 
     &-intro {
-        // height: 76.5rem;
         text-align: center;
-        // margin-top: 6rem; //aligned with the header with navigation; should be renamed to intro-...
-        height: 88rem;
-    
-        &__container {
-            width: 100%;
-            height: 56rem;
-    
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            background-image: url("../../graphics/pages-content/home-page/Home-header-1920.png");
-        }
-    
-        &__title {
-            padding-top: 12.6rem;
-        }
 
-        &__content-box {
-            position: relative;
-            top: 26rem;
+        @include respond(_1040-1200) {
+            margin-bottom: -35rem;
         }
     
-        &__paragraph {
-            // max-width: calc(#{$grid-width} * 0.932);
-            margin: 0 auto;
-            padding: 6.4rem 16.2rem 2.5rem;
-            text-align: justify;
-            font-size: $font-size-paragraph--mb;//3rem;
-            background-color: var(--color-white);
-            max-width: 156rem;
+        &__background-img {
+            width: 100%;
+            padding-top:52%;
+            
+            background-repeat: no-repeat;
+            background-size: contain;
+            // background-size: cover;
+            background-position: center;
+            background-image: url("../../graphics/pages-content/home-page/home-header-mb.png");
+            @include respond(_1040-1200) {
+                padding-top:29%;
+                background-image: url("../../graphics/pages-content/home-page/home-header-dt.png");
+            }
+            // @include div-same-size-as-background-img("../../graphics/pages-content/home-page/Home-header-1920.png");
+        }
+        
+        &__content {
+            padding: 5vw;
             
             @include respond(_1040-1200) {
+                position: relative;
+                top: -50rem;
+
+                height: 100%;
+                padding: 0;
+            }
+        }
+
+        &__title {
+            margin: 3rem 0;
+            text-transform: uppercase;
+            color: var(--color-font-main);
+
+            @include respond(_1040-1200) {
+                color: var(--color-pink);
+                text-align: center;
+                text-transform: initial;
+                margin: 10rem 0 25rem;
+            }
+        }
+
+    
+        &__paragraph {
+            margin: 0 auto;
+            text-align: justify;
+            font-size: $font-size-paragraph--mb;//3rem;
+            
+            @include respond(_1040-1200) {
+                
+                padding: 6.4rem 16.2rem 2.5rem;
+                max-width: 156rem;
                 font-size: $font-size-paragraph--dt;//2.3rem;
+                background-color: var(--color-white);
             }
         }
     
@@ -54,6 +78,13 @@
             // padding: 3rem;
             margin: 3rem auto;
             // background-color: var(--color-white);
+        }
+
+        &__btn {
+            // height: 6.6rem;
+            width: 85vw;
+            margin: 4vw 0;
+            font-size: 3.5rem;
         }
     }
     

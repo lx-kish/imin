@@ -2,23 +2,47 @@
 @import "../../project-styles/variables";
 @import "../../project-styles/typography";
 
+/**
+Types of buttons:
+Navigation 'Sign in' button - mobile (with icon) / desktop (sign uppercase)
+
+Intro button 'Register now' - mobile/desktop
+
+Email subscription 'Submit' button - mobile/desktop
+
+Contacts enquiry form 'Enquiry now' button - mobile/desktop
+
+Sign in/Sign up forms buttons - mobile/desktop
+
+Log off page buttons - mobile/desktop
+
+Application interfaces buttons (Profile and others) - mobile/desktop
+*/
+
 .btn {
   display: inline-block;
   
   border-radius: $border-radius-main;
   text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  
   line-height: 2rem;
-
   font-weight: 600;
   padding: 0.8rem 4.5rem;
-  cursor: pointer;
+  font-size: $font-size-paragraph--mb;//2rem;//$font-size-paragraph;
+  
+  @include respond(_1040-1200) {
 
-  font-family: inherit;
-  font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
-
-  -webkit-transition: all 250ms;
-  -moz-transition: all 250ms;
-  transition: all 250ms;
+    line-height: 2rem;
+    font-weight: 600;
+    padding: 0.8rem 4.5rem;
+    
+    font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    transition: all 250ms;
+  }
 
   &:hover,
   &:focus,
@@ -26,6 +50,53 @@
     outline: none;
     text-decoration: none;
   }
+
+  &--main {
+
+    width: 85vw;
+    margin: 4vw 0;
+    font-size: 3.5rem;
+
+    @include respond(_1040-1200) {
+
+      line-height: 2rem;
+      font-weight: 600;
+      padding: 0.8rem 4.5rem;
+      
+      font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
+      -webkit-transition: all 250ms;
+      -moz-transition: all 250ms;
+      transition: all 250ms;
+    }    
+
+    &:hover {
+      @include BoxShadowHelper(2);
+      -webkit-transform: translateY(-0.5rem);
+      -moz-transform: translateY(-0.5rem);
+      transform: translateY(-0.5rem);
+    }
+    
+    &:active {
+      @include BoxShadowHelper(1);
+      transform: translateY(-0.1rem);
+    }
+  }
+
+  &--header {
+    height: 5.5rem;
+    width: 5.5rem;
+
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+      
+    @include respond(_1040-1200) {
+      display: inline-block;
+      height: default;
+      width: default;
+    }
+  }
+
 
   &--dt {    
     &:hover {

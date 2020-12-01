@@ -15,8 +15,13 @@ body {
 
 .heading-primary {
     font-weight: $font-weight-bold;
-    font-size: $font-size-heading-primary;
-    line-height: calc(#{$font-size-heading-primary} * 1.2);
+    font-size: $font-size-heading-primary--mb;
+    line-height: calc(#{$font-size-heading-primary--mb} * 1.2);
+    
+    @include respond(_1040-1200) {
+        font-size: $font-size-heading-primary--dt;
+        line-height: calc(#{$font-size-heading-primary--dt} * 1.2);
+    }
     
     &--uppercase {
         text-transform: uppercase;

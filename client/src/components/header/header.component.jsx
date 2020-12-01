@@ -103,7 +103,7 @@ const Header = (props) => {
 							to={{
 								pathname: '/logout'
 							}}
-							className={'btn btn--tertiary header__btn header__btn--mb btn--login'}
+							className={'btn btn--tertiary btn--header'}
 						>
 							{<LogOutIcon className="color-white" />}
 						</Link>
@@ -115,7 +115,7 @@ const Header = (props) => {
 								pathname: '/signin',
 								state: { role: 'student' }
 							}}
-							className={'btn btn--tertiary header__btn header__btn--mb btn--login'}
+							className={'btn btn--tertiary btn--header'}
 						>
 							{<LogInIcon className="color-white" />}
 						</Link>

@@ -97,25 +97,24 @@ const content = {
 const renderIntro = () => {
 	return (
 		<section className="home-intro">
-			<div className="home-intro__container">
-				<h1 className="home-intro__title heading-primary color-pink">Industry and Community-led Education</h1>
-				<div className="home-intro__content-box">
-					<p className="home-intro__paragraph">
-						At I'm In, our vision is to make community led education and development opportunities{' '}
-						<b>free and accessible</b> for every young person in every corner of New Zealand. Our platform connects
-						organisations, businesses and individuals who want to teach, with young people who want to learn.
-					</p>
-					<div className="home-intro__btn-box">
-						<Link
-							to={{
-								pathname: '/signup',
-								state: { role: 'student' }
-							}}
-							className="btn btn--dt btn--primary"
-						>
-							Register Now
-						</Link>
-					</div>
+			<div className="home-intro__background-img" />
+			<div className="home-intro__content">
+				<h1 className="home-intro__title heading-primary">Industry and Community-led Education</h1>
+				<p className="home-intro__paragraph">
+					At I'm In, our vision is to make community led education and development opportunities{' '}
+					<b>free and accessible</b> for every young person in every corner of New Zealand. Our platform connects
+					organisations, businesses and individuals who want to teach, with young people who want to learn.
+				</p>
+				<div className="home-intro__btn-box">
+					<Link
+						to={{
+							pathname: '/signup',
+							state: { role: 'student' }
+						}}
+						className="home-intro__btn btn btn-main btn--dt btn--primary"
+					>
+						Register Now
+					</Link>
 				</div>
 			</div>
 		</section>
