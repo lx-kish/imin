@@ -141,8 +141,8 @@
       width: 5.5rem;
 
       @include respond(_1040-1200) {
-        height: default;
-        width: default;
+        height: auto;
+        width: auto;
       }
     }
   }

@@ -4,15 +4,15 @@
 
 /**
 Types of buttons:
-Navigation 'Sign in' button - mobile (with icon) / desktop (sign uppercase)
++ Navigation 'Sign in' button - mobile (with icon) / desktop (sign uppercase)
 
-Intro button 'Register now' - mobile/desktop
++ Intro button 'Register now' - mobile/desktop
 
 Email subscription 'Submit' button - mobile/desktop
 
 Contacts enquiry form 'Enquiry now' button - mobile/desktop
 
-Sign in/Sign up forms buttons - mobile/desktop
++ Sign in/Sign up forms buttons - mobile/desktop
 
 Log off page buttons - mobile/desktop
 
@@ -29,7 +29,7 @@ Application interfaces buttons (Profile and others) - mobile/desktop
   
   line-height: 2rem;
   font-weight: 600;
-  padding: 0.8rem 4.5rem;
+  // padding: 0.8rem 4.5rem;
   font-size: $font-size-paragraph--mb;//2rem;//$font-size-paragraph;
   
   @include respond(_1040-1200) {
@@ -82,21 +82,191 @@ Application interfaces buttons (Profile and others) - mobile/desktop
     }
   }
 
+  //Header btn full style
   &--header {
-    height: 5.5rem;
-    width: 5.5rem;
 
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    height: $form-element-height-mb;
+    width: $navbar-btn-width-mb;
     padding: 0.8rem;
-      
+  
+    border-radius: $border-radius-main;
+    text-decoration: none;
+    cursor: pointer;
+
+    font-family: inherit;
+    font-weight: 600;
+    font-size: $font-size-paragraph--mb;//2rem;//$font-size-paragraph;
+    line-height: 2rem;
+    
     @include respond(_1040-1200) {
       display: inline-block;
-      height: default;
-      width: default;
+      
+      height: $form-element-height-dt;
+      width: $navbar-btn-width-dt;
+      padding: 0.8rem 4.5rem;
+      line-height: 3rem;
+    
+      font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
+      -webkit-transition: all 250ms;
+      -moz-transition: all 250ms;
+      transition: all 250ms;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      text-decoration: none;
+    }
+
+    &:hover {
+      @include BoxShadowHelper(2);
+      -webkit-transform: translateY(-0.5rem);
+      -moz-transform: translateY(-0.5rem);
+      transform: translateY(-0.5rem);
+    }
+    
+    &:active {
+      @include BoxShadowHelper(1);
+      transform: translateY(-0.1rem);
     }
   }
 
+  //Home Intro btn full style
+  &--home-intro {
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    display: inline-block;
+  
+    border-radius: $border-radius-main;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    // padding: 0.8rem 4.5rem;
+    // font-size: $font-size-paragraph--mb;//3rem;//$font-size-paragraph;
+    
+    width: 60vw;
+    height: $form-element-height-mb;
+    // height: 7.5rem;
+    
+    line-height: 5.5rem;
+    // line-height: 6.5rem;
+
+    margin: 7vw 0;
+    font-size: 3.5rem;
+
+    @include respond(_1040-1200) {
+  
+      line-height: 2.5rem;
+      // line-height: 2rem;
+      font-weight: 600;
+      padding: 0.8rem 4.5rem;
+      margin: 4rem auto;
+
+      width: auto;
+      height: $form-element-height-dt;
+      
+      font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
+      -webkit-transition: all 250ms;
+      -moz-transition: all 250ms;
+      transition: all 250ms;
+    }
+  
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      text-decoration: none;
+    }
+
+    &:hover {
+      @include BoxShadowHelper(2);
+      -webkit-transform: translateY(-0.5rem);
+      -moz-transform: translateY(-0.5rem);
+      transform: translateY(-0.5rem);
+    }
+    
+    &:active {
+      @include BoxShadowHelper(1);
+      transform: translateY(-0.1rem);
+    }
+  }
+
+  //Sign in/Sign up forms btn full style
+  &--signin {
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    display: inline-block;
+  
+    border-radius: $border-radius-main;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    line-height: 6.5rem;
+    font-weight: 600;
+    // padding: 0.8rem 4.5rem;
+    // font-size: $font-size-paragraph--mb;//3rem;//$font-size-paragraph;
+    
+    width: 60vw;
+    height: 7.5rem;
+    margin: 7vw 0;
+    font-size: 3.5rem;
+
+    height: 6.6rem;
+    width: 85vw;
+    margin: 4vw 0;
+    font-size: 3.5rem;
+
+    @include respond(_1040-1200) {
+      width: 40vw;
+      margin: 1vw 0;
+    }
+
+    @include respond(_1040-1200) {
+  
+      line-height: 2rem;
+      font-weight: 600;
+      padding: 0.8rem 4.5rem;
+      margin: 4rem auto;
+
+      width: auto;
+      height: auto;
+      
+      font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
+      -webkit-transition: all 250ms;
+      -moz-transition: all 250ms;
+      transition: all 250ms;
+    }
+  
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      text-decoration: none;
+    }
+
+    &:hover {
+      @include BoxShadowHelper(2);
+      -webkit-transform: translateY(-0.5rem);
+      -moz-transform: translateY(-0.5rem);
+      transform: translateY(-0.5rem);
+    }
+    
+    &:active {
+      @include BoxShadowHelper(1);
+      transform: translateY(-0.1rem);
+    }
+  }
 
   &--dt {    
     &:hover {

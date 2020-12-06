@@ -111,7 +111,8 @@ const renderIntro = () => {
 							pathname: '/signup',
 							state: { role: 'student' }
 						}}
-						className="home-intro__btn btn btn-main btn--dt btn--primary"
+						className="btn--home-intro btn--primary"
+						// className="home-intro__btn btn btn-main btn--dt btn--primary"
 					>
 						Register Now
 					</Link>
