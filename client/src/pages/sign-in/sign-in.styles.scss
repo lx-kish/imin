@@ -147,21 +147,6 @@
     }
   }
 
-  &__btn--submit {
-    height: $form-element-height-mb;
-    // height: 6.6rem;
-    width: 85vw;
-    margin: $sign-in-form-margin-top-bottom-mb 0;
-    // margin: 4vw 0;
-    font-size: 3.5rem;
-
-    @include respond(_1040-1200) {
-      width: 40vw;
-      margin: $sign-in-form-margin-top-bottom-dt 0;
-      // margin: 1vw 0;
-    }
-  }
-
   &__forgot {
     margin: $sign-in-form-margin-top-bottom-mb 0;
     // margin: 4vw 0;

@@ -103,7 +103,7 @@ const Header = (props) => {
 							to={{
 								pathname: '/logout'
 							}}
-							className={'btn--header btn--tertiary'}
+							className={'btn btn--header btn--tertiary'}
 							// className={'btn btn--tertiary header__btn header__btn--mb btn--login'}
 						>
 							{<LogOutIcon className="color-white" />}
@@ -116,7 +116,7 @@ const Header = (props) => {
 								pathname: '/signin',
 								state: { role: 'student' }
 							}}
-							className={'btn--header btn--tertiary'}
+							className={'btn btn--header btn--tertiary'}
 							// className={'btn btn--tertiary header__btn header__btn--mb btn--login'}
 						>
 							{<LogInIcon className="color-white" />}
@@ -140,7 +140,7 @@ const Header = (props) => {
 								to={{
 									pathname: '/logout'
 								}}
-								className={'btn--header btn--tertiary paragraph--uppercase'}
+								className={'btn btn--header btn--tertiary paragraph--uppercase'}
 								// className={'btn btn--dt btn--tertiary header__btn--dt paragraph--uppercase'}
 							>
 								{'sign out'}
@@ -151,7 +151,7 @@ const Header = (props) => {
 									pathname: '/signin',
 									state: { role: 'student' }
 								}}
-								className={'btn--header btn--tertiary paragraph--uppercase'}
+								className={'btn btn--header btn--tertiary paragraph--uppercase'}
 								// className={'btn btn--dt btn--tertiary header__btn--dt paragraph--uppercase'}
 							>
 								{'sign in'}

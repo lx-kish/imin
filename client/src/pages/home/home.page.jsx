@@ -9,7 +9,8 @@ import supportImg from '../../graphics/pages-content/home-page/home-support-1x.p
 
 import Image from '../../components/panes/image/image.component';
 import PartArticle from '../../components/panes/part-article/part-article.component';
-import ContactForm from '../../components/forms/contact-form/contact-form.component';
+import ContactForm from '../../components/forms/contact-form/contact-form-formik.component';
+// import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
 	articles: [
@@ -111,7 +112,7 @@ const renderIntro = () => {
 							pathname: '/signup',
 							state: { role: 'student' }
 						}}
-						className="btn--home-intro btn--primary"
+						className="btn btn--home-intro btn--primary"
 						// className="home-intro__btn btn btn-main btn--dt btn--primary"
 					>
 						Register Now

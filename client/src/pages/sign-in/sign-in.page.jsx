@@ -226,11 +226,11 @@ const SignIn = (props) => {
                 <input
                   type="submit"
                   value="SIGN IN"
-                  className={`btn btn--dt ${
+                  className={`btn btn--signin btn--dt ${
                     values.role === "educator"
                       ? "btn--primary "
                       : "btn--tertiary "
-                  }sign-in__btn--submit`}
+                  }`}
                 />
               </>
               <Link

@@ -404,9 +404,9 @@ const SignUp = (props) => {
                 <input
                   type="submit"
                   value="SIGN UP"
-                  className={`btn btn--dt ${
+                  className={`btn btn--signin btn--dt ${
                     role === "educator" ? "btn--primary " : "btn--tertiary "
-                  }sign-up__btn--submit`}
+                  }`}
                 />
               </>
               <hr className={`sign-up__hr sign-up__hr--${role}`} />
