@@ -4,7 +4,14 @@
 .lvl2 {
     // background-color: var(--color-white);
     // text-align: center;
+    &__main {
+        margin-top: 11.9rem;
 
+        @include respond(_1040-1200) {
+            margin-top: 6.9rem;
+        }
+    }
+    
     &__section {
         &--double-pane {
             margin-bottom: 0;

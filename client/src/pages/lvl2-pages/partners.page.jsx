@@ -21,17 +21,14 @@ const content = {
         containerClassName: 'intro__container intro__container--partners-page',
         title: 'Openning up a world of possibilities.',
         titleClassName: 'intro__title heading-primary color-white',
-        renderButton: false
-        // button: {
-        //     boxClassName: 'intro__btn-box',
-        //     linkTo: '/signup',
-        //     role: 'educator',
-        //     config: {
-        //         type: 'button',
-        //         title: 'Register Now',
-        //         className: 'btn btn--dt btn--primary'
-        //     }
-        // }
+        renderButton: false,
+        button: {
+            boxClassName: 'intro__btn-box',
+            linkTo: '/signup',
+            role: 'educator',
+            title: 'Register Now',
+            className: 'btn btn--dt btn--primary'
+        }
     },
     content: {
         singlePaneRow: {

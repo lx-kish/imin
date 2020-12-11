@@ -82,8 +82,8 @@ Application interfaces buttons (Profile and others) - mobile/desktop
 
   &--home-intro {
     
-    width: 60vw;
     height: $form-element-height-mb;
+    width: 60vw;
     
     margin: 7vw 0;
     
@@ -91,8 +91,8 @@ Application interfaces buttons (Profile and others) - mobile/desktop
       
       margin: 4rem auto;
       
-      width: auto;
       height: $form-element-height-dt;
+      width: auto;
     }
   }
 
@@ -110,8 +110,22 @@ Application interfaces buttons (Profile and others) - mobile/desktop
       margin: 4rem auto;
       margin: $sign-in-form-margin-top-bottom-dt 0;
       
-      width: 40vw;
       height: $form-element-height-dt;
+      width: auto;
+
+    }
+  }
+
+  &--subscribe {
+    
+    width: 60vw;
+
+    height: $form-element-height-mb;
+
+    @include respond(_1040-1200) {
+      
+      height: $form-element-height-dt;
+      width: auto;
 
     }
   }

@@ -25,11 +25,8 @@ const content = {
             boxClassName: 'intro__btn-box',
             linkTo: '/signup',
             role: 'student',
-            config: {
-                type: 'button',
-                title: 'Register Now',
-                className: 'btn btn--dt btn--primary'
-            }
+            title: 'Register Now',
+            className: 'btn btn--dt btn--primary'
         }
     },
     content: {

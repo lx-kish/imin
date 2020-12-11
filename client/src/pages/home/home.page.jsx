@@ -9,8 +9,7 @@ import supportImg from '../../graphics/pages-content/home-page/home-support-1x.p
 
 import Image from '../../components/panes/image/image.component';
 import PartArticle from '../../components/panes/part-article/part-article.component';
-import ContactForm from '../../components/forms/contact-form/contact-form-formik.component';
-// import ContactForm from '../../components/forms/contact-form/contact-form.component';
+import ContactForm from '../../components/forms/contact-form/contact-form.component';
 
 const content = {
 	articles: [

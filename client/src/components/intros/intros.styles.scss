@@ -1,3 +1,4 @@
+@import "../../project-styles/mixins";
 @import "../../project-styles/variables";
 
 .intro {
@@ -17,6 +18,16 @@
         background-size: cover;
         background-position: center;
 
+
+        // width: 100%;
+        // padding-top:52%;        
+        // background-repeat: no-repeat;
+        // background-size: contain;
+        // // background-size: cover;
+        // background-position: center;
+        // @include respond(_1040-1200) {
+        //     padding-top:29%;
+        // }
         // &--home-page {
         //     background-image: url("../../graphics/pages-content/home-page/Home-header-1920.png");
         // }
@@ -36,11 +47,6 @@
         &--partners-page {
             background-image: url("../../graphics/pages-content/partners-page/partners-header-1920.png");
         }
-    }
-
-    &__title--home-page {
-        padding-top: 12.6rem;
-        
     }
 
     &__title--second-lvl-page {

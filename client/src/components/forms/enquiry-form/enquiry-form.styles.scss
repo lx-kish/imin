@@ -45,7 +45,7 @@
     &__input {
         height: 5rem;
         width: 100%; //25.4rem;
-        font-size: $font-size-input;
+        font-size: $font-size-input-mb;
         font-family: inherit;
 
         padding: 0.7rem 2rem;
@@ -87,7 +87,7 @@
         border: 0.2rem solid var(--color-input-border);
         border-radius: $border-radius-main;
 
-        font-size: $font-size-input;
+        font-size: $font-size-input-mb;
         font-family: inherit;
 
         padding: 0.7rem 2rem;
