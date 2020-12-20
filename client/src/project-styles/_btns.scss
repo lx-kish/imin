@@ -96,6 +96,24 @@ Application interfaces buttons (Profile and others) - mobile/desktop
     }
   }
 
+  &--lvl2 {
+    
+    height: $form-element-height-mb;
+    width: 60vw;
+    
+    margin: 0 0 7vw;
+    // margin: 7vw 0;
+    
+    @include respond(_1040-1200) {
+      
+      margin: 0 auto;
+      // margin: 4rem auto;
+   
+      height: $form-element-height-dt;
+      width: auto;
+    }
+  }
+
   &--signin {
 
     align-self: center;
@@ -175,5 +193,21 @@ Application interfaces buttons (Profile and others) - mobile/desktop
   &__icon {
     display: block;
     margin: auto;
+  }
+
+  &--dt-only {
+    display: none;
+    
+    @include respond(_1040-1200) {
+        display: inline-block;
+    }
+  }
+
+  &--mb-only {
+    display: none;
+
+    @include respond(_1040-1200) {
+        display: inline-block;
+    }
   }
 }

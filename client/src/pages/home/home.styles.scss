@@ -18,20 +18,23 @@
             margin-bottom: -35rem;
         }
     
-        &__background-img {
+        &__bg {
             width: 100%;
-            padding-top:52%;
+            padding-top:53%;
             
             background-repeat: no-repeat;
             background-size: contain;
             // background-size: cover;
             background-position: center;
-            background-image: url("../../graphics/pages-content/home-page/home-header-mb.png");
+            background-image: url("../../graphics/pages-content/home-page/home-header-320.png");
             @include respond(_1040-1200) {
-                padding-top:29%;
-                background-image: url("../../graphics/pages-content/home-page/home-header-dt.png");
+                padding-top:31%;
+                background-image: url("../../graphics/pages-content/home-page/home-header-1366.png");
             }
-            // @include div-same-size-as-background-img("../../graphics/pages-content/home-page/Home-header-1920.png");
+            @include respond(_1200-big-desktop) {
+                padding-top:29%;
+                background-image: url("../../graphics/pages-content/home-page/home-header-1920.png");
+            }
         }
         
         &__content {

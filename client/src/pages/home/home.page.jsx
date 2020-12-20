@@ -97,7 +97,7 @@ const content = {
 const renderIntro = () => {
 	return (
 		<section className="home-intro">
-			<div className="home-intro__background-img" />
+			<div className="home-intro__bg" />
 			<div className="home-intro__content">
 				<h1 className="home-intro__title heading-primary">Industry and Community-led Education</h1>
 				<p className="home-intro__paragraph">
