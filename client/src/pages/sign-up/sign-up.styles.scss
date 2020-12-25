@@ -18,16 +18,12 @@ Contains 2 parts: logo and the form
 
   /* Contains logo part */
   &__background {
-    // padding: 16rem 0rem 0rem;
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
 
     @include respond(_1040-1200) {
-      // width: 50vw;
       flex: 1; /* additionally, equal width */
-      // height: 100vh;
-      // overflow: auto;
       align-self: stretch;
     }
 
@@ -87,7 +83,6 @@ Contains 2 parts: logo and the form
     @include respond(_1040-1200) {
       margin: 0;
       align-items: center;
-      // width: 50vw;
     }
 
     &-box {
@@ -97,7 +92,6 @@ Contains 2 parts: logo and the form
       justify-content: center;
 
       @include respond(_1040-1200) {
-        // padding-top: 9rem;
         align-self: stretch;
         justify-content: center;
         flex: 1; /* additionally, equal width */
@@ -109,33 +103,24 @@ Contains 2 parts: logo and the form
 
   &__input {
     height: $form-element-height-mb;
-    // height: 6.6rem;
-    width: 85vw; //25.4rem;
-    font-size: 3.2rem;
+    width: 85vw;
+    font-size: $font-size-input-mb;
     font-family: inherit;
-
+    
     padding: 0.7rem 2rem;
     background-color: var(--color-input-bg) !important;
     border: 0.2rem solid var(--color-input-border);
     border-radius: $border-radius-main;
-
+    
     margin: $sign-in-form-margin-top-bottom-mb 0;
     // margin: 4vw 0;
-
+    
     @include respond(_1040-1200) {
       height: $form-element-height-dt;
       width: 40vw;
-      // width: 35vw;
       margin: $sign-in-form-margin-top-bottom-dt 0;
-      // margin: 1vw 0;
+      font-size: $form-element-width-dt;
     }
-
-    // &:first-child {
-    //   margin-top: 8vw;
-    // }
-    // &:last-child {
-    //   margin-bottom: 8vw;
-    // }
 
     &::-webkit-input-placeholder {
       /* Edge */
@@ -168,22 +153,20 @@ Contains 2 parts: logo and the form
     height: 20vw;
     resize: none;
     margin-bottom: $sign-in-form-margin-top-bottom-mb;
-    // margin-bottom: 4vw;
 
-    font-size: 3.2rem;
+    font-size: $form-element-width-mb;
     font-family: inherit;
-
+    
     padding: 0.7rem 2rem;
     background-color: var(--color-input-bg) !important;
     border: 0.2rem solid var(--color-input-border);
     border-radius: $border-radius-main;
-
+    
     @include respond(_1040-1200) {
       width: 40vw;
-      // width: 35vw;
       height: 10vw;
       margin-bottom: $sign-in-form-margin-top-bottom-dt;
-      // margin-bottom: 1vw;
+      font-size: $form-element-width-dt;
     }
 
     &::-webkit-input-placeholder {
@@ -202,16 +185,13 @@ Contains 2 parts: logo and the form
 
     &-label {
       margin-top: $sign-in-form-margin-top-bottom-mb;
-      // margin-top: 4vw;
       margin-bottom: 2vw;
       max-width: 85vw;
       text-align: left;
 
       @include respond(_1040-1200) {
         max-width: 40vw;
-        // max-width: 35vw;
         margin-top: $sign-in-form-margin-top-bottom-dt;
-        // margin-top: 1vw;
         margin-bottom: .5vw;
       }
     }
@@ -222,26 +202,22 @@ Contains 2 parts: logo and the form
     width: 3.3rem; //25.4rem;
     display: inline-block;
     margin: $sign-in-form-margin-top-bottom-mb 0;
-    // margin: 4vw 0;
 
     background-color: var(--color-input-bg) !important;
     border: 0.2rem solid var(--color-input-border);
 
     @include respond(_1040-1200) {
       margin: $sign-in-form-margin-top-bottom-dt 0;
-      // margin: 1vw 0;
     }
 
     &-group {
       display: flex;
       align-items: center;
-      // justify-content: space-between;
 
       max-width: 85vw;
 
       @include respond(_1040-1200) {
         max-width: 40vw;
-        // max-width: 35vw;
       }
     }
 
@@ -257,7 +233,6 @@ Contains 2 parts: logo and the form
     display: inline-block;
     font-size: 2.5rem;
     font-weight: 700;
-    //   font-size: 2rem;
     letter-spacing: 0rem;
 
     &,
@@ -280,24 +255,19 @@ Contains 2 parts: logo and the form
   &__hr {
     width: 85vw;
     margin: $sign-in-form-margin-top-bottom-mb 0 0;
-    // margin: 4vw 0 0;
     border: 1px solid;
 
     @include respond(_1040-1200) {
       max-width: 40vw;
-      // max-width: 35vw;
       margin: $sign-in-form-margin-top-bottom-dt 0 0;
-      // margin: 1vw 0 0;
     }
 
     &--student {
       border-color: var(--color-violet-1);
-      // color: var(--color-violet);
     }
 
     &--educator {
       border-color: var(--color-pink-1);
-      // color: var(--color-pink);
     }
   }
 

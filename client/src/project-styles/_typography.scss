@@ -61,7 +61,11 @@ body {
 
 .heading-quinary {
     font-weight: $font-weight-bold;
-    font-size: $font-size-heading-quinary;
+    font-size: $font-size-heading-quinary--mb;
+
+    @include respond(_1040-1200) {
+        font-size: $font-size-heading-quinary--dt;
+    }
 
     &--uppercase {
         text-transform: uppercase;

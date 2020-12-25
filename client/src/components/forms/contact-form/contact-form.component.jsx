@@ -159,8 +159,8 @@ const SusbscribeForm = (props) => {
 											onBlur={handleBlur}
 										>
 											<option value="educator">I want to be an educator</option>
-											<option value="student">I want to be an student</option>
-											<option value="partner">I want to be an partner</option>
+											<option value="student">I want to be a student</option>
+											<option value="partner">I want to be a partner</option>
 										</select>
 									</div>
 								</div>

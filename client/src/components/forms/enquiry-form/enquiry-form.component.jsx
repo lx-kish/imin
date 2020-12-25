@@ -1,233 +1,185 @@
 import React from 'react';
+import axios from 'axios';
+
+import { Formik } from 'formik';
+
+import config from '../../../axios.config';
 
 import './enquiry-form.styles.scss';
 
-import SinglePaneRow from '../../../hoc/rows/single-pane-row/single-pane-row.component';
-import DoublePanesRow from '../../../hoc/rows/double-panes-row/double-panes-row.hoc';
-import FormFields from '../forms-fields/form-fields.component';
-import Btn from '../../btn/btn.component';
+// import SinglePaneRow from '../../../hoc/rows/single-pane-row/single-pane-row.component';
+// import DoublePanesRow from '../../../hoc/rows/double-panes-row/double-panes-row.hoc';
+// import FormFields from '../forms-fields/form-fields.component';
+// import Btn from '../../btn/btn.component';
 
-class EnquiryForm extends React.Component {
+const EnquiryForm = (props) => {
+	/** Single state hook useState for all the state properties */
+	const [ fullState, setFullState ] = React.useState({
+		submitSuccess: false,
+		submitError: false,
+		errorMessage: ''
+	});
 
-    state = {
-        formData: {
-            name: {
-                field: 'name', //field name for service purposes
-                element: 'input', //type of element input|text area|select
-                elementClassName: 'contact-form__element', //form element (field+label) className
-                value: '', //value
-                label: false, //show label: true|false
-                labelText: '', //text label (if show)
-                labelClassName: '', //label styles
-                config: { //properties of element (attributes)
-                    name: 'name_input',
-                    className: 'enquiry-form__input',
-                    type: 'text',
-                    placeholder: 'First Name'
-                },
-                validation: { //field validation required: true|false
-                    required: false
-                },
-                valid: false, //field valid: true|false
-                touched: false, //for blur field touched flag: true|false
-                labelErrorClassName: 'enquiry-form__label-error',
-                validationMessage: '' //warning text if the field invalid
-            },
-            lastname: {
-                field: 'lastname',
-                element: 'input',
-                elementClassName: 'enquiry-form__element',
-                value: '',
-                label: false,
-                labelText: '',
-                labelClassName: '',
-                config: {
-                    name: 'lastname_input',
-                    className: 'enquiry-form__input',
-                    type: 'text',
-                    placeholder: 'Last Name'
-                },
-                validation: {
-                    required: false
-                },
-                valid: false,
-                touched: false,
-                labelErrorClassName: 'enquiry-form__label-error',
-                validationMessage: ''
-            },
-            phone: {
-                field: 'phone',
-                element: 'input',
-                elementClassName: 'enquiry-form__element',
-                value: '',
-                label: false,
-                labelText: '',
-                labelClassName: '',
-                config: {
-                    name: 'tel_input',
-                    className: 'enquiry-form__input',
-                    type: 'tel',
-                    placeholder: 'Contact Number'
-                },
-                validation: {
-                    required: false
-                },
-                valid: false,
-                touched: false,
-                labelErrorClassName: 'enquiry-form__label-error',
-                validationMessage: ''
-            },
-            email: {
-                field: 'email',
-                element: 'input',
-                elementClassName: 'enquiry-form__element',
-                value: '',
-                label: false,
-                labelText: '',
-                labelClassName: '',
-                config: {
-                    name: 'email_input',
-                    className: 'enquiry-form__input',
-                    type: 'email',
-                    placeholder: 'Email Address'
-                },
-                validation: {
-                    required: false
-                },
-                valid: false,
-                touched: false,
-                labelErrorClassName: 'enquiry-form__label-error',
-                validationMessage: ''
-            },
-            message: {
-                field: 'message',
-                element: 'textarea',
-                elementClassName: 'enquiry-form__element',
-                value: '',
-                label: true,
-                labelText: 'Your message',
-                labelClassName: 'enquiry-form__message-label',
-                config: {
-                    name: 'message_input',
-                    className: 'enquiry-form__textarea',
-                    rows: 5,
-                    cols: 36
-                },
-                validation: {
-                    required: false
-                },
-                valid: false
-            }
-        }
-    }
+	const renderForm = () => {
+		return (
+			<React.Fragment>
+				<Formik
+					initialValues={{
+						firstName: '',
+						lastName: '',
+						contactNo: '',
+						email: '',
+						message: ''
+					}}
+					validate={(values) => {
+						const errors = {};
 
-    updateForm = (newState, key) => {
-        // this.setState({
-        //     formData: newState
-        // })
+						if (!values.email) {
+							errors.email = 'Please provide your valid email address';
+						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+							errors.email = 'Please provide valid email address';
+						}
 
-        this.setState(prevState => ({
-            formData: {
-                ...prevState.formData,
-                [prevState.formData[key]]: newState
-            }
-        }));
-    }
+						return errors;
+					}}
+					onSubmit={(values, { setSubmitting, resetForm }) => {
+						setSubmitting(true);
 
-    submitForm = (event) => {
-        event.preventDefault();
-        let dataToSubmit = {};
-        let formIsValid = true;
+						axios
+							.post(`/api/users/signin`, values, config)
+							.then((res) => {
+								console.log('sign in doc, res =====> ', res);
 
-        for (let key in this.state.formData) {
-            dataToSubmit[key] = this.state.formData[key].value
-        }
+								setFullState({
+									...fullState,
+									submitSuccess: true,
+									submitError: false,
+									errorMessage: ''
+								});
 
-        for (let key in this.state.formData) {
-            formIsValid = this.state.formData[key].valid && formIsValid;
-        }
+								console.log('after push into profile', props);
+								props.history.push(`/profile`);
+								// props.history.push(`/profile`, { role: res.data.data.role });
+							})
+							.catch((error) => {
+								console.log('sign in doc, error =====> ', error.response);
 
-        if (formIsValid) {
+								// resetForm();
+								setFullState({
+									...fullState,
+									submitSuccess: false,
+									submitError: true,
+									errorMessage: error.message
+								});
+							});
 
-            // firebaseDB.ref('users').push(dataToSubmit)
-            // .then(() => {
-            console.log('Message has been sent');
-            // })
-            // .catch(e =>{
-            //     console.log(e)
-            // })
-        }
-    }
+						setSubmitting(false);
+					}}
+				>
+					{({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
+						<form className="enquiry-form container" onSubmit={handleSubmit}>
+							<div className="enquiry-form__row">
+								<div className="enquiry-form__element">
+									<input
+										type="text"
+										name="firstName"
+										placeholder="First Name"
+										className={`enquiry-form__field${errors.firstName && touched.firstName
+											? ' form-input--error'
+											: ''}`}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										value={values.email}
+									/>
+									{errors.firstName && touched.firstName ? (
+										<p className="enquiry-form__error-message">{errors.firstName}</p>
+									) : null}
+								</div>
+								<div className="enquiry-form__element">
+									<input
+										type="text"
+										name="lastName"
+										placeholder="Last Name"
+										className={`enquiry-form__field${errors.lastName && touched.lastName ? ' form-input--error' : ''}`}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										value={values.lastName}
+									/>
+									{errors.lastName && touched.lastName ? (
+										<p className="enquiry-form__error-message">{errors.lastName}</p>
+									) : null}
+								</div>
+							</div>
+							<div className="enquiry-form__row">
+								<div className="enquiry-form__element">
+									<input
+										type="text"
+										name="contactNo"
+										placeholder="Contact Number"
+										className={`enquiry-form__field${errors.contactNo && touched.contactNo
+											? ' form-input--error'
+											: ''}`}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										value={values.contactNo}
+									/>
+									{errors.contactNo && touched.contactNo ? (
+										<p className="enquiry-form__error-message">{errors.contactNo}</p>
+									) : null}
+								</div>
+								<div className="enquiry-form__element">
+									<input
+										type="email"
+										name="email"
+										placeholder="Email Address"
+										className={`enquiry-form__field${errors.email && touched.email ? ' form-input--error' : ''}`}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										value={values.email}
+									/>
+									{errors.email && touched.email ? <p className="enquiry-form__error-message">{errors.email}</p> : null}
+								</div>
+							</div>
+							<div className="enquiry-form__textarea">
+								<label htmlFor="message" className="enquiry-form__message-label">
+									Your message
+								</label>
+								<textarea
+									id="message"
+									name="message"
+									rows="5"
+									cols="35"
+									className={`enquiry-form__message${errors.company && touched.company
+										? ' enquiry-form__input--error'
+										: ''}`}
+									onChange={handleChange}
+									onBlur={handleBlur}
+									value={values.message}
+								/>
+							</div>
+							<div className="enquiry-form__btn-box">
+								<input
+									type="submit"
+									title="Enquiry now"
+									value="Enquiry now"
+									className="btn btn--primary btn--subscribe"
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
+							</div>
+						</form>
+					)}
+				</Formik>
+			</React.Fragment>
+		);
+	};
 
-    render() {
-        return (
-            <section className='enquiry-form'>
-                <h2 className='enquiry-form__heading heading-secondary heading-secondary--uppercase'>Enquiry form</h2>
-                <form
-                    className='enquiry-form__form container'
-                    onSubmit={this.submitForm}
-                >
-                    <DoublePanesRow
-                        rowClassName='flex-box flex-box-row row-enquiry-form'
-                        leftColClassName='col-1-of-2--enquiry-form'
-                        rightColClassName='col-1-of-2--enquiry-form'
-                        left={
-                            <FormFields
-                                formData={this.state.formData['name']}
-                                onblur={(newState) => this.updateForm(newState, 'name')}
-                                change={(newState) => this.updateForm(newState, 'name')}
-                            />
-                        }
-                        right={
-                            <FormFields
-                                formData={this.state.formData['lastname']}
-                                onblur={(newState) => this.updateForm(newState, 'lastname')}
-                                change={(newState) => this.updateForm(newState, 'lastname')}
-                            />
-                        }
-                    />
-
-                    <DoublePanesRow
-                        rowClassName='row-enquiry-form'
-                        leftColClassName='col-1-of-2--enquiry-form'
-                        rightColClassName='col-1-of-2--enquiry-form'
-                        left={
-                            <FormFields
-                                formData={this.state.formData['phone']}
-                                onblur={(newState) => this.updateForm(newState, 'phone')}
-                                change={(newState) => this.updateForm(newState, 'phone')}
-                            />
-                        }
-                        right={
-                            <FormFields
-                                formData={this.state.formData['email']}
-                                onblur={(newState) => this.updateForm(newState, 'email')}
-                                change={(newState) => this.updateForm(newState, 'email')}
-                            />
-                        }
-                    />
-
-                    <SinglePaneRow
-                        rowClassName='row-enquiry-form'
-                        pane={<FormFields
-                            formData={this.state.formData['message']}
-                            onblur={(newState) => this.updateForm(newState, 'message')}
-                            change={(newState) => this.updateForm(newState, 'message')}
-                        />}
-                    />
-                    
-                    <SinglePaneRow
-                        rowClassName='row-enquiry-form enquiry-form--btn-box'
-                        pane={<Btn
-                            type='submit'
-                            title='Enquire now'
-                            className='btn btn--dt btn--primary enquiry-form__btn--submit'
-                        />}
-                    />
-                </form>
-            </section>
-        )
-    }
-}
+	return (
+		<section className="enquiry">
+			<h2 className="enquiry__heading heading-secondary heading-secondary--uppercase">Enquiry form</h2>
+			{renderForm()}
+		</section>
+	);
+};
 
 export default EnquiryForm;

@@ -40,7 +40,6 @@
     height: 50vw;
 
     margin: 4rem 0 2rem;
-    // float: left;
     shape-outside: circle(50% at 50% 50%);
     clip-path: circle(50% at 50% 50%);
     
@@ -55,21 +54,7 @@
 
       width: 8rem;
       height: 8rem;
-      // margin: 17rem 
-      // position: absolute;
-      // margin: 17rem auto 0;
-      // border-radius: 50%;
-      // border: 0.5rem solid var(--color-violet);
-      // filter: brightness(90%) sepia(20%);
     }
-
-    // &-icon {
-      // position: absolute;
-      // top: 2.5rem;
-      // left: 3rem;
-      // width: 3vw;
-      // height: 3vw;
-    // }
   }
 
   &__view {
@@ -109,27 +94,19 @@
   &__input {
     height: 6.6rem;
     width: 85vw; //25.4rem;
-    font-size: 3.2rem;
+    font-size: $font-size-input-mb;
     font-family: inherit;
-
+    
     padding: 0.7rem 2rem;
     background-color: var(--color-input-bg) !important;
     border: 0.2rem solid var(--color-input-border);
     border-radius: $border-radius-main;
-
-    // margin-bottom: 4vw;
-
+    
     @include respond(_1040-1200) {
       width: 40vw;
       margin: 1vw 0;
+      font-size: $font-size-input-dt;
     }
-
-    // &:first-child {
-    //   margin-top: 8vw;
-    // }
-    // &:last-child {
-    //   margin-bottom: 8vw;
-    // }
 
     &::-webkit-input-placeholder {
       /* Edge */
