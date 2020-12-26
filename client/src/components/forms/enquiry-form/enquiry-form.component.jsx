@@ -7,11 +7,6 @@ import config from '../../../axios.config';
 
 import './enquiry-form.styles.scss';
 
-// import SinglePaneRow from '../../../hoc/rows/single-pane-row/single-pane-row.component';
-// import DoublePanesRow from '../../../hoc/rows/double-panes-row/double-panes-row.hoc';
-// import FormFields from '../forms-fields/form-fields.component';
-// import Btn from '../../btn/btn.component';
-
 const EnquiryForm = (props) => {
 	/** Single state hook useState for all the state properties */
 	const [ fullState, setFullState ] = React.useState({

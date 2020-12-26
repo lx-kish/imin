@@ -7,11 +7,6 @@ import config from '../../../axios.config';
 
 import './contact-form.styles.scss';
 
-// import CaretDownIcon from '../../icons/icon-caret-down.component';
-// import DoublePanesRow from '../../../hoc/rows/double-panes-row/double-panes-row.hoc';
-// import FormFields from '../forms-fields/form-fields.component';
-// import Btn from '../../btn/btn.component';
-
 const SusbscribeForm = (props) => {
 	/** Single state hook useState for all the state properties */
 	const [ fullState, setFullState ] = React.useState({

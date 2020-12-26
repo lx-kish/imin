@@ -10,13 +10,9 @@ import ImageIsaac from '../../graphics/pages-content/contact-page/isaac.png';
 import IconEnvelop from '../../components/icons/icon-envelope.component';
 import IconLinkedIn from '../../components/icons/icon-linkedin.component';
 
-// import DoublePanesRow from '../../hoc/rows/double-panes-row/double-panes-row.hoc';
 import ContactDetails from '../../components/panes/contact-details/contact-details.component';
-// import ContactMap from '../../components/panes/contact-map/contact-map.component';
 import GoogleMap from '../../components/panes/contact-map/google-map.component';
 import EnquiryForm from '../../components/forms/enquiry-form/enquiry-form.component';
-import EnquiryFormOld from '../../components/forms/enquiry-form/enquiry-form-old.component';
-// import TriplePanesRow from '../../hoc/rows/triple-panes-row/triple-panes-row.component';
 import TeamArticle from '../../components/panes/contact-team-article/contact-team-article.component';
 import DoubleLinksIconBox from '../../components/panes/double-links-icon-box/double-links-icon-box.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
@@ -65,10 +61,10 @@ const content = {
 			}
 		},
 		map: {
-            className: 'contact__map-box',
-            latitude: -41.2922011,
-            longitude: 174.773596,
-            zoom: 15
+			className: 'contact__map-box',
+			latitude: -41.2922011,
+			longitude: 174.773596,
+			zoom: 15
 		}
 	},
 	team: {
@@ -206,16 +202,8 @@ const ContactPage = () => {
 			<section className={data.sectionClassName}>
 				<div className="container contact__row">
 					<ContactDetails {...data.details} />
-					{/* <ContactMap {...data.map} /> */}
-                    <GoogleMap {...data.map} />
+					<GoogleMap {...data.map} />
 				</div>
-				{/* <DoublePanesRow
-                    rowClassName={data.rowClassName}
-                    leftColClassName={data.colClassName}
-                    rightColClassName={data.colClassName}
-                    left={<ContactDetails {...data.details} />}
-                    right={<ContactMap {...data.map} />}
-                /> */}
 			</section>
 		);
 	};
@@ -245,90 +233,7 @@ const ContactPage = () => {
 		return (
 			<section className={data.sectionClassName}>
 				<h2 className="team__heading heading-secondary heading-secondary--uppercase">Our team</h2>
-				<div className="team__row container">
-					{teamLoop()}
-					{/* leftColClassName={data.colClassName}
-					middleColClassName={data.colClassName}
-					rightColClassName={data.colClassName}
-					left={
-						<TeamArticle
-							{...data.members[0]}
-							link={
-								<DoubleLinksIconBox
-									{...data.members[0].links}
-									icon1={<IconEnvelop className={data.members[0].links.link1.icon.className} />}
-									icon2={<IconLinkedIn className={data.members[0].links.link2.icon.className} />}
-								/>
-							}
-						/>
-					}
-					middle={
-						<TeamArticle
-							{...data.members[1]}
-							link={
-								<DoubleLinksIconBox
-									{...data.members[1].links}
-									icon1={<IconEnvelop className={data.members[1].links.link1.icon.className} />}
-									icon2={<IconLinkedIn className={data.members[1].links.link2.icon.className} />}
-								/>
-							}
-						/>
-					}
-					right={
-						<TeamArticle
-							{...data.members[2]}
-							link={
-								<DoubleLinksIconBox
-									{...data.members[2].links}
-									icon1={<IconEnvelop className={data.members[2].links.link1.icon.className} />}
-									icon2={<IconLinkedIn className={data.members[2].links.link2.icon.className} />}
-								/>
-							}
-						/>
-					} */}
-				</div>
-				{/* <TriplePanesRow
-					rowClassName={data.rowClassName}
-					leftColClassName={data.colClassName}
-					middleColClassName={data.colClassName}
-					rightColClassName={data.colClassName}
-					left={
-						<TeamArticle
-							{...data.members[0]}
-							link={
-								<DoubleLinksIconBox
-									{...data.members[0].links}
-									icon1={<IconEnvelop className={data.members[0].links.link1.icon.className} />}
-									icon2={<IconLinkedIn className={data.members[0].links.link2.icon.className} />}
-								/>
-							}
-						/>
-					}
-					middle={
-						<TeamArticle
-							{...data.members[1]}
-							link={
-								<DoubleLinksIconBox
-									{...data.members[1].links}
-									icon1={<IconEnvelop className={data.members[1].links.link1.icon.className} />}
-									icon2={<IconLinkedIn className={data.members[1].links.link2.icon.className} />}
-								/>
-							}
-						/>
-					}
-					right={
-						<TeamArticle
-							{...data.members[2]}
-							link={
-								<DoubleLinksIconBox
-									{...data.members[2].links}
-									icon1={<IconEnvelop className={data.members[2].links.link1.icon.className} />}
-									icon2={<IconLinkedIn className={data.members[2].links.link2.icon.className} />}
-								/>
-							}
-						/>
-					}
-				/> */}
+				<div className="team__row container">{teamLoop()}</div>
 			</section>
 		);
 	};
@@ -337,7 +242,6 @@ const ContactPage = () => {
 		<React.Fragment>
 			{renderContactDetailsSection(content.contactDetails)}
 			<EnquiryForm />
-			{/* <EnquiryFormOld /> */}
 			{renderTeamSection(content.team)}
 			<ContactForm />
 		</React.Fragment>
