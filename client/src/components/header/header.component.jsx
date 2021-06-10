@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import useClickOutside from '../../utils/useClickOutside';
+import useClickOutside from '../../utils/use-click-outside/useClickOutside';
 import appMenu from '../navigation/appMenu';
+import delimeter from '../navigation/delimeter';
 import siteMenu from '../navigation/siteMenu';
 
 import logo from '../../graphics/logo_pink.png';
@@ -53,13 +54,13 @@ const Header = (props) => {
 
 	// console.log('navigation bar props ===> ', props);
 
-	const delimeter = [
-		{
-			name: 'delimeter',
-			link: '',
-			className: 'navigation-link__delimeter'
-		}
-	];
+	// const delimeter = [
+	// 	{
+	// 		name: 'delimeter',
+	// 		link: '',
+	// 		className: 'navigation-link__delimeter'
+	// 	}
+	// ];
 
 	const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
 

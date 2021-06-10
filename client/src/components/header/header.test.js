@@ -1,121 +1,132 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { render, fireEvent, cleanup, screen } from '@testing-library/react';
+// import { shallow, render, mount } from 'enzyme';
 
 import Header from './header.component';
 
-const setUp = (props = {}) => {
-    return shallow(<Header {...props} />);
-}
+import appMenu from '../navigation/appMenu';
+import delimeter from '../navigation/delimeter';
+import siteMenu from '../navigation/siteMenu';
 
-describe('Navigation bar component test set', () => {
+import NavigationBar from '../navigation/navigation-bar/navigation-bar.component';
+import BurgerIcon from '../navigation/burger icon/icon-burger.component';
+import SlideBar from '../navigation/slide bar/slide-bar.component';
 
-    let component;
-    beforeEach(() => {
-        component = setUp();
-    });
+describe('Header component rendering test suit', () => {
 
-    it('Should render <NavigationBar /> component without errors', () => {
-        expect(
-            component
-                .find('nav')
-                .length
-        ).toBe(1);
-    });
+    afterEach(cleanup);
 
-    it('Should render class="navigation__logo-box" inside <NavigationBar /> component', () => {
-        expect(
-            component
-                .find('.navigation__logo-box')
-                .length
-        ).toBe(1);
-    });
-
-    it('Should render <img /> inside <NavigationBar /> component', () => {
-        expect(
-            component
-                .find('img')
-                .length
-        ).toBe(1);
-    });
-
-    it('Should render <ul /> list inside <NavigationBar /> component', () => {
-        expect(
-            component
-                .find('ul')
-                .length
-        ).toBe(1);
-    });
-
-    it('Should render four <li /> items inside <NavigationBar /> component', () => {
-        expect(
-            component
-                .find('li')
-                .length
-        ).toBe(5);
-    });
-
-    it('Should contain <Link /> to "/" (Home page)', () => {
-        expect(
-            component
-                .find('Link')
-                .at(0)
-                .prop('to')
-        ).toEqual('/');
-    });
-
-    it('Should contain <Link /> to "/about" (About page)', () => {
-        expect(
-            component
-                .find('Link')
-                .at(1)
-                .prop('to')
-        ).toEqual('/about');
-    });
-
-    it('Should contain <Link /> to "/platform" (Platform page)', () => {
-        expect(
-            component
-                .find('Link')
-                .at(2)
-                .prop('to')
-        ).toEqual('/platform');
-    });
-
-    it('Should contain <Link /> to "/contact" (Contact page)', () => {
-        expect(
-            component
-                .find('Link')
-                .at(3)
-                .prop('to')
-        ).toEqual('/contact');
-    });
-
-    it('Should contain <Link /> to "/signin" (Sign in page)', () => {
+    it('button should contain link to "/logout" if user ID HAS passed to props', () => {
         const props = {
-            pathname: '/signin',
-            state: { role: 'student' }
-        }
+            data: {
+                _id: '123456789'
+            }
+        };
 
-        expect(
-            component
-                .find('Link')
-                .at(4)
-                .prop('to')
-        ).toEqual(props);
-    });
+        const { container } = render(
+            <BrowserRouter>
+                <Header {...props} />
+            </BrowserRouter>
+        );
 
-    // it('Should render <ul /> list inside <NavigationBar /> component', () => {
+        const button = container.querySelector('.btn--header');
 
-    //     expect(
-    //         shallow(<Button type='reset' />).find('.btn').prop('type')
-    //     ).toEqual('reset');
-    // });
+        expect(button).toHaveAttribute('href', '/logout');
 
-    // it('Test click event', () => {
-    //     const mockCallBack = jest.fn();
+    })
 
-    //     const button = shallow((<Button onClick={mockCallBack}></Button>));
-    //     button.find('button').simulate('click');
-    //     expect(mockCallBack.mock.calls.length).toEqual(1);
-    // });
+    it('button should contain link to "/signin" if user ID has NOT passed to props', () => {
+
+        const { container } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = container.querySelector('.btn--header');
+
+        expect(button).toHaveAttribute('href', '/signin');
+
+    })
+
+    it('should contain 15 links across component if user ID HAS passed to props', () => {
+        const props = {
+            data: {
+                _id: '123456789'
+            }
+        };
+
+        const { container } = render(
+            <BrowserRouter>
+                <Header {...props} />
+            </BrowserRouter>
+        );
+
+        // const button = container.querySelector('.btn--header');
+
+        expect(screen.getAllByRole('link').length).toBe(15);
+        // expect(screen.getAllByRole('link')).toHaveAttribute('href', '/profile');
+
+    })
+
+    it('should contain 10 links across component if user ID has NOT passed to props', () => {
+
+        const { container } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        // const button = container.querySelector('.btn--header');
+
+        expect(screen.getAllByRole('link').length).toBe(10);
+        // expect(screen.getAllByRole('link')).toHaveAttribute('href', '/profile');
+
+    })
+
+    it('should change state on every click on BurgerIcon element', () => {
+
+        const { container } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = container.querySelector('.burger');
+
+        expect(button.classList.contains('is-active')).toBe(false);
+
+        fireEvent.click(button);
+
+        expect(button.classList.contains('is-active')).toBe(true);
+
+        fireEvent.click(button);
+
+        expect(button.classList.contains('is-active')).toBe(false);
+    })
+
+    it('should show and hide SlideBar element on click on BurgerIcon element', () => {
+
+        const { container } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = container.querySelector('.burger');
+
+        const slidebar = container.querySelector('.slide-bar');
+
+        expect(slidebar.classList.contains('is-active')).toBe(false);
+
+        fireEvent.click(button);
+
+        expect(slidebar.classList.contains('is-active')).toBe(true);
+
+        fireEvent.click(button);
+
+        expect(slidebar.classList.contains('is-active')).toBe(false);
+    })
 })
