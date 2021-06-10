@@ -1,0 +1,49 @@
+@import "./project-styles/mixins";
+@import "./project-styles/variables";
+
+.color-pink {
+    color: var(--color-pink);
+    fill: var(--color-pink);
+}
+
+.color-violet {
+    color: var(--color-violet);
+    fill: var(--color-violet);
+}
+
+.color-white {
+    color: var(--color-white);
+    fill: var(--color-white);
+}
+
+.bg-grey {
+    background-color: var(--color-input-bg);
+}
+
+.bg-pink {
+    background-color: var(--color-pink);
+}
+
+.bg-white {
+    background-color: var(--color-white);
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block--mb {
+    display: block;
+
+    @include respond(_1040-1200) {
+        display: none;
+    }
+}
+
+.display-block--dt {
+    display: none;
+
+    @include respond(_1040-1200) {
+        display: block;
+    }
+}
