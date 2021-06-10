@@ -28,78 +28,210 @@
     }
 }
 
-.enquiry-form {
-    background-color: var(--color-input-border);
-    color: var(--color-white);
-    text-align: center;
+.enquiry {
 
-    &__form {
-        padding: 0 38.3rem 12rem;
+    background-color: var(--color-input-border);
+    text-align: center;
+    padding: 12rem 0;
+    // padding-top: 12rem;
+
+    @include respond(_1040-1200) {
+        padding: 12rem 31rem;
+        // padding: 3.2rem 31rem;
     }
 
     &__heading {
-        padding: 12rem 0 3rem;
+        margin-bottom: 3rem;
         color: var(--color-font-main);
     }
 
-    &__input {
-        height: 5rem;
-        width: 100%; //25.4rem;
-        font-size: $font-size-input;
-        font-family: inherit;
+    &-form {
 
-        padding: 0.7rem 2rem;
-        background-color: var(--color-white);
-        border: 0.2rem solid var(--color-input-border);
-        border-radius: $border-radius-main;
+        background-color: var(--color-input-border);
+        color: var(--color-white);
+        text-align: center;
 
-        &::-webkit-input-placeholder {
-            /* Edge */
+        &__form {
+            padding: 0 38.3rem 12rem;
+        }
+
+        &__heading {
+            padding: 12rem 0 3rem;
             color: var(--color-font-main);
         }
 
-        &::-ms-input-placeholder {
-            /* Internet Explorer 10-11 */
-            color: var(--color-font-main);
+        // &__row {
+        //     display: flex;
+        //     flex-direction: column;
+        //     justify-content: space-between;
+        
+        //     @include respond(_1040-1200) {
+        //         padding: 19rem 0 25rem;
+        //         flex-direction: row;
+        //     }
+        // }
+
+        &__row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            margin: 3rem 0;
+
+            @include respond(_1040-1200) {
+                flex-direction: row;
+            }
         }
 
-        &::placeholder {
-            color: var(--color-font-main);
+        &__element {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: center;
+            
+            width: 80vw;
+            
+            @include respond(_1040-1200) {
+                align-items: flex-end;
+                align-self: flex-end;
+                width: calc((100% - #{$gutter-horizontal-parts}) / 2);
+                
+                &:not(:last-child) {
+                    margin-right: $gutter-horizontal-parts;
+                    align-self: flex-start;
+                    // margin-right: $gutter-horizontal-contact-form;
+                }
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 3rem;
+
+                @include respond(_1040-1200) {
+                    margin-bottom: 0;
+                }
+            }
         }
-    }
 
-    &__label {
-        font-size: 1.8rem;
-    }
+        &__btn-box {
+            margin-top: 3rem;            
+            text-align: center;
+            
+            
+            @include respond(_1040-1200) {
+                text-align: right;
+                width: 100%;
+            }
 
-    &__message-label {
-        text-align: left;
-        color: var(--color-font-main);
-        display: inline-block;
-        width: 100%;
-        padding-bottom: 1rem;
-    }
+        }
 
-    &__textarea {
-        width: 100%;
-        resize: none;
-        outline: none;
-        border: 0.2rem solid var(--color-input-border);
-        border-radius: $border-radius-main;
+        &__field {
+            height: $form-element-height-mb;
+            width: 100%;
+            font-size: $font-size-input-mb;
+            font-family: inherit;
+            
+            padding: 0.7rem 2rem;
 
-        font-size: $font-size-input;
-        font-family: inherit;
+            background-color: var(--color-white);
+            border: 0.2rem solid var(--color-input-border);
+            border-radius: $border-radius-main;
+            @include respond(_1040-1200) {
+                height: $form-element-height-dt;
+                font-size: $font-size-input-dt;
+            }
+            
+            &::-webkit-input-placeholder {
+                /* Edge */
+                color: var(--color-font-main);
+            }
 
-        padding: 0.7rem 2rem;
-    }
+            &::-ms-input-placeholder {
+                /* Internet Explorer 10-11 */
+                color: var(--color-font-main);
+            }
 
-    &--btn-box {
-        height: 8rem;
-    }
+            &::placeholder {
+                color: var(--color-font-main);
+            }
+        }
 
-    &__btn {
-        &--submit {
-            float: right;
+        &__error-message {
+            color: #ff0000;
+            align-self: flex-start;
+        }
+
+        // &__input {
+        //     height: 5rem;
+        //     width: 100%; //25.4rem;
+        //     font-size: $font-size-input-mb;
+        //     font-family: inherit;
+
+        //     padding: 0.7rem 2rem;
+        //     background-color: var(--color-white);
+        //     border: 0.2rem solid var(--color-input-border);
+        //     border-radius: $border-radius-main;
+
+        //     &::-webkit-input-placeholder {
+        //         /* Edge */
+        //         color: var(--color-font-main);
+        //     }
+
+        //     &::-ms-input-placeholder {
+        //         /* Internet Explorer 10-11 */
+        //         color: var(--color-font-main);
+        //     }
+
+        //     &::placeholder {
+        //         color: var(--color-font-main);
+        //     }
+        // }
+
+        // &__label {
+        //     font-size: 1.8rem;
+        // }
+
+        &__message-label {
+            text-align: left;
+            color: var(--color-font-main);
+            display: inline-block;
+            width: 80%;
+            padding-bottom: 1rem;
+            
+            @include respond(_1040-1200) {
+                width: 100%;
+            }
+        }
+
+        &__message {
+        // &__textarea {
+            width: 80%;
+            // width: 100%;
+            resize: none;
+            outline: none;
+            border: 0.2rem solid var(--color-input-border);
+            border-radius: $border-radius-main;
+
+            font-size: $font-size-input-mb;
+            font-family: inherit;
+
+            padding: 0.7rem 2rem;
+
+            @include respond(_1040-1200) {
+
+                font-size: $font-size-input-dt;
+                width: 100%;
+            }
+        }
+
+        &--btn-box {
+            height: 8rem;
+        }
+
+        &__btn {
+            &--submit {
+                float: right;
+            }
         }
     }
 }

@@ -1,0 +1,178 @@
+@import "../../project-styles/mixins";
+@import "../../project-styles/variables";
+
+.intro {
+    // height: 76.5rem;
+    text-align: center;
+    // margin-top: 12rem; //aligned with the header with navigation; should be renamed to intro-...
+    
+    // @include respond(_1040-1200) {
+    //     margin-top: 7rem;
+    // }
+
+    &__container {
+        width: 100%;
+        height: 56rem;
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+
+        width: 100%;
+        // padding-top:52%;        
+        background-repeat: no-repeat;
+        // background-size: contain;
+        background-size: cover;
+        background-position: center;
+        // @include respond(_1040-1200) {
+        //     padding-top:29%;
+        // }
+
+        // &--about-page {
+        //     background-image: url("../../graphics/pages-content/about-page/about-header-320.png");
+        //     @include respond(_1040-1200) {
+        //         background-image: url("../../graphics/pages-content/about-page/about-header-1366.png");
+        //     }
+        //     @include respond(_1200-big-desktop) {
+        //         background-image: url("../../graphics/pages-content/about-page/about-header-1920.png");
+        //     }
+        // }
+        
+        // &--educators-page {
+        //     background-image: url("../../graphics/pages-content/educators-page/educators-header-320.png");
+        //     @include respond(_1040-1200) {
+        //         background-image: url("../../graphics/pages-content/educators-page/educators-header-1366.png");
+        //     }
+        //     @include respond(_1200-big-desktop) {
+        //         background-image: url("../../graphics/pages-content/educators-page/educators-header-1920.png");
+        //     }
+        // }
+        
+        // &--students-page {
+        //     background-image: url("../../graphics/pages-content/students-page/students-header-1920.png");
+        //     @include respond(_1040-1200) {
+        //         background-image: url("../../graphics/pages-content/students-page/students-header-1920.png");
+        //     }
+        // }
+        
+        // &--partners-page {
+        //     background-image: url("../../graphics/pages-content/partners-page/partners-header-1920.png");
+        //     @include respond(_1040-1200) {
+        //         background-image: url("../../graphics/pages-content/partners-page/partners-header-1920.png");
+        //     }
+        // }
+    }
+
+    &__bg {
+        width: 100%;
+        padding-top:52%;
+        
+        background-repeat: no-repeat;
+        // background-size: contain;
+        background-size: cover;
+        background-position: center;
+        @include respond(_1040-1200) {
+            padding-top:29%;
+        }
+
+        &--about {
+            background-image: url("../../graphics/pages-content/about-page/about-header-320.png");
+            @include respond(_1040-1200) {
+                background-image: url("../../graphics/pages-content/about-page/about-header-1366.png");
+            }
+            @include respond(_1200-big-desktop) {
+                background-image: url("../../graphics/pages-content/about-page/about-header-1920.png");
+            }
+        }
+        
+        &--educators {
+            background-image: url("../../graphics/pages-content/educators-page/educators-header-320.png");
+            @include respond(_1040-1200) {
+                background-image: url("../../graphics/pages-content/educators-page/educators-header-1366.png");
+            }
+            @include respond(_1200-big-desktop) {
+                background-image: url("../../graphics/pages-content/educators-page/educators-header-1920.png");
+            }
+        }
+        
+        &--students {
+            background-image: url("../../graphics/pages-content/students-page/students-header-320.png");
+            @include respond(_1040-1200) {
+                background-image: url("../../graphics/pages-content/students-page/students-header-1366.png");
+            }
+            @include respond(_1200-big-desktop) {
+                background-image: url("../../graphics/pages-content/students-page/students-header-1920.png");
+            }
+        }
+        
+        &--partners {
+            background-image: url("../../graphics/pages-content/partners-page/partners-header-320.png");
+            @include respond(_1040-1200) {
+                background-image: url("../../graphics/pages-content/partners-page/partners-header-1366.png");
+            }
+            @include respond(_1200-big-desktop) {
+                background-image: url("../../graphics/pages-content/partners-page/partners-header-1920.png");
+            }
+        }
+    }
+
+    &__content {
+        
+        @include respond(_1040-1200) {
+            position: relative;
+            top: -50rem;
+
+            height: 100%;
+            padding: 0;
+        }
+    }
+
+    &__title {
+        // margin: 3rem 0;
+        text-transform: uppercase;
+        color: var(--color-font-main);
+
+        @include respond(_1040-1200) {
+            color: var(--color-pink);
+            text-align: center;
+            text-transform: initial;
+            margin-top: -30rem;
+            margin-bottom: 25rem;
+        }
+        
+        &--lvl2 {
+            padding: 5vw 5vw 0;            
+            @include respond(_1040-1200) {
+                padding: 0;            
+            }
+        }
+    }
+
+    &__title--second-lvl-page {
+        padding-top: 22rem;
+    }
+
+    // &__title {
+    //     padding-top: 22rem;
+    // }
+
+    &__content-box {
+        position: relative;
+        top: 26rem;
+    }
+
+    &__paragraph {
+        max-width: calc(#{$grid-width} * 0.932);
+        margin: 0 auto;
+        padding: 6.4rem 16.2rem 2.5rem;
+        text-align: justify;
+        font-size: 2.3rem;
+        background-color: var(--color-white);
+        
+        &--home-page {
+            font-size: 3rem;
+            max-width: 156rem;
+        }
+    }
+}

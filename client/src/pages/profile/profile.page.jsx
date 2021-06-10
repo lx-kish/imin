@@ -8,6 +8,16 @@ import config from '../../axios.config';
 
 import IconCamera from '../../components/icons/icon-camera.component';
 
+import educatorFormStructure from '../../components/forms/profile-form/educator-form-structure';
+import studentFormStructure from '../../components/forms/profile-form/student-form-structure';
+import adminFormStructure from '../../components/forms/profile-form/admin-form-structure';
+
+import useWindowSize from '../../utils/use-window-size/use-window-size';
+
+import DesktopWidth from '../../utils/desktop-width/desktop-width';
+
+import AsideMenu from '../../components/navigation/aside-menu-dt/aside-menu-dt.component';
+
 import './profile.styles.scss';
 
 // import { userCreatedStatusChange } from '../../redux/user/user.actions';
@@ -38,6 +48,8 @@ const Profile = (props) => {
 			edit: !fullState.edit
 		});
 	};
+
+	const [ width, height ] = useWindowSize();
 
 	/**
      * Profile structure:
@@ -153,116 +165,10 @@ const Profile = (props) => {
 
 	const formStructure = (role) => {
 		//return specific form structure for each role
-		if (role === 'educator') {
-			return [
-				{
-					name: 'profession',
-					type: 'text',
-					placeholder: 'Profession',
-					class: 'profile__input',
-					label: ''
-				},
-				{
-					name: 'industries',
-					type: 'text',
-					placeholder: 'Industry',
-					class: 'profile__input'
-				},
-				{
-					name: 'skills',
-					type: 'text',
-					placeholder: 'Skills',
-					class: 'profile__input'
-				},
-				{
-					name: 'company',
-					type: 'text',
-					placeholder: 'Company',
-					class: 'profile__input'
-				},
-				{
-					name: 'website',
-					type: 'text',
-					placeholder: 'Website',
-					class: 'profile__input'
-				},
-				{
-					name: 'location',
-					type: 'text',
-					placeholder: 'Location',
-					class: 'profile__input'
-				},
-				// {
-				// 	name: 'email',
-				// 	type: 'text',
-				// 	placeholder: 'Email address',
-				// 	class: 'profile__input'
-				// },
-				{
-					name: 'phone',
-					type: 'text',
-					placeholder: 'Contact No',
-					class: 'profile__input'
-				},
-				{
-					name: 'address',
-					type: 'text',
-					placeholder: 'Workshop address',
-					class: 'profile__input'
-				}
-			];
-		}
-		if (role === 'student') {
-			return [
-				{
-					name: 'industry',
-					type: 'text',
-					placeholder: 'Industry',
-					class: 'profile__input'
-				},
-				{
-					name: 'skillset',
-					type: 'text',
-					placeholder: 'Skillset',
-					class: 'profile__input'
-				},
-				{
-					name: 'location',
-					type: 'text',
-					placeholder: 'Location',
-					class: 'profile__input'
-				},
-				// {
-				// 	name: 'email',
-				// 	type: 'text',
-				// 	placeholder: 'Email address',
-				// 	class: 'profile__input'
-				// },
-				{
-					name: 'phone',
-					type: 'text',
-					placeholder: 'Contact No',
-					class: 'profile__input'
-				}
-			];
-		}
-		if (role === 'admin') {
-			return [
-				// {
-				// 	name: 'email',
-				// 	type: 'text',
-				// 	placeholder: 'Email address',
-				// 	class: 'profile__input'
-				// },
-				{
-					name: 'phone',
-					type: 'text',
-					placeholder: 'Contact No',
-					class: 'profile__input'
-				}
-			];
-		}
-		//if role is unfamiliar, then return it for diagnostic
+		if (role === 'educator') return educatorFormStructure;
+		if (role === 'student') return studentFormStructure;
+		if (role === 'admin') return adminFormStructure;
+		// if role is unfamiliar, then return it for the diagnostic
 		return role;
 	};
 
@@ -305,10 +211,10 @@ const Profile = (props) => {
 					if there is a label property and it's empty, there is no label at all */}
 
 					{ !field?.label 
-					? <label htmlFor={field.name} className={`profile__label profile__label--${field.name}`}>{field.placeholder}</label>
+					? <label htmlFor={field.name} className="profile__label profile__label--input">{field.placeholder}</label>
 					: field.label === '' 
 					? null
-					: <label htmlFor={field.name} className={`profile__label profile__label--${field.name}`}>{field.label}</label>
+					: <label htmlFor={field.name} className="profile__label profile__label--input">{field.label}</label>
 					}
 
 					<input
@@ -329,25 +235,24 @@ const Profile = (props) => {
 		});
 	};
 
-	const profileMainData = () => {
+	const renderForm = () => {
 		return (
-			// <section className="profile__main-data">
 			<Formik
 				initialValues={{ ...fullState.user }}
 				validate={(values) => {
 					const errors = {};
-
+	
 					if (!values.email) {
 						errors.email = 'Please provide your valid email address';
 					} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
 						errors.email = 'Please provide valid email address';
 					}
-
+	
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting, resetForm }) => {
 					setSubmitting(true);
-
+	
 					axios
 						.patch(`/api/users/${fullState.role}/${fullState.user._id}`, values, config)
 						.then((res) => {
@@ -361,13 +266,13 @@ const Profile = (props) => {
 								submitError: false,
 								errorMessage: ''
 							});
-
+	
 							// resetForm();
 							values = {...fullState.user};
 						})
 						.catch((error) => {
 							console.log('profile, error =====> ', error.response);
-
+	
 							setFullState({
 								...fullState,
 								submitSuccess: false,
@@ -375,7 +280,7 @@ const Profile = (props) => {
 								errorMessage: error.message
 							});
 						});
-
+	
 					// setSubmitting(false);
 				}}
 			>
@@ -383,13 +288,13 @@ const Profile = (props) => {
 					// {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
 					<form className="profile__form" onSubmit={form.handleSubmit}>
 						{/* ===> conditional rendering: if "EDIT" button activated, 
-               form is rendering, if not then view <=== */}
-
+							 form is rendering, if not then view <=== */}
+	
 						{fullState.edit ? (
 							<React.Fragment>
 								{/* name renders for all roles */}
 								<div className="profile__box profile__box--name">
-									<label htmlFor="name" className="profile__label profile__label--name">
+									<label htmlFor="name" className="profile__label profile__label--input">
 										First Name
 									</label>
 									<input
@@ -409,7 +314,7 @@ const Profile = (props) => {
 									}
 								</div>
 								<div className="profile__box profile__box--surname">
-									<label htmlFor="surname" className="profile__label profile__label--surname">
+									<label htmlFor="surname" className="profile__label profile__label--input">
 										Last Name
 									</label>
 									<input
@@ -430,9 +335,9 @@ const Profile = (props) => {
 										</p>
 									}
 								</div>
-
+	
 								{formFields(form)}
-
+	
 								<p className="profile__error-message">{fullState.submitError ? fullState.errorMessage : ''}</p>
 							</React.Fragment>
 						) : (
@@ -445,34 +350,86 @@ const Profile = (props) => {
 										'--'
 									)}
 								</div>
-
+	
 								{viewFields()}
 							</div>
 						)}
-
+	
 						{/* ===> buttons are rendered on any condition <=== */}
-
+	
 						<div className="profile__box profile__box--btn">
 							<button type="button" onClick={setEdit} className="btn btn--primary profile__btn paragraph--uppercase">
-								{`${fullState.edit ? 'Cancel' : 'Edit'}`}
+								{ fullState.edit ? 'Cancel' : 'Edit' }
 							</button>
 						</div>
-
-						<div className={`${fullState.edit ? 'profile__box ' : 'display-none '} profile__box--btn`}>
-							<button type="submit" onClick={null} className="btn btn--primary profile__btn paragraph--uppercase">
-								Save changes
-							</button>
-						</div>
+	
+						{fullState.edit ? (
+							<div className="profile__box profile__box--btn">
+								<button type="submit" onClick={null} className="btn btn--primary profile__btn paragraph--uppercase">
+									Save changes
+								</button>
+							</div>
+						) : ( null )}
 					</form>
 				)}
 			</Formik>
+		);
+	};
+
+	const profileMainData = () => {
+		return (
+			<section className="profile__main-data">
+
+				{renderForm()}
+			</section>
+			// <section className="profile__main-data">
+			// 	{ DesktopWidth() ? <AsideMenu /> : null }
+			// 	{/* { width > 1040 ? <AsideMenu /> : null } */}
+			// 	{renderForm()}
 			// </section>
 		);
 	};
 
+	const profilePhotoSection = () => {
+		return (
+			<section className="profile__box profile__box--photo">
+				<figure className="profile__photo">
+					<img
+						src="img/profile_photo.png"
+						alt="Profile photo"
+						className="profile__photo-img"
+					/>
+				</figure>
+				<button className="btn--primary btn--round profile__photo-button">
+					{<IconCamera className="profile__photo-icon btn__icon color-white" />}
+				</button>
+			</section>
+		);
+	};
+
 	return (
-		<main className="profile">
-			<h2 className="heading-secondary--uppercase profile__heading">My profile</h2>
+
+			DesktopWidth() ?
+				<main className="profile profile--dt">
+					<div className="profile__content">
+						<AsideMenu />
+						<div className="profile">
+							<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
+							{profilePhotoSection()}
+							{profileMainData()}
+						</div>
+					</div>
+				</main>
+			: 
+				<main className="profile">
+					<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
+					{profilePhotoSection()}
+					{profileMainData()}
+				</main>
+
+			/* { DesktopWidth() ? <AsideMenu /> : null } */
+			/* { width > 1040 ? <AsideMenu /> : null } */
+			/* <h1 className="heading-primary--uppercase profile__heading">My profile</h1>
 			<section className="profile__box profile__box--photo">
 				<div className="profile__photo">
 					<img src="img/profile_photo.png" className="profile__photo-img" />
@@ -481,8 +438,7 @@ const Profile = (props) => {
 					{<IconCamera className="profile__photo-icon btn__icon color-white" />}
 				</button>
 			</section>
-			{profileMainData()}
-		</main>
+			{profileMainData()} */
 	);
 };
 

@@ -1,63 +1,220 @@
 @import "../../project-styles/mixins";
 @import "../../project-styles/variables";
 
-.container {
-    // padding-top: 7rem;
-    // width: $grid-width;
-    // max-width: 136.6rem;
-    margin: 0 auto;
-    // padding: $container-padding-top-bottom $container-padding-left-right;
-    // background-color: var(--color-white);
-}
+.home {
 
+    &__main {
+        margin-top: 11.9rem;
 
-////////////////////////////////////////////////
-// CUSTOM GRID FOR PARTS SECTION
-.row--parts {
-    .col-1-of-2--parts {
-        width: calc((100% - #{$gutter-horizontal-parts}) / 2);
-    }
-
-    @include clearfix;
-
-    [class^="col-"] {
-        float: left;
-
-        &:not(:last-child) {
-            margin-right: $gutter-horizontal-parts;
+        @include respond(_1040-1200) {
+            margin-top: 6.9rem;
         }
     }
-}
 
-.parts {
-    background-color: var(--color-white);
-    // text-align: center;
-
-    &__container {
-        margin: 0 auto;
-        max-width: 111.4rem;
-        padding: 3.2rem 8rem;
-    }
-
-    &__heading {
+    &-intro {
         text-align: center;
-        padding: 1.2rem 0 6rem;
-        // max-width: 111.4rem;
-    }
 
-    &__article {
-        text-align: right;
+        @include respond(_1040-1200) {
+            margin-bottom: -35rem;
+        }
+    
+        &__bg {
+            width: 100%;
+            padding-top:53%;
+            
+            background-repeat: no-repeat;
+            background-size: contain;
+            // background-size: cover;
+            background-position: center;
+            background-image: url("../../graphics/pages-content/home-page/home-header-320.png");
+            @include respond(_1040-1200) {
+                padding-top:31%;
+                background-image: url("../../graphics/pages-content/home-page/home-header-1366.png");
+            }
+            @include respond(_1200-big-desktop) {
+                padding-top:29%;
+                background-image: url("../../graphics/pages-content/home-page/home-header-1920.png");
+            }
+        }
+        
+        &__content {
+            padding: 5vw;
+            
+            @include respond(_1040-1200) {
+                position: relative;
+                top: -50rem;
 
-        &-title {
-            padding-bottom: 3rem;
-
-            &--common {
-                padding-bottom: 2rem;
+                height: 100%;
+                padding: 0;
             }
         }
 
-        &-paragraph {
+        &__title {
+            margin: 3rem 0;
+            text-transform: uppercase;
+            color: var(--color-font-main);
+
+            @include respond(_1040-1200) {
+                color: var(--color-pink);
+                text-align: center;
+                text-transform: initial;
+                margin: 10rem 0 25rem;
+            }
+        }
+
+        &__paragraph {
+            margin: 0 auto;
             text-align: justify;
+            font-size: $font-size-paragraph--mb;//3rem;
+            
+            @include respond(_1040-1200) {
+                
+                padding: 6.4rem 16.2rem 2.5rem;
+                max-width: 156rem;
+                font-size: $font-size-paragraph--dt;//2.3rem;
+                background-color: var(--color-white);
+            }
+        }
+    
+        &__btn-box {
+            margin: 0 auto;
+        }
+    }
+    
+    &__page-title {
+        text-align: center;
+        margin: 1.2rem 0 6rem;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        
+        @include respond(_1040-1200) {
+            flex-direction: row;
+            // max-width: 100%;
+            padding: 3.2rem 31rem;            
+        }
+        
+        &--middle {
+            @include respond(_1040-1200) {
+                margin: 10rem auto;
+            }
+        }
+    }
+    
+    &__segment {
+        width: 100vw;
+
+        @include respond(_1040-1200) {
+            width: calc((100% - #{$gutter-horizontal-parts}) / 2);
+        }
+        &:not(:last-child) {
+            @include respond(_1040-1200) {
+                margin-right: $gutter-horizontal-parts;
+            }
+        }
+    }  
+    
+    &__cta-link {
+
+        display: block;
+        font-size: 3rem;
+        font-weight: 600;
+        margin: 2rem 0;
+                
+        @include respond(_1040-1200) {
+            display: inline-block;
+            font-size: 2.3rem;
+            letter-spacing: 0.2rem;
+            margin: 6rem 0 0 0;
+            
+            position: relative;
+            
+            transition: border-bottom .2s linear;
+            // transition: transform .2s linear;
+        }
+        
+        &:after {
+            @include respond(_1040-1200) {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                height: 1px;
+                width: 0;
+                transform: scaleX(0);
+                transition: transform 0.3s;//, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s;
+                
+                color: inherit;
+                background-color: currentColor;
+            }
+        }
+         
+        &:link,
+        &:visited,
+        &:active {
+            text-decoration: none;
+        }
+            
+        &:hover::after,
+        &:active::after {
+            // transform: translateY(-1rem);
+            // font-weight: $font-weight-bold;
+            // letter-spacing: .19rem;
+
+            // border-bottom: solid .1rem ;
+
+            transform: scaleX(-1);
+            width: 100%;
+        }
+    }
+
+    &__article {
+        
+        // display: flex;
+        // flex-direction: column;
+        text-align: center;
+        
+        padding: 5vw;
+        
+        @include respond(_1040-1200) {
+            text-align: right;
+            padding: 0;
+        }
+        
+        &-title {
+            margin-bottom: 3rem;
+            font-weight: 700;
+            font-size: 9rem;
+            line-height: 1;
+            
+            @include respond(_1040-1200) {
+                margin-bottom: 3rem;
+                font-weight: 700;
+                font-size: 5rem;
+            }
+    
+            &--common {
+                // margin-bottom: 2rem;
+                @include respond(_1040-1200) {
+                    // margin-bottom: 2rem;
+                }
+            }
+        }
+    
+        &-paragraph {
+            font-weight: $font-weight-regular;
+            line-height: 1.3;
+            font-size: $font-size-paragraph--mb;
+            text-align: justify;
+
+            @include respond(_1040-1200) {
+                font-size: $font-size-paragraph--dt;//2.3rem;
+            }
         }
     }
 }

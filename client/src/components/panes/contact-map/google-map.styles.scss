@@ -1,0 +1,11 @@
+@import "../../../project-styles/mixins";
+@import "../../../project-styles/variables";
+
+.google-map {
+  height: 100vw;
+  width: 100vw;
+  @include respond(_1040-1200) {
+    height: inherit;
+    width: 50vw;
+  }
+}

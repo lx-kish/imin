@@ -58,21 +58,25 @@
   }
 
   &__input {
-    height: 6.6rem;
+    height: $form-element-height-mb;
+    // height: 6.6rem;
     width: 85vw; //25.4rem;
-    font-size: 3.2rem;
+    font-size: $font-size-input-mb;
     font-family: inherit;
-
+    
     padding: 0.7rem 2rem;
     background-color: var(--color-input-bg) !important;
     border: 0.2rem solid var(--color-input-border);
     border-radius: $border-radius-main;
-
-    margin: 4vw 0;
-
+    
+    margin: $sign-in-form-margin-top-bottom-mb 0;
+    
     @include respond(_1040-1200) {
+      height: $form-element-height-dt;
       width: 40vw;
-      margin: 1vw 0;
+      margin: $sign-in-form-margin-top-bottom-dt 0;
+      font-size: $font-size-input-dt;
+      // margin: 1vw 0;
     }
 
     // &:first-child {
@@ -126,61 +130,45 @@
       align-items: center;
 
       max-width: 85vw;
-      margin: 4vw 0;
+      margin: $sign-in-form-margin-top-bottom-mb 0;
 
       @include respond(_1040-1200) {
-        margin: 1vw 0;
+        margin: $sign-in-form-margin-top-bottom-dt 0;
       }
     }
 
     &-label {
-      // display: inline-block;
-      // font-size: 2.5rem;
-      // letter-spacing: -0.1rem;
+
       margin-left: 3vw;
       cursor: pointer;
     }
   }
 
-  &__btn--submit {
-    height: 6.6rem;
-    width: 85vw;
-    margin: 4vw 0;
-    font-size: 3.5rem;
-
-    @include respond(_1040-1200) {
-      width: 40vw;
-      margin: 1vw 0;
-    }
-  }
-
   &__forgot {
-    margin: 4vw 0;
+    margin: $sign-in-form-margin-top-bottom-mb 0;
     align-self: center;
 
     @include respond(_1040-1200) {
-      margin: 1vw 0;
+      margin: $sign-in-form-margin-top-bottom-dt 0;
     }
   }
 
   &__hr {
     width: 85vw;
-    margin: 4vw 0 0;
+    margin: $sign-in-form-margin-top-bottom-mb 0;
     border: 1px solid;
 
     @include respond(_1040-1200) {
       width: 40vw;
-      margin: 1vw 0;
+      margin: $sign-in-form-margin-top-bottom-dt 0;
     }
 
     &--student {
       border-color: var(--color-violet-1);
-      // color: var(--color-violet);
     }
 
     &--educator {
       border-color: var(--color-pink-1);
-      // color: var(--color-pink);
     }
   }
 
@@ -188,7 +176,6 @@
     display: inline-block;
     font-size: 2.5rem;
     font-weight: 700;
-    //   font-size: 2rem;
     letter-spacing: 0rem;
 
     @include respond(_1040-1200) {

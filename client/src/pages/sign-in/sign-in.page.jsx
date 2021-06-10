@@ -7,8 +7,6 @@ import { Formik } from "formik";
 import "./sign-in.styles.scss";
 
 import config from "../../axios.config";
-import DoublePanesRow from "../../hoc/rows/double-panes-row/double-panes-row.hoc";
-import SinglePaneRow from "../../hoc/rows/single-pane-row/single-pane-row.component";
 
 import ImgStudent from "../../graphics/pages-content/sign-in/avatar-student.png";
 import ImgEducator from "../../graphics/pages-content/sign-in/avatar-educator.png";
@@ -25,7 +23,7 @@ const SignIn = (props) => {
     submitSuccess: false,
     submitError: false,
     errorMessage: "",
-    role: props.location.state
+    role: props.location?.state
       ? props.location.state.role || "student"
       : "student",
   });
@@ -39,7 +37,7 @@ const SignIn = (props) => {
     }
   }, [fullState.submitSuccess]);
 
-  const role = props.location.state
+  const role = props.location?.state
     ? props.location.state.role || "student"
     : "student";
 
@@ -83,13 +81,7 @@ const SignIn = (props) => {
 
               .then((res) => {
                 console.log("sign in doc, res =====> ", res);
-                // let responseMessage = res.payload.response.data.message;
-                // let errorMessage;
 
-                // if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
-                //     errorMessage = `User with email ${values.email} already exists.`;
-
-                // }
                 setFullState({
                   ...fullState,
                   submitSuccess: true,
@@ -97,6 +89,7 @@ const SignIn = (props) => {
                   errorMessage: "",
                 });
 
+                console.log("after push into profile", props);
                 props.history.push(`/profile`);
                 // props.history.push(`/profile`, { role: res.data.data.role });
 
@@ -233,11 +226,11 @@ const SignIn = (props) => {
                 <input
                   type="submit"
                   value="SIGN IN"
-                  className={`btn btn--dt ${
+                  className={`btn btn--signin btn--dt ${
                     values.role === "educator"
                       ? "btn--primary "
                       : "btn--tertiary "
-                  }sign-in__btn--submit`}
+                  }`}
                 />
               </>
               <Link
@@ -277,7 +270,7 @@ const SignIn = (props) => {
   };
 
   return (
-    <main className={"sign-in"}>
+    <main className="sign-in container">
       <img
         src={fullState.role === "student" ? ImgStudent : ImgEducator}
         alt={`${fullState.role} avatar`}

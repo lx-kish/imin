@@ -1,0 +1,213 @@
+@import "./project-styles/mixins";
+@import "./project-styles/variables";
+@import "./project-styles/typography";
+
+/**
+Types of buttons:
++ Navigation 'Sign in' button - mobile (with icon) / desktop (sign uppercase)
+
++ Intro button 'Register now' - mobile/desktop
+
+Email subscription 'Submit' button - mobile/desktop
+
+Contacts enquiry form 'Enquiry now' button - mobile/desktop
+
++ Sign in/Sign up forms buttons - mobile/desktop
+
+Log off page buttons - mobile/desktop
+
+Application interfaces buttons (Profile and others) - mobile/desktop
+*/
+
+.btn {
+  display: inline-block;
+  
+  border-radius: $border-radius-main;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: $font-size-paragraph--mb;//2rem;//$font-size-paragraph;
+  line-height: 6rem;
+  
+  @include respond(_1040-1200) {
+
+    padding: 0.8rem 4.5rem;
+    
+    font-size: $font-size-paragraph--dt;//2rem;//$font-size-paragraph;
+    line-height: 3rem;
+
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    transition: all 250ms;
+
+    &:hover {
+      @include BoxShadowHelper(2);
+      -webkit-transform: translateY(-0.5rem);
+      -moz-transform: translateY(-0.5rem);
+      transform: translateY(-0.5rem);
+    }
+    
+    &:active {
+      @include BoxShadowHelper(1);
+      transform: translateY(-0.1rem);
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    text-decoration: none;
+  }
+
+  &--header {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: $form-element-height-mb;
+    width: $navbar-btn-width-mb;
+    padding: 0.8rem;
+    
+    @include respond(_1040-1200) {
+      display: inline-block;
+      
+      height: $form-element-height-dt;
+      width: $navbar-btn-width-dt;
+      padding: 0.8rem 4.5rem;
+    }
+  }
+
+  &--home-intro {
+    
+    height: $form-element-height-mb;
+    width: 60vw;
+    
+    margin: 7vw 0;
+    
+    @include respond(_1040-1200) {
+      
+      margin: 4rem auto;
+      
+      height: $form-element-height-dt;
+      width: auto;
+    }
+  }
+
+  &--lvl2 {
+    
+    height: $form-element-height-mb;
+    width: 60vw;
+    
+    margin: 0 0 7vw;
+    // margin: 7vw 0;
+    
+    @include respond(_1040-1200) {
+      
+      margin: 0 auto;
+      // margin: 4rem auto;
+   
+      height: $form-element-height-dt;
+      width: auto;
+    }
+  }
+
+  &--signin {
+
+    align-self: center;
+    
+    width: 60vw;
+    // width: 85vw;
+    height: $form-element-height-mb;
+    margin: $sign-in-form-margin-top-bottom-mb 0;
+
+    @include respond(_1040-1200) {
+      
+      margin: 4rem auto;
+      margin: $sign-in-form-margin-top-bottom-dt 0;
+      
+      height: $form-element-height-dt;
+      width: auto;
+
+    }
+  }
+
+  &--subscribe {
+    
+    width: 60vw;
+
+    height: $form-element-height-mb;
+
+    @include respond(_1040-1200) {
+      
+      height: $form-element-height-dt;
+      width: auto;
+
+    }
+  }
+  
+  &--primary {
+    background-color: var(--color-pink);
+    color: var(--color-white);
+    border: 1px solid var(--color-pink);
+  }
+  
+  &--secondary {
+    background-color: var(--color-white);
+    color: var(--color-pink);
+    border: 1px solid var(--color-pink);
+  }
+  
+  &--tertiary {
+    background-color: var(--color-violet);
+    color: var(--color-white);
+    border: 1px solid var(--color-violet);
+  }
+  
+  &--login {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+  }
+
+  &--round {
+    // width: 10rem;
+    // height: 10rem;
+    border-radius: 50%;
+    
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      text-decoration: none;
+    }
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // text-align: center;
+    // vertical-align: auto;
+  }
+
+  &__icon {
+    display: block;
+    margin: auto;
+  }
+
+  &--dt-only {
+    display: none;
+    
+    @include respond(_1040-1200) {
+        display: inline-block;
+    }
+  }
+
+  &--mb-only {
+    display: none;
+
+    @include respond(_1040-1200) {
+        display: inline-block;
+    }
+  }
+}

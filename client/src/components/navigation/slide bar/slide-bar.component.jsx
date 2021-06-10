@@ -1,28 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import "./slide-bar.styles.scss";
+import './slide-bar.styles.scss';
 
 const SlideBar = ({ open, links, hideSliderMenu }) => {
+	const element = (link, i) => (
+		<Link key={i} to={link.link} className={`slide-bar__item ${link.className}`} onClick={() => hideSliderMenu()}>
+			{link.name}
+		</Link>
+	);
 
-  const element = (link, i) => (
-    <li key={i} className="slide-bar__item">
-      <Link to={link.link} className={link.className} onClick={() => hideSliderMenu()}>
-        {link.name}
-      </Link>
-    </li>
-  );
+	const delimeter = (link, i) => <div key={i} className={link.className} />;
 
-  const showLinks = (links) =>
-    links.map((link, i) => {
-      return element(link, i);
-    });
+	const showLinks = (links) =>
+		links.map((link, i) => {
+			if (link.name === 'delimeter') return delimeter(link, i);
+			return element(link, i);
+		});
 
-  return (
-    <ul className={`slide-bar${open ? ' is-active' : ''}`}>
-      {showLinks(links)}
-    </ul>
-  );
+	return <nav className={`slide-bar${open ? ' is-active' : ''}`}>{showLinks(links)}</nav>;
 };
 
 export default SlideBar;

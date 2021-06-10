@@ -14,38 +14,35 @@ import Profile from './pages/profile/profile.page';
 import Account from './pages/account/account.page';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
 
-import Layout from './components/layout/layout.hoc';
 import PrivateRoute from './hoc/private-route/private-route.hoc';
-import Auth from './hoc/auth/auth.hoc';
-// import Auth from './hoc/auth';
+import PublicRoute from './hoc/public-route/public-route.hoc';
 
 const Routes = () => {
-    return (
-        <Layout>
-            <Switch>
-                <Route path='/' exact component={Home} />
-                <Route path='/about' exact component={About} />
-                <Route path='/contact' exact component={Contact} />
-                <Route path='/educators' exact component={Educators} />
-                <Route path='/students' exact component={Students} />
-                <Route path='/partners' exact component={Partners} />
-                <Route path='/signup' exact component={SignUp} />
-                <Route path='/signin' exact component={SignIn} />
-                <PrivateRoute path='/logout' exact component={LogOut} />
-                <PrivateRoute path='/profile' exact component={Profile} />
-                <PrivateRoute path='/account' exact component={Account} />
-                <Route path='/terms' exact component={TermsAndConditions} />
-                {/* <Route path='/login' exact component={Auth(Login, false)}/>
-                <Route path='/user' exact component={Auth(User, true)}/>
-                <Route path='/user/logout' exact component={Auth(Logout, true)}/>
-                <Route path='/user/add' exact component={Auth(AddReview, true)}/>
-                <Route path='/user/register' exact component={Auth(Register, true)}/>
-                <Route path='/user/edit-post/:id' exact component={Auth(EditReview, true)}/>
-                <Route path='/books/:id' exact component={Auth(BookView, null)} />
-                <Route path='/user/user-reviews' exact component={Auth(UserPosts, true)}/> */}
-            </Switch>
-        </Layout>
-    );
+	return (
+		<Switch>
+			<PublicRoute path="/" exact component={Home} privateRoute={false} />
+			<PublicRoute path="/about" exact component={About} privateRoute={false} />
+			<PublicRoute path="/contact" exact component={Contact} privateRoute={false} />
+			<PublicRoute path="/educators" exact component={Educators} privateRoute={false} />
+			<PublicRoute path="/students" exact component={Students} privateRoute={false} />
+			<PublicRoute path="/partners" exact component={Partners} privateRoute={false} />
+			<PublicRoute path="/signup" exact component={SignUp} privateRoute={false} />
+			<PublicRoute path="/signin" exact component={SignIn} privateRoute={false} />
+			<PublicRoute path="/terms" exact component={TermsAndConditions} privateRoute={false} />
+			{/* <Route path="/" exact component={Home} />
+				<Route path="/about" exact component={About} />
+				<Route path="/contact" exact component={Contact} />
+				<Route path="/educators" exact component={Educators} />
+				<Route path="/students" exact component={Students} />
+				<Route path="/partners" exact component={Partners} />
+				<Route path="/signup" exact component={SignUp} />
+				<Route path="/signin" exact component={SignIn} /> */}
+			<PrivateRoute path="/logout" exact component={LogOut} privateRoute={true} />
+			<PrivateRoute path="/profile" exact component={Profile} privateRoute={true} />
+			<PrivateRoute path="/account" exact component={Account} privateRoute={true} />
+			{/* <Route path="/terms" exact component={TermsAndConditions} /> */}
+		</Switch>
+	);
 };
 
 export default Routes;

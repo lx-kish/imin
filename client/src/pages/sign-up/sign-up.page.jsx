@@ -7,8 +7,6 @@ import { Formik } from "formik";
 import "./sign-up.styles.scss";
 
 import config from "../../axios.config";
-import DoublePanesRow from "../../hoc/rows/double-panes-row/double-panes-row.hoc";
-import SinglePaneRow from "../../hoc/rows/single-pane-row/single-pane-row.component";
 
 import ImgStudent from "../../graphics/pages-content/sign-up/IMIN-purple.png";
 import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
@@ -57,7 +55,7 @@ const SignUp = (props) => {
     }
   }, [fullState.submitSuccess]);
 
-  const role = props.location.state
+  const role = props.location?.state
     ? props.location.state.role || "student"
     : "student";
 
@@ -144,13 +142,7 @@ const SignUp = (props) => {
               //getting respond from the server
               .then((res) => {
                 console.log("sign up doc, res =====> ", res);
-                // let responseMessage = res.payload.response.data.message;
-                // let errorMessage;
 
-                // if (responseMessage.indexOf('E11000 duplicate key error collection:') > -1) {
-                //     errorMessage = `User with email ${values.email} already exists.`;
-
-                // }
                 setFullState({
                   ...fullState,
                   submitSuccess: true,
@@ -412,9 +404,9 @@ const SignUp = (props) => {
                 <input
                   type="submit"
                   value="SIGN UP"
-                  className={`btn btn--dt ${
+                  className={`btn btn--signin btn--dt ${
                     role === "educator" ? "btn--primary " : "btn--tertiary "
-                  }sign-up__btn--submit`}
+                  }`}
                 />
               </>
               <hr className={`sign-up__hr sign-up__hr--${role}`} />
