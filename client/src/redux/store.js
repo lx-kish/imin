@@ -6,10 +6,13 @@ import logger from 'redux-logger';
 import rootReducer from './root-reducer';
 
 const middlewares = [
-    logger,
     promiseMiddleware,
     ReduxThunk
 ];
+
+if (process.env.NODE_ENV === "development") {
+    middlewares.push(logger);
+}
 
 // applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
 
