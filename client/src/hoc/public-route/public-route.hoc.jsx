@@ -26,13 +26,13 @@ const PublicRoute = (props) => {
 			.then((res) => {
 				if (!isCancelled) {
 					// console.log('PrivateRoute, res =====> ', res);
-					console.log('PrivateRoute, res.data.data =====> ', res.data);
+					console.log('PublicRoute, res.data.data =====> ', res.data);
 					setUser(res.data);
 					setLoaded(true);
 				}
 			})
 			.catch((error) => {
-				console.log('PrivateRoute, error =====> ', error.response);
+				console.log('PublicRoute, error =====> ', error.response);
 				setUser({});
 				setLoaded(true);
 			});
@@ -66,7 +66,7 @@ const PublicRoute = (props) => {
 			{...rest}
 			render={(props) => (
 				<div className="page">
-					<Header data={{}} />
+					<Header user={{}} />
 					<Component {...props} />
 					<Footer />
 				</div>

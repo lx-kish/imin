@@ -33,12 +33,14 @@ const Profile = (props) => {
    * Single state hook useState for all the state properties
    */
 	const [ fullState, setFullState ] = React.useState({
-		user: { ...props.data },
+		user: props.user,
+		// user: { ...props.data },
 		edit: false,
 		submitSuccess: false,
 		submitError: false,
 		errorMessage: '',
-		role: props?.data?.role ? props.data.role : 'student'
+		role: props?.user.role ? props.user.role : 'student'
+		// role: props?.data?.role ? props.data.role : 'student'
 		// role: props.location.state ? props.location.state.role || 'student' : 'student'
 	});
 
@@ -50,6 +52,13 @@ const Profile = (props) => {
 	};
 
 	const [ width, height ] = useWindowSize();
+	
+	// console.log(
+	// 	'%c Profile component, props and fullState.user ===> ',
+	// 	'color: orangered; font-weight: bold;',
+	// 	{ ...props },
+	// 	fullState.user
+	// );
 
 	/**
      * Profile structure:

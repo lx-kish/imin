@@ -62,7 +62,8 @@ const Header = (props) => {
 	// 	}
 	// ];
 
-	const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	const slideMenu = props.user?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	// const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
 
 	/** Single state hook useState for all the state properties */
 	const [ fullState, setFullState ] = React.useState({
@@ -97,7 +98,8 @@ const Header = (props) => {
 				<div className="header__logo-box">
 					<img src={logo} alt="Logo" className="header__logo" />
 				</div>
-				{props.data?._id ? (
+				{props.user?._id ? (
+				// {props.data?._id ? (
 					// 'isAuth'
 					<div className="header__btn-box--mb">
 						<Link
@@ -105,7 +107,6 @@ const Header = (props) => {
 								pathname: '/logout'
 							}}
 							className={'btn btn--header btn--tertiary'}
-							// className={'btn btn--tertiary header__btn header__btn--mb btn--login'}
 						>
 							{<LogOutIcon className="color-white" />}
 						</Link>
@@ -118,7 +119,6 @@ const Header = (props) => {
 								state: { role: 'student' }
 							}}
 							className={'btn btn--header btn--tertiary'}
-							// className={'btn btn--tertiary header__btn header__btn--mb btn--login'}
 						>
 							{<LogInIcon className="color-white" />}
 						</Link>
@@ -135,14 +135,14 @@ const Header = (props) => {
 					<NavigationBar />
 
 					<div className="header__btn-box--dt">
-						{props.data?._id ? (
+						{props.user?._id ? (
+						// {props.data?._id ? (
 							// 'Auth'
 							<Link
 								to={{
 									pathname: '/logout'
 								}}
 								className={'btn btn--header btn--tertiary paragraph--uppercase'}
-								// className={'btn btn--dt btn--tertiary header__btn--dt paragraph--uppercase'}
 							>
 								{'sign out'}
 							</Link>
@@ -153,7 +153,6 @@ const Header = (props) => {
 									state: { role: 'student' }
 								}}
 								className={'btn btn--header btn--tertiary paragraph--uppercase'}
-								// className={'btn btn--dt btn--tertiary header__btn--dt paragraph--uppercase'}
 							>
 								{'sign in'}
 							</Link>
