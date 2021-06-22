@@ -2,81 +2,152 @@ import axios from 'axios';
 
 import config from '../../axios.config';
 
-import {
-    USER_SIGN_UP,
-    USER_SIGN_UP_SUCCESS,
-    USER_SIGN_UP_FAILURE,
-    USER_SIGN_IN,
-    USER_SIGN_IN_SUCCESS,
-    USER_SIGN_IN_FAILURE,
-    USER_CHECK_AUTH,
-    USER_CHECK_AUTH_SUCCESS,
-    USER_CHECK_AUTH_FAILURE,
-    USER_CREATED_STATUS_CHANGE,
-} from '../types';
+import { postData, patchData } from '../../utils/use-fetch/use-fetch';
 
-export const userSignUp = user => {
+export const FETCH_USER_DATA__START = "FETCH_USER_DATA__START";
+export const FETCH_USER_DATA__SUCCESS = "ETCH_USER_DATA__SUCCESS";
+export const FETCH_USER_DATA__FAILURE = "FETCH_USER_DATA__FAILURE";
+export const FETCH_USER_LOGOUT = "FETCH_USER_LOGOUT";
 
-    // return {
-    return (dispatch) => {
+export const fetchUserDataStart = () => ({
+    type: FETCH_USER_DATA__START,
+});
 
-        // dispatch({ type: USER_SIGN_UP });
-        return axios.post(`http://127.0.0.1:3100/api/user/signup`, user, config)
-            // request
+export const fetchUserDataSuccess = (user) => ({
+    type: FETCH_USER_DATA__SUCCESS,
+    payload: {
+        user,
+    },
+});
+
+export const fetchUserDataFailure = (error, user) => ({
+    type: FETCH_USER_DATA__FAILURE,
+    payload: {
+        error,
+        // user, //previous state.user.data
+    },
+});
+
+export const fetchUserLogout = () => ({
+    type: FETCH_USER_LOGOUT,
+});
+
+export const postUserDataToTheServer = (route, values) => {
+
+    return (dispatch, getState) => {
+
+        dispatch(fetchUserDataStart());
+
+        return postData(`/api/users/${route}`, values)
             .then((res) => {
-                // console.log('res ----> ',res);
-                return dispatch({ type: USER_SIGN_UP_SUCCESS, payload: res });
-                // dispatch(userSignIn(res.data.user));
+                // console.log(
+                //     '%c user.actions postUserDataToTheServer, res.data.data ===> ',
+                //     'color: yellowgreen; font-weight: bold;',
+                //     { ...res.data.data },
+                //     route
+                // );
+                if (route === 'signin') dispatch(fetchUserDataSuccess({ ...res.data.data.user }));
+
+                if (route === 'logout') dispatch(fetchUserLogout());
+
             })
-            .catch((error) => {
-                // console.log('error ----> ', error);
-                return dispatch({ type: USER_SIGN_UP_FAILURE, payload: error });
-            })
-    }
-}
+            .catch((e) => {
+                dispatch(fetchUserDataFailure(e.response));
+            });
 
-export const userSignIn = user => {
 
-    return (dispatch) => {
 
-        dispatch({ type: USER_SIGN_IN });
-        return axios.post(`http://127.0.0.1:3100/api/user/signin`, user, config)
-            // request
+        // return axios
+
+        //     .post(`/api/users/${route}`, values, config)
+
+        //     .then((res) => {
+        //         console.log(
+        //             '%c user.actions postUserDataToTheServer, res.data.data ===> ',
+        //             'color: yellowgreen; font-weight: bold;',
+        //             res,
+        //             { ...res.data.data.user },
+        //             route,
+        //             values,
+        //         );
+
+        //         if (route === 'logout') {
+        //             dispatch(fetchUserLogout());
+        //             // dispatch(fetchUserDataSuccess({}));
+        //         }
+
+        //         if (route === 'login') dispatch(fetchUserDataSuccess({ ...res.data.data.user }));
+
+        //         // console.log("sign in doc, res =====> ", res);
+
+        //         // setFullState({
+        //         //     ...fullState,
+        //         //     submitSuccess: true,
+        //         //     submitError: false,
+        //         //     errorMessage: "",
+        //         // });
+
+        //         // console.log("after push into profile", props);
+        //         // props.history.push(`/profile`);
+        //         // props.history.push(`/profile`, { role: res.data.data.role });
+
+        //     })
+        //     .catch((error) => {
+        //         console.log("sign in doc, error =====> ", error.response);
+
+        //         // resetForm();
+        //         // setFullState({
+        //         //     ...fullState,
+        //         //     submitSuccess: false,
+        //         //     submitError: true,
+        //         //     errorMessage: error.message,
+        //         // });
+        //     });
+    };
+};
+
+export const patchUserDataToTheServer = (route, values) => {
+
+    return (dispatch, getState) => {
+
+        dispatch(fetchUserDataStart());
+
+        return axios
+
+            .patch(`/api/users/${route}`, values, config)
+
             .then((res) => {
-                // console.log('res ----> ',res);
-                return dispatch({ type: USER_SIGN_IN_SUCCESS, payload: res });
+
+                dispatch(fetchUserDataSuccess({ ...res.data.data.user }));
+
             })
-            .catch((error) => {
-                // console.log('error ----> ', error);
-                return dispatch({ type: USER_SIGN_IN_FAILURE, payload: error });
-            })
-    }
-}
+            .catch((e) => {
+                dispatch(fetchUserDataFailure(e.response));
+            });
+        // console.log("sign in doc, res =====> ", res);
 
-export const auth = () => {
+        // setFullState({
+        //     ...fullState,
+        //     submitSuccess: true,
+        //     submitError: false,
+        //     errorMessage: "",
+        // });
 
-    return (dispatch) => {
+        // console.log("after push into profile", props);
+        // props.history.push(`/profile`);
+        // props.history.push(`/profile`, { role: res.data.data.role });
 
-        dispatch({ type: USER_CHECK_AUTH });
-        return axios.get(`http://127.0.0.1:3100/api/user/auth`, config)
-            // request
-            .then((res) => {
-                console.log('res ----> ', res);
-                return dispatch({ type: USER_CHECK_AUTH_SUCCESS, payload: res });
-            })
-            .catch((error) => {
-                console.log('error ----> ', error);
-                return dispatch({ type: USER_CHECK_AUTH_FAILURE, payload: error });
-            })
-    }
+        // })
+        //         .catch ((error) => {
+        // console.log("sign in doc, error =====> ", error.response);
 
-}
-
-export const userCreatedStatusChange = user => {
-
-    return (dispatch) => {
-
-        dispatch({ type: USER_CREATED_STATUS_CHANGE, payload: { created: false } });
-
-    }
-}
+        // resetForm();
+        // setFullState({
+        //     ...fullState,
+        //     submitSuccess: false,
+        //     submitError: true,
+        //     errorMessage: error.message,
+        // });
+        // });
+    };
+};

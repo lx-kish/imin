@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import useClickOutside from '../../utils/use-click-outside/useClickOutside';
 import appMenu from '../navigation/appMenu';
 import delimeter from '../navigation/delimeter';
@@ -62,7 +64,21 @@ const Header = (props) => {
 	// 	}
 	// ];
 
-	const slideMenu = props.user?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	const { user, status } = props;
+
+	// console.log(
+	// 	'%c Header component, { ...props }, user ===> ',
+	// 	'color: orangered; font-weight: bold;',
+	// 	{ ...props },
+	// 	user,
+	// 	status
+	// );
+
+	const slideMenu = status ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	// const slideMenu = '_id' in user && user._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	// const slideMenu = user.hasOwnProperty('_id') && user._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	// const slideMenu = props.user._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
+	// const slideMenu = props.user?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
 	// const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
 
 	/** Single state hook useState for all the state properties */
@@ -98,8 +114,11 @@ const Header = (props) => {
 				<div className="header__logo-box">
 					<img src={logo} alt="Logo" className="header__logo" />
 				</div>
-				{props.user?._id ? (
-				// {props.data?._id ? (
+				{ status ? (
+				// {'_id' in user && user._id ? (
+					// { user.hasOwnProperty('_id') && user._id ? (
+					// {props.user?._id ? (
+					// {props.data?._id ? (
 					// 'isAuth'
 					<div className="header__btn-box--mb">
 						<Link
@@ -135,8 +154,11 @@ const Header = (props) => {
 					<NavigationBar />
 
 					<div className="header__btn-box--dt">
-						{props.user?._id ? (
-						// {props.data?._id ? (
+						{status ? (
+						// {'_id' in user && user._id ? (
+							// { user.hasOwnProperty('_id') && user._id ? (
+							// {props.user?._id ? (
+							// {props.data?._id ? (
 							// 'Auth'
 							<Link
 								to={{
@@ -164,4 +186,16 @@ const Header = (props) => {
 	);
 };
 
-export default Header;
+const mapReduxStateToProps = (state) => ({
+	user: state.user.data,
+	processing: state.auth.processing,
+	dataFetched: state.auth.dataFetched,
+	status: state.auth.status,
+	error: state.auth.error
+});
+
+export default connect(
+	mapReduxStateToProps,
+	null
+)(Header);
+// export default Header;

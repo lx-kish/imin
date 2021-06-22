@@ -53,7 +53,7 @@ const generateAndSendToken = (user, statusCode, req, res) => {
     httpOnly: true,
     secure: req.secure || req.headers['x-forwareded-proto'] === 'https'
   };
-  
+
   // removes password from the output
   user.password = undefined;
   user.passwordConfirm = undefined;
@@ -174,15 +174,36 @@ module.exports = {
       return next(new AppError('Bad email or password provided!', 400));
     }
 
-    const userModel = users;
+    let userModel = users;
+    // const userModel = users;
 
-    const user = await userModel.findOne({ email }).select('password');
+    // let user = await userModel.findOne({ email });
+    let user = await userModel.findOne({ email }).select('password');
 
     if (!user || !(await user.comparePassword(password, user.password))) {
       return next(new AppError('Incorrect email or password!', 401));
     }
 
-    logger.debug('Found user at Sign-In endpoint with properties:', user);
+    logger.debug('Found user at Sign-In endpoint with properties: %o', user);
+
+    //get full user data from db...
+    switch (user.role) {
+      case 'admin':
+        userModel = admins;
+        break;
+      case 'student':
+        userModel = students;
+        break;
+      case 'educator':
+        userModel = educators;
+        break;
+      default:
+        return new AppError(`Unidentified role: ${role}.`, 400);
+    }
+
+    user = await userModel.findById(user._id);
+
+    logger.debug(`Found data for user ${user._id} with role ${user.role} while signing in: %o`, user);
 
     generateAndSendToken(user, 200, req, res);
   }),

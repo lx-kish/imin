@@ -16,6 +16,13 @@ module.exports = function (app) {
             userController.getUser
         );
 
+    // router
+    //     .route('/signup')
+    //     .post(
+    //         authController.signUp,
+    //         // userController.getMe,
+    //         // userController.getUser
+    //     );
     router.post('/signup', authController.signUp);
 
     router.post('/signin', authController.signIn);

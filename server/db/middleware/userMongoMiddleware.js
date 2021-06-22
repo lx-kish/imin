@@ -70,7 +70,7 @@ module.exports = (schema) => {
 
         const decoded = await promisify(jwt.verify)(token, config.jwtSecret);
 
-        console.log(decoded);
+        // console.log(decoded);
 
         // jwt.verify(token, config.jwtSecret, (err, decode) => {
 

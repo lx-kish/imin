@@ -53,14 +53,15 @@ const PrivateRoute = (props) => {
 		path,
 		processing,
 		dataFetched,
-		user,
+		status,
+		// user,
 		error,
 		checkUserAuth,
 		...rest 
 	} = props;
 
 	console.log(
-		'%c auth.actions fetchUserAuth, res.data.data ===> ',
+		'%c PrivateRoute component, { ...props } ===> ',
 		'color: orangered; font-weight: bold;',
 		{ ...props }
 	);
@@ -122,22 +123,24 @@ const PrivateRoute = (props) => {
 	// 	return <div className="private-route__loading">loading...</div>;
 	// }
 
-	console.log('============================================>');
-	console.log('props from privateRoute hoc ===> ', props);
-	console.log('Component from privateRoute hoc ===> ', Component.name);
-	console.log('user from privateRoute hoc ===> ', user);
-	// console.log('loaded from privateRoute hoc ===> ', loaded);
-	// console.log('user?.data?._id from privateRoute hoc ===> ', user?.data?._id);
+	// console.log('============================================>');
+	// console.log('props from privateRoute hoc ===> ', props);
+	// console.log('Component from privateRoute hoc ===> ', Component.name);
+	// console.log('user from privateRoute hoc ===> ', user);
+	// // console.log('loaded from privateRoute hoc ===> ', loaded);
+	// // console.log('user?.data?._id from privateRoute hoc ===> ', user?.data?._id);
 
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
-				user?._id ? (
+				status ? (
+				// user?._id ? (
 				// user?.data?._id ? (
 					<div className="page">
-						<Header user={user} />
-						<Component user={user} { ...props } />
+						<Header />
+						{/* <Header user={user} /> */}
+						<Component { ...props } />
 						{/* <Header {...user} />
 						<Component {...user} {...props} /> */}
 						<Footer />
@@ -149,28 +152,19 @@ const PrivateRoute = (props) => {
 	);
 };
 
-// export default PrivateRoute;
-
 const mapReduxStateToProps = state => ({
 	processing: state.auth.processing,
 	dataFetched: state.auth.dataFetched,
-	user: state.auth.user,
-	// user: { ...state.auth.user },
+	status: state.auth.status,
 	error: state.auth.error,
 });
 
 const mapReduxDispatchToProps = dispatch => ({
-	checkUserAuth: () => dispatch(fetchUserAuth(dispatch)),
-
-  // onPhraseChange:
-  //   (newPhrase) => dispatch(updateSearchPhrase(newPhrase)),
-  // // TODO something is wrong here _DONE
-  // onMatchingContactSelect:
-  //   (selectedMatchingContact) => dispatch(selectMatchingContact(selectedMatchingContact.value)),
-  //   // (selectedMatchingContact) => dispatch(updateSearchPhrase(selectedMatchingContact.value)),
+	checkUserAuth: () => dispatch(fetchUserAuth()),
 });
 
 export default connect(
-  mapReduxStateToProps,
+	mapReduxStateToProps,
   mapReduxDispatchToProps,
 )(PrivateRoute);
+// export default PrivateRoute;

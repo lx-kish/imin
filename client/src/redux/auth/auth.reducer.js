@@ -4,11 +4,16 @@ import {
     FETCH_USER_AUTH__FAILURE,
 } from './auth.actions.js';
 
+import {
+    FETCH_USER_DATA__SUCCESS,
+    FETCH_USER_LOGOUT,
+} from '../user/user.actions.js';
+
 const initialState = {
     dataFetched: false,
     processing: false,
+    status: false,
     error: '',
-    user: {},
 }
 
 const authReducer = (state = initialState, action) => {
@@ -27,7 +32,8 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 processing: false,
                 dataFetched: true,
-                user: payload.user,
+                status: true,
+                // user: payload.user,
                 // user: { ...payload.user },
             }
 
@@ -36,8 +42,24 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 processing: false,
                 dataFetched: false,
-                user: null,
                 error: payload.error
+            }
+
+        case FETCH_USER_DATA__SUCCESS:
+            return {
+                ...state,
+                processing: false,
+                dataFetched: true,
+                status: true,
+            }
+
+        case FETCH_USER_LOGOUT:
+            return {
+                ...state,
+                dataFetched: false,
+                processing: false,
+                status: false,
+                error: '',
             }
 
         default:

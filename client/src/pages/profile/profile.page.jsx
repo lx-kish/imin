@@ -1,10 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 import { Formik } from 'formik';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
-import config from '../../axios.config';
+// import config from '../../axios.config';
+
+import { patchUserDataToTheServer } from '../../redux/user/user.actions';
 
 import IconCamera from '../../components/icons/icon-camera.component';
 
@@ -29,6 +31,7 @@ const Profile = (props) => {
 	// console.log('props.data.role from Profile ===> ', props.data.role);
 	// console.log('props from Profile ===> ', props);
 
+	const { patchUserData } = props;
 	/**
    * Single state hook useState for all the state properties
    */
@@ -262,14 +265,15 @@ const Profile = (props) => {
 				onSubmit={(values, { setSubmitting, resetForm }) => {
 					setSubmitting(true);
 	
-					axios
-						.patch(`/api/users/${fullState.role}/${fullState.user._id}`, values, config)
-						.then((res) => {
-							console.log('profile, res =====> ', res);
-							
-							setFullState({
-								...fullState,
-								user: res.data.data.data,
+					patchUserData(
+						`${fullState.role}/${fullState.user._id}`,
+						values
+					)
+					.then((res) => {
+						
+						setFullState({
+							...fullState,
+								user: res.data.data.user,
 								edit: false,
 								submitSuccess: true,
 								submitError: false,
@@ -279,16 +283,45 @@ const Profile = (props) => {
 							// resetForm();
 							values = {...fullState.user};
 						})
-						.catch((error) => {
-							console.log('profile, error =====> ', error.response);
+						.catch((e) => {
+							// console.log('profile, error =====> ', error.response);
 	
 							setFullState({
 								...fullState,
 								submitSuccess: false,
 								submitError: true,
-								errorMessage: error.message
+								errorMessage: e.message
 							});
 						});
+
+
+					// axios
+					// 	.patch(`/api/users/${fullState.role}/${fullState.user._id}`, values, config)
+					// 	.then((res) => {
+					// 		console.log('profile, res =====> ', res);
+							
+					// 		setFullState({
+					// 			...fullState,
+					// 			user: res.data.data.data,
+					// 			edit: false,
+					// 			submitSuccess: true,
+					// 			submitError: false,
+					// 			errorMessage: ''
+					// 		});
+	
+					// 		// resetForm();
+					// 		values = {...fullState.user};
+					// 	})
+					// 	.catch((error) => {
+					// 		console.log('profile, error =====> ', error.response);
+	
+					// 		setFullState({
+					// 			...fullState,
+					// 			submitSuccess: false,
+					// 			submitError: true,
+					// 			errorMessage: error.message
+					// 		});
+					// 	});
 	
 					// setSubmitting(false);
 				}}
@@ -451,9 +484,16 @@ const Profile = (props) => {
 	);
 };
 
-// const mapStateToProps = (state) => ({
-// 	user: state.user
-// });
+const mapReduxStateToProps = ( state ) => ({
+	user: state.user.data,
+});
 
-// export default connect(mapStateToProps)(Profile);
-export default Profile;
+const mapReduxDispatchToProps = dispatch => ({
+	patchUserData: (route, values) => dispatch(patchUserDataToTheServer(route, values)),
+});
+
+export default connect(
+	mapReduxStateToProps,
+  mapReduxDispatchToProps,
+)(Profile);
+// export default Profile;

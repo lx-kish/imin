@@ -8,7 +8,7 @@ import Routes from './routes';
 
 const App = (props) => {
   
-  // authentification check before launch the app
+  // checking authentification before the app launch
   const { checkUserAuth } = props;
 
   checkUserAuth();

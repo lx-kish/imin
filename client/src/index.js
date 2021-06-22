@@ -9,7 +9,7 @@ import './index.scss';
 
 import store from './redux/store';
 
-import Routes from './routes';
+// import Routes from './routes';
 
 ReactDOM.render(
   <Provider store={store} >
