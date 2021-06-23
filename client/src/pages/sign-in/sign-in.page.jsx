@@ -1,13 +1,9 @@
 import React from "react";
-import axios from "axios";
-
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Formik } from "formik";
 
 import "./sign-in.styles.scss";
-
-import config from "../../axios.config";
 
 import { postUserDataToTheServer } from '../../redux/user/user.actions';
 
@@ -15,14 +11,11 @@ import ImgStudent from "../../graphics/pages-content/sign-in/avatar-student.png"
 import ImgEducator from "../../graphics/pages-content/sign-in/avatar-educator.png";
 
 const SignIn = (props) => {
-  // let role = props.location.state ?
-  //     props.location.state.role || 'student'
-  //     : 'student';
 
   const { 
-		component: Component,
-		privateRoute,
-		path,
+		// component: Component,
+		// privateRoute,
+		// path,
 		processing,
 		dataFetched,
     status,
@@ -123,43 +116,8 @@ const SignIn = (props) => {
                 errorMessage: error.message,
               });
             });
-            
+
             setSubmitting(false);
-            // if(status) props.history.push(`/profile`);
-
-            
-
-            // axios
-            //   .post(`/api/users/signin`, values, config)
-
-            //   .then((res) => {
-            //     console.log("sign in doc, res =====> ", res);
-
-            //     setFullState({
-            //       ...fullState,
-            //       submitSuccess: true,
-            //       submitError: false,
-            //       errorMessage: "",
-            //     });
-
-            //     console.log("after push into profile", props);
-            //     props.history.push(`/profile`);
-            //     // props.history.push(`/profile`, { role: res.data.data.role });
-
-            //   })
-            //   .catch((error) => {
-            //     console.log("sign in doc, error =====> ", error.response);
-
-            //     // resetForm();
-            //     setFullState({
-            //       ...fullState,
-            //       submitSuccess: false,
-            //       submitError: true,
-            //       errorMessage: error.message,
-            //     });
-            //   });
-
-            
           }}
         >
           {({
@@ -338,7 +296,6 @@ const SignIn = (props) => {
 };
 
 const mapReduxStateToProps = state => ({
-	// user: state.user.data,
 	processing: state.auth.processing,
 	dataFetched: state.auth.dataFetched,
   status: state.auth.status,
@@ -347,11 +304,9 @@ const mapReduxStateToProps = state => ({
 
 const mapReduxDispatchToProps = dispatch => ({
 	postUserData: (route, values) => dispatch(postUserDataToTheServer(route, values)),
-	// postUserData: (route, values) => dispatch(postUserDataToTheServer(dispatch)),
 });
 
 export default connect(
 	mapReduxStateToProps,
   mapReduxDispatchToProps,
 )(SignIn);
-// export default SignIn;

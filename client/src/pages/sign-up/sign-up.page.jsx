@@ -1,12 +1,14 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import { Formik } from "formik";
 
 import "./sign-up.styles.scss";
 
-import config from "../../axios.config";
+import { postUserDataToTheServer } from '../../redux/user/user.actions';
+// import config from "../../axios.config";
 
 import ImgStudent from "../../graphics/pages-content/sign-up/IMIN-purple.png";
 import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
@@ -37,6 +39,16 @@ import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
  * @param {*} props
  */
 const SignUp = (props) => {
+
+  const {
+    // processing,
+		// dataFetched,
+    // status,
+		// error,
+    postUserData,
+    ...rest
+  } = props;
+
   /**
    * Single state hook useState for all the state properties
    */
@@ -136,39 +148,63 @@ const SignUp = (props) => {
             values.role = role;
 
             // send request containing new user data from the form to the server
-            axios
-              .post(`/api/users/signup`, values, config)
-
-              //getting respond from the server
-              .then((res) => {
-                console.log("sign up doc, res =====> ", res);
-
-                setFullState({
-                  ...fullState,
-                  submitSuccess: true,
-                  submitError: false,
-                  errorMessage: "",
-                });
-
-                //reset form fields
-
-                //redirect to the profile page with the newly registered user
-                props.history.push(`/profile`);
-                // props.history.push(`/profile`, { role: res.data.data.role });
-              })
-
-              //error handler for unknown errors
-              .catch((error) => {
-                console.log("sign up doc, error =====> ", error.response);
-
-                // resetForm();
-                setFullState({
-                  ...fullState,
-                  submitSuccess: false,
-                  submitError: true,
-                  errorMessage: error.message,
-                });
+            postUserData('signup', values)
+            .then((res) => {
+              console.log(
+                '%c sign-up.page onSubmit, status ===> ',
+                'color: yellowgreen; font-weight: bold;',
+                res
+              );
+              setFullState({
+                ...fullState,
+                submitSuccess: true,
+                submitError: false,
+                errorMessage: "",
               });
+              props.history.push(`/profile`);
+
+            })
+            .catch((e) => {
+              setFullState({
+                ...fullState,
+                submitSuccess: false,
+                submitError: true,
+                errorMessage: e.message,
+              });
+            });
+            // axios
+            //   .post(`/api/users/signup`, values, config)
+
+            //   //getting respond from the server
+            //   .then((res) => {
+            //     console.log("sign up doc, res =====> ", res);
+
+            //     setFullState({
+            //       ...fullState,
+            //       submitSuccess: true,
+            //       submitError: false,
+            //       errorMessage: "",
+            //     });
+
+            //     //reset form fields
+
+            //     //redirect to the profile page with the newly registered user
+            //     props.history.push(`/profile`);
+            //     // props.history.push(`/profile`, { role: res.data.data.role });
+            //   })
+
+            //   //error handler for unknown errors
+            //   .catch((error) => {
+            //     console.log("sign up doc, error =====> ", error.response);
+
+            //     // resetForm();
+            //     setFullState({
+            //       ...fullState,
+            //       submitSuccess: false,
+            //       submitError: true,
+            //       errorMessage: error.message,
+            //     });
+            //   });
 
             //setting formik setSubmitting flag to false
             setSubmitting(false);
@@ -478,4 +514,20 @@ const SignUp = (props) => {
   );
 };
 
-export default SignUp;
+// const mapReduxStateToProps = state => ({
+// 	processing: state.auth.processing,
+// 	dataFetched: state.auth.dataFetched,
+//   status: state.auth.status,
+// 	error: state.auth.error,
+// });
+
+const mapReduxDispatchToProps = dispatch => ({
+	postUserData: (route, values) => dispatch(postUserDataToTheServer(route, values)),
+});
+
+export default connect(
+	null,
+	// mapReduxStateToProps,
+  mapReduxDispatchToProps,
+)(SignUp);
+// export default SignUp;

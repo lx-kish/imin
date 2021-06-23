@@ -54,16 +54,6 @@ const Header = (props) => {
    * 
    */
 
-	// console.log('navigation bar props ===> ', props);
-
-	// const delimeter = [
-	// 	{
-	// 		name: 'delimeter',
-	// 		link: '',
-	// 		className: 'navigation-link__delimeter'
-	// 	}
-	// ];
-
 	const { user, status } = props;
 
 	// console.log(
@@ -75,12 +65,7 @@ const Header = (props) => {
 	// );
 
 	const slideMenu = status ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
-	// const slideMenu = '_id' in user && user._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
-	// const slideMenu = user.hasOwnProperty('_id') && user._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
-	// const slideMenu = props.user._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
-	// const slideMenu = props.user?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
-	// const slideMenu = props.data?._id ? [ ...appMenu, ...delimeter, ...siteMenu ] : siteMenu;
-
+	
 	/** Single state hook useState for all the state properties */
 	const [ fullState, setFullState ] = React.useState({
 		open: false
@@ -115,11 +100,6 @@ const Header = (props) => {
 					<img src={logo} alt="Logo" className="header__logo" />
 				</div>
 				{ status ? (
-				// {'_id' in user && user._id ? (
-					// { user.hasOwnProperty('_id') && user._id ? (
-					// {props.user?._id ? (
-					// {props.data?._id ? (
-					// 'isAuth'
 					<div className="header__btn-box--mb">
 						<Link
 							to={{
@@ -155,11 +135,6 @@ const Header = (props) => {
 
 					<div className="header__btn-box--dt">
 						{status ? (
-						// {'_id' in user && user._id ? (
-							// { user.hasOwnProperty('_id') && user._id ? (
-							// {props.user?._id ? (
-							// {props.data?._id ? (
-							// 'Auth'
 							<Link
 								to={{
 									pathname: '/logout'
@@ -198,4 +173,3 @@ export default connect(
 	mapReduxStateToProps,
 	null
 )(Header);
-// export default Header;

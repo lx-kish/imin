@@ -1,12 +1,10 @@
 import React from 'react';
-// import axios from 'axios';
-
-import { Formik } from 'formik';
 import { connect } from 'react-redux';
-
-// import config from '../../axios.config';
+import { Formik } from 'formik';
 
 import { patchUserDataToTheServer } from '../../redux/user/user.actions';
+
+import AsideMenu from '../../components/navigation/aside-menu-dt/aside-menu-dt.component';
 
 import IconCamera from '../../components/icons/icon-camera.component';
 
@@ -18,33 +16,28 @@ import useWindowSize from '../../utils/use-window-size/use-window-size';
 
 import DesktopWidth from '../../utils/desktop-width/desktop-width';
 
-import AsideMenu from '../../components/navigation/aside-menu-dt/aside-menu-dt.component';
-
 import './profile.styles.scss';
 
-// import { userCreatedStatusChange } from '../../redux/user/user.actions';
-
 const Profile = (props) => {
-	//if redirected from sign up, change new user status
-	// if (props.user.created) props.dispatch(userCreatedStatusChange(props.user));
 
-	// console.log('props.data.role from Profile ===> ', props.data.role);
-	// console.log('props from Profile ===> ', props);
-
-	const { patchUserData } = props;
+	const { user, patchUserData } = props;
+	
+	console.log(
+		'%c Profile component, props and user ===> ',
+		'color: orangered; font-weight: bold;',
+		{ ...props },
+		user
+	);
+	
 	/**
    * Single state hook useState for all the state properties
    */
 	const [ fullState, setFullState ] = React.useState({
-		user: props.user,
-		// user: { ...props.data },
 		edit: false,
 		submitSuccess: false,
 		submitError: false,
 		errorMessage: '',
-		role: props?.user.role ? props.user.role : 'student'
-		// role: props?.data?.role ? props.data.role : 'student'
-		// role: props.location.state ? props.location.state.role || 'student' : 'student'
+		role: user.role ? user.role : 'student'
 	});
 
 	const setEdit = () => {
@@ -55,13 +48,7 @@ const Profile = (props) => {
 	};
 
 	const [ width, height ] = useWindowSize();
-	
-	// console.log(
-	// 	'%c Profile component, props and fullState.user ===> ',
-	// 	'color: orangered; font-weight: bold;',
-	// 	{ ...props },
-	// 	fullState.user
-	// );
+
 
 	/**
      * Profile structure:
@@ -189,10 +176,16 @@ const Profile = (props) => {
 	};
 
 	const viewFields = () => {
-		console.log('profile viewFields fullState.role ===> ', fullState.role);
 		return formStructure(fullState.role).map((field, i) => {
+			// console.log(
+			// 	'%c Profile component, viewFields function,  fullState.role ===> ',
+			// 	'color: orangered; font-weight: bold;',
+			// 	fullState.role,
+			// 	field.name,
+			// 	user[field.name],
+			// 	user
+			// );
 			return (
-				// <div key={i} className={`profile__${field.name}`}>
 				<div key={i} className={`profile__box profile__box--${field.name}`}>
 					{/* if no label property in the field object, then label equal to placeholder
 					if there is a label property, then label is distinct of placeholder
@@ -206,7 +199,8 @@ const Profile = (props) => {
 					}
 
 					<div className={`profile__field-content profile__${field.name}`}>
-						{renderViewField(fullState.user[field.name])}
+						{renderViewField(user[field.name])}
+						{/* {renderViewField(fullState.user[field.name])} */}
 					</div>
 				</div>
 			);
@@ -215,7 +209,6 @@ const Profile = (props) => {
 
 	const formFields = (form) => {
 		return formStructure(fullState.role).map((field, i) => {
-			// console.log('form from profile ===> ', form);
 			return (
 				<div key={i} className={`profile__box profile__box--${field.name}`}>
 					{/* if no label property in the field object, then label equal to placeholder
@@ -250,7 +243,8 @@ const Profile = (props) => {
 	const renderForm = () => {
 		return (
 			<Formik
-				initialValues={{ ...fullState.user }}
+				initialValues={{ ...user }}
+				// initialValues={{ ...fullState.user }}
 				validate={(values) => {
 					const errors = {};
 	
@@ -266,14 +260,14 @@ const Profile = (props) => {
 					setSubmitting(true);
 	
 					patchUserData(
-						`${fullState.role}/${fullState.user._id}`,
+						`${fullState.role}/${user._id}`,
 						values
 					)
 					.then((res) => {
-						
+						// console.log('profile, res =====> ', res);
 						setFullState({
 							...fullState,
-								user: res.data.data.user,
+								// user: res.data.data.user,
 								edit: false,
 								submitSuccess: true,
 								submitError: false,
@@ -281,7 +275,8 @@ const Profile = (props) => {
 							});
 	
 							// resetForm();
-							values = {...fullState.user};
+							values = {...user};
+							// values = {...fullState.user};
 						})
 						.catch((e) => {
 							// console.log('profile, error =====> ', error.response);
@@ -294,40 +289,9 @@ const Profile = (props) => {
 							});
 						});
 
-
-					// axios
-					// 	.patch(`/api/users/${fullState.role}/${fullState.user._id}`, values, config)
-					// 	.then((res) => {
-					// 		console.log('profile, res =====> ', res);
-							
-					// 		setFullState({
-					// 			...fullState,
-					// 			user: res.data.data.data,
-					// 			edit: false,
-					// 			submitSuccess: true,
-					// 			submitError: false,
-					// 			errorMessage: ''
-					// 		});
-	
-					// 		// resetForm();
-					// 		values = {...fullState.user};
-					// 	})
-					// 	.catch((error) => {
-					// 		console.log('profile, error =====> ', error.response);
-	
-					// 		setFullState({
-					// 			...fullState,
-					// 			submitSuccess: false,
-					// 			submitError: true,
-					// 			errorMessage: error.message
-					// 		});
-					// 	});
-	
-					// setSubmitting(false);
 				}}
 			>
 				{(form) => (
-					// {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, isSubmitting }) => (
 					<form className="profile__form" onSubmit={form.handleSubmit}>
 						{/* ===> conditional rendering: if "EDIT" button activated, 
 							 form is rendering, if not then view <=== */}
@@ -386,11 +350,16 @@ const Profile = (props) => {
 							<div className="profile__view">
 								{/* <div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}> */}
 								<div className="profile__box profile__name heading-secondary">
-									{fullState.user.name || fullState.user.surname ? (
-										`${fullState.user.name} ${fullState.user.surname}`
+									{user.name || user.surname ? (
+										`${user.name} ${user.surname}`
 									) : (
 										'--'
 									)}
+									{/* {fullState.user.name || fullState.user.surname ? (
+										`${fullState.user.name} ${fullState.user.surname}`
+									) : (
+										'--'
+									)} */}
 								</div>
 	
 								{viewFields()}
@@ -421,14 +390,8 @@ const Profile = (props) => {
 	const profileMainData = () => {
 		return (
 			<section className="profile__main-data">
-
 				{renderForm()}
 			</section>
-			// <section className="profile__main-data">
-			// 	{ DesktopWidth() ? <AsideMenu /> : null }
-			// 	{/* { width > 1040 ? <AsideMenu /> : null } */}
-			// 	{renderForm()}
-			// </section>
 		);
 	};
 
@@ -468,19 +431,6 @@ const Profile = (props) => {
 					{profilePhotoSection()}
 					{profileMainData()}
 				</main>
-
-			/* { DesktopWidth() ? <AsideMenu /> : null } */
-			/* { width > 1040 ? <AsideMenu /> : null } */
-			/* <h1 className="heading-primary--uppercase profile__heading">My profile</h1>
-			<section className="profile__box profile__box--photo">
-				<div className="profile__photo">
-					<img src="img/profile_photo.png" className="profile__photo-img" />
-				</div>
-				<button className="btn--primary btn--round profile__photo-button">
-					{<IconCamera className="profile__photo-icon btn__icon color-white" />}
-				</button>
-			</section>
-			{profileMainData()} */
 	);
 };
 
@@ -496,4 +446,3 @@ export default connect(
 	mapReduxStateToProps,
   mapReduxDispatchToProps,
 )(Profile);
-// export default Profile;

@@ -36,7 +36,6 @@ const LogOut = (props) => {
 	});
 
 	const logout = () => {
-		// console.log('log-out');
 
 		postUserData('logout', '')
 			.then((res) => {
@@ -54,30 +53,9 @@ const LogOut = (props) => {
 					errorMessage: error.message
 				});
 			});
-		// if (!status) props.history.push('/signin');
-
-		// axios
-		// 	.post(`/api/users/logout`, '', config)
-		// 	.then((res) => {
-		// 		// console.log('sign in doc, res =====> ', res);
-
-		// 		props.history.push('/signin');
-		// 	})
-		// 	.catch((error) => {
-		// 		// console.log('sign in doc, error =====> ', error.response);
-
-		// 		// resetForm();
-		// 		setFullState({
-		// 			...fullState,
-		// 			logoutError: true,
-		// 			errorMessage: error.message
-		// 		});
-		// 	});
 	};
 
 	const cancel = () => {
-		// console.log('cancel');
-		// props.history.push('/signin');
 		console.log(props.history);
 	};
 
@@ -114,8 +92,6 @@ const mapReduxStateToProps = (state) => ({
 
 const mapReduxDispatchToProps = (dispatch) => ({
 	postUserData: (route, values) => dispatch(postUserDataToTheServer(route, values))
-	// postUserData: (route, values) => dispatch(postUserDataToTheServer(dispatch)),
 });
 
 export default connect(mapReduxStateToProps, mapReduxDispatchToProps)(LogOut);
-// export default LogOut;
