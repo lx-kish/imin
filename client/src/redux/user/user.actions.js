@@ -50,7 +50,7 @@ export const postUserDataToTheServer = (route, values) => {
 
                 if (route === 'logout') dispatch(fetchUserLogout());
 
-                throw new Error(`The unknown route *${route}* has been detected, operation aborted!`);
+                // throw new Error(`The unknown route *${route}* has been detected, operation aborted!`);
 
             })
             .catch((e) => {

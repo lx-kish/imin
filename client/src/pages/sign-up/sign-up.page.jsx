@@ -151,7 +151,7 @@ const SignUp = (props) => {
             postUserData('signup', values)
             .then((res) => {
               console.log(
-                '%c sign-up.page onSubmit, status ===> ',
+                '%c sign-up.page onSubmit, res ===> ',
                 'color: yellowgreen; font-weight: bold;',
                 res
               );
