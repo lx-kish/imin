@@ -176,11 +176,12 @@ const Profile = (props) => {
 	};
 
 	const viewFields = () => {
-		return formStructure(fullState.role).map((field, i) => {
+		return formStructure(user.role).map((field, i) => {
+		// return formStructure(fullState.role).map((field, i) => {
 			// console.log(
-			// 	'%c Profile component, viewFields function,  fullState.role ===> ',
+			// 	'%c Profile component, viewFields function,  user.role ===> ',
 			// 	'color: orangered; font-weight: bold;',
-			// 	fullState.role,
+			// 	user.role,
 			// 	field.name,
 			// 	user[field.name],
 			// 	user
@@ -208,7 +209,8 @@ const Profile = (props) => {
 	};
 
 	const formFields = (form) => {
-		return formStructure(fullState.role).map((field, i) => {
+		return formStructure(user.role).map((field, i) => {
+		// return formStructure(fullState.role).map((field, i) => {
 			return (
 				<div key={i} className={`profile__box profile__box--${field.name}`}>
 					{/* if no label property in the field object, then label equal to placeholder
@@ -260,7 +262,8 @@ const Profile = (props) => {
 					setSubmitting(true);
 	
 					patchUserData(
-						`${fullState.role}/${user._id}`,
+						`${user.role}/${user._id}`,
+						// `${fullState.role}/${user._id}`,
 						values
 					)
 					.then((res) => {

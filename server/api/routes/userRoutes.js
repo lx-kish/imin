@@ -1,4 +1,8 @@
 const router = require('express').Router();
+const multer = require('multer');
+
+const upload = multer({ dest: `${process.cwd()}/client/public/img/userpics/` });
+// const upload = multer({ dest: '../../../client/public/img/userpics' });
 
 const logger = require('../../loaders/logger')();
 const authController = require('../controllers/authController');
@@ -8,46 +12,72 @@ module.exports = function (app) {
 
     app.use('/users', router);
 
-    router
-        .route('/auth')
-        .get(
-            authController.isAuth,
-            userController.getMe,
-            userController.getUser
-        );
-
     // router
-    //     .route('/signup')
-    //     .post(
-    //         authController.signUp,
-    //         // userController.getMe,
-    //         // userController.getUser
+    //     .route('/auth')
+    //     .get(
+    //         authController.isAuth,
+    //         userController.getMe,
+    //         userController.getUser
     //     );
+
     router.post('/signup', authController.signUp);
 
     router.post('/signin', authController.signIn);
 
-    router.post('/logout', authController.isAuth, authController.logOut);
+    // Protects all routes below this middleware
+    router.use(authController.isAuth);
+
+    
+    router
+        .route('/auth')
+        .get(
+            userController.getMe,
+            userController.getUser
+        );
+
+    router.post('/logout', authController.logOut);
 
     router
         .route('/')
         .get(
-            authController.isAuth,
             authController.isPermitted('admin', 'educator'),
             userController.getAllUsers
         );
 
     router
         .route('/:id')
-        .get(authController.isAuth, userController.getUser)
-        .patch(authController.isAuth, userController.updateUser)
-        .delete(authController.isAuth, userController.deleteUser);
+        .get(userController.getUser)
+        .patch(upload.single('userpic'), userController.updateUser)
+        // .patch(userController.updateUser)
+        .delete(userController.deleteUser);
 
     router
         .route('/:role/:id')
-        .get(authController.isAuth, userController.getRole)
-        .patch(authController.isAuth, userController.updateRole)
-        .delete(authController.isAuth, userController.deleteRole);
+        .get(userController.getRole)
+        .patch(userController.updateRole)
+        .delete(userController.deleteRole);
+
+    // router.post('/logout', authController.isAuth, authController.logOut);
+
+    // router
+    //     .route('/')
+    //     .get(
+    //         authController.isAuth,
+    //         authController.isPermitted('admin', 'educator'),
+    //         userController.getAllUsers
+    //     );
+
+    // router
+    //     .route('/:id')
+    //     .get(authController.isAuth, userController.getUser)
+    //     .patch(authController.isAuth, userController.updateUser)
+    //     .delete(authController.isAuth, userController.deleteUser);
+
+    // router
+    //     .route('/:role/:id')
+    //     .get(authController.isAuth, userController.getRole)
+    //     .patch(authController.isAuth, userController.updateRole)
+    //     .delete(authController.isAuth, userController.deleteRole);
 
     return app;
 };

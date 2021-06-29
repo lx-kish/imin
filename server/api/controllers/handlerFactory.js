@@ -18,6 +18,13 @@ exports.deleteOne = Model => catchAsync(async (req, res, next) => {
 
 exports.updateOne = Model => catchAsync(async (req, res, next) => {
 
+    console.log(req.file);
+    console.log(__dirname);
+    console.log(__filename);
+    console.log(process.cwd());
+    console.log(process.argv[1]);
+    console.log('../../../client/public/img/userpics/');
+
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true
