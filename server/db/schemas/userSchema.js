@@ -43,6 +43,10 @@ module.exports = {
 		type: Date,
 		select: false
 	},
+	photo: {
+		type: String,
+		default: 'default.jpg'
+	},
 	active: {
 		type: Boolean,
 		default: true,

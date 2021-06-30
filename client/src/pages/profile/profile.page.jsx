@@ -298,7 +298,22 @@ const Profile = (props) => {
 					<form className="profile__form" onSubmit={form.handleSubmit}>
 						{/* ===> conditional rendering: if "EDIT" button activated, 
 							 form is rendering, if not then view <=== */}
-	
+						<div className="profile__box profile__box--photo">
+
+						
+							<figure className="profile__photo">
+								<img
+									src={`img/userpics/${user.photo}`}
+									// src="img/profile_photo.png"
+									alt="Profile photo"
+									className="profile__photo-img"
+								/>
+							</figure>
+							<button className="btn--primary btn--round profile__photo-button">
+								{<IconCamera className="profile__photo-icon btn__icon color-white" />}
+							</button>
+						</div>
+
 						{fullState.edit ? (
 							<React.Fragment>
 								{/* name renders for all roles */}
@@ -423,7 +438,7 @@ const Profile = (props) => {
 						<AsideMenu />
 						<div className="profile">
 							<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
-							{profilePhotoSection()}
+							{/* {profilePhotoSection()} */}
 							{profileMainData()}
 						</div>
 					</div>

@@ -1,8 +1,6 @@
 const router = require('express').Router();
-const multer = require('multer');
 
-const upload = multer({ dest: `${process.cwd()}/client/public/img/userpics/` });
-// const upload = multer({ dest: '../../../client/public/img/userpics' });
+const uploadImage = require('../../utils/uploadImage');
 
 const logger = require('../../loaders/logger')();
 const authController = require('../controllers/authController');
@@ -47,7 +45,7 @@ module.exports = function (app) {
     router
         .route('/:id')
         .get(userController.getUser)
-        .patch(upload.single('userpic'), userController.updateUser)
+        .patch(uploadImage('userpic'), userController.updateUser)
         // .patch(userController.updateUser)
         .delete(userController.deleteUser);
 
