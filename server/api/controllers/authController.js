@@ -212,9 +212,13 @@ module.exports = {
     // const logger = Container.get('logger');
     logger.debug('Calling Sign-Out endpoint');
 
-    res.cookie('access_token', '');
+    res.cookie('access_token', '', {
+    // res.cookie('access_token', 'loggedout', {
+      // expires: new Date(Date.now() + 10 * 1000),
+      httpOnly: true,
+  });
 
-    res.status(204).json({
+    res.status(200).json({
       status: 'success',
       data: null
     });

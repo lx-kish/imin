@@ -1,11 +1,20 @@
 const router = require('express').Router();
 
-const uploadImage = require('../../utils/uploadImage');
-
 const logger = require('../../loaders/logger')();
+
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
-
+/**
+ * authController:
+ * sign up
+ * sign in
+ * log out
+ * forgot password
+ * reset password
+ * 
+ * userController:
+ * 
+ */
 module.exports = function (app) {
 
     app.use('/users', router);
@@ -19,21 +28,27 @@ module.exports = function (app) {
     //     );
 
     router.post('/signup', authController.signUp);
-
     router.post('/signin', authController.signIn);
+    router.get('/logout', authController.logOut);
 
     // Protects all routes below this middleware
     router.use(authController.isAuth);
 
-    
-    router
-        .route('/auth')
-        .get(
-            userController.getMe,
-            userController.getUser
-        );
+    /**
+     * The route is used for checking if the user is authenticated,
+     * and provides the client with authenticated user's data
+     */
+    router.get(
+        '/auth',
+        userController.getMe,
+        userController.getUser
+    );
 
-    router.post('/logout', authController.logOut);
+    router.patch(
+        '/updateMe',
+        userController.uploadImage,
+        userController.updateMe
+    );
 
     router
         .route('/')
@@ -45,8 +60,8 @@ module.exports = function (app) {
     router
         .route('/:id')
         .get(userController.getUser)
-        .patch(uploadImage('userpic'), userController.updateUser)
-        // .patch(userController.updateUser)
+        .patch(userController.uploadImage, userController.updateUser)
+        .patch(userController.updateUser)
         .delete(userController.deleteUser);
 
     router

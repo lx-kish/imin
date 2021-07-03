@@ -45,7 +45,7 @@ module.exports = {
 	},
 	photo: {
 		type: String,
-		default: 'default.jpg'
+		default: 'default-1.jpg'
 	},
 	active: {
 		type: Boolean,

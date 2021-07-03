@@ -23,7 +23,9 @@ exports.updateOne = Model => catchAsync(async (req, res, next) => {
     // console.log(__filename);
     // console.log(process.cwd());
     // console.log(process.argv[1]);
-    // console.log('../../../client/public/img/userpics/');
+    // console.log(req.params);
+    // console.log(req.body);
+    // console.log(req.user);
 
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
         new: true,

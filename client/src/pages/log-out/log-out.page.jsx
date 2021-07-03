@@ -1,11 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 
 import './log-out.styles.scss';
 
-import config from '../../axios.config';
-import { postUserDataToTheServer } from '../../redux/user/user.actions';
+import { getUserDataFromTheServer } from '../../redux/user/user.actions';
 import Btn from '../../components/btn/btn.component';
 
 const content = {
@@ -26,7 +24,7 @@ const content = {
 };
 
 const LogOut = (props) => {
-	const { user, processing, dataFetched, status, error, postUserData } = props;
+	const { user, processing, dataFetched, status, error, getUserData } = props;
 	/**
      * Single state hook useState for all the state properties
      */
@@ -37,7 +35,7 @@ const LogOut = (props) => {
 
 	const logout = () => {
 
-		postUserData('logout', '')
+		getUserData('logout', '')
 			.then((res) => {
 				// console.log('sign in doc, res =====> ', res);
 
@@ -91,7 +89,7 @@ const mapReduxStateToProps = (state) => ({
 });
 
 const mapReduxDispatchToProps = (dispatch) => ({
-	postUserData: (route, values) => dispatch(postUserDataToTheServer(route, values))
+	getUserData: (route, values) => dispatch(getUserDataFromTheServer(route, values))
 });
 
 export default connect(mapReduxStateToProps, mapReduxDispatchToProps)(LogOut);

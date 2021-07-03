@@ -2,17 +2,18 @@ import axios from 'axios';
 
 import config from '../../axios.config';
 
-export const postData = async (route, values) => {
-    
-  return await axios.post(route, values, config);
-};
-
-export const getData = async (route) => {
-    
-  return await axios.get(route, config);
-};
-
-export const patchData = async (route, values) => {
-    
-  return await axios.patch(route, values, config);
+export const fetchData = async (method, url, data) => {
+  // console.log(
+  //   '%c use-fetch.fetchData, data ===> ',
+  //   'color: blue; font-weight: bold;',
+  //   method,
+  //   url,
+  //   data
+  // );
+  return await axios({
+    method,
+    url,
+    data,
+    config
+  })
 };

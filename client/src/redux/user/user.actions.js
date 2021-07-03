@@ -1,13 +1,11 @@
-import axios from 'axios';
-
-import config from '../../axios.config';
-
-import { postData, patchData } from '../../utils/use-fetch/use-fetch';
+import { fetchData } from '../../utils/use-fetch/use-fetch';
 
 export const FETCH_USER_DATA__START = "FETCH_USER_DATA__START";
-export const FETCH_USER_DATA__SUCCESS = "ETCH_USER_DATA__SUCCESS";
+export const FETCH_USER_DATA__SUCCESS = "FETCH_USER_DATA__SUCCESS";
 export const FETCH_USER_DATA__FAILURE = "FETCH_USER_DATA__FAILURE";
 export const FETCH_USER_LOGOUT = "FETCH_USER_LOGOUT";
+
+const routePrefix = '/api/users';
 
 export const fetchUserDataStart = () => ({
     type: FETCH_USER_DATA__START,
@@ -32,23 +30,53 @@ export const fetchUserLogout = () => ({
     type: FETCH_USER_LOGOUT,
 });
 
+export const getUserDataFromTheServer = (route, values) => {
+
+    return (dispatch, getState) => {
+
+        dispatch(fetchUserDataStart());
+
+        return fetchData('GET', `${routePrefix}/${route}`, values)
+            .then((res) => {
+                // console.log(
+                //     '%c user.actions getUserDataFromTheServer, res.data.data ===> ',
+                //     'color: yellowgreen; font-weight: bold;',
+                //     { ...res.data.data?.user },
+                //     `${routePrefix}/${route}`
+                // );
+
+                if (route === 'logout') dispatch(fetchUserLogout());
+
+                // throw new Error(`The unknown route *${route}* has been detected, operation aborted!`);
+
+            })
+            .catch((e) => {
+                // console.log(
+                //     '%c user.actions getUserDataFromTheServer, e ===> ',
+                //     'color: yellowgreen; font-weight: bold;',
+                //     e,
+                //     `${routePrefix}/${route}`
+                // );
+                dispatch(fetchUserDataFailure(e.response));
+            });
+    };
+};
+
 export const postUserDataToTheServer = (route, values) => {
 
     return (dispatch, getState) => {
 
         dispatch(fetchUserDataStart());
 
-        return postData(`/api/users/${route}`, values)
+        return fetchData('POST', `${routePrefix}/${route}`, values)
             .then((res) => {
-                console.log(
-                    '%c user.actions postUserDataToTheServer, res.data.data ===> ',
-                    'color: yellowgreen; font-weight: bold;',
-                    { ...res.data.data.user },
-                    route
-                );
+                // console.log(
+                //     '%c user.actions postUserDataToTheServer, res.data.data ===> ',
+                //     'color: yellowgreen; font-weight: bold;',
+                //     { ...res.data.data.user },
+                //     route
+                // );
                 if (route === 'signin' || route === 'signup') dispatch(fetchUserDataSuccess({ ...res.data.data.user }));
-
-                if (route === 'logout') dispatch(fetchUserLogout());
 
                 // throw new Error(`The unknown route *${route}* has been detected, operation aborted!`);
 
@@ -65,19 +93,15 @@ export const patchUserDataToTheServer = (route, values) => {
 
         dispatch(fetchUserDataStart());
 
-        return axios
-
-            .patch(`/api/users/${route}`, values, config)
-
+        return fetchData('PATCH', `${routePrefix}/${route}`, values)
             .then((res) => {
-                console.log(
-                    '%c user.actions postUserDataToTheServer, res.data.data ===> ',
-                    'color: yellowgreen; font-weight: bold;',
-                    { ...res.data.data },
-                    route
-                );
+                // console.log(
+                //     '%c user.actions postUserDataToTheServer, res.data.data ===> ',
+                //     'color: yellowgreen; font-weight: bold;',
+                //     { ...res.data.data },
+                //     route
+                // );
                 dispatch(fetchUserDataSuccess({ ...res.data.data.data }));
-                // dispatch(fetchUserDataSuccess({ ...res.data.data.user }));
 
             })
             .catch((e) => {

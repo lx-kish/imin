@@ -262,8 +262,8 @@ const Profile = (props) => {
 					setSubmitting(true);
 	
 					patchUserData(
-						`${user.role}/${user._id}`,
-						// `${fullState.role}/${user._id}`,
+						`updateMe`,
+						// `${user.role}/${user._id}`,
 						values
 					)
 					.then((res) => {
