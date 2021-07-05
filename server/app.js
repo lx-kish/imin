@@ -1,3 +1,4 @@
+const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -15,7 +16,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./api/controllers/errorController');
 
 
-const app = require('express')();
+const app = express();
 
 module.exports = () => {
 
@@ -27,13 +28,15 @@ module.exports = () => {
   app.use(helmet());
 
   // Enable Cross Origin Resource Sharing to all origins by default
-  // app.use(cors());
-  // app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
   app.use(cors());
   app.options('*', cors());
+  // app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
   // Middleware that transforms the raw string of req.body into json
-  app.use(bodyParser.json());
+  // app.use(bodyParser.json());
+  // app.use(bodyParser.urlencoded({ extended: true })); 
+  app.use(express.json({ limit: '10kb' }));
+  app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
   app.use(cookieParser());
 

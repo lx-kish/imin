@@ -10,6 +10,7 @@ export const fetchData = async (method, url, data) => {
   //   url,
   //   data
   // );
+  if (method === 'PATCH') data.append('_method', 'PATCH');
   return await axios({
     method,
     url,

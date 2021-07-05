@@ -1,13 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import { Route, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import { fetchUserAuth } from '../../redux/auth/auth.actions';
 
-// import isAuth from '../../utils/isAuth';
-import config from '../../axios.config';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 
@@ -44,8 +41,6 @@ const PrivateRoute = (props) => {
 	 * 4) Otherwise, redirect to login page
    *
    */
-
-	// const { component: Component, privateRoute, path, ...rest } = props;
 	
 	const { 
 		component: Component,
@@ -72,77 +67,14 @@ const PrivateRoute = (props) => {
 		return <div className="private-route__loading">loading...</div>;
 	}
 
-		// React.useEffect(() => {
-		// 	if (!dataFetched) checkUserAuth();
-		// },
-		// [user]
-		// );
-
-	// const [ user, setUser ] = React.useState({});
-	// const [ loaded, setLoaded ] = React.useState(false);
-
-	// const fetchData = async (isCancelled) => {
-	// 	await axios
-	// 		// const result = await axios
-	// 		.get(`/api/users/auth`, config)
-	// 		.then((res) => {
-	// 			if (!isCancelled) {
-	// 				// console.log('PrivateRoute, res =====> ', res);
-	// 				console.log('PrivateRoute, res.data.data =====> ', res.data);
-	// 				setUser(res.data);
-	// 				setLoaded(true);
-	// 			}
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log('PrivateRoute, error =====> ', error.response);
-	// 			setUser({});
-	// 			setLoaded(true);
-	// 		});
-	// };
-
-	// React.useEffect(
-	// 	() => {
-	// 		let isCancelled = false;
-
-	// 		fetchData(isCancelled);
-	// 		return () => {
-	// 			isCancelled = true;
-	// 		};
-	// 		/**
-  //    * Input dependencies:
-  //    * undefined => every render,
-  //    * [a, b] => when a or b change,
-  //    * [] => only once
-  //    * https://medium.com/@sdolidze/the-iceberg-of-react-hooks-af0b588f43fb
-  //    */
-	// 	},
-	// 	[]
-	// );
-
-	// if (!loaded) {
-	// 	return <div className="private-route__loading">loading...</div>;
-	// }
-
-	// console.log('============================================>');
-	// console.log('props from privateRoute hoc ===> ', props);
-	// console.log('Component from privateRoute hoc ===> ', Component.name);
-	// console.log('user from privateRoute hoc ===> ', user);
-	// // console.log('loaded from privateRoute hoc ===> ', loaded);
-	// // console.log('user?.data?._id from privateRoute hoc ===> ', user?.data?._id);
-
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
 				status ? (
-				// user?._id ? (
-				// user?.data?._id ? (
 					<div className="page">
 						<Header />
-						{/* <Header user={user} /> */}
 						<Component { ...props } />
-						{/* <Header {...user} />
-						<Component {...user} {...props} /> */}
 						<Footer />
 					</div>
 				) : (

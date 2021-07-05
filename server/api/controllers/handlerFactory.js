@@ -18,6 +18,15 @@ exports.deleteOne = Model => catchAsync(async (req, res, next) => {
 
 exports.updateOne = Model => catchAsync(async (req, res, next) => {
 
+    console.log(
+        '%c handlerFactory.updateOne, req.file, req.body ===> ',
+        'color: yellowgreen; font-weight: bold;',
+        req.params.id,
+        req.body,
+        req.fields,
+        req.file,
+        req.userpic
+    );
     // console.log(req.file);
     // console.log(__dirname);
     // console.log(__filename);

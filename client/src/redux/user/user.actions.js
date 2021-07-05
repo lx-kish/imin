@@ -1,4 +1,4 @@
-import { fetchData } from '../../utils/use-fetch/use-fetch';
+import { fetchData } from '../../utils/use-fetch';
 
 export const FETCH_USER_DATA__START = "FETCH_USER_DATA__START";
 export const FETCH_USER_DATA__SUCCESS = "FETCH_USER_DATA__SUCCESS";
@@ -88,7 +88,12 @@ export const postUserDataToTheServer = (route, values) => {
 };
 
 export const patchUserDataToTheServer = (route, values) => {
-
+    console.log(
+        '%c user.actions patchUserDataToTheServer, values, route ===> ',
+        'color: yellowgreen; font-weight: bold;',
+        values,
+        route
+    );
     return (dispatch, getState) => {
 
         dispatch(fetchUserDataStart());

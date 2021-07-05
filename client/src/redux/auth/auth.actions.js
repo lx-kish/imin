@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import config from '../../axios.config';
 
-import { getData } from '../../utils/use-fetch/use-fetch';
+import { fetchData } from '../../utils/use-fetch';
 
 export const FETCH_USER_AUTH__START = "FETCH_USER_AUTH__START";
 export const FETCH_USER_AUTH__SUCCESS = "FETCH_USER_AUTH__SUCCESS";
@@ -30,7 +30,7 @@ export const fetchUserAuth = () => {
 
         dispatch(fetchUserAuthStart());
 
-        return getData(`/api/users/auth`)
+        return fetchData('GET', '/api/users/auth', '')
             .then((res) => {
                 dispatch(fetchUserAuthSuccess({ ...res.data.data }));
             })

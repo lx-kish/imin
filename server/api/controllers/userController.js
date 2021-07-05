@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 const config = require('../../config');
 const logger = require('../../loaders/logger')();
@@ -27,6 +28,33 @@ const admins = connection.model('admin');
 const students = connection.model('student');
 const educators = connection.model('educator');
 
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, `${process.cwd()}/client/public/img/userpics/`);
+    },
+    filename: (req, file, cb) => {
+        // <prefix('user')>-<ObjectId('from-mongoDB')>-<timestamp(17012324656987)>.<file-extention>
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+    }
+});
+
+// const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('image')) {
+        cb(null, true);
+    } else {
+        cb(new AppError('Not an image! Please upload only images', 404));
+    }
+};
+
+// const upload = multer({ dest: `${process.cwd()}/client/public/img/userpics/` });
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter
+});
+
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
     Object.keys(obj).forEach(el => {
@@ -37,6 +65,23 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 module.exports = {
+
+    uploadImage: upload.single('userpic'),
+
+    // uploadImage: catchAsync(async (req, res, next) => {
+    //     // 1) if no file found, then go next;
+    //     // if (!req.file) return next();
+
+    //     // 2) set dest folder and filename for uploading raw userpic
+    //     const dest = `${process.cwd()}/client/public/img/userpics/`;
+    //     // const ext = req.file.mimetype.split('/')[1];
+    //     const file = `user-${req.user.id}-${Date.now()}`;
+
+    //     // 3) uploading to the 
+    //     // uploadImage('userpic');
+    //     uploadImage('userpic', dest, file);
+
+    // }),
 
     getMe: catchAsync(async (req, res, next) => {
         // getMe: (req, res, next) => {
@@ -53,12 +98,16 @@ module.exports = {
 
     updateMe: catchAsync(async (req, res, next) => {
         console.log(
-            '%c userController.updateMe, req.file, req.body ===> ',
+            '%c userController.updateMe, req.body, req.fields, req.file, req.data ===> ',
             'color: yellowgreen; font-weight: bold;',
+            // req
             // req.file,
-            // req.body,
-            req.user,
-            req.values,
+            req.body,
+            req.fields,
+            req.file,
+            req.data,
+            // req.user,
+            // res.locals.user,
         );
 
         // 1) Create error if user POSTs password
@@ -124,20 +173,6 @@ module.exports = {
     //         }
     //     })
     // }),
-
-    uploadImage: catchAsync(async (req, res, next) => {
-        // 1) if no file found, then go next;
-        if (!req.file) return next();
-
-        // 2) set dest folder and filename for uploading raw userpic
-        const dest = `${process.cwd()}/client/public/img/userpics/`;
-        const ext = req.file.mimetype.split('/')[1];
-        const file = `user-${req.user.id}-${Date.now()}.${ext}`;
-
-        // 3) uploading to the 
-        uploadImage('userpic');
-
-    }),
 
     updateUser: factory.updateOne(users),
     // updateUser: (req, res, next) => { 

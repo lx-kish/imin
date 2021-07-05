@@ -61,7 +61,7 @@ module.exports = function (app) {
         .route('/:id')
         .get(userController.getUser)
         .patch(userController.uploadImage, userController.updateUser)
-        .patch(userController.updateUser)
+        // .patch(userController.updateUser)
         .delete(userController.deleteUser);
 
     router
