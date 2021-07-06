@@ -44,7 +44,7 @@ const userReducer = (state = initialState, action) => {
                 processing: false, 
                 submitError: false,
                 error: payload.error,
-                data: payload.user, //should be previous state.user.data
+                // data: payload.user, //should be previous state.user.data
             }
 
         case FETCH_USER_LOGOUT:

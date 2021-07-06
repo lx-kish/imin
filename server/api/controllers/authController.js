@@ -121,7 +121,7 @@ module.exports = {
   // },
 
   signUp: catchAsync(async (req, res, next) => {
-    logger.debug('Calling Sign-Up endpoint with body: %o', req.body)
+    logger.debug('Calling Sign-Up endpoint with body: %o', req.body);
 
     const role = req.body.role;
     let userModel;
@@ -135,6 +135,7 @@ module.exports = {
       surname: req.body.surname
     };
 
+    // TODO - redesign for connection.model(role)
     switch (role) {
       case 'admin':
         userModel = admins;
@@ -187,6 +188,7 @@ module.exports = {
     logger.debug('Found user at Sign-In endpoint with properties: %o', user);
 
     //get full user data from db...
+    // TODO - redesign for connection.model(user.role)
     switch (user.role) {
       case 'admin':
         userModel = admins;

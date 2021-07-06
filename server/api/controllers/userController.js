@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
+const sharp = require('sharp');
 
 const config = require('../../config');
 const logger = require('../../loaders/logger')();
@@ -28,18 +29,18 @@ const admins = connection.model('admin');
 const students = connection.model('student');
 const educators = connection.model('educator');
 
-const multerStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, `${process.cwd()}/client/public/img/userpics/`);
-    },
-    filename: (req, file, cb) => {
-        // <prefix('user')>-<ObjectId('from-mongoDB')>-<timestamp(17012324656987)>.<file-extention>
-        const ext = file.mimetype.split('/')[1];
-        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
-    }
-});
+// const multerStorage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, `${process.cwd()}/client/public/img/userpics/`);
+//     },
+//     filename: (req, file, cb) => {
+//         // <prefix('user')>-<ObjectId('from-mongoDB')>-<timestamp(17012324656987)>.<file-extention>
+//         const ext = file.mimetype.split('/')[1];
+//         cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+//     }
+// });
 
-// const multerStorage = multer.memoryStorage();
+const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
     if (file.mimetype.startsWith('image')) {
@@ -66,7 +67,7 @@ const filterObj = (obj, ...allowedFields) => {
 
 module.exports = {
 
-    uploadImage: upload.single('userpic'),
+    uploadUserPic: upload.single('userpic'),
 
     // uploadImage: catchAsync(async (req, res, next) => {
     //     // 1) if no file found, then go next;
@@ -83,44 +84,74 @@ module.exports = {
 
     // }),
 
+    resizeUserPic: catchAsync(async (req, res, next) => {
+        if (!req.file) return next();
+
+        req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+        const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
+    
+        await sharp(req.file.buffer)
+            .resize(500, 500)
+            .toFormat('jpeg')
+            .jpeg({ quality: 90 })
+            // .toFile(`${process.cwd()}\\client\\public\\img\\userpics\\`);
+            .toFile(fileFullPath);
+    
+        logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
+        next();
+    }),
+
     getMe: catchAsync(async (req, res, next) => {
-        // getMe: (req, res, next) => {
         // console.log(
         //     '%c users/auth route, userController.getMe routine, req.user/res.locals.user/res.locals ===> ',
         //     'color: yellowgreen; font-weight: bold;',
         //     req.user,
-        //     // res.locals.user,
-        //     // res.locals
         // );
         req.params.id = req.user.id;
         next();
     }),
 
     updateMe: catchAsync(async (req, res, next) => {
-        console.log(
-            '%c userController.updateMe, req.body, req.fields, req.file, req.data ===> ',
-            'color: yellowgreen; font-weight: bold;',
-            // req
-            // req.file,
-            req.body,
-            req.fields,
-            req.file,
-            req.data,
-            // req.user,
-            // res.locals.user,
-        );
+        // console.log(
+        //     '%c userController.updateMe, req.body, req.file, req.data, req.user ===> ',
+        //     'color: yellowgreen; font-weight: bold;',
+        //     req.body,
+        //     req.file,
+        //     req.user,
+        // );
 
-        // 1) Create error if user POSTs password
+        // 1) Create error if user POSTs password or email
         if (req.body.password || req.body.passwordConfirm) {
-            return next(new AppError('This route is not for password updates. Please use updateMyPassword', 400));
+            return next(new AppError('This route is for updating personal settings only. Please use security page', 400));
         }
 
         // 2) Filtered out unwanted fields that are not allowed to be updated
-        const filteredBody = filterObj(req.body, 'name', 'email');
+        const filteredBody = filterObj(
+            req.body,
+            'name',
+            'surname',
+            'phone',
+            'location',
+            'profession',
+            'industries',
+            'skills',
+            'company',
+            'website',
+        );
+
         if (req.file) filteredBody.photo = req.file.filename;
 
+        console.log(
+            '%c userController.updateMe, filteredBody, req.user.role ===> ',
+            'color: yellowgreen; font-weight: bold;',
+            filteredBody,
+            req.user.role,
+        );
+
         // 3) Update user document
-        const updatedUser = await User.findByIdAndUpdate(
+        const updatedUser = await connection.model(req.user.role).findByIdAndUpdate(
+        // const updatedUser = await users.findByIdAndUpdate(
             req.user._id,
             filteredBody,
             {
@@ -129,58 +160,21 @@ module.exports = {
             }
         );
 
+        logger.debug('User profile data was successfully updated: %o', updatedUser);
+
         res.status(200).json({
             status: 'success',
             data: {
                 user: updatedUser
             }
         });
-        // console.log(req.user);
-        // factory.updateOne(users);
-        // // factory.updateOne(connection.model(req.user.role));
     }),
 
     getAllUsers: factory.getAll(users),
 
     getUser: factory.getOne(users),
 
-
-    // getAllUsers: catchAsync(async (req, res, next) => {
-    //     // const users = await users.find();
-
-    //     res.status(200).json({
-    //         status: 'success',
-    //         results: users.length,
-    //         data: {
-    //             users
-    //         }
-    //     });
-    // }),
-
-    // getUser: catchAsync(async (req, res, next) => {
-
-    //     const user = await users.findById(req.params.id);
-    //     // const user = await user.findOne({ _id: req.params.id });
-
-    //     if (!user) {
-    //         return next(new AppError(`No user found with id ${req.params.id}`, 404));
-    //     }
-
-    //     res.status(200).json({
-    //         status: 'success',
-    //         data: {
-    //             user
-    //         }
-    //     })
-    // }),
-
     updateUser: factory.updateOne(users),
-    // updateUser: (req, res, next) => { 
-
-    //     console.log(req.user);
-    //     factory.updateOne(users);
-    //     // factory.updateOne(connection.model(req.user.role));
-    // },
 
     deleteUser: () => { },
 

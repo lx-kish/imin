@@ -22,7 +22,7 @@ export const fetchUserDataFailure = (error, user) => ({
     type: FETCH_USER_DATA__FAILURE,
     payload: {
         error,
-        // user, //previous state.user.data
+        user, //previous state.user.data
     },
 });
 
@@ -92,7 +92,8 @@ export const patchUserDataToTheServer = (route, values) => {
         '%c user.actions patchUserDataToTheServer, values, route ===> ',
         'color: yellowgreen; font-weight: bold;',
         values,
-        route
+        route,
+        `${routePrefix}/${route}`,
     );
     return (dispatch, getState) => {
 
@@ -100,13 +101,13 @@ export const patchUserDataToTheServer = (route, values) => {
 
         return fetchData('PATCH', `${routePrefix}/${route}`, values)
             .then((res) => {
-                // console.log(
-                //     '%c user.actions postUserDataToTheServer, res.data.data ===> ',
-                //     'color: yellowgreen; font-weight: bold;',
-                //     { ...res.data.data },
-                //     route
-                // );
-                dispatch(fetchUserDataSuccess({ ...res.data.data.data }));
+                console.log(
+                    '%c user.actions postUserDataToTheServer, res.data.data, route ===> ',
+                    'color: yellowgreen; font-weight: bold;',
+                    { ...res.data.data },
+                );
+                dispatch(fetchUserDataSuccess({ ...res.data.data.user }));
+                // dispatch(fetchUserDataSuccess({ ...res.data.data.data }));
 
             })
             .catch((e) => {
