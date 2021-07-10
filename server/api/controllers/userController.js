@@ -113,13 +113,13 @@ module.exports = {
     }),
 
     updateMe: catchAsync(async (req, res, next) => {
-        // console.log(
-        //     '%c userController.updateMe, req.body, req.file, req.data, req.user ===> ',
-        //     'color: yellowgreen; font-weight: bold;',
-        //     req.body,
-        //     req.file,
-        //     req.user,
-        // );
+        console.log(
+            '%c userController.updateMe, req.body, req.file, req.user ===> ',
+            'color: yellowgreen; font-weight: bold;',
+            req.body,
+            req.file,
+            req.user,
+        );
 
         // 1) Create error if user POSTs password or email
         if (req.body.password || req.body.passwordConfirm) {

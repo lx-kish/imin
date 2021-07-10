@@ -260,11 +260,22 @@ const Profile = (props) => {
 				}}
 				onSubmit={(values, { setSubmitting, resetForm }) => {
 					setSubmitting(true);
-	
+
+					let form = new FormData();
+					for (const key in values) {
+						form.append(key, values[key]);
+					}
+
+					console.log(
+						'%c profile.onSubmit, values, form ===> ',
+						'color: fuchsia; font-weight: bold;',
+						values,
+						form,
+					);
+
 					patchUserData(
 						`updateMe`,
-						// `${user.role}/${user._id}`,
-						values
+						form
 					)
 					.then((res) => {
 						// console.log('profile, res =====> ', res);
@@ -309,9 +320,27 @@ const Profile = (props) => {
 									className="profile__photo-img"
 								/>
 							</figure>
-							<button className="btn--primary btn--round profile__photo-button">
-								{<IconCamera className="profile__photo-icon btn__icon color-white" />}
-							</button>
+							{fullState.edit ? (
+								<React.Fragment>
+									<input 
+										className="profile__photo-input"
+										type="file"
+										accept="image/*"
+										id="userpic"
+										name="userpic"
+										onChange={(event) => {
+											form.setFieldValue("userpic", event.currentTarget.files[0]);
+										}}
+									/>
+									<label className="btn--primary btn--round profile__photo-button" htmlFor="userpic">
+										{<IconCamera className="profile__photo-icon btn__icon color-white" />}
+									</label>
+								</React.Fragment>
+							) : ( null )
+								/* <button className="btn--primary btn--round profile__photo-button">
+									{<IconCamera className="profile__photo-icon btn__icon color-white" />}
+								</button> */
+							}
 						</div>
 
 						{fullState.edit ? (
@@ -446,7 +475,7 @@ const Profile = (props) => {
 			: 
 				<main className="profile">
 					<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
-					{profilePhotoSection()}
+					{/* {profilePhotoSection()} */}
 					{profileMainData()}
 				</main>
 	);

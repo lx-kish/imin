@@ -88,13 +88,13 @@ export const postUserDataToTheServer = (route, values) => {
 };
 
 export const patchUserDataToTheServer = (route, values) => {
-    console.log(
-        '%c user.actions patchUserDataToTheServer, values, route ===> ',
-        'color: yellowgreen; font-weight: bold;',
-        values,
-        route,
-        `${routePrefix}/${route}`,
-    );
+    // console.log(
+    //     '%c user.actions patchUserDataToTheServer, values, route ===> ',
+    //     'color: yellowgreen; font-weight: bold;',
+    //     values,
+    //     route,
+    //     `${routePrefix}/${route}`,
+    // );
     return (dispatch, getState) => {
 
         dispatch(fetchUserDataStart());

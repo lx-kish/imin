@@ -79,7 +79,6 @@
     margin: 4rem 0 2rem;
     shape-outside: circle(50% at 50% 50%);
     clip-path: circle(50% at 50% 50%);
-
       
     @include respond(_1040-1200) {
       width: 50%;
@@ -90,23 +89,34 @@
       height: 100%;
     }
 
+    &-input {
+      display: none;
+    }
+
     &-button {
       position: relative;
-      top: -6rem;
+      top: -10rem;
+      // top: -6rem;
       z-index: 5;
 
       width: 8rem;
       height: 8rem;
+
+      display: flex;
+
+      @include respond(_1040-1200) {
+        top: -13rem;
+      }
     }
   }
 
-  &__main-data {
-    display: flex;
-    // max-width: 85vw;
+  // &__main-data {
+  //   display: flex;
+  //   // max-width: 85vw;
 
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+  //   flex-direction: column;
+  //   justify-content: flex-end;
+  // }
 
   &__view {
     display: flex;
