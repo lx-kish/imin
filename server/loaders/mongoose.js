@@ -5,7 +5,9 @@ const userModel = require('../db/models/userModel');
 const logger = require('./logger')();
 /**End */
 
-const { db: { name } } = config;
+const name = config.db_name;
+// const { name } = config.db_local;
+// const { db_local: { name } } = config;
 
 const connectionLink = {};
 

@@ -23,12 +23,32 @@ module.exports = {
   port: parseInt(process.env.APP_PORT, 10),
 
   /**
-   * Database connection settings
+   * Connection type: local/cloud
    */
-  db: {
+  connection_type: process.env.MONGODB_CONNECTIONTYPE,
+  
+  /**
+   * Database name
+   */
+  db_name: process.env.MONGODB_NAME,
+
+  /**
+   * Database local connection settings
+   */
+  db_local: {
     host: process.env.MONGODB_HOST,
     port: process.env.MONGODB_PORT,
-    name: process.env.MONGODB_NAME
+    name: process.env.MONGODB_NAME,
+  },
+
+  /**
+   * Database cloud connection settings
+   */
+  db_cloud: {
+    name: process.env.MONGODB_NAME,
+    username: process.env.MONGODB_USERNAME,
+    password: process.env.MONGODB_PASSWORD,
+    uri: process.env.MONGODB_URI,
   },
   // database_name: process.env.MONGODB_NAME,
   // database_URI: process.env.MONGODB_URI,

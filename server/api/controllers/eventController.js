@@ -4,7 +4,9 @@ const config = require('../../config');
 const eventModel = require('../../db/models/eventModel');
 const catchAsync = require('../../utils/catchAsync');
 
-const { db: { name } } = config;
+const name = config.db_name;
+// const { name } = config.db_local;
+// const { db_local: { name } } = config;
 // console.log(services);
 // const dbName = config.database_name;
 // const connection = services.get('connections')[dbName];

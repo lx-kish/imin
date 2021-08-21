@@ -11,7 +11,9 @@ const factory = require('./handlerFactory');
 
 const uploadImage = require('../../utils/uploadImage');
 
-const { db: { name } } = require('../../config');
+const name = require('../../config').db_name;
+// const { name } = require('../../config').db_local;
+// const { db_local: { name } } = require('../../config');
 
 const connection = services.get('connections')[name];
 

@@ -10,7 +10,9 @@ const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
 // const factory = require('./handlerFactory');
 
-const { db: { name } } = require('../../config');
+const name = require('../../config').db_name;
+// const { name } = require('../../config').db_local;
+// const { db_local: { name } } = require('../../config');
 // // console.log(services);
 // const dbName = config.database_name;
 // // const connection = services.get('connections')[dbName];
