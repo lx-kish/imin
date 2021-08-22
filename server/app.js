@@ -15,6 +15,8 @@ const routes = require('./api/index');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./api/controllers/errorController');
 
+const path = require('path');
+
 
 const app = express();
 
@@ -74,6 +76,13 @@ module.exports = () => {
 
   // Load API routes
   app.use(config.api.prefix, routes());
+
+  // Serve React.js frontend
+  app.use(express.static(path.join("client/build")));s
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));;
+  });
 
   // catch 404 and forward to error handler
   app.all('*', (req, res, next) => {
