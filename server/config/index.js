@@ -20,7 +20,7 @@ module.exports = {
   /**
    * Port which application listens
    */
-  port: parseInt(process.env.APP_PORT, 10),
+  port: process.env.PORT || parseInt(process.env.APP_PORT, 10),
 
   /**
    * Connection type: local/cloud
