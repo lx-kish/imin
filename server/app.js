@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 
 const config = require('./config');
 const logger = require('./loaders/logger')();
@@ -61,6 +62,8 @@ module.exports = () => {
     message: 'Too many requests from this IP, please try again in an hour!'
   });
 
+  app.use(compression());
+
   app.use(config.api.prefix, limiter);
   // console.log('config.api.prefix ===> ', config.api.prefix);
 
@@ -78,9 +81,9 @@ module.exports = () => {
   app.use(config.api.prefix, routes());
 
   // Serve React.js frontend
-  app.use(express.static(path.join("client/build")));s
+  app.use(express.static(path.join("client/build")));
   
-  app.get('*', (req, res) => {
+  app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));;
   });
 
