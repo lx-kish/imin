@@ -18,11 +18,12 @@ module.exports = () => {
 
     try {
         fs.readdirSync(routesFolder).forEach((file) => {
-            // const route = `${routesFolder}/${file.substr(0, file.indexOf('.'))}`;
-            const route = `${routesFolder}\\${file.substr(0, file.indexOf('.'))}`;
+            const route = path.join(routesFolder, file.substr(0, file.indexOf('.')));
+            // const route = `${routesFolder}\\${file.substr(0, file.indexOf('.'))}`;
             logger.info(`Adding route: ${route}`);
             // console.log(`require(${route}) ====> `, require(route)(app));
             require(route)(app);
+            logger.info(`✌️ Route: ${route} has been added successfully!`);
         });
     } catch (e) {
         logger.error('🔥 error: %o', e);
