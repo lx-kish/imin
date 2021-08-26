@@ -4,23 +4,23 @@ const path = require('path');
 // Set the NODE_ENV to 'development' by default
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-// Connect .env.* files ('.env.development, .env.test, ...')
-const envFound = dotenv.config({ path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`) });
-// const envFound = dotenv.config({ path: path.resolve(process.cwd(), '.env') });
-// const envFound = dotenv.config();
-// console.log('path: ===> ', path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`))
+// // Connect .env.* files ('.env.development, .env.test, ...')
+// const envFound = dotenv.config({ path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`) });
+const envFound = dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+// // const envFound = dotenv.config();
+// // console.log('path: ===> ', path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`))
 
-if (!envFound) {
-  // This error should crash whole process
-
-  throw new Error("⚠️  Couldn't find .env file  ⚠️");
-}
+// if (!envFound) {
+//   // This error should crash whole process
+//   throw new Error("⚠️  Couldn't find .env file  ⚠️");
+// }
 
 module.exports = {
   /**
    * Port which application listens
    */
-  port: process.env.PORT || parseInt(process.env.APP_PORT, 10),
+  port: process.env.PORT || 8080,
+  // port: process.env.PORT || parseInt(process.env.APP_PORT, 10),
 
   /**
    * Connection type: local/cloud
