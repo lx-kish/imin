@@ -84,7 +84,7 @@ module.exports = () => {
   app.use(express.static(path.join("client/build")));
   
   app.get('/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));;
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
   });
 
   // catch 404 and forward to error handler
