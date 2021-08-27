@@ -314,7 +314,7 @@ const Profile = (props) => {
 						
 							<figure className="profile__photo">
 								<img
-									src={`img/userpics/${user.photo}`}
+									src={`./img/userpics/${user.photo}`}
 									// src="img/profile_photo.png"
 									alt="Profile photo"
 									className="profile__photo-img"

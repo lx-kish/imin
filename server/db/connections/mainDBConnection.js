@@ -26,12 +26,12 @@ const connection = dbConnectionFactory(dbUrl);
 // DB connection initialization service messages:
 // When the connection established
 connection.on("open", () => {
-    logger.info(`Connection to database ${dbUrl} established`);
+    logger.info(`✌️ Connection to database ${dbUrl} established`);
 });
 
 // When the connection throws an error
 connection.on("error", (err) => {
-    logger.error(`Failed to connect to database ${dbUrl} on startup`, err);
+    logger.error(`🔥 error: Failed to connect to database ${dbUrl} on startup: %o`, err);
 });
 
 // When the connection is disconnected

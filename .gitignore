@@ -38,6 +38,6 @@ yarn-error.log*
 */debug.log
 
 # misc
-*.png
-*.jpeg
-*.jpg
+# *.png
+# *.jpeg
+# *.jpg

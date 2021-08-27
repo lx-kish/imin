@@ -25,7 +25,7 @@ module.exports = {
         if (!services) init();
         Logger.info(`Services initiated. Injecting service ${key}...`);
         services[key] = service;
-        Logger.info(`Service ${key} has been injected successfully.`)
+        Logger.info(`✌️ Service ${key} has been injected successfully.`)
     },
 
     /**
