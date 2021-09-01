@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.d90abc6c.chunk.css",
+    "main.css": "/static/css/main.ad59c953.chunk.css",
     "main.js": "/static/js/main.6f6367bc.chunk.js",
     "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
     "static/js/2.9c7e50fd.chunk.js": "/static/js/2.9c7e50fd.chunk.js",
     "index.html": "/index.html",
-    "precache-manifest.9bc8d0ddd7bd6a63bb801d009adcf5dc.js": "/precache-manifest.9bc8d0ddd7bd6a63bb801d009adcf5dc.js",
+    "precache-manifest.2f9774e41bcbb32256cba5c2c6980d81.js": "/precache-manifest.2f9774e41bcbb32256cba5c2c6980d81.js",
     "service-worker.js": "/service-worker.js",
     "static/js/2.9c7e50fd.chunk.js.LICENSE.txt": "/static/js/2.9c7e50fd.chunk.js.LICENSE.txt",
     "static/media/1-become-a-partner.png": "/static/media/1-become-a-partner.757ace58.png",
@@ -23,11 +23,11 @@
     "static/media/IMIN-pink.png": "/static/media/IMIN-pink.4b46053b.png",
     "static/media/IMIN-purple.png": "/static/media/IMIN-purple.ffdb92ab.png",
     "static/media/about-dna-1-1920.png": "/static/media/about-dna-1-1920.c778580f.png",
-    "static/media/home.styles.scss": "/static/media/about-header-320.b0d6e57d.png",
+    "static/media/intro.styles.scss": "/static/media/students-header-320.8587903b.png",
     "static/media/about-strategy-2-1920.png": "/static/media/about-strategy-2-1920.f3f3a445.png",
     "static/media/avatar-student.png": "/static/media/avatar-student.6fc9fb31.png",
-    "static/media/intro.styles.scss": "/static/media/students-header-320.8587903b.png",
     "static/media/home-educate-1x.png": "/static/media/home-educate-1x.e2dd53d5.png",
+    "static/media/home.styles.scss": "/static/media/home-header-320.5c646778.png",
     "static/media/home-learn-1x.png": "/static/media/home-learn-1x.f41d6896.png",
     "static/media/home-support-1x.png": "/static/media/home-support-1x.2fd6e65b.png",
     "static/media/isaac.png": "/static/media/isaac.0cfedc1a.png",
@@ -38,7 +38,7 @@
   "entrypoints": [
     "static/js/runtime-main.09b85ec0.js",
     "static/js/2.9c7e50fd.chunk.js",
-    "static/css/main.d90abc6c.chunk.css",
+    "static/css/main.ad59c953.chunk.css",
     "static/js/main.6f6367bc.chunk.js"
   ]
 }
