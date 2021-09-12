@@ -45,7 +45,7 @@ const content = {
 			title: 'In our DNA.',
 			titleClassName: 'lvl2__heading heading-secondary',
 			img: {
-				src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/about-page/about-dna-1-1920.png`,
+				src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/about-page/about-dna-1-1920.png`,
 				// src: FirstImage,
 				alt: 'In our DNA.',
 				className: 'lvl2__image-pane'
@@ -72,7 +72,7 @@ const content = {
 			title: 'Our strategy for impact.',
 			titleClassName: 'lvl2__heading heading-secondary',
 			img: {
-				src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/about-page/about-strategy-2-1920.png`,
+				src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/about-page/about-strategy-2-1920.png`,
 				// src: SecondImage,
 				alt: 'What we do and how we do it.',
 				className: 'lvl2__image-pane'

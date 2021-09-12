@@ -47,7 +47,7 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/1-sign-up.png`,
+						src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/1-sign-up.png`,
 						// src: ImageSignUp,
 						alt: 'Sign Up',
 						className: 'lvl2__image-pane'
@@ -67,7 +67,7 @@ const content = {
 				right: {
 					componentClassName: 'lvl2__flex--right',
 					img: {
-						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/2-attend-experiences.png`,
+						src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/2-attend-experiences.png`,
 						// src: ImageAttendExperiences,
 						alt: 'Attend Experiences',
 						className: 'lvl2__image-pane'
@@ -91,7 +91,7 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/3-gain-skills.png`,
+						src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/3-gain-skills.png`,
 						// src: ImageGainSkills,
 						alt: 'Gain skills',
 						className: 'lvl2__image-pane'
@@ -112,7 +112,7 @@ const content = {
 				right: {
 					componentClassName: 'lvl2__flex--right',
 					img: {
-						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/4-rate-experiences.png`,
+						src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/4-rate-experiences.png`,
 						// src: ImageRateExperiences,
 						alt: 'Rate Experiences',
 						className: 'lvl2__image-pane'
@@ -136,7 +136,7 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/5-make-decisions-about-your-future.png`,
+						src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/students-page/5-make-decisions-about-your-future.png`,
 						// src: ImageMakeDecisionAboutYourFuture,
 						alt: 'Make decisions about your future',
 						className: 'lvl2__image-pane'
