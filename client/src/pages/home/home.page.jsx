@@ -17,7 +17,7 @@ const content = {
 			articleClassName: 'home__section bg-grey',
 			segmentClassName: 'home__segment',
 			img: {
-				src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/home-page/home-educate-1x.png`,
+				src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/home-page/home-educate-1x.png`,
 				// src: educateImg,
 				alt: 'For those who want to educate',
 				className: 'image'
@@ -44,7 +44,7 @@ const content = {
 			articleClassName: 'home__section home__section--middle',
 			segmentClassName: 'home__segment',
 			img: {
-				src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/home-page/home-learn-1x.png`,
+				src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/home-page/home-learn-1x.png`,
 				// src: learnImg,
 				alt: 'For those who want to learn',
 				className: 'image'
@@ -71,7 +71,7 @@ const content = {
 			articleClassName: 'home__section bg-grey',
 			segmentClassName: 'home__segment',
 			img: {
-				src: `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/home-page/home-support-1x.png`,
+				src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/home-page/home-support-1x.png`,
 				// src: supportImg,
 				alt: 'For those who want to support',
 				className: 'image'

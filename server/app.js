@@ -27,7 +27,9 @@ module.exports = () => {
   // It shows the real origin IP in the heroku or Cloudwatch logs
   app.enable('trust proxy');
 
-  //SEt security HTTP headers
+  // Set security HTTP headers
+  // taking into the account showing images, hosting on third party storages, like AWS S3:
+  // https://stackoverflow.com/questions/66405357/refused-to-load-the-image-url-because-it-violates-the-following-content-secu 
   app.use(helmet(
     {
       contentSecurityPolicy: false,

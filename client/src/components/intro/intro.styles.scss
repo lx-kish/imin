@@ -77,53 +77,53 @@
         }
 
         &--about {
-            background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/about-page/about-header-320.png");
+            background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/about-page/about-header-320.png");
             // background-image: url("../../graphics/pages-content/about-page/about-header-320.png");
             @include respond(_1040-1200) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/about-page/about-header-1366.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/about-page/about-header-1366.png");
                 // background-image: url("../../graphics/pages-content/about-page/about-header-1366.png");
             }
             @include respond(_1200-big-desktop) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/about-page/about-header-1920.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/about-page/about-header-1920.png");
                 // background-image: url("../../graphics/pages-content/about-page/about-header-1920.png");
             }
         }
         
         &--educators {
-            background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/educators-page/educators-header-320.png");
+            background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/educators-page/educators-header-320.png");
             // background-image: url("../../graphics/pages-content/educators-page/educators-header-320.png");
             @include respond(_1040-1200) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/educators-page/educators-header-1366.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/educators-page/educators-header-1366.png");
                 // background-image: url("../../graphics/pages-content/educators-page/educators-header-1366.png");
             }
             @include respond(_1200-big-desktop) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/educators-page/educators-header-1920.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/educators-page/educators-header-1920.png");
                 // background-image: url("../../graphics/pages-content/educators-page/educators-header-1920.png");
             }
         }
         
         &--students {
-            background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/students-page/students-header-320.png");
+            background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/students-page/students-header-320.png");
             // background-image: url("../../graphics/pages-content/students-page/students-header-320.png");
             @include respond(_1040-1200) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/students-page/students-header-1366.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/students-page/students-header-1366.png");
                 // background-image: url("../../graphics/pages-content/students-page/students-header-1366.png");
             }
             @include respond(_1200-big-desktop) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/students-page/students-header-1920.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/students-page/students-header-1920.png");
                 // background-image: url("../../graphics/pages-content/students-page/students-header-1920.png");
             }
         }
         
         &--partners {
-            background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/partners-page/partners-header-320.png");
+            background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/partners-page/partners-header-320.png");
             // background-image: url("../../graphics/pages-content/partners-page/partners-header-320.png");
             @include respond(_1040-1200) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/partners-page/partners-header-1366.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/partners-page/partners-header-1366.png");
                 // background-image: url("../../graphics/pages-content/partners-page/partners-header-1366.png");
             }
             @include respond(_1200-big-desktop) {
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/partners-page/partners-header-1920.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/partners-page/partners-header-1920.png");
                 // background-image: url("../../graphics/pages-content/partners-page/partners-header-1920.png");
             }
         }

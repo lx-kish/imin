@@ -494,8 +494,8 @@ const SignUp = (props) => {
         <img
           src={
             role === "student" ?
-            `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-up/IMIN-purple.png` :
-            `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-up/IMIN-pink.png`
+            `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-up/IMIN-purple.png` :
+            `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-up/IMIN-pink.png`
           }
           alt={`${role} logo`}
           className={`sign-up__logo`}

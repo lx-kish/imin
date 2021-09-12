@@ -285,8 +285,8 @@ const SignIn = (props) => {
       <img
         src={
           fullState.role === "student" ?
-          `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-in/avatar-student.png` :
-          `http://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-in/avatar-educator.png`
+          `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-in/avatar-student.png` :
+          `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-in/avatar-educator.png`
         }
         alt={`${fullState.role} avatar`}
         className={`sign-in__logo sign-in__logo--${fullState.role}`}

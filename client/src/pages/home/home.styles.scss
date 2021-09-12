@@ -26,16 +26,16 @@
             background-size: contain;
             // background-size: cover;
             background-position: center;
-            background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/home-page/home-header-320.png");
+            background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/home-page/home-header-320.png");
             // background-image: url("../../graphics/pages-content/home-page/home-header-320.png");
             @include respond(_1040-1200) {
                 padding-top:31%;
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/home-page/home-header-1366.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/home-page/home-header-1366.png");
                 // background-image: url("../../graphics/pages-content/home-page/home-header-1366.png");
             }
             @include respond(_1200-big-desktop) {
                 padding-top:29%;
-                background-image: url("http://s3.amazonaws.com/imin-app-assets/img/static/pages-content/home-page/home-header-1920.png");
+                background-image: url("https://s3.amazonaws.com/imin-app-assets/img/static/pages-content/home-page/home-header-1920.png");
                 // background-image: url("../../graphics/pages-content/home-page/home-header-1920.png");
             }
         }
