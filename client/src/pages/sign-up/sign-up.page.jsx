@@ -492,7 +492,11 @@ const SignUp = (props) => {
       <div className={`sign-up__background sign-up__background--${role}`}>
         {/* <div className={`sign-up__logo sign-up__logo--${role}`}></div> */}
         <img
-          src={role === "student" ? ImgStudent : ImgEducator}
+          src={
+            role === "student" ?
+            `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-up/IMIN-purple.png` :
+            `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-up/IMIN-pink.png`
+          }
           alt={`${role} logo`}
           className={`sign-up__logo`}
         />

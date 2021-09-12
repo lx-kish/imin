@@ -7,8 +7,8 @@ import "./sign-in.styles.scss";
 
 import { postUserDataToTheServer } from '../../redux/user/user.actions';
 
-import ImgStudent from "../../graphics/pages-content/sign-in/avatar-student.png";
-import ImgEducator from "../../graphics/pages-content/sign-in/avatar-educator.png";
+import ImgStudent from '../../graphics/pages-content/sign-in/avatar-student.png';
+import ImgEducator from '../../graphics/pages-content/sign-in/avatar-educator.png';
 
 const SignIn = (props) => {
 
@@ -283,7 +283,11 @@ const SignIn = (props) => {
   return (
     <main className="sign-in container">
       <img
-        src={fullState.role === "student" ? ImgStudent : ImgEducator}
+        src={
+          fullState.role === "student" ?
+          `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-in/avatar-student.png` :
+          `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/sign-in/avatar-educator.png`
+        }
         alt={`${fullState.role} avatar`}
         className={`sign-in__logo sign-in__logo--${fullState.role}`}
       />

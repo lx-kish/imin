@@ -39,7 +39,8 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: ImageBecomeAPartner,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/partners-page/1-become-a-partner.png`,
+						// src: ImageBecomeAPartner,
 						alt: 'Become a Partner',
 						className: 'lvl2__image-pane'
 					},
@@ -59,7 +60,8 @@ const content = {
 				right: {
 					componentClassName: 'lvl2__flex--right',
 					img: {
-						src: ImageDonate,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/partners-page/2-donate.png`,
+						// src: ImageDonate,
 						alt: 'Donate',
 						className: 'lvl2__image-pane'
 					},

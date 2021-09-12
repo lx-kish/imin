@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
+const path = require('path');
 
 const config = require('./config');
 const logger = require('./loaders/logger')();
@@ -16,7 +17,6 @@ const routes = require('./api/index');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./api/controllers/errorController');
 
-const path = require('path');
 
 
 const app = express();
@@ -84,6 +84,7 @@ module.exports = () => {
   app.use(express.static(path.join("client/build")));
   
   app.get('/*', (req, res) => {
+    logger.info('✌️ Uploaded static files!');
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
   });
 

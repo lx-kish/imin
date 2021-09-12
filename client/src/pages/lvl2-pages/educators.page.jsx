@@ -48,7 +48,8 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: ImageSignUp,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/educators-page/1-sign-up.png`,
+						// src: ImageSignUp,
 						alt: 'Sign Up',
 						className: 'lvl2__image-pane'
 					},
@@ -67,7 +68,8 @@ const content = {
 				right: {
 					componentClassName: 'lvl2__flex--right',
 					img: {
-						src: ImageApplyToHost,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/educators-page/2-apply-to-host.png`,
+						// src: ImageApplyToHost,
 						alt: 'Apply to host',
 						className: 'lvl2__image-pane'
 					},
@@ -90,7 +92,8 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: ImageEducate,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/educators-page/3-educate.png`,
+						// src: ImageEducate,
 						alt: 'Educate',
 						className: 'lvl2__image-pane'
 					},
@@ -110,7 +113,8 @@ const content = {
 				right: {
 					componentClassName: 'lvl2__flex--right',
 					img: {
-						src: ImageSeeTheImpact,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/educators-page/4-see-the-impact.png`,
+						// src: ImageSeeTheImpact,
 						alt: 'See the impact',
 						className: 'lvl2__image-pane'
 					},
@@ -133,7 +137,8 @@ const content = {
 				left: {
 					componentClassName: 'lvl2__flex--left',
 					img: {
-						src: ImageBeAnImpact,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/educators-page/5-be-an-impact-partner.png`,
+						// src: ImageBeAnImpact,
 						alt: 'Be an Impact Partner',
 						className: 'lvl2__image-pane'
 					},
@@ -153,7 +158,8 @@ const content = {
 				right: {
 					componentClassName: 'lvl2__flex--right',
 					img: {
-						src: ImageTheNextWave,
+						src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/educators-page/6-the-next-wave.png`,
+						// src: ImageTheNextWave,
 						alt: 'The Next Wave',
 						className: 'lvl2__image-pane'
 					},

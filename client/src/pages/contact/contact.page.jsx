@@ -74,7 +74,8 @@ const content = {
 		members: [
 			{
 				image: {
-					src: ImageJenny,
+					src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/contact-page/jenny.png`,
+					// src: ImageJenny,
 					alt: 'Jenny Bennet photo',
 					className: 'team-member__photo'
 				},
@@ -114,7 +115,8 @@ const content = {
 			},
 			{
 				image: {
-					src: ImageThomas,
+					src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/contact-page/thomas.png`,
+					// src: ImageThomas,
 					alt: 'Thomas Maharaj photo',
 					className: 'team-member__photo'
 				},
@@ -154,7 +156,8 @@ const content = {
 			},
 			{
 				image: {
-					src: ImageIsaac,
+					src: `https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/static/pages-content/contact-page/isaac.png`,
+					// src: ImageIsaac,
 					alt: 'Isaac Winsley photo',
 					className: 'team-member__photo'
 				},
