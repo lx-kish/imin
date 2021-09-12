@@ -28,7 +28,11 @@ module.exports = () => {
   app.enable('trust proxy');
 
   //SEt security HTTP headers
-  app.use(helmet());
+  app.use(helmet(
+    {
+      contentSecurityPolicy: false,
+    }
+  ));
 
   // Enable Cross Origin Resource Sharing to all origins by default
   app.use(cors());
