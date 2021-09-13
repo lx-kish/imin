@@ -12,8 +12,6 @@ const factory = require('./handlerFactory');
 const uploadImage = require('../../utils/uploadImage');
 
 const name = require('../../config').db_name;
-// const { name } = require('../../config').db_local;
-// const { db_local: { name } } = require('../../config');
 
 const connection = services.get('connections')[name];
 
@@ -31,32 +29,20 @@ const admins = connection.model('admin');
 const students = connection.model('student');
 const educators = connection.model('educator');
 
-// const multerStorage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, `${process.cwd()}/client/public/img/userpics/`);
-//     },
-//     filename: (req, file, cb) => {
-//         // <prefix('user')>-<ObjectId('from-mongoDB')>-<timestamp(17012324656987)>.<file-extention>
-//         const ext = file.mimetype.split('/')[1];
-//         cb(null, `user-${req.user.id}-${Date.now()}.${ext}`)
+// const multerStorage = multer.memoryStorage();
+
+// const multerFilter = (req, file, cb) => {
+//     if (file.mimetype.startsWith('image')) {
+//         cb(null, true);
+//     } else {
+//         cb(new AppError('Not an image! Please upload only images', 404));
 //     }
+// };
+
+// const upload = multer({
+//     storage: multerStorage,
+//     fileFilter: multerFilter
 // });
-
-const multerStorage = multer.memoryStorage();
-
-const multerFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith('image')) {
-        cb(null, true);
-    } else {
-        cb(new AppError('Not an image! Please upload only images', 404));
-    }
-};
-
-// const upload = multer({ dest: `${process.cwd()}/client/public/img/userpics/` });
-const upload = multer({
-    storage: multerStorage,
-    fileFilter: multerFilter
-});
 
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
@@ -69,7 +55,8 @@ const filterObj = (obj, ...allowedFields) => {
 
 module.exports = {
 
-    uploadUserPic: upload.single('userpic'),
+    uploadUserPic: uploadImage.memoryLoader.single('userpic'),
+    // uploadUserPic: upload.single('userpic'),
 
     // uploadImage: catchAsync(async (req, res, next) => {
     //     // 1) if no file found, then go next;

@@ -14,7 +14,11 @@ const GoogleMap = (props) => {
 
 	React.useEffect(() => {
 
-		console.log('%c google map API key ===> ',  'color: orange; font-weight: bold;', process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+		// console.log(
+    //   '%c google map API key ===> ',
+    //   'color: orange; font-weight: bold;',
+    //   process.env.REACT_APP_GOOGLE_MAP_API_KEY
+    // );
 
 		const googleMapScript = document.createElement('script');
 		googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env
@@ -24,7 +28,7 @@ const GoogleMap = (props) => {
 		googleMapScript.addEventListener('load', () => {
 			createGoogleMap();
 			// getLatLng();
-		});
+		}); 
 	}, []);
 	// you can add at the end of the src &language=en to be only English without this it will be localized.
   const createGoogleMap = () => {
