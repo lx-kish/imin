@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const multer = require('multer');
+// const multer = require('multer');
 const sharp = require('sharp');
 
 const config = require('../../config');
@@ -10,6 +10,7 @@ const catchAsync = require('../../utils/catchAsync');
 const factory = require('./handlerFactory');
 
 const uploadImage = require('../../utils/uploadImage');
+const resizeImage = require('../../utils/resizeImage');
 
 const name = require('../../config').db_name;
 
@@ -55,7 +56,9 @@ const filterObj = (obj, ...allowedFields) => {
 
 module.exports = {
 
-    uploadUserPic: uploadImage.memoryLoader.single('userpic'),
+    // @TODO - sort out issue with multer 'limit' property
+    uploadUserPic: uploadImage.memoryLoader().single('userpic'),
+    // uploadUserPic: uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic'),
     // uploadUserPic: upload.single('userpic'),
 
     // uploadImage: catchAsync(async (req, res, next) => {
@@ -80,16 +83,28 @@ module.exports = {
 
         const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
     
-        await sharp(req.file.buffer)
-            .resize(500, 500)
-            .toFormat('jpeg')
-            .jpeg({ quality: 90 })
-            // .toFile(`${process.cwd()}\\client\\public\\img\\userpics\\`);
-            .toFile(fileFullPath);
+        await resizeImage(req, 500, 500, 'jpeg', 90, fileFullPath);
     
         logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
         next();
     }),
+    // resizeUserPic: catchAsync(async (req, res, next) => {
+    //     if (!req.file) return next();
+
+    //     req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+    //     const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
+    
+    //     await sharp(req.file.buffer)
+    //         .resize(500, 500)
+    //         .toFormat('jpeg')
+    //         .jpeg({ quality: 90 })
+    //         // .toFile(`${process.cwd()}\\client\\public\\img\\userpics\\`);
+    //         .toFile(fileFullPath);
+    
+    //     logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
+    //     next();
+    // }),
 
     getMe: catchAsync(async (req, res, next) => {
         // console.log(

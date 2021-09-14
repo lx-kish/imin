@@ -12,15 +12,16 @@ const multerFilter = (req, file, cb) => {
 
 module.exports = {
 
-  memoryLoader: multer({
+  memoryLoader: (fileSizeLimit) => multer({
     storage: multer.memoryStorage(),
     fileFilter: multerFilter,
     limits: {
-      fileSize: 2097152, // 2 MByte
+      fileSize: fileSizeLimit,
+      // fileSize: 2097152, // 2 MByte
     },
   }),
 
-  diskLoader: multer({
+  diskLoader: (fileSizeLimit) => multer({
     storage: multer.diskStorage({
       destination: (_req, _file, cb) => {
         cb(null, path.join(__dirname, '../tmp/upload'));
@@ -28,7 +29,8 @@ module.exports = {
     }),
     fileFilter: multerFilter,
     limits: {
-      fileSize: 67108864, // 64 MByte
+      fileSize: fileSizeLimit,
+      // fileSize: 67108864, // 64 MByte
     },
   })
 }
