@@ -56,35 +56,62 @@ const filterObj = (obj, ...allowedFields) => {
 
 module.exports = {
 
-    // @TODO - sort out issue with multer 'limit' property
-    uploadUserPic: uploadImage.memoryLoader().single('userpic'),
-    // uploadUserPic: uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic'),
-    // uploadUserPic: upload.single('userpic'),
+    // @TODO - sort out issue with multer 'limits/fileSize' property
+    processUserPic: uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic'),
 
-    // uploadImage: catchAsync(async (req, res, next) => {
-    //     // 1) if no file found, then go next;
-    //     // if (!req.file) return next();
+    uploadUserPicLocally: uploadImage.diskLoader(3 * 1024 * 1024, './tmp/'),
 
-    //     // 2) set dest folder and filename for uploading raw userpic
-    //     const dest = `${process.cwd()}/client/public/img/userpics/`;
-    //     // const ext = req.file.mimetype.split('/')[1];
-    //     const file = `user-${req.user.id}-${Date.now()}`;
+    uploadUserPic: catchAsync(async (req, res, next) => {
 
-    //     // 3) uploading to the 
-    //     // uploadImage('userpic');
-    //     uploadImage('userpic', dest, file);
+        // uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic');
 
-    // }),
+        console.log(
+            '%c userController.resizeUserPicLocally, req.file ===> ',
+            'color: yellowgreen; font-weight: bold;',
+            req.file,
+        );
 
-    resizeUserPic: catchAsync(async (req, res, next) => {
+        if (!req.file) return next();
+
+        // uploadUserPic: uploadImage.memoryLoader().single('userpic'),
+        // uploadUserPic: uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic'),
+        // uploadUserPic: upload.single('userpic'),
+
+        req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+        const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
+
+        await resizeImage.resizeToFile(req, 500, 500, 'jpeg', 90, fileFullPath);
+
+        logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
+        next();
+
+        // uploadImage: catchAsync(async (req, res, next) => {
+        //     // 1) if no file found, then go next;
+        //     // if (!req.file) return next();
+
+        //     // 2) set dest folder and filename for uploading raw userpic
+        //     const dest = `${process.cwd()}/client/public/img/userpics/`;
+        //     // const ext = req.file.mimetype.split('/')[1];
+        //     const file = `user-${req.user.id}-${Date.now()}`;
+
+        //     // 3) uploading to the 
+        //     // uploadImage('userpic');
+        //     uploadImage('userpic', dest, file);
+
+        // }),
+    }),
+
+    resizeUserPicLocally: catchAsync(async (req, res, next) => {
+
         if (!req.file) return next();
 
         req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
         const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
-    
-        await resizeImage(req, 500, 500, 'jpeg', 90, fileFullPath);
-    
+
+        await resizeImage.resizeToFile(req, 500, 500, 'jpeg', 90, fileFullPath);
+
         logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
         next();
     }),
@@ -94,14 +121,14 @@ module.exports = {
     //     req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
     //     const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
-    
+
     //     await sharp(req.file.buffer)
     //         .resize(500, 500)
     //         .toFormat('jpeg')
     //         .jpeg({ quality: 90 })
     //         // .toFile(`${process.cwd()}\\client\\public\\img\\userpics\\`);
     //         .toFile(fileFullPath);
-    
+
     //     logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
     //     next();
     // }),
@@ -155,7 +182,7 @@ module.exports = {
 
         // 3) Update user document
         const updatedUser = await connection.model(req.user.role).findByIdAndUpdate(
-        // const updatedUser = await users.findByIdAndUpdate(
+            // const updatedUser = await users.findByIdAndUpdate(
             req.user._id,
             filteredBody,
             {

@@ -1,4 +1,3 @@
-const path = require('path');
 const multer = require('multer');
 const AppError = require('./appError');
 
@@ -21,10 +20,10 @@ module.exports = {
     },
   }),
 
-  diskLoader: (fileSizeLimit) => multer({
+  diskLoader: (fileSizeLimit, filePath) => multer({
     storage: multer.diskStorage({
       destination: (_req, _file, cb) => {
-        cb(null, path.join(__dirname, '../tmp/upload'));
+        cb(null, filePath);
       },
     }),
     fileFilter: multerFilter,

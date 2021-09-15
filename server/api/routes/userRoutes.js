@@ -46,8 +46,9 @@ module.exports = function (app) {
 
     router.patch(
         '/updateMe',
+        userController.processUserPic,
+        // userController.resizeUserPic,
         userController.uploadUserPic,
-        userController.resizeUserPic,
         userController.updateMe
     );
 
@@ -62,8 +63,9 @@ module.exports = function (app) {
         .route('/:id')
         .get(userController.getUser)
         .patch(
+            userController.processUserPic,
+            // userController.resizeUserPic,
             userController.uploadUserPic,
-            userController.resizeUserPic,
             userController.updateUser
         )
         // .patch(userController.updateUser)
