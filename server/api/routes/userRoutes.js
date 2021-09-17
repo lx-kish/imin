@@ -47,8 +47,11 @@ module.exports = function (app) {
     router.patch(
         '/updateMe',
         userController.processUserPic,
-        // userController.resizeUserPic,
-        userController.uploadUserPic,
+        // // userController.resizeUserPic,
+        // userController.uploadUserPic,
+        // userController.uploadUserPicLocallyFullSize,
+        // userController.uploadUserPicLocallyResize,
+        userController.uploadUserPicS3Resize,
         userController.updateMe
     );
 
@@ -64,8 +67,8 @@ module.exports = function (app) {
         .get(userController.getUser)
         .patch(
             userController.processUserPic,
-            // userController.resizeUserPic,
-            userController.uploadUserPic,
+            // userController.uploadUserPicLocallyFullSize,
+            userController.uploadUserPicLocallyResize,
             userController.updateUser
         )
         // .patch(userController.updateUser)

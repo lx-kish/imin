@@ -11,6 +11,7 @@ const factory = require('./handlerFactory');
 
 const uploadImage = require('../../utils/uploadImage');
 const resizeImage = require('../../utils/resizeImage');
+const awsS3upload = require('../../utils/awsS3upload');
 
 const name = require('../../config').db_name;
 
@@ -59,50 +60,25 @@ module.exports = {
     // @TODO - sort out issue with multer 'limits/fileSize' property
     processUserPic: uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic'),
 
-    uploadUserPicLocally: uploadImage.diskLoader(3 * 1024 * 1024, './tmp/'),
+    uploadUserPicLocallyFullSize: uploadImage.diskLoader(3 * 1024 * 1024).single('userpic'),
 
-    uploadUserPic: catchAsync(async (req, res, next) => {
+    uploadUserPicLocallyResize: catchAsync(async (req, res, next) => {
 
-        // uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic');
-
-        console.log(
-            '%c userController.resizeUserPicLocally, req.file ===> ',
-            'color: yellowgreen; font-weight: bold;',
-            req.file,
-        );
+        // console.log(
+        //     '%c userController.resizeUserPicLocally, req.file ===> ',
+        //     'color: yellowgreen; font-weight: bold;',
+        //     req.file,
+        // );
 
         if (!req.file) return next();
 
-        // uploadUserPic: uploadImage.memoryLoader().single('userpic'),
-        // uploadUserPic: uploadImage.memoryLoader(3 * 1024 * 1024).single('userpic'),
-        // uploadUserPic: upload.single('userpic'),
+        await resizeImage.resizeToFile(req, 500, 500, 'jpeg', 90);
 
-        req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-
-        const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
-
-        await resizeImage.resizeToFile(req, 500, 500, 'jpeg', 90, fileFullPath);
-
-        logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
         next();
 
-        // uploadImage: catchAsync(async (req, res, next) => {
-        //     // 1) if no file found, then go next;
-        //     // if (!req.file) return next();
-
-        //     // 2) set dest folder and filename for uploading raw userpic
-        //     const dest = `${process.cwd()}/client/public/img/userpics/`;
-        //     // const ext = req.file.mimetype.split('/')[1];
-        //     const file = `user-${req.user.id}-${Date.now()}`;
-
-        //     // 3) uploading to the 
-        //     // uploadImage('userpic');
-        //     uploadImage('userpic', dest, file);
-
-        // }),
     }),
 
-    resizeUserPicLocally: catchAsync(async (req, res, next) => {
+    uploadUserPicS3FullSize: catchAsync(async (req, res, next) => {
 
         if (!req.file) return next();
 
@@ -115,23 +91,21 @@ module.exports = {
         logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
         next();
     }),
-    // resizeUserPic: catchAsync(async (req, res, next) => {
-    //     if (!req.file) return next();
 
-    //     req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+    uploadUserPicS3Resize: catchAsync(async (req, res, next) => {
 
-    //     const fileFullPath = `${process.cwd()}/client/public/img/userpics/${req.file.filename}`;
+        if (!req.file) return next();
 
-    //     await sharp(req.file.buffer)
-    //         .resize(500, 500)
-    //         .toFormat('jpeg')
-    //         .jpeg({ quality: 90 })
-    //         // .toFile(`${process.cwd()}\\client\\public\\img\\userpics\\`);
-    //         .toFile(fileFullPath);
+        const filename = `img/userpics/user-${req.user.id}-${Date.now()}.jpeg`;
 
-    //     logger.debug('User picture was successfully updated and uploaded to: %o', fileFullPath);
-    //     next();
-    // }),
+        resizeImage.resizeToBuffer(req, 500, 500, 'jpeg', 90)
+        .then(resizedFile => awsS3upload(resizedFile, filename))
+        .then(() => logger.debug(`User picture ${filename} was successfully uploaded to AWS S3 Bucket %o`))
+        .catch(e => new AppError(e));
+
+        // logger.debug(`User picture ${filename} was successfully uploaded to AWS S3 Bucket %o`)
+        next();        
+    }),
 
     getMe: catchAsync(async (req, res, next) => {
         // console.log(
@@ -144,13 +118,13 @@ module.exports = {
     }),
 
     updateMe: catchAsync(async (req, res, next) => {
-        console.log(
-            '%c userController.updateMe, req.body, req.file, req.user ===> ',
-            'color: yellowgreen; font-weight: bold;',
-            req.body,
-            req.file,
-            req.user,
-        );
+        // console.log(
+        //     '%c userController.updateMe, req.body, req.file, req.user ===> ',
+        //     'color: yellowgreen; font-weight: bold;',
+        //     req.body,
+        //     req.file,
+        //     req.user,
+        // );
 
         // 1) Create error if user POSTs password or email
         if (req.body.password || req.body.passwordConfirm) {
@@ -173,12 +147,12 @@ module.exports = {
 
         if (req.file) filteredBody.photo = req.file.filename;
 
-        console.log(
-            '%c userController.updateMe, filteredBody, req.user.role ===> ',
-            'color: yellowgreen; font-weight: bold;',
-            filteredBody,
-            req.user.role,
-        );
+        // console.log(
+        //     '%c userController.updateMe, filteredBody, req.user.role ===> ',
+        //     'color: yellowgreen; font-weight: bold;',
+        //     filteredBody,
+        //     req.user.role,
+        // );
 
         // 3) Update user document
         const updatedUser = await connection.model(req.user.role).findByIdAndUpdate(
