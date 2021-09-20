@@ -314,8 +314,7 @@ const Profile = (props) => {
 						
 							<figure className="profile__photo">
 								<img
-									src={`./img/userpics/${user.photo}`}
-									// src="img/profile_photo.png"
+									src={`https://s3.amazonaws.com/${process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME}/img/userpics/${user.photo}`}
 									alt="Profile photo"
 									className="profile__photo-img"
 								/>

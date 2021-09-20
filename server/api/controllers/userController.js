@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// const multer = require('multer');
-const sharp = require('sharp');
 
 const config = require('../../config');
 const logger = require('../../loaders/logger')();
@@ -27,24 +25,9 @@ const connection = services.get('connections')[name];
  * https://github.com/Automattic/mongoose/blob/master/README.md
  */
 const users = connection.model('user');
-const admins = connection.model('admin');
-const students = connection.model('student');
-const educators = connection.model('educator');
-
-// const multerStorage = multer.memoryStorage();
-
-// const multerFilter = (req, file, cb) => {
-//     if (file.mimetype.startsWith('image')) {
-//         cb(null, true);
-//     } else {
-//         cb(new AppError('Not an image! Please upload only images', 404));
-//     }
-// };
-
-// const upload = multer({
-//     storage: multerStorage,
-//     fileFilter: multerFilter
-// });
+// const admins = connection.model('admin');
+// const students = connection.model('student');
+// const educators = connection.model('educator');
 
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
@@ -96,15 +79,16 @@ module.exports = {
 
         if (!req.file) return next();
 
-        const filename = `img/userpics/user-${req.user.id}-${Date.now()}.jpeg`;
+        req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
-        resizeImage.resizeToBuffer(req, 500, 500, 'jpeg', 90)
-        .then(resizedFile => awsS3upload(resizedFile, filename))
-        .then(() => logger.debug(`User picture ${filename} was successfully uploaded to AWS S3 Bucket %o`))
-        .catch(e => new AppError(e));
+        await resizeImage.resizeToBuffer(req, 500, 500, 'jpeg', 90)
+        .then(resizedFile => awsS3upload(resizedFile, `img/userpics/${req.file.filename}`))
+        .then((data) => { 
+            logger.debug(`User picture ${req.file.filename} was successfully uploaded to AWS S3 Bucket %o`);
+            next();
+        })
+        .catch(e => next(new AppError(e)));
 
-        // logger.debug(`User picture ${filename} was successfully uploaded to AWS S3 Bucket %o`)
-        next();        
     }),
 
     getMe: catchAsync(async (req, res, next) => {
@@ -118,13 +102,13 @@ module.exports = {
     }),
 
     updateMe: catchAsync(async (req, res, next) => {
-        // console.log(
-        //     '%c userController.updateMe, req.body, req.file, req.user ===> ',
-        //     'color: yellowgreen; font-weight: bold;',
-        //     req.body,
-        //     req.file,
-        //     req.user,
-        // );
+        console.log(
+            '%c userController.updateMe, req.body, req.file, req.user ===> ',
+            'color: yellowgreen; font-weight: bold;',
+            req.body,
+            req.file,
+            req.user,
+        );
 
         // 1) Create error if user POSTs password or email
         if (req.body.password || req.body.passwordConfirm) {
@@ -156,7 +140,6 @@ module.exports = {
 
         // 3) Update user document
         const updatedUser = await connection.model(req.user.role).findByIdAndUpdate(
-            // const updatedUser = await users.findByIdAndUpdate(
             req.user._id,
             filteredBody,
             {
