@@ -1,17 +1,19 @@
-const { Router } = require('express');
-const logger = require('../../loaders/logger')();
+const router = require('express').Router();
 
-const eventMiddleware = require('../controllers/eventController');
+const authController = require('../controllers/authController');
+const eventController = require('../controllers/eventController');
 
-const route = Router();
+// const route = Router();
 
 module.exports = async (app) => {
     
-    app.use('/events', route);
+    app.use('/events', router);
 
-    route.post('/', eventMiddleware.create);
+    router.use(authController.isAuth);
 
-    route.patch('/:id', eventMiddleware.update);
+    router.post('/create', eventController.create);
+
+    router.patch('/:id', eventController.update);
 
     return app;
 };

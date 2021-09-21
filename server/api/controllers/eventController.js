@@ -16,36 +16,73 @@ const events = eventModel(connection);
 module.exports = {
 
   create: catchAsync(async (req, res, next) => {
-    logger.debug('Calling create endpoint with body: %o', req.body)
+    logger.debug('Calling create endpoint with body: %o', req.body, req.user)
 
+    // 1) Create error if user is not educator
+    if (req.user.role !== 'educator') {
+      return next(new AppError(`Only users with role 'educator' are alowed to create events. Please sign in as an educator.`, 400));
+    }
+    logger.debug('User role is', req.user);
 
-    event = new events({
-      hoster: [req.body.hoster],
+    const event = {
+      organizers: [req.user.id],
+      creator: req.user.id,
       name: req.body.name,
       industry: req.body.industry,
       skill: req.body.skill,
-      capacity: req.body.capacity,
+      // capacity: req.body.capacity,
       start: new Date(req.body.start),
       end: new Date(req.body.end),
       time: req.body.time,
-      city: req.body.city,
+      area: req.body.area,
       address: req.body.address,
       registered: undefined,
       approved: undefined,
       approver: undefined
-    });
+    };
+    // const event = new events({
+    //   organizers: [req.body.hoster],
+    //   creator: req.user.id,
+    //   name: req.body.name,
+    //   industry: req.body.industry,
+    //   skill: req.body.skill,
+    //   capacity: req.body.capacity,
+    //   start: new Date(req.body.start),
+    //   end: new Date(req.body.end),
+    //   time: req.body.time,
+    //   city: req.body.city,
+    //   address: req.body.address,
+    //   registered: undefined,
+    //   approved: undefined,
+    //   approver: undefined
+    // });
 
-    await event.save((err, event) => {
+    const newEvent = await events.create(event);
 
-      if (err) {
-        logger.error(`${err} occured while saving new event ${req.body.name}`);
-        res.status(err.status || 400).json({ message: err.message });
+    if (!newEvent) {
+      logger.error(`${err} occured while saving new event ${req.body.name}`);
+      res.status(err.status || 400).json({ message: err.message });
+    }
+
+    // req.event = event;
+    res.status(200).json({
+      status: 'success',
+      data: {
+        event
       }
-
-      req.event = event;
-      next();
-
     });
+
+    // await event.save((err, event) => {
+
+    //   if (err) {
+    //     logger.error(`${err} occured while saving new event ${req.body.name}`);
+    //     res.status(err.status || 400).json({ message: err.message });
+    //   }
+
+    //   req.event = event;
+    //   next();
+
+    // });
   }),
 
   update: catchAsync(async (req, res, next) => {
