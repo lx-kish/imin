@@ -2,13 +2,6 @@ import React from 'react';
 
 import './lvl2-pages.styles.scss';
 
-import ImageSignUp from '../../graphics/pages-content/educators-page/1-sign-up.png';
-import ImageApplyToHost from '../../graphics/pages-content/educators-page/2-apply-to-host.png';
-import ImageEducate from '../../graphics/pages-content/educators-page/3-educate.png';
-import ImageSeeTheImpact from '../../graphics/pages-content/educators-page/4-see-the-impact.png';
-import ImageBeAnImpact from '../../graphics/pages-content/educators-page/5-be-an-impact-partner.png';
-import ImageTheNextWave from '../../graphics/pages-content/educators-page/6-the-next-wave.png';
-
 import Intro from '../../components/intro/intro.component';
 import RenderBtn from '../../components/intro/render-btn.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';

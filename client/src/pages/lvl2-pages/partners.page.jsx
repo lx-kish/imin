@@ -2,9 +2,6 @@ import React from 'react';
 
 import './lvl2-pages.styles.scss';
 
-import ImageBecomeAPartner from '../../graphics/pages-content/partners-page/1-become-a-partner.png';
-import ImageDonate from '../../graphics/pages-content/partners-page/2-donate.png';
-
 import IconPhone from '../../components/icons/icon-phone.component';
 import IconEnvelop from '../../components/icons/icon-envelope.component';
 

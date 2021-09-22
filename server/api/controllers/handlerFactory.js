@@ -18,23 +18,15 @@ exports.deleteOne = Model => catchAsync(async (req, res, next) => {
 
 exports.updateOne = Model => catchAsync(async (req, res, next) => {
 
-    console.log(
-        '%c handlerFactory.updateOne, req.file, req.body ===> ',
-        'color: yellowgreen; font-weight: bold;',
-        req.params.id,
-        req.body,
-        req.fields,
-        req.file,
-        req.userpic
-    );
-    // console.log(req.file);
-    // console.log(__dirname);
-    // console.log(__filename);
-    // console.log(process.cwd());
-    // console.log(process.argv[1]);
-    // console.log(req.params);
-    // console.log(req.body);
-    // console.log(req.user);
+    // console.log(
+    //     '%c handlerFactory.updateOne, req.file, req.body ===> ',
+    //     'color: yellowgreen; font-weight: bold;',
+    //     req.params.id,
+    //     req.body,
+    //     req.fields,
+    //     req.file,
+    //     req.userpic
+    // );
 
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
         new: true,

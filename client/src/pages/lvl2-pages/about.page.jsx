@@ -2,9 +2,6 @@ import React from 'react';
 
 import './lvl2-pages.styles.scss';
 
-import FirstImage from '../../graphics/pages-content/about-page/about-dna-1-1920.png';
-import SecondImage from '../../graphics/pages-content/about-page/about-strategy-2-1920.png';
-
 import Intro from '../../components/intro/intro.component';
 import RenderBtn from '../../components/intro/render-btn.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';

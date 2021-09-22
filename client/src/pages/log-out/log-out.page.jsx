@@ -24,7 +24,7 @@ const content = {
 };
 
 const LogOut = (props) => {
-	const { user, processing, dataFetched, status, error, getUserData } = props;
+	const { error, getUserData } = props;
 	/**
      * Single state hook useState for all the state properties
      */

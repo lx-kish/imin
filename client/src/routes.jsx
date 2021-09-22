@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import Home from './pages/home/home.page';
 import About from './pages/lvl2-pages/about.page';
@@ -29,18 +29,9 @@ const Routes = () => {
 			<PublicRoute path="/signup" exact component={SignUp} privateRoute={false} />
 			<PublicRoute path="/signin" exact component={SignIn} privateRoute={false} />
 			<PublicRoute path="/terms" exact component={TermsAndConditions} privateRoute={false} />
-			{/* <Route path="/" exact component={Home} />
-				<Route path="/about" exact component={About} />
-				<Route path="/contact" exact component={Contact} />
-				<Route path="/educators" exact component={Educators} />
-				<Route path="/students" exact component={Students} />
-				<Route path="/partners" exact component={Partners} />
-				<Route path="/signup" exact component={SignUp} />
-				<Route path="/signin" exact component={SignIn} /> */}
 			<PrivateRoute path="/logout" exact component={LogOut} privateRoute={true} />
 			<PrivateRoute path="/profile" exact component={Profile} privateRoute={true} />
 			<PrivateRoute path="/account" exact component={Account} privateRoute={true} />
-			{/* <Route path="/terms" exact component={TermsAndConditions} /> */}
 		</Switch>
 	);
 };

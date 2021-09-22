@@ -6,12 +6,20 @@ const eventController = require('../controllers/eventController');
 // const route = Router();
 
 module.exports = async (app) => {
-    
+
     app.use('/events', router);
 
     router.use(authController.isAuth);
 
-    router.post('/create', eventController.create);
+    router
+        .route('/')
+        .get(
+            authController.isPermitted('admin'),
+            eventController.getAllEvents)
+        .post(
+            authController.isPermitted('educator'),
+            eventController.create
+        );
 
     router.patch('/:id', eventController.update);
 

@@ -2,12 +2,6 @@ import React from 'react';
 
 import './lvl2-pages.styles.scss';
 
-import ImageSignUp from '../../graphics/pages-content/students-page/1-sign-up.png';
-import ImageAttendExperiences from '../../graphics/pages-content/students-page/2-attend-experiences.png';
-import ImageGainSkills from '../../graphics/pages-content/students-page/3-gain-skills.png';
-import ImageRateExperiences from '../../graphics/pages-content/students-page/4-rate-experiences.png';
-import ImageMakeDecisionAboutYourFuture from '../../graphics/pages-content/students-page/5-make-decisions-about-your-future.png';
-
 import Intro from '../../components/intro/intro.component';
 import RenderBtn from '../../components/intro/render-btn.component';
 import ParagraphTitled from '../../components/panes/paragraphs/paragraph-titled/paragraph-titled.component';

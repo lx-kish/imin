@@ -1,11 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './contact.styles.scss';
-
-import ImageJenny from '../../graphics/pages-content/contact-page/jenny.png';
-import ImageThomas from '../../graphics/pages-content/contact-page/thomas.png';
-import ImageIsaac from '../../graphics/pages-content/contact-page/isaac.png';
 
 import IconEnvelop from '../../components/icons/icon-envelope.component';
 import IconLinkedIn from '../../components/icons/icon-linkedin.component';

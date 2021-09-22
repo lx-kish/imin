@@ -3,6 +3,7 @@ const services = require('../../loaders/services');;
 const config = require('../../config');
 const eventModel = require('../../db/models/eventModel');
 const catchAsync = require('../../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 const name = config.db_name;
 // const { name } = config.db_local;
@@ -19,43 +20,28 @@ module.exports = {
     logger.debug('Calling create endpoint with body: %o', req.body, req.user)
 
     // 1) Create error if user is not educator
-    if (req.user.role !== 'educator') {
-      return next(new AppError(`Only users with role 'educator' are alowed to create events. Please sign in as an educator.`, 400));
-    }
+    // if (req.user.role !== 'educator') {
+    //   return next(new AppError(`Only users with role 'educator' are alowed to create events. Please sign in as an educator.`, 400));
+    // }
     logger.debug('User role is', req.user);
 
     const event = {
       organizers: [req.user.id],
-      creator: req.user.id,
       name: req.body.name,
+      summary: req.body.summary,
+      description: req.body.description,
       industry: req.body.industry,
       skill: req.body.skill,
-      // capacity: req.body.capacity,
-      start: new Date(req.body.start),
-      end: new Date(req.body.end),
+      capacity: req.body.capacity,
+      startDate: new Date(req.body.startDate),
+      endDate: new Date(req.body.endDate),
       time: req.body.time,
       area: req.body.area,
       address: req.body.address,
-      registered: undefined,
-      approved: undefined,
-      approver: undefined
+      photo: '',
+      createdBy: req.user.id,
+      approved: false,
     };
-    // const event = new events({
-    //   organizers: [req.body.hoster],
-    //   creator: req.user.id,
-    //   name: req.body.name,
-    //   industry: req.body.industry,
-    //   skill: req.body.skill,
-    //   capacity: req.body.capacity,
-    //   start: new Date(req.body.start),
-    //   end: new Date(req.body.end),
-    //   time: req.body.time,
-    //   city: req.body.city,
-    //   address: req.body.address,
-    //   registered: undefined,
-    //   approved: undefined,
-    //   approver: undefined
-    // });
 
     const newEvent = await events.create(event);
 
@@ -84,6 +70,8 @@ module.exports = {
 
     // });
   }),
+
+  getAllEvents: factory.getAll(events),
 
   update: catchAsync(async (req, res, next) => {
     logger.debug('Calling update endpoint with body: %o', req.body)

@@ -54,7 +54,7 @@ const Header = (props) => {
    * 
    */
 
-	const { user, status } = props;
+	const { status } = props;
 
 	// console.log(
 	// 	'%c Header component, { ...props }, user ===> ',

@@ -12,7 +12,7 @@ import educatorFormStructure from '../../components/forms/profile-form/educator-
 import studentFormStructure from '../../components/forms/profile-form/student-form-structure';
 import adminFormStructure from '../../components/forms/profile-form/admin-form-structure';
 
-import useWindowSize from '../../utils/use-window-size/use-window-size';
+// import useWindowSize from '../../utils/use-window-size/use-window-size';
 
 import DesktopWidth from '../../utils/desktop-width/desktop-width';
 
@@ -47,7 +47,7 @@ const Profile = (props) => {
 		});
 	};
 
-	const [ width, height ] = useWindowSize();
+	// const [ width, height ] = useWindowSize();
 
 
 	/**
@@ -201,7 +201,6 @@ const Profile = (props) => {
 
 					<div className={`profile__field-content profile__${field.name}`}>
 						{renderViewField(user[field.name])}
-						{/* {renderViewField(fullState.user[field.name])} */}
 					</div>
 				</div>
 			);
@@ -210,7 +209,6 @@ const Profile = (props) => {
 
 	const formFields = (form) => {
 		return formStructure(user.role).map((field, i) => {
-		// return formStructure(fullState.role).map((field, i) => {
 			return (
 				<div key={i} className={`profile__box profile__box--${field.name}`}>
 					{/* if no label property in the field object, then label equal to placeholder
@@ -246,7 +244,6 @@ const Profile = (props) => {
 		return (
 			<Formik
 				initialValues={{ ...user }}
-				// initialValues={{ ...fullState.user }}
 				validate={(values) => {
 					const errors = {};
 	
@@ -278,22 +275,17 @@ const Profile = (props) => {
 						form
 					)
 					.then((res) => {
-						// console.log('profile, res =====> ', res);
 						setFullState({
 							...fullState,
-								// user: res.data.data.user,
 								edit: false,
 								submitSuccess: true,
 								submitError: false,
 								errorMessage: ''
 							});
 	
-							// resetForm();
 							values = {...user};
-							// values = {...fullState.user};
 						})
 						.catch((e) => {
-							// console.log('profile, error =====> ', error.response);
 	
 							setFullState({
 								...fullState,
@@ -335,10 +327,7 @@ const Profile = (props) => {
 										{<IconCamera className="profile__photo-icon btn__icon color-white" />}
 									</label>
 								</React.Fragment>
-							) : ( null )
-								/* <button className="btn--primary btn--round profile__photo-button">
-									{<IconCamera className="profile__photo-icon btn__icon color-white" />}
-								</button> */
+								) : ( null )
 							}
 						</div>
 
@@ -394,18 +383,12 @@ const Profile = (props) => {
 							</React.Fragment>
 						) : (
 							<div className="profile__view">
-								{/* <div className={`${fullState.edit ? 'display-none ' : 'profile__view'}`}> */}
 								<div className="profile__box profile__name heading-secondary">
 									{user.name || user.surname ? (
 										`${user.name} ${user.surname}`
 									) : (
 										'--'
 									)}
-									{/* {fullState.user.name || fullState.user.surname ? (
-										`${fullState.user.name} ${fullState.user.surname}`
-									) : (
-										'--'
-									)} */}
 								</div>
 	
 								{viewFields()}
@@ -466,7 +449,6 @@ const Profile = (props) => {
 						<AsideMenu />
 						<div className="profile">
 							<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
-							{/* {profilePhotoSection()} */}
 							{profileMainData()}
 						</div>
 					</div>
@@ -474,7 +456,6 @@ const Profile = (props) => {
 			: 
 				<main className="profile">
 					<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
-					{/* {profilePhotoSection()} */}
 					{profileMainData()}
 				</main>
 	);

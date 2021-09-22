@@ -1,5 +1,4 @@
 import React from "react";
-// import axios from "axios";
 
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -8,10 +7,6 @@ import { Formik } from "formik";
 import "./sign-up.styles.scss";
 
 import { postUserDataToTheServer } from '../../redux/user/user.actions';
-// import config from "../../axios.config";
-
-import ImgStudent from "../../graphics/pages-content/sign-up/IMIN-purple.png";
-import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
 
 /**
  * Component Sign-up let user to create an account in the system.
@@ -41,12 +36,7 @@ import ImgEducator from "../../graphics/pages-content/sign-up/IMIN-pink.png";
 const SignUp = (props) => {
 
   const {
-    // processing,
-		// dataFetched,
-    // status,
-		// error,
     postUserData,
-    ...rest
   } = props;
 
   /**
@@ -113,14 +103,6 @@ const SignUp = (props) => {
               errors.email = "Please provide valid email address";
             }
 
-            // if (!values.phone) {
-            //     errors.email = 'Please provide your valid email address';
-            // } else if (
-            //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            // ) {
-            //     errors.email = 'Please provide valid email address';
-            // }
-
             if (!values.password) {
               errors.password =
                 "Please provide a password at least 8 characters";
@@ -172,39 +154,6 @@ const SignUp = (props) => {
                 errorMessage: e.message,
               });
             });
-            // axios
-            //   .post(`/api/users/signup`, values, config)
-
-            //   //getting respond from the server
-            //   .then((res) => {
-            //     console.log("sign up doc, res =====> ", res);
-
-            //     setFullState({
-            //       ...fullState,
-            //       submitSuccess: true,
-            //       submitError: false,
-            //       errorMessage: "",
-            //     });
-
-            //     //reset form fields
-
-            //     //redirect to the profile page with the newly registered user
-            //     props.history.push(`/profile`);
-            //     // props.history.push(`/profile`, { role: res.data.data.role });
-            //   })
-
-            //   //error handler for unknown errors
-            //   .catch((error) => {
-            //     console.log("sign up doc, error =====> ", error.response);
-
-            //     // resetForm();
-            //     setFullState({
-            //       ...fullState,
-            //       submitSuccess: false,
-            //       submitError: true,
-            //       errorMessage: error.message,
-            //     });
-            //   });
 
             //setting formik setSubmitting flag to false
             setSubmitting(false);
@@ -453,12 +402,10 @@ const SignUp = (props) => {
                     pathname: "/signin",
                     state: {
                       role,
-                      // role: role === "educator" ? "educator" : "student",
                     },
                   }}
                   className={`sign-up__link 
                             sign-up__link--${role}`}
-                  // className="sign-up__redirect-sign-in--link"
                 >
                   Sign in.
                 </Link>
@@ -490,7 +437,6 @@ const SignUp = (props) => {
   return (
     <main className={"sign-up"}>
       <div className={`sign-up__background sign-up__background--${role}`}>
-        {/* <div className={`sign-up__logo sign-up__logo--${role}`}></div> */}
         <img
           src={
             role === "student" ?
@@ -502,28 +448,12 @@ const SignUp = (props) => {
         />
         <h2 className="sign-up__heading sign-up__heading--mb color-white">
           {`${role} Sign Up`}
-          {/* {`${role === "educator" ? "Educator" : "Student"} Sign Up`} */}
         </h2>
-        {/* <div className="sign-up__heading--mb">
-          <h2 className="sign-up__heading color-white">
-            {`${role === "educator" ? "Educator" : "Student"}`}
-          </h2>
-          <h2 className="sign-up__heading color-white">
-            {`Sign Up`}
-          </h2>
-        </div> */}
       </div>
       {signUpForm()}
     </main>
   );
 };
-
-// const mapReduxStateToProps = state => ({
-// 	processing: state.auth.processing,
-// 	dataFetched: state.auth.dataFetched,
-//   status: state.auth.status,
-// 	error: state.auth.error,
-// });
 
 const mapReduxDispatchToProps = dispatch => ({
 	postUserData: (route, values) => dispatch(postUserDataToTheServer(route, values)),
@@ -531,7 +461,5 @@ const mapReduxDispatchToProps = dispatch => ({
 
 export default connect(
 	null,
-	// mapReduxStateToProps,
   mapReduxDispatchToProps,
 )(SignUp);
-// export default SignUp;

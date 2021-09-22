@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import './btn.styles.scss';
-
 const ButtonLink = (props) => {
 	return (
 		<Link

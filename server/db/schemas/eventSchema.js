@@ -10,21 +10,6 @@ module.exports = {
             ]
         }
     ],
-    creator: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Educator',
-        required: [
-            true,
-            'Required field missing: EVENT CREATOR'
-        ],
-        // validate: {
-        //     validator: function (user) {
-        //         // this only points to current doc on NEW document creation and NOT on update!!!
-        //         return user.role === 'educator';
-        //     },
-        //     message: "Creator's role ({VALUE.role}) is not educator. Only educators can create events."
-        // }
-    },
     name: {
         type: String,
         required: [
@@ -32,59 +17,80 @@ module.exports = {
             'Required field missing: EVENT NAME'
         ]
     },
-    industry: {
+    summary: {
         type: String,
+        trim: true,
         required: [
             true,
-            'Required field missing: INDUSTRY(ES)'
+            'Required field missing: SUMMARY'
         ]
     },
-    skill: {
+    description: {
         type: String,
+        trim: true,
         required: [
             true,
-            'Required field missing: SKILL(S)'
+            'Required field missing: DESCRIPTION'
         ]
     },
+    industries: [
+        {
+            type: String,
+            required: [
+                true,
+                'Required field missing: INDUSTRY(ES)'
+            ]
+        }
+    ],
+    skills: [
+        {
+            type: String,
+            required: [
+                true,
+                'Required field missing: SKILL(S)'
+            ]
+        }
+    ],
     attendees: [
         {
             type: mongoose.Schema.ObjectId,
             ref: 'Student',
         }
     ],
-    // capacity: {
-    //     type: Number,
-    //     required: [
-    //         true,
-    //         'Required field missing: CAPACITY'
-    //     ]
-    // },
-    start: {
+    capacity: {
+        type: Number,
+        required: [
+            true,
+            'Required field missing: CAPACITY'
+        ]
+    },
+    startDate: {
         type: Date,
         required: [
             true,
             'Required field missing: START DATE'
         ],
         validate: {
-            validator: function (startDate) {
+            validator: function (value) {
                 // this only points to current doc on NEW document creation and NOT on update!!!
-                return startDate <= Date.now();
+                return value > Date.now();
             },
             message: "Event start date ({VALUE}) should be future date. Please, provide the correct start date."
         }
     },
-    end: {
+    endDate: {
         type: Date,
         required: [
             true,
             'Required field missing: END DATE'
         ],
         validate: {
-            validator: function (endDate) {
+            validator: function (value) {
                 // this only points to current doc on NEW document creation and NOT on update!!!
-                return endDate < this.start;
+                return value > this.startDate;
             },
-            message: "Event end date ({VALUE}) can not be earlier than the start date. Please, provide the correct end date."        }
+            message: "Event end date ({VALUE}) can not be earlier than the start date. Please, provide the correct end date."
+        }
     },
     time: {
         type: String,
@@ -94,7 +100,8 @@ module.exports = {
         ]
     },
     area: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
+        ref: 'Area',
         required: [
             true,
             'Required field missing: CITY'
@@ -107,11 +114,23 @@ module.exports = {
             'Required field missing: ADDRESS'
         ]
     },
-    created: {
-        type: Boolean,
-        default: false
+    photo: {
+		type: String,
+		default: ''
+	},
+    // created: {
+    //     type: Boolean,
+    //     default: false
+    // },
+    createdBy: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Educator',
+        required: [
+            true,
+            'Required field missing: EVENT CREATOR'
+        ]
     },
-    createdAt: {
+    creationDate: {
         type: Date,
         default: Date.now()
     },
@@ -119,10 +138,10 @@ module.exports = {
         type: Boolean,
         default: false
     },
-    approvedAt: {
+    approvalDate: {
         type: Date
     },
-    approver: {
+    approvedBy: {
         type: mongoose.Schema.ObjectId,
         ref: 'Admin'
     }

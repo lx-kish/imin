@@ -7,22 +7,12 @@ import "./sign-in.styles.scss";
 
 import { postUserDataToTheServer } from '../../redux/user/user.actions';
 
-import ImgStudent from '../../graphics/pages-content/sign-in/avatar-student.png';
-import ImgEducator from '../../graphics/pages-content/sign-in/avatar-educator.png';
-
 const SignIn = (props) => {
 
   const { 
-		// component: Component,
-		// privateRoute,
-		// path,
-		processing,
-		dataFetched,
     status,
-		// user,
 		error,
     postUserData,
-		...rest
 	} = props;
 	
 	console.log(

@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 
 import './home.styles.scss';
 
-import educateImg from '../../graphics/pages-content/home-page/home-educate-1x.png';
-import learnImg from '../../graphics/pages-content/home-page/home-learn-1x.png';
-import supportImg from '../../graphics/pages-content/home-page/home-support-1x.png';
-
 import Image from '../../components/panes/image/image.component';
 import PartArticle from '../../components/panes/part-article/part-article.component';
 import ContactForm from '../../components/forms/contact-form/contact-form.component';
