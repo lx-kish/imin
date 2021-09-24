@@ -1,5 +1,6 @@
 const aws = require('aws-sdk')
 const AppError = require('./appError');
+const config = require('../config');
 
 /**
  * @param fileName: filename to be saved
@@ -15,12 +16,12 @@ module.exports = async (file, fileName) => {
   // );
 
   const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_S3_ACCESS_KEY,
-    region: process.env.AWS_S3_REGION,
+    accessKeyId: config.awsS3.accessKeyId,
+    secretAccessKey: config.awsS3.accessKey,
+    region: config.awsS3.region,
   });
 
-  const bucketName = process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME;
+  const bucketName = config.awsS3.bucketName;
 
   const params = {
     Bucket: bucketName,

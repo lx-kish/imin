@@ -1,3 +1,4 @@
+const { S3 } = require('aws-sdk');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -26,7 +27,7 @@ module.exports = {
    * Connection type: local/cloud
    */
   connection_type: process.env.MONGODB_CONNECTIONTYPE,
-  
+
   /**
    * Database name
    */
@@ -50,10 +51,6 @@ module.exports = {
     password: process.env.MONGODB_PASSWORD,
     uri: process.env.MONGODB_URI,
   },
-  // database_name: process.env.MONGODB_NAME,
-  // database_URI: process.env.MONGODB_URI,
-  // database_name: JSON.parse(process.env.MONGODB_URI).name || '',
-  // database_URI: JSON.parse(process.env.MONGODB_URI).URI,
 
   /**
    * Secret key and expiration for JWT
@@ -74,5 +71,17 @@ module.exports = {
    */
   api: {
     prefix: '/api',
+  },
+
+  /**
+   * AWS S3 Bucket assets cloud storage credentials
+   */
+
+  awsS3: {
+    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+    accessKey: process.env.AWS_S3_ACCESS_KEY,
+    region: process.env.AWS_S3_REGION,
+    bucketName: process.env.REACT_APP_AWS_S3_BUCKET_ASSETS_NAME,
+    fileCount: process.env.AWS_S3_MAX_FILE_COUNT,
   }
 };

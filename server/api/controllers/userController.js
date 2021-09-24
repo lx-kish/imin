@@ -5,14 +5,15 @@ const logger = require('../../loaders/logger')();
 const services = require('../../loaders/services');
 const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
+const filterObj = require('../../utils/filterObject');
 const factory = require('./handlerFactory');
 
+// Images processing and uploading utilites
 const uploadImage = require('../../utils/uploadImage');
 const resizeImage = require('../../utils/resizeImage');
 const awsS3upload = require('../../utils/awsS3upload');
 
 const name = require('../../config').db_name;
-
 const connection = services.get('connections')[name];
 
 /**
@@ -28,15 +29,6 @@ const users = connection.model('user');
 // const admins = connection.model('admin');
 // const students = connection.model('student');
 // const educators = connection.model('educator');
-
-const filterObj = (obj, ...allowedFields) => {
-    const newObj = {};
-    Object.keys(obj).forEach(el => {
-        if (allowedFields.includes(el)) newObj[el] = obj[el];
-    });
-
-    return newObj;
-};
 
 module.exports = {
 

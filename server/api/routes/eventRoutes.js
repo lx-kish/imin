@@ -21,7 +21,23 @@ module.exports = async (app) => {
             eventController.create
         );
 
-    router.patch('/:id', eventController.update);
+    router.patch(
+        '/:id',
+        authController.isPermitted('educator'),
+        eventController.update
+    );
+
+    router
+        .route('/area/:areaID/from/:startDate')
+        .get(eventController.getEventsWithinAreaFromDate); // for dashboard
+
+    router
+        .route('/from/:startDate/to/:endDate')
+        .get(eventController.getAllEventsForThePeriod); //events for the period for admins
+
+    router
+        .route('/area/:areaID/from/:startDate/to/:endDate')
+        .get(eventController.getEventsWithinAreaForThePeriod); //events for the period for admins
 
     return app;
 };

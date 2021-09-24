@@ -115,9 +115,9 @@ module.exports = {
         ]
     },
     photo: {
-		type: String,
-		default: ''
-	},
+        type: String,
+        default: ''
+    },
     // created: {
     //     type: Boolean,
     //     default: false
@@ -144,5 +144,19 @@ module.exports = {
     approvedBy: {
         type: mongoose.Schema.ObjectId,
         ref: 'Admin'
+    },
+    deleted: {
+        type: Boolean,
+        default: false
+    },
+    deleteDate: {
+        type: Date
+    },
+    deletedBy: {
+        type: mongoose.Schema.ObjectId,
+        ref: [
+            'Admin',
+            'Educator'
+        ]
     }
 };
