@@ -1,6 +1,5 @@
 const logger = require('../../loaders/logger')();
-const services = require('../../loaders/services');;
-// const config = require('../../config');
+const services = require('../../loaders/services');
 const eventModel = require('../../db/models/eventModel');
 const catchAsync = require('../../utils/catchAsync');
 const filterObj = require('../../utils/filterObject');
@@ -158,11 +157,37 @@ module.exports = {
 
   }),
 
-  getEventsWithinAreaFromDate: catchAsync(async (req, res, next) => {}),
-  
-  getAllEventsForThePeriod: catchAsync(async (req, res, next) => {}),
-  
-  getEventsWithinAreaForThePeriod: catchAsync(async (req, res, next) => {}),
+  getEventsWithinAreaFromDate: catchAsync(async (req, res, next) => {
+
+  }),
+
+  getAllEventsForThePeriod: catchAsync(async (req, res, next) => {
+
+    const periodStart = `${req.params.startDate}T12:00:00.000+00:00`;
+    const periodEnd = `${req.params.endDate}T12:23:59.999+00:00`;
+
+    // console.log(
+    //   '%c eventController.getAllEventsForThePeriod routine, req.params.startDate/req.params.endDate ===> ',
+    //   'color: yellowgreen; font-weight: bold;',
+    //   req.params.startDate,
+    //   req.params.endDate,
+    // );
+
+    const selectedEvents = await events.find(
+      { "startDate": { $gte: new Date(periodStart), $lte: new Date(periodEnd) } }
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        selectedEvents
+      }
+    });
+  }),
+
+  getEventsWithinAreaForThePeriod: catchAsync(async (req, res, next) => {
+
+  }),
 
   getAllEvents: factory.getAll(events),
 };

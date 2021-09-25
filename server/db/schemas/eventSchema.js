@@ -154,9 +154,11 @@ module.exports = {
     },
     deletedBy: {
         type: mongoose.Schema.ObjectId,
-        ref: [
-            'Admin',
-            'Educator'
-        ]
+        refPath: 'modelDeletedBy'
+    },
+    modelDeletedBy: {
+        type: String,
+        // required: true,
+        enum: [ 'Admin', 'Educator' ]
     }
 };

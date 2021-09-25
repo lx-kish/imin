@@ -114,13 +114,6 @@ module.exports = {
       next();
     }
   },
-  // isPermitted: (req, res, next) => {
-
-  //   if (req.user.role !== 'admin') {
-  //     return next(new AppError('You do not have a permission to perform this action', 403));
-  //   }
-  //   next();
-  // },
 
   signUp: catchAsync(async (req, res, next) => {
     logger.debug('Calling Sign-Up endpoint with body: %o', req.body);
@@ -157,10 +150,14 @@ module.exports = {
 
     let newUser = await userModel.create(user);
 
-    // console.log('userModel ===> ', userModel);
-    // console.log('role "role" ===> ', role);
-    // console.log('role "req.body.role" ===> ', req.body.role);
-    // console.log('role newUser.role ===> ', newUser.role);
+    // console.log(
+    //     '%c authController.signUp routine, userModel/role/req.body.role/newUser.role ===> ',
+    //     'color: yellowgreen; font-weight: bold;',
+    //     userModel,
+    //     role,
+    //     req.body.role,
+    //     newUser.role,
+    // );
 
     if (!newUser) return next(new AppError(`Error occured while user saving`, 400));
 
@@ -217,10 +214,10 @@ module.exports = {
     logger.debug('Calling Sign-Out endpoint');
 
     res.cookie('access_token', '', {
-    // res.cookie('access_token', 'loggedout', {
+      // res.cookie('access_token', 'loggedout', {
       // expires: new Date(Date.now() + 10 * 1000),
       httpOnly: true,
-  });
+    });
 
     res.status(200).json({
       status: 'success',
