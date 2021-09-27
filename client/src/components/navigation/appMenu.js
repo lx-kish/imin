@@ -5,13 +5,13 @@ const AppMenu = [
     className: 'navigation-link color-pink paragraph--uppercase'
   },
   {
-    name: 'Account',
-    link: '/accout',
+    name: 'Settings',
+    link: '/settings',
     className: 'navigation-link color-pink paragraph--uppercase'
   },
   {
-    name: 'Events',
-    link: '/events',
+    name: 'Upcoming events',
+    link: '/upcoming',
     className: 'navigation-link color-pink paragraph--uppercase'
   },
   {

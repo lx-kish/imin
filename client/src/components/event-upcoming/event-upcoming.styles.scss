@@ -1,0 +1,14 @@
+@import "../../project-styles/mixins";
+@import "../../project-styles/variables";
+@import "../../project-styles/typography";
+
+.upcoming-event {
+  display: flex;
+  width: 90%;
+  background-color: var(--color-input-border);
+
+  &__requisites {
+    display: flex;
+    flex-direction: column;
+  }
+}
