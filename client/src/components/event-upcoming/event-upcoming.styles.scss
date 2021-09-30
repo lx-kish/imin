@@ -4,11 +4,81 @@
 
 .upcoming-event {
   display: flex;
-  width: 90%;
-  background-color: var(--color-input-border);
+  width: 93%;
+  background-color: var(--color-white);
+  // background-color: var(--color-input-border)
+  border-radius: 4rem;
+  margin-bottom: 7rem;
+  overflow: hidden;
+
+  @include BoxShadowHelper(3);
+
+  @include respond(_1040-1200) {
+    border: 1px solid;
+    border-color: var(--color-input-border);
+  }
+
+  &__cover {
+    max-width: 30%;
+    overflow: hidden;
+  }
+
+  &__photo {
+    height: 100%;
+  }
 
   &__requisites {
     display: flex;
     flex-direction: column;
+    padding: 3rem;
+    min-height: 100%;
+    width: 70%;
+  }
+
+  &__header {
+    margin-bottom: 3rem;
+    letter-spacing: -1px;
+  }
+
+  &__date-time {
+    letter-spacing: -1px;
+  }
+
+  &__time {
+    margin-left: 3rem;
+  }
+
+  &__footer {
+    margin-top: auto;
+    display: flex;
+    min-width: 100%;
+    letter-spacing: -1px;
+  }
+
+  &__attending {
+    display: flex;
+    align-items: center;
+    letter-spacing: -1px;
+
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+  &__icon-attending {
+    display: flex;
+  }
+
+  &__icon-group {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  &__btn-box {
+    display: flex;
+    margin-left: auto;
   }
 }

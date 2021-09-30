@@ -190,6 +190,18 @@ Application interfaces buttons (Profile and others) - mobile/desktop
     // vertical-align: auto;
   }
 
+  &--upcoming-event {
+    display: flex;
+    height: 6.5rem;
+    width: 6.5rem;
+    padding: 1rem;
+    background-color: var(--color-input-border);
+
+    &:not(:last-child) {
+      margin-right: 3rem;
+    }
+  }
+
   &__icon {
     display: block;
     margin: auto;

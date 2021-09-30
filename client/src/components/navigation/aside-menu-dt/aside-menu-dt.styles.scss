@@ -5,7 +5,8 @@
 
   color: var(--color-white);
 
-  flex: 43rem 0 0;
+  flex: 33% 0 0;
+  // flex: 43rem 0 0;
 
   &--student {
     background-image: -webkit-gradient( linear, left top, right bottom, from(var(--color-violet)), to(var(--color-violet-1)) );
@@ -35,6 +36,6 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    padding: 2rem 5rem;
+    padding: 2rem 4rem;
   }
 }
