@@ -151,17 +151,17 @@ OTHERVICE WE SUGGEST IT AS A MOBILE DEVICE WITH TOUCH SCREEN.
   //   }
   // }
 
-  // @if $breakpoint == _360-580 {
-  //   //phone {
-  //   /** Desktop first */
-  //   // @media only screen and (max-width: 36.25em) {
-  //   //   @content;
-  //   // }
-  //   /** Mobile first */
-  //   @media only screen and (min-width: 22.5em) {
-  //     @content;
-  //   }
-  // }
+  @if $breakpoint == _360-580 {
+    //phone {
+    /** Desktop first */
+    // @media only screen and (max-width: 36.25em) {
+    //   @content;
+    // }
+    /** Mobile first */
+    @media only screen and (min-width: 22.5em) {
+      @content;
+    }
+  }
 
   @if $breakpoint == _580-720 {
     //tab-port {

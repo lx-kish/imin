@@ -41,14 +41,14 @@ const UpcomingEventsList = (props) => {
         <div className="upcoming-list__content">
           <AsideMenu />
           <div className="upcoming-list">
-            <h1 className="heading-tertiary heading-tertiary--uppercase upcoming-list__heading">Upcoming experiences</h1>
+            <h1 className="upcoming-list__heading">Upcoming experiences</h1>
             {listUpcomingEvents()}
           </div>
         </div>
       </main>
     : 
       <main className="upcoming-list">
-        <h1 className="heading-tertiary heading-tertiary--uppercase upcoming-list__heading">Upcoming experiences</h1>
+        <h1 className="upcoming-list__heading">Upcoming experiences</h1>
         {listUpcomingEvents()}
       </main>
   );

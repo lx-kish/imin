@@ -6,17 +6,22 @@
   display: flex;
   width: 93%;
   background-color: var(--color-white);
-  // background-color: var(--color-input-border)
   border-radius: 4rem;
-  margin-bottom: 7rem;
   overflow: hidden;
-
+  margin-bottom: 7rem;
+  height: 30vw;
+  
   @include BoxShadowHelper(3);
-
+  
   @include respond(_1040-1200) {
     border: 1px solid;
     border-color: var(--color-input-border);
+    height: 35%;
   }
+
+  // &:not(:last-child) {
+  //   margin-bottom: 7rem;
+  // }
 
   &__cover {
     max-width: 30%;
@@ -30,35 +35,56 @@
   &__requisites {
     display: flex;
     flex-direction: column;
-    padding: 3rem;
+    padding: 2rem;
     min-height: 100%;
     width: 70%;
+
+    font-weight: $font-weight-bold;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    
+    @include respond(_360-580) {
+      padding: 3rem;
+    }
   }
 
   &__header {
-    margin-bottom: 3rem;
-    letter-spacing: -1px;
+    // font-weight: $font-weight-bold;
+    font-size: 2.5rem;
+    
+    @include respond(_360-580) {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
   }
 
   &__date-time {
-    letter-spacing: -1px;
+    // font-weight: $font-weight-bold;
+    // font-size: $font-size-heading-tertiary;
+    // margin-bottom: 3rem;
+    // letter-spacing: -1px;
   }
 
   &__time {
-    margin-left: 3rem;
+    font-weight: $font-weight-regular;
+    margin-left: 2rem;
   }
 
   &__footer {
     margin-top: auto;
     display: flex;
     min-width: 100%;
-    letter-spacing: -1px;
+    // letter-spacing: -1px;
   }
 
   &__attending {
     display: flex;
     align-items: center;
-    letter-spacing: -1px;
+
+    // font-weight: $font-weight-bold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    // letter-spacing: -1px;
 
     &:link,
     &:visited,
@@ -66,15 +92,15 @@
     &:active {
       text-decoration: none;
     }
-  }
 
-  &__icon-attending {
-    display: flex;
+    &-icon {
+      display: flex;
+    }
   }
 
   &__icon-group {
-    width: 7rem;
-    height: 7rem;
+    width: 6rem;
+    height: 6rem;
   }
 
   &__btn-box {

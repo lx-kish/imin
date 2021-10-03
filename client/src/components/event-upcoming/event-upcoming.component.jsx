@@ -27,8 +27,8 @@ const EventUpcoming = (props) => {
 				/>
 			</figure>
       <div className="upcoming-event__requisites">
-        <h2 className="upcoming-event__header heading-quaternary">{props.name}</h2>
-        <div className="upcoming-event__date-time color-pink heading-quinary">
+        <h2 className="upcoming-event__header">{props.name}</h2>
+        <div className="upcoming-event__date-time color-pink">
           <span className="upcoming-event__date">{props.startDate}</span>
           <span className="upcoming-event__time">{props.time}</span>
         </div>
@@ -40,10 +40,10 @@ const EventUpcoming = (props) => {
             }}
             className="upcoming-event__attending"
           >
-            <span className="upcoming-event__icon-attending">
+            <span className="upcoming-event__attending-icon">
               <IconGroups className="upcoming-event__icon-group"/>
             </span>
-            <span className="heading-quinary heading-quinary--uppercase">
+            <span className="">
               {`${20} attending`}
             </span>
           </Link>

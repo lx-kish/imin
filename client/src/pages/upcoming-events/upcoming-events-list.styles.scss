@@ -8,8 +8,9 @@
   // padding-top: 19rem;
   margin: 12rem auto 0;
   min-width: 67%;
+  min-height: 100vh;
   background-color: var(--color-input-border);
-  
+
   @include respond(_1040-1200) {
     // padding-top: 7rem;
     margin: 7rem auto 0;
@@ -42,9 +43,26 @@
   }
 
   &__heading {
-    margin: 9rem 0 5rem 5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 3rem;
+    // letter-spacing: $letter-spacing-tertiary; // .4rem;
+
+    margin: 5rem 0 5rem 3.5rem;
+    // margin: 9rem 0 5rem 5rem;
+
+    @include respond(_360-580) {
+      font-size: 3.5rem;
+      margin: 6rem 0 6rem 4rem;
+    }
+
+    @include respond(_580-720) {
+      font-size: 3.5rem;
+      margin: 9rem 0 4rem 4rem;
+    }
 
     @include respond(_1040-1200) {
+      font-size: 3rem;
       margin: 0 0 4rem 4rem;
     }
   }
