@@ -13,7 +13,9 @@ import LogOut from './pages/log-out/log-out.page';
 import Profile from './pages/profile/profile.page';
 import Settings from './pages/settings/settings.page';
 import TermsAndConditions from './pages/terms-and-conditions/terms-and-conditions.page';
+import Event from './pages/event/event.page';
 import UpcomingEventsList from './pages/upcoming-events/upcoming-events-list.page';
+import EventAttendeesList from './pages/event-attendees-list/event-attendees-list.page';
 
 import PrivateRoute from './hoc/private-route/private-route.hoc';
 import PublicRoute from './hoc/public-route/public-route.hoc';
@@ -34,6 +36,8 @@ const Routes = () => {
 			<PrivateRoute path="/profile" exact component={Profile} privateRoute={true} />
 			<PrivateRoute path="/settings" exact component={Settings} privateRoute={true} />
 			<PrivateRoute path="/upcoming" exact component={UpcomingEventsList} privateRoute={true} />
+			<PrivateRoute path="/event" exact component={Event} privateRoute={true} />
+			<PrivateRoute path="/event-attendees" exact component={EventAttendeesList} privateRoute={true} />
 		</Switch>
 	);
 };

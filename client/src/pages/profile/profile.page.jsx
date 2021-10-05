@@ -22,12 +22,12 @@ const Profile = (props) => {
 
 	const { user, patchUserData } = props;
 	
-	console.log(
-		'%c Profile component, props and user ===> ',
-		'color: orangered; font-weight: bold;',
-		{ ...props },
-		user
-	);
+	// console.log(
+	// 	'%c Profile component, props and user ===> ',
+	// 	'color: orangered; font-weight: bold;',
+	// 	{ ...props },
+	// 	user
+	// );
 	
 	/**
    * Single state hook useState for all the state properties
@@ -444,17 +444,17 @@ const Profile = (props) => {
 	return (
 
 			DesktopWidth() ?
-				<main className="profile profile--dt">
+				<main className="app-page app-page--dt profile">
 					<div className="profile__content">
 						<AsideMenu />
-						<div className="profile">
+						<div className="app-page profile">
 							<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
 							{profileMainData()}
 						</div>
 					</div>
 				</main>
 			: 
-				<main className="profile">
+				<main className="app-page profile">
 					<h1 className="heading-primary--uppercase profile__heading">My profile</h1>
 					{profileMainData()}
 				</main>
