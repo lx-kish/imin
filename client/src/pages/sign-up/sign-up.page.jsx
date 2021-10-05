@@ -435,7 +435,7 @@ const SignUp = (props) => {
   };
 
   return (
-    <main className={"sign-up"}>
+    <main className="sign-up">
       <div className={`sign-up__background sign-up__background--${role}`}>
         <img
           src={

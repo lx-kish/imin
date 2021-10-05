@@ -37,17 +37,17 @@ const UpcomingEventsList = (props) => {
   return (
 
     DesktopWidth() ?
-      <main className="upcoming-list upcoming-list--dt">
+      <main className="app-page app-page--dt upcoming-list">
         <div className="upcoming-list__content">
           <AsideMenu />
-          <div className="upcoming-list">
+          <div className="app-page upcoming-list">
             <h1 className="upcoming-list__heading">Upcoming experiences</h1>
             {listUpcomingEvents()}
           </div>
         </div>
       </main>
     : 
-      <main className="upcoming-list">
+      <main className="app-page upcoming-list">
         <h1 className="upcoming-list__heading">Upcoming experiences</h1>
         {listUpcomingEvents()}
       </main>

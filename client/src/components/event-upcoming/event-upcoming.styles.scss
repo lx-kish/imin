@@ -8,11 +8,21 @@
   background-color: var(--color-white);
   border-radius: 4rem;
   overflow: hidden;
-  margin-bottom: 7rem;
+  margin-bottom: 6rem;
   height: 30vw;
-  
+
   @include BoxShadowHelper(3);
-  
+
+  @include respond(_720-880) {
+    margin-bottom: 7rem;
+    height: 27vw;
+  }
+
+  @include respond(_880-1040) {
+    margin-bottom: 7rem;
+    height: 25vw;
+  }
+
   @include respond(_1040-1200) {
     border: 1px solid;
     border-color: var(--color-input-border);
@@ -47,7 +57,7 @@
       padding: 3rem;
     }
   }
-
+  
   &__header {
     // font-weight: $font-weight-bold;
     font-size: 2.5rem;
@@ -55,6 +65,10 @@
     @include respond(_360-580) {
       font-size: 3rem;
       margin-bottom: 1rem;
+    }
+    
+    @include respond(_720-880) {
+      font-size: 3.5rem;
     }
   }
 
@@ -85,6 +99,14 @@
     font-size: 2.5rem;
     text-transform: uppercase;
     // letter-spacing: -1px;
+        
+    @include respond(_360-580) {
+      font-size: 3rem;
+    }
+    
+    @include respond(_720-880) {
+      font-size: 3.5rem;
+    }
 
     &:link,
     &:visited,

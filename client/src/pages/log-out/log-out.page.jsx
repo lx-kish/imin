@@ -58,7 +58,7 @@ const LogOut = (props) => {
 	};
 
 	return (
-		<div className="log-out">
+		<main className="log-out">
 			<h2 className="log-out__header">Do you want to log out?</h2>
 			<p className="log-out__error-message">{error}</p>
 			{/* <p className="log-out__error-message">{fullState.logoutError ? fullState.errorMessage : ''}</p> */}
@@ -76,7 +76,7 @@ const LogOut = (props) => {
 					}}
 				/>
 			</div>
-		</div>
+		</main>
 	);
 };
 

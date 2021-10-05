@@ -35,7 +35,7 @@ const EventUpcoming = (props) => {
         <div className="upcoming-event__footer">
           <Link 
             to={{
-              pathname: "/signin",
+              pathname: "/event-attendees",
               state: props.attendees,
             }}
             className="upcoming-event__attending"
@@ -50,7 +50,7 @@ const EventUpcoming = (props) => {
           <div className="upcoming-event__btn-box">
             <Link
 				      to={{
-                pathname: "#",
+                pathname: "/event",
 				  	    state: ""
 			  	    }}
 		  		    className="btn btn--upcoming-event"

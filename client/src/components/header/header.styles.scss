@@ -10,7 +10,6 @@
 
   &--primary {
     height: 12rem;
-    // height: 6rem;
     background-color: var(--color-white);
 
     @include respond(_1040-1200) {
@@ -27,15 +26,12 @@
 
       @include respond(_1040-1200) {
         display: flex;
-        // align-items: center;
         justify-content: space-between;
-        // height: 100%;
       }
     }
 
     &--mb {
       display: flex;
-      // flex-direction: row;
       align-items: center;
       justify-content: space-between;
 
@@ -48,10 +44,6 @@
   &__nav-box {
     display: flex;
     align-items: stretch;
-    // flex-direction: row;
-    // align-items: center;
-    // justify-content: center;
-    // min-height: 100%;
     
     &--mb {
       padding: 4rem;
@@ -59,24 +51,15 @@
   }
 
   &__logo-box {
-    // display: inline-block;
-    // padding: .55rem 0;
     display: flex;
     align-items: center;
-    // flex-direction: column;
-    // justify-content: center;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     min-height: 100%;
-    // line-height: 100%;
-    // @include respond(_1040-1200) {
-    //   display: none;
-    // }
   }
 
   &__logo {
     height: 8.8rem;
-    // height: 4.4rem;
 
     @include respond(_1040-1200) {
       height: 4.4rem;
@@ -86,9 +69,7 @@
   &__nav {
     display: flex;
     align-items: stretch;
-    // flex-direction: row;
-    // align-items: center;
-    // height: 100%;
+
     &:before {
       content:'';
       height:100%;
@@ -99,13 +80,11 @@
 
   &__item {
     align-self: center;
-    // float: left;
     min-height: 100%;
     line-height: 100%;
 
     &:not(:last-child) {
       padding: 0 4rem;
-      // padding: 0 3.5rem;
 
       &:hover {
         background-color: var(--color-pink-4);
@@ -117,7 +96,6 @@
   }
 
   &__btn-box {
-    // padding: 2rem;
     
     &--mb {
       padding: 4rem;
@@ -132,8 +110,6 @@
   &__btn {
     &--dt {
       display: inline-block;
-      // margin-top: 1.1rem;
-      // margin-bottom: 1.1rem;
     }
 
     &--mb {
@@ -152,24 +128,19 @@
 
   display: flex;
   align-items: center;
-  // align-self: center;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 600;
   margin: 4rem 0;
-
   
-  // text-align: center;
-  // text-decoration: none;
-  // min-height: 100%;
-  // line-height: 1.2;
-  // line-height: 100%;
-  // height: 100%;
-  // vertical-align: middle;
+  @include respond(_360-580) {
+    font-size: 4.7rem;
+  }
   
-  
+  @include respond(_580-720) {
+    font-size: 5rem;
+  }
   
   @include respond(_1040-1200) {
-    // font-size: 2.2rem;
     font-size: $font-size-paragraph--dt;//2.3rem;
     letter-spacing: 0.2rem;
     margin: 0 6rem 0 0;
@@ -187,19 +158,7 @@
     @include respond(_1040-1200) {
       transform: scale(1.15);
     }
-    // background-color: var(--color-pink-4);
-    // border-bottom: solid var(--color-pink);
   }
-
-  
-  // &:not(:last-child) {
-  //   margin: 0 4rem;
-  //   // padding: 0 4rem;
-
-  // }
-  // &:last-child {
-  //   // padding: 0 0 0 3.5rem;
-  // }
 
   &__delimeter {
     width: 100%;
